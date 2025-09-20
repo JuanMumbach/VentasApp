@@ -22,6 +22,8 @@ namespace VentasApp.Presenters
             this.view = view;
             this.repository = repository;
 
+            this.view.SearchProductEvent += SearchProduct;
+
             this.view.SetProductosListBindingSource(productsBindingSource);
 
             LoadAllProductsList();
@@ -32,6 +34,20 @@ namespace VentasApp.Presenters
         private void LoadAllProductsList()
         {
             productList = repository.GetAllProducts();
+            productsBindingSource.DataSource = productList;
+        }
+
+        private void SearchProduct(object? sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(view.searchValue))
+            {
+                productList = repository.GetAllProducts();
+            }
+            else
+            {
+                productList = repository.SearchProducts(view.searchValue);
+            }
+
             productsBindingSource.DataSource = productList;
         }
     }

@@ -39,7 +39,14 @@ namespace VentasApp.Repositories
 
         public IEnumerable<ProductModel> SearchProducts(string searchTerm)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Products.Where(p =>
+                    p.Name.Contains(searchTerm) || 
+                    p.Description.Contains(searchTerm) ||
+                    p.Id.ToString().Contains(searchTerm)
+                ).ToList();
+            }
         }
 
         public void UpdateProduct(ProductModel user)

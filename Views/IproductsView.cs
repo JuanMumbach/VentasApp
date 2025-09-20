@@ -2,7 +2,8 @@
 {
     public interface IproductsView
     {
-        event EventHandler BuscarProductoEvent;
+        event EventHandler SearchProductEvent;
+        string searchValue { get; set; }
 
         void SetProductosListBindingSource(BindingSource productosList);
     }

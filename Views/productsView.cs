@@ -12,6 +12,8 @@ namespace VentasApp.Views
 {
     public partial class productsView : Form, IproductsView
     {
+        public event EventHandler SearchProductEvent;
+
         public productsView()
         {
             InitializeComponent();
@@ -19,7 +21,11 @@ namespace VentasApp.Views
             SetupEventsHandler();
         }
 
-        public event EventHandler BuscarProductoEvent;
+        public string searchValue
+        {
+            get { return SearchTextbox.Text; }
+            set { SearchTextbox.Text = value; }
+        }
 
         public void SetProductosListBindingSource(BindingSource source)
         {
@@ -28,7 +34,12 @@ namespace VentasApp.Views
 
         private void SetupEventsHandler()
         {
-            
+            //SearchButton.Click += delegate { SearchProductEvent?.Invoke(this, EventArgs.Empty); };
+            SearchTextbox.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                    SearchProductEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
     }
 }
