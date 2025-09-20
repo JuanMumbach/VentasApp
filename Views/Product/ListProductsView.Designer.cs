@@ -1,6 +1,6 @@
 ﻿namespace VentasApp.Views
 {
-    partial class productsView
+    partial class ListProductsView
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             dataGridView1 = new DataGridView();
             SearchTextbox = new TextBox();
+            OpenAddProductViewButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -39,12 +40,13 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(38, 93);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(818, 389);
+            dataGridView1.Size = new Size(818, 381);
             dataGridView1.TabIndex = 0;
             // 
             // SearchTextbox
@@ -54,14 +56,26 @@
             SearchTextbox.Size = new Size(522, 27);
             SearchTextbox.TabIndex = 1;
             // 
-            // productsView
+            // OpenAddProductViewButton
+            // 
+            OpenAddProductViewButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            OpenAddProductViewButton.Location = new Point(38, 495);
+            OpenAddProductViewButton.Name = "OpenAddProductViewButton";
+            OpenAddProductViewButton.Size = new Size(94, 29);
+            OpenAddProductViewButton.TabIndex = 2;
+            OpenAddProductViewButton.Text = "Agregar";
+            OpenAddProductViewButton.UseVisualStyleBackColor = true;
+            // 
+            // ListProductsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(896, 570);
+            Controls.Add(OpenAddProductViewButton);
             Controls.Add(SearchTextbox);
             Controls.Add(dataGridView1);
-            Name = "productsView";
+            Name = "ListProductsView";
             Text = "productosView";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -72,5 +86,6 @@
 
         private DataGridView dataGridView1;
         private TextBox SearchTextbox;
+        private Button OpenAddProductViewButton;
     }
 }

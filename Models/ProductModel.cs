@@ -12,7 +12,7 @@ namespace VentasApp.Models
         public int Id { get; set; }
 
         [Column("product_name")]
-        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
         
         [Column("product_description")]
@@ -22,27 +22,33 @@ namespace VentasApp.Models
         public string? Image { get; set; }
         
         [Column("price")]
-        [Required(ErrorMessage = "El precio es obligatorio")]
+        [Required(ErrorMessage = "Price is required.")]
         public decimal Price { get; set; }
         
         [Column("category_id")]
-        [Required(ErrorMessage = "La categoria es obligatoria")]
+        [Required(ErrorMessage = "CategoryId is required.")]
         public int CategoryId { get; set; }
         
         [Column("supplier_id")]
         public int? SupplierId { get; set; }
         
         [Column("active_state")]
-        [Required(ErrorMessage = "El estado es obligatorio")]
+        [Required(ErrorMessage = "Active state is required.")]
         public bool Active { get; set; }
         
         [Column("stock")]
-        [Required(ErrorMessage = "El stock es obligatorio")]
+        [Required(ErrorMessage = "Stock  is required.")]
         public uint Stock { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public CategoryModel Category { get; set; }
+
+        [ForeignKey("SupplierId")]
+        public SupplierModel? Supplier { get; set; }
     }
 }

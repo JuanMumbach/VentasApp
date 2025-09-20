@@ -4,22 +4,27 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VentasApp.Models;
+using VentasApp.Views.Product;
 
 namespace VentasApp.Views
 {
-    public partial class productsView : Form, IproductsView
+    public partial class ListProductsView : Form, IListProductsView
     {
         public event EventHandler SearchProductEvent;
+        public event EventHandler AddProductViewEvent;
 
-        public productsView()
+        public ListProductsView()
         {
             InitializeComponent();
 
             SetupEventsHandler();
         }
+
 
         public string searchValue
         {
@@ -40,6 +45,10 @@ namespace VentasApp.Views
                 if (e.KeyCode == Keys.Enter)
                     SearchProductEvent?.Invoke(this, EventArgs.Empty);
             };
+
+            OpenAddProductViewButton.Click += delegate { AddProductViewEvent?.Invoke(this, EventArgs.Empty); };
         }
+
+        
     }
 }

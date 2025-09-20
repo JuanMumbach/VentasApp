@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Models;
+using VentasApp.Models.DTOs;
 
 namespace VentasApp.Repositories
 {
@@ -13,8 +14,9 @@ namespace VentasApp.Repositories
         IEnumerable<ProductModel> GetProductsByCategory(string category);
         IEnumerable<ProductModel> SearchProducts(string searchTerm);
         ProductModel GetProductById(int id);
-        void AddProduct(ProductModel user);
-        void UpdateProduct(ProductModel user);
+        void AddProduct(AddProductDTO productDTO);
+        void UpdateProduct(ProductModel product);
         void DeleteProduct(int id);
+        void AddProduct();
     }
 }

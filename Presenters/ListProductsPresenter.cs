@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Repositories;
 using VentasApp.Views;
+using VentasApp.Views.Product;
 
 namespace VentasApp.Presenters
 {
-    public class ProductPresenter
+    public class ListProductsPresenter
     {
-        private IproductsView view;
+        private IListProductsView view;
         private IproductRepository repository;
         private BindingSource productsBindingSource;
         private IEnumerable<Models.ProductModel> productList;
 
-        public ProductPresenter(IproductsView view, IproductRepository repository)
+        public ListProductsPresenter(IListProductsView view, IproductRepository repository)
         {
             this.productsBindingSource = new BindingSource();
 
@@ -23,12 +24,21 @@ namespace VentasApp.Presenters
             this.repository = repository;
 
             this.view.SearchProductEvent += SearchProduct;
-
+            this.view.AddProductViewEvent += LoadAddProductView;
             this.view.SetProductosListBindingSource(productsBindingSource);
 
             LoadAllProductsList();
 
             //this.view.BuscarProductoEvent += BuscarProducto;
+        }
+
+        private void LoadAddProductView(object? sender, EventArgs e)
+        {
+            IAddProductView addProductView = new AddProductView();
+            new AddProductPresenter(addProductView, repository);
+   
+            addProductView.ShowDialogView();
+
         }
 
         private void LoadAllProductsList()

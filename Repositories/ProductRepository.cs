@@ -1,15 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using VentasApp.Models;
+using VentasApp.Models.DTOs;
 
 namespace VentasApp.Repositories
 {
     public class ProductRepository : IproductRepository
     {
-        public void AddProduct(ProductModel user)
+        public void AddProduct(AddProductDTO productDTO)
+        {
+            using (var context = new VentasDBContext())
+            {
+                var product = new ProductModel
+                {
+                    Name = productDTO.Name,
+                    Description = productDTO.Description,
+                    Price = productDTO.Price,
+                    Stock = productDTO.Stock,
+                    CategoryId = productDTO.CategoryId,
+                    SupplierId = productDTO.SupplierId,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Active = true
+                };
+
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
+        }
+
+        public void AddProduct()
         {
             throw new NotImplementedException();
         }
@@ -45,7 +64,10 @@ namespace VentasApp.Repositories
                     p.Name.Contains(searchTerm) || 
                     p.Description.Contains(searchTerm) ||
                     p.Id.ToString().Contains(searchTerm)
-                ).ToList();
+                )
+                .Include(p => p.Category)
+                .Include(p => p.Supplier)
+                .ToList();
             }
         }
 
