@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Configuration;
+using VentasApp.Presenters;
+using VentasApp.Repositories;
 using VentasApp.Views;
 
 namespace VentasApp
@@ -15,13 +17,12 @@ namespace VentasApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            IConfiguration configuration = new ConfigurationBuilder()
-                .AddUserSecrets<MainView>()
-                .Build();
+            productsView productView = new productsView();
+            ProductRepository productRepository = new ProductRepository();
 
-            string connectionString = configuration["MySqlConnection"];
+            new ProductPresenter(productView, productRepository);
 
-            Application.Run(new MainView());
+            Application.Run((Form)productView);
         }
     }
 }
