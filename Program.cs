@@ -17,13 +17,11 @@ namespace VentasApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            ListProductsView productView = new ListProductsView();
-            ProductRepository productRepository = new ProductRepository();
-
-            new ListProductsPresenter(productView, productRepository);
-
+            MainView mainView = new MainView();
             
-            Application.Run((Form)productView);
+            new MainViewPresenter(mainView);
+            
+            Application.Run((Form)mainView);
         }
     }
 }
