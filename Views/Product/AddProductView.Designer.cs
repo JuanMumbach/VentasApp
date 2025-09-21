@@ -42,6 +42,9 @@
             PriceTextbox = new TextBox();
             AddProductButton = new Button();
             CancelAddButton = new Button();
+            ProductImageBox = new PictureBox();
+            ChangeImageButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)ProductImageBox).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -110,7 +113,7 @@
             DescriptionTextbox.Location = new Point(157, 72);
             DescriptionTextbox.Multiline = true;
             DescriptionTextbox.Name = "DescriptionTextbox";
-            DescriptionTextbox.Size = new Size(419, 98);
+            DescriptionTextbox.Size = new Size(255, 98);
             DescriptionTextbox.TabIndex = 7;
             // 
             // CategoryCombo
@@ -161,12 +164,36 @@
             CancelAddButton.Text = "Cancelar";
             CancelAddButton.UseVisualStyleBackColor = true;
             // 
+            // ProductImageBox
+            // 
+            ProductImageBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ProductImageBox.BackColor = SystemColors.Control;
+            ProductImageBox.BackgroundImage = Properties.Resources.genericProductImage;
+            ProductImageBox.BackgroundImageLayout = ImageLayout.Stretch;
+            ProductImageBox.Location = new Point(520, 29);
+            ProductImageBox.Name = "ProductImageBox";
+            ProductImageBox.Size = new Size(178, 178);
+            ProductImageBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            ProductImageBox.TabIndex = 14;
+            ProductImageBox.TabStop = false;
+            // 
+            // ChangeImageButton
+            // 
+            ChangeImageButton.Location = new Point(546, 213);
+            ChangeImageButton.Name = "ChangeImageButton";
+            ChangeImageButton.Size = new Size(131, 29);
+            ChangeImageButton.TabIndex = 15;
+            ChangeImageButton.Text = "Cambiar imagen";
+            ChangeImageButton.UseVisualStyleBackColor = true;
+            // 
             // AddProductView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(800, 450);
+            Controls.Add(ChangeImageButton);
+            Controls.Add(ProductImageBox);
             Controls.Add(CancelAddButton);
             Controls.Add(AddProductButton);
             Controls.Add(PriceTextbox);
@@ -183,6 +210,7 @@
             Controls.Add(label1);
             Name = "AddProductView";
             Text = "AddProductView";
+            ((System.ComponentModel.ISupportInitialize)ProductImageBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -203,5 +231,7 @@
         private TextBox PriceTextbox;
         private Button AddProductButton;
         private Button CancelAddButton;
+        private PictureBox ProductImageBox;
+        private Button ChangeImageButton;
     }
 }

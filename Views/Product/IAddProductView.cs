@@ -11,6 +11,7 @@ namespace VentasApp.Views.Product
     {
         event EventHandler AddProductEvent;
         event EventHandler CancelProductAddEvent;
+        event EventHandler ChangeProductImageEvent;
         string ProductName { get; set; }
         string ProductDescription { get; set; }
         decimal Price { get; set; }
@@ -18,9 +19,12 @@ namespace VentasApp.Views.Product
         int CategoryId { get; set; }
         int? SupplierId { get; set; }
 
-        void Show();
+        string? ImagePath { get; set; }
+        bool SecureImagePath { get; set; }
 
+        void Show();
         void CloseView();
         void ShowDialogView();
+        public void UpdateProductImage();
     }
 }

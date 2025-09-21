@@ -16,6 +16,11 @@ namespace VentasApp.Views
     {
         IEnumerable<CategoryModel> categories;
         IEnumerable<SupplierModel> suppliers;
+
+        public event EventHandler AddProductEvent;
+        public event EventHandler CancelProductAddEvent;
+        public event EventHandler ChangeProductImageEvent;
+
         public AddProductView()
         {
             InitializeComponent();
@@ -28,6 +33,7 @@ namespace VentasApp.Views
         {
             AddProductButton.Click += delegate { AddProductEvent?.Invoke(this, EventArgs.Empty); };
             CancelAddButton.Click += delegate { CancelProductAddEvent?.Invoke(this, EventArgs.Empty); };
+            ChangeImageButton.Click += delegate { ChangeProductImageEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public string ProductName
@@ -87,8 +93,8 @@ namespace VentasApp.Views
             }
         }
 
-        public event EventHandler AddProductEvent;
-        public event EventHandler CancelProductAddEvent;
+        public string? ImagePath { get; set; }
+        public bool SecureImagePath { get; set; }
 
         private void LoadCategories()
         {
@@ -116,6 +122,25 @@ namespace VentasApp.Views
             }
         }
 
+        public void UpdateProductImage()
+        {
+            
+            if (SecureImagePath)
+            {
+                ProductImageBox.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory+ImagePath);
+            }
+            else 
+            {
+                if (ImagePath != null)
+                { 
+                    ProductImageBox.Image = Image.FromFile(ImagePath);
+                }
+                else
+                {
+                    ProductImageBox.Image = null;
+                }
+            }   
+        }
         public void CloseView()
         {
             this.Close();

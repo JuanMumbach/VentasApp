@@ -18,8 +18,8 @@ namespace VentasApp.Models
         [Column("product_description")]
         public string? Description { get; set; }
         
-        [Column("image")]
-        public string? Image { get; set; }
+        [Column("image_path")]
+        public string? ImagePath { get; set; }
         
         [Column("price")]
         [Required(ErrorMessage = "Price is required.")]

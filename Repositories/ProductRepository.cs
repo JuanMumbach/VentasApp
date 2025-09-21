@@ -16,6 +16,7 @@ namespace VentasApp.Repositories
                     Description = productDTO.Description,
                     Price = productDTO.Price,
                     Stock = productDTO.Stock,
+                    ImagePath = productDTO.ImagePath,
                     CategoryId = productDTO.CategoryId,
                     SupplierId = productDTO.SupplierId,
                     CreatedAt = DateTime.Now,
