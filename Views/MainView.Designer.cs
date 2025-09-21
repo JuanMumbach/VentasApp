@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             SidePanel = new Panel();
-            MainPanel = new Panel();
             ProductsButton = new Button();
+            MainPanel = new Panel();
             SidePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,16 +46,6 @@
             SidePanel.Size = new Size(282, 591);
             SidePanel.TabIndex = 0;
             // 
-            // MainPanel
-            // 
-            MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            MainPanel.BackColor = SystemColors.ActiveCaption;
-            MainPanel.Location = new Point(287, 0);
-            MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(734, 591);
-            MainPanel.TabIndex = 1;
-            // 
             // ProductsButton
             // 
             ProductsButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -66,6 +56,16 @@
             ProductsButton.TabIndex = 0;
             ProductsButton.Text = "PRODUCTOS";
             ProductsButton.UseVisualStyleBackColor = true;
+            // 
+            // MainPanel
+            // 
+            MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            MainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            MainPanel.BackColor = SystemColors.ActiveCaption;
+            MainPanel.Location = new Point(287, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(734, 591);
+            MainPanel.TabIndex = 1;
             // 
             // MainView
             // 
