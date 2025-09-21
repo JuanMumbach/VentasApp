@@ -44,6 +44,8 @@
             CancelAddButton = new Button();
             ProductImageBox = new PictureBox();
             ChangeImageButton = new Button();
+            UpdateProductButton = new Button();
+            DeleteProductButton = new Button();
             ((System.ComponentModel.ISupportInitialize)ProductImageBox).BeginInit();
             SuspendLayout();
             // 
@@ -148,18 +150,20 @@
             // 
             // AddProductButton
             // 
-            AddProductButton.Location = new Point(49, 377);
+            AddProductButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddProductButton.Location = new Point(32, 372);
             AddProductButton.Name = "AddProductButton";
-            AddProductButton.Size = new Size(123, 46);
+            AddProductButton.Size = new Size(141, 35);
             AddProductButton.TabIndex = 12;
-            AddProductButton.Text = "Agregar";
+            AddProductButton.Text = "Agregar producto";
             AddProductButton.UseVisualStyleBackColor = true;
             // 
             // CancelAddButton
             // 
-            CancelAddButton.Location = new Point(202, 377);
+            CancelAddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CancelAddButton.Location = new Point(302, 372);
             CancelAddButton.Name = "CancelAddButton";
-            CancelAddButton.Size = new Size(123, 46);
+            CancelAddButton.Size = new Size(95, 35);
             CancelAddButton.TabIndex = 13;
             CancelAddButton.Text = "Cancelar";
             CancelAddButton.UseVisualStyleBackColor = true;
@@ -179,6 +183,7 @@
             // 
             // ChangeImageButton
             // 
+            ChangeImageButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ChangeImageButton.Location = new Point(546, 213);
             ChangeImageButton.Name = "ChangeImageButton";
             ChangeImageButton.Size = new Size(131, 29);
@@ -186,12 +191,34 @@
             ChangeImageButton.Text = "Cambiar imagen";
             ChangeImageButton.UseVisualStyleBackColor = true;
             // 
+            // UpdateProductButton
+            // 
+            UpdateProductButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            UpdateProductButton.Location = new Point(193, 372);
+            UpdateProductButton.Name = "UpdateProductButton";
+            UpdateProductButton.Size = new Size(88, 35);
+            UpdateProductButton.TabIndex = 16;
+            UpdateProductButton.Text = "Actualizar";
+            UpdateProductButton.UseVisualStyleBackColor = true;
+            // 
+            // DeleteProductButton
+            // 
+            DeleteProductButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            DeleteProductButton.Location = new Point(625, 372);
+            DeleteProductButton.Name = "DeleteProductButton";
+            DeleteProductButton.Size = new Size(137, 35);
+            DeleteProductButton.TabIndex = 17;
+            DeleteProductButton.Text = "Eliminar producto";
+            DeleteProductButton.UseVisualStyleBackColor = true;
+            // 
             // AddProductView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(800, 450);
+            Controls.Add(DeleteProductButton);
+            Controls.Add(UpdateProductButton);
             Controls.Add(ChangeImageButton);
             Controls.Add(ProductImageBox);
             Controls.Add(CancelAddButton);
@@ -233,5 +260,7 @@
         private Button CancelAddButton;
         private PictureBox ProductImageBox;
         private Button ChangeImageButton;
+        private Button UpdateProductButton;
+        private Button DeleteProductButton;
     }
 }

@@ -20,13 +20,39 @@ namespace VentasApp.Views
         public event EventHandler AddProductEvent;
         public event EventHandler CancelProductAddEvent;
         public event EventHandler ChangeProductImageEvent;
+        public event EventHandler UpdateProductEvent;
 
         public AddProductView()
         {
             InitializeComponent();
             LoadCategories();
             LoadSuppliers();
+            SwitchEditModeButtons();
             SetupEventsHandler();
+        }
+
+        public AddProductView(int productId)
+        {
+            ProductId = productId;
+            InitializeComponent();
+            LoadCategories();
+            LoadSuppliers();
+            SwitchEditModeButtons();
+            SetupEventsHandler();
+        }
+
+        private void SwitchEditModeButtons()
+        {
+            if (ProductId == null)
+            {
+                UpdateProductButton.Enabled = false;
+                DeleteProductButton.Enabled = false;
+            }
+            else
+            {
+                UpdateProductButton.Enabled = true;
+                DeleteProductButton.Enabled = true;
+            }
         }
 
         private void SetupEventsHandler()
@@ -34,6 +60,7 @@ namespace VentasApp.Views
             AddProductButton.Click += delegate { AddProductEvent?.Invoke(this, EventArgs.Empty); };
             CancelAddButton.Click += delegate { CancelProductAddEvent?.Invoke(this, EventArgs.Empty); };
             ChangeImageButton.Click += delegate { ChangeProductImageEvent?.Invoke(this, EventArgs.Empty); };
+            UpdateProductButton.Click += delegate { UpdateProductEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public string ProductName
@@ -93,6 +120,8 @@ namespace VentasApp.Views
             }
         }
 
+        public int? ProductId { get; set; }
+
         public string? ImagePath { get; set; }
         public bool SecureImagePath { get; set; }
 
@@ -122,24 +151,29 @@ namespace VentasApp.Views
             }
         }
 
-        public void UpdateProductImage()
+        public void UpdateViewProductImage()
         {
-            
+
             if (SecureImagePath)
             {
-                ProductImageBox.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory+ImagePath);
+                string fullImagePath = AppDomain.CurrentDomain.BaseDirectory + ImagePath;
+
+                if (File.Exists(fullImagePath))
+                {
+                    ProductImageBox.Image = Image.FromFile(fullImagePath);
+                }
             }
-            else 
+            else
             {
                 if (ImagePath != null)
-                { 
+                {
                     ProductImageBox.Image = Image.FromFile(ImagePath);
                 }
                 else
                 {
                     ProductImageBox.Image = null;
                 }
-            }   
+            }
         }
         public void CloseView()
         {

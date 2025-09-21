@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VentasApp.Models;
 using VentasApp.Models.DTOs;
 using VentasApp.Repositories;
 using VentasApp.Views.Product;
@@ -19,8 +20,27 @@ namespace VentasApp.Presenters
             this.repository = repository;
             
             this.view.AddProductEvent += AddProduct;
+            this.view.UpdateProductEvent += UpdateProduct;
             this.view.CancelProductAddEvent += CancelAddProduct;
             this.view.ChangeProductImageEvent += ChangeProductImage;
+            if (this.view.ProductId != null) LoadProductData();
+        }
+
+        private void LoadProductData()
+        {
+            ProductModel product = repository.GetProductById((int)this.view.ProductId);
+            if (product != null)
+            {
+                this.view.ProductName = product.Name;
+                this.view.ProductDescription = product.Description;
+                this.view.Price = product.Price;
+                this.view.Stock = (int)product.Stock;
+                this.view.CategoryId = product.CategoryId;
+                this.view.SupplierId = product.SupplierId;
+                this.view.ImagePath = product.ImagePath;
+                if (this.view.ImagePath != null) this.view.SecureImagePath = true;
+                UpdateViewProductImage();
+            }
         }
 
         private void ChangeProductImage(object? sender, EventArgs e)
@@ -43,12 +63,12 @@ namespace VentasApp.Presenters
                 this.view.ImagePath = imagePath;
                 this.view.SecureImagePath = false;
             }
-            UpdateProductImage();
+            UpdateViewProductImage();
         }
 
-        private void UpdateProductImage()
+        private void UpdateViewProductImage()
         {
-            this.view.UpdateProductImage();
+            this.view.UpdateViewProductImage();
         }
         private void CancelAddProduct(object? sender, EventArgs e)
         {
@@ -78,6 +98,32 @@ namespace VentasApp.Presenters
                 ImagePath = view.ImagePath
             };
             repository.AddProduct(newProduct);
+        }
+
+        private void UpdateProduct(object? sender, EventArgs e)
+        {
+            if (!this.view.SecureImagePath && this.view.ImagePath != null)
+            {
+                string? newImagePath = SaveImageInAppDomain();
+                if (newImagePath != null)
+                {
+                    this.view.SecureImagePath = true;
+                    this.view.ImagePath = newImagePath;
+                }
+            }
+
+            UpdateProductDTO newProduct = new UpdateProductDTO()
+            {
+                Id = (int)this.view.ProductId!,
+                Name = view.ProductName,
+                Description = view.ProductDescription,
+                Price = view.Price,
+                Stock = (uint)view.Stock,
+                CategoryId = view.CategoryId,
+                SupplierId = view.SupplierId,
+                ImagePath = view.ImagePath
+            };
+            repository.UpdateProduct(newProduct);
         }
 
         private string? SaveImageInAppDomain()

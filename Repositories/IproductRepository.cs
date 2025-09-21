@@ -16,7 +16,7 @@ namespace VentasApp.Repositories
         IEnumerable<ProductModel> SearchProducts(string searchTerm);
         ProductModel GetProductById(int id);
         void AddProduct(AddProductDTO productDTO);
-        void UpdateProduct(ProductModel product);
+        void UpdateProduct(UpdateProductDTO productDTO);
         void DeleteProduct(int id);
         void RestoreProduct(int id);
         void AddProduct();

@@ -10,6 +10,7 @@ namespace VentasApp.Views.Product
     public interface IAddProductView
     {
         event EventHandler AddProductEvent;
+        event EventHandler UpdateProductEvent;
         event EventHandler CancelProductAddEvent;
         event EventHandler ChangeProductImageEvent;
         string ProductName { get; set; }
@@ -18,6 +19,7 @@ namespace VentasApp.Views.Product
         int Stock { get; set; }
         int CategoryId { get; set; }
         int? SupplierId { get; set; }
+        int? ProductId { get; set; }
 
         string? ImagePath { get; set; }
         bool SecureImagePath { get; set; }
@@ -25,6 +27,6 @@ namespace VentasApp.Views.Product
         void Show();
         void CloseView();
         void ShowDialogView();
-        public void UpdateProductImage();
+        public void UpdateViewProductImage();
     }
 }

@@ -79,7 +79,10 @@ namespace VentasApp.Repositories
 
         public ProductModel GetProductById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Products.Find(id);
+            }
         }
 
         public IEnumerable<ProductModel> GetProductsByCategory(string category)
@@ -102,9 +105,28 @@ namespace VentasApp.Repositories
             }
         }
 
-        public void UpdateProduct(ProductModel user)
+        public void UpdateProduct(UpdateProductDTO productDTO)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                var product = new ProductModel
+                {
+                    Id = productDTO.Id,
+                    Name = productDTO.Name,
+                    Description = productDTO.Description,
+                    Price = productDTO.Price,
+                    Stock = productDTO.Stock,
+                    ImagePath = productDTO.ImagePath,
+                    CategoryId = productDTO.CategoryId,
+                    SupplierId = productDTO.SupplierId,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Active = true
+                };
+
+                context.Products.Update(product);
+                context.SaveChanges();
+            }
         }
     }
 }

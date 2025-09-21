@@ -20,6 +20,7 @@ namespace VentasApp.Views
         public event EventHandler DeleteProductEvent;
         public event EventHandler RestoreProductEvent;
         public event EventHandler ShowDeletedCheckboxChange;
+        public event EventHandler EditProductViewEvent;
 
         public ListProductsView()
         {
@@ -59,9 +60,11 @@ namespace VentasApp.Views
             {
                 UpdateDeleteButtonState();
                 UpdateRestoreButtonState();
+                UpdateEditButtonState();
             };
 
             OpenAddProductViewButton.Click += delegate { AddProductViewEvent?.Invoke(this, EventArgs.Empty); };
+            EditProductButton.Click += delegate { EditProductViewEvent?.Invoke(this, EventArgs.Empty); };
             DeleteButton.Click += delegate { DeleteProductEvent?.Invoke(this, EventArgs.Empty); };
             RestoreButton.Click += delegate { RestoreProductEvent?.Invoke(this, EventArgs.Empty); };
 
@@ -99,6 +102,11 @@ namespace VentasApp.Views
         {
             var selectedProduct = GetSelectedProductInfo();
             RestoreButton.Enabled = selectedProduct.HasValue && selectedProduct.Value.Active == false;
+        }
+
+        private void UpdateEditButtonState()
+        {
+            EditProductButton.Enabled = GetSelectedProductId().HasValue;
         }
     }
 }

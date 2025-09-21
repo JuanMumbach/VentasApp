@@ -25,6 +25,7 @@ namespace VentasApp.Presenters
 
             this.view.SearchProductEvent += SearchProduct;
             this.view.AddProductViewEvent += LoadAddProductView;
+            this.view.EditProductViewEvent += LoadEditProductView;
             this.view.DeleteProductEvent += DeleteProduct;
             this.view.RestoreProductEvent += RestoreProduct;
             this.view.ShowDeletedCheckboxChange += (s, e) => LoadAllProductsList();
@@ -35,13 +36,23 @@ namespace VentasApp.Presenters
             //this.view.BuscarProductoEvent += BuscarProducto;
         }
 
+        private void LoadEditProductView(object? sender, EventArgs e)
+        {
+            int? id = view.GetSelectedProductId();
+            if (id != null)
+            {
+                IAddProductView addProductView = new AddProductView((int)id);
+                new AddProductPresenter(addProductView, repository);
+
+                addProductView.ShowDialogView();
+            }
+        }
         private void LoadAddProductView(object? sender, EventArgs e)
         {
             IAddProductView addProductView = new AddProductView();
             new AddProductPresenter(addProductView, repository);
    
             addProductView.ShowDialogView();
-
         }
 
         private void LoadAllProductsList()

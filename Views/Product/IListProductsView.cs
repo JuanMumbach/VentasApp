@@ -6,6 +6,7 @@
         string searchValue { get; set; }
         bool showDeleteProducts { get; set; }
         event EventHandler AddProductViewEvent;
+        event EventHandler EditProductViewEvent;
         event EventHandler DeleteProductEvent;
         event EventHandler RestoreProductEvent;
         event EventHandler ShowDeletedCheckboxChange;
