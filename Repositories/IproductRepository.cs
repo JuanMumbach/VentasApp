@@ -11,6 +11,7 @@ namespace VentasApp.Repositories
     public interface IproductRepository
     {
         IEnumerable<ProductModel> GetAllProducts();
+        IEnumerable<ProductModel> GetActiveProducts(bool activeState);
         IEnumerable<ProductModel> GetProductsByCategory(string category);
         IEnumerable<ProductModel> SearchProducts(string searchTerm);
         ProductModel GetProductById(int id);

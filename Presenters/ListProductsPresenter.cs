@@ -27,6 +27,7 @@ namespace VentasApp.Presenters
             this.view.AddProductViewEvent += LoadAddProductView;
             this.view.DeleteProductEvent += DeleteProduct;
             this.view.RestoreProductEvent += RestoreProduct;
+            this.view.ShowDeletedCheckboxChange += (s, e) => LoadAllProductsList();
             this.view.SetProductosListBindingSource(productsBindingSource);
 
             LoadAllProductsList();
@@ -45,7 +46,11 @@ namespace VentasApp.Presenters
 
         private void LoadAllProductsList()
         {
-            productList = repository.GetAllProducts();
+            if (view.showDeleteProducts)
+            { productList = repository.GetAllProducts(); }
+            else
+            { productList = repository.GetActiveProducts(true); }
+
             productsBindingSource.DataSource = productList;
         }
 

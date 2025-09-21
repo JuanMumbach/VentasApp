@@ -33,6 +33,7 @@
             OpenAddProductViewButton = new Button();
             DeleteButton = new Button();
             RestoreButton = new Button();
+            ShowDeletedCheckbox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -88,12 +89,24 @@
             RestoreButton.Text = "Restaurar";
             RestoreButton.UseVisualStyleBackColor = true;
             // 
+            // ShowDeletedCheckbox
+            // 
+            ShowDeletedCheckbox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ShowDeletedCheckbox.AutoSize = true;
+            ShowDeletedCheckbox.Location = new Point(497, 498);
+            ShowDeletedCheckbox.Name = "ShowDeletedCheckbox";
+            ShowDeletedCheckbox.Size = new Size(159, 24);
+            ShowDeletedCheckbox.TabIndex = 5;
+            ShowDeletedCheckbox.Text = "Mostrar eliminados";
+            ShowDeletedCheckbox.UseVisualStyleBackColor = true;
+            // 
             // ListProductsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(896, 570);
+            Controls.Add(ShowDeletedCheckbox);
             Controls.Add(RestoreButton);
             Controls.Add(DeleteButton);
             Controls.Add(OpenAddProductViewButton);
@@ -113,5 +126,6 @@
         private Button OpenAddProductViewButton;
         private Button DeleteButton;
         private Button RestoreButton;
+        private CheckBox ShowDeletedCheckbox;
     }
 }

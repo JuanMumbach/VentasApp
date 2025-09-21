@@ -28,6 +28,13 @@ namespace VentasApp.Repositories
             }
         }
 
+        public IEnumerable<ProductModel> GetActiveProducts(bool activeState)
+        {
+            using (var context = new VentasDBContext())
+            {
+                return context.Products.Where(p => p.Active == activeState).ToList();
+            }
+        }
         public void AddProduct()
         {
             throw new NotImplementedException();
