@@ -105,6 +105,22 @@ namespace VentasApp.Repositories
             }
         }
 
+        public IEnumerable<ProductModel> SearchProducts(string searchTerm, bool activeState )
+        {
+            using (var context = new VentasDBContext())
+            {
+                    return context.Products.Where(p =>
+                        (p.Name.Contains(searchTerm) ||
+                        p.Description.Contains(searchTerm) ||
+                        p.Id.ToString().Contains(searchTerm)) &&
+                        p.Active == activeState
+                    )
+                    .Include(p => p.Category)
+                    .Include(p => p.Supplier)
+                    .ToList();
+            }
+        }
+
         public void UpdateProduct(UpdateProductDTO productDTO)
         {
             using (var context = new VentasDBContext())

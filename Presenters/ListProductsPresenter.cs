@@ -57,7 +57,7 @@ namespace VentasApp.Presenters
 
         private void LoadAllProductsList()
         {
-            if (view.showDeleteProducts)
+            if (view.showDeletedProducts)
             { productList = repository.GetAllProducts(); }
             else
             { productList = repository.GetActiveProducts(true); }
@@ -69,11 +69,15 @@ namespace VentasApp.Presenters
         {
             if (string.IsNullOrWhiteSpace(view.searchValue))
             {
-                productList = repository.GetAllProducts();
+                LoadAllProductsList();
             }
             else
             {
-                productList = repository.SearchProducts(view.searchValue);
+                
+                if (view.showDeletedProducts)
+                { productList = repository.SearchProducts(view.searchValue);}
+                else
+                { productList = repository.SearchProducts(view.searchValue, activeState: true); }
             }
 
             productsBindingSource.DataSource = productList;

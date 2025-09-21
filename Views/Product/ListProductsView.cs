@@ -36,7 +36,7 @@ namespace VentasApp.Views
             set { SearchTextbox.Text = value; }
         }
 
-        public bool showDeleteProducts 
+        public bool showDeletedProducts 
         { 
             get { return ShowDeletedCheckbox.Checked; }
             set { ShowDeletedCheckbox.Checked = value; }

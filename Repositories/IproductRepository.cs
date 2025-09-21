@@ -14,6 +14,7 @@ namespace VentasApp.Repositories
         IEnumerable<ProductModel> GetActiveProducts(bool activeState);
         IEnumerable<ProductModel> GetProductsByCategory(string category);
         IEnumerable<ProductModel> SearchProducts(string searchTerm);
+        IEnumerable<ProductModel> SearchProducts(string searchTerm, bool activeState);
         ProductModel GetProductById(int id);
         void AddProduct(AddProductDTO productDTO);
         void UpdateProduct(UpdateProductDTO productDTO);

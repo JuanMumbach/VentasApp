@@ -4,7 +4,7 @@
     {
         event EventHandler SearchProductEvent;
         string searchValue { get; set; }
-        bool showDeleteProducts { get; set; }
+        bool showDeletedProducts { get; set; }
         event EventHandler AddProductViewEvent;
         event EventHandler EditProductViewEvent;
         event EventHandler DeleteProductEvent;
