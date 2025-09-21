@@ -25,6 +25,7 @@ namespace VentasApp.Presenters
 
             this.view.SearchProductEvent += SearchProduct;
             this.view.AddProductViewEvent += LoadAddProductView;
+            this.view.DeleteProductEvent += DeleteProduct;
             this.view.SetProductosListBindingSource(productsBindingSource);
 
             LoadAllProductsList();
@@ -59,6 +60,16 @@ namespace VentasApp.Presenters
             }
 
             productsBindingSource.DataSource = productList;
+        }
+
+        private void DeleteProduct(object? sender, EventArgs e)
+        {
+            var selectedProductInfo = view.GetSelectedProductInfo();
+            if (selectedProductInfo.HasValue && selectedProductInfo.Value.Id.HasValue)
+            {
+                repository.DeleteProduct(selectedProductInfo.Value.Id.Value);
+                LoadAllProductsList(); // Recarga la lista para reflejar el cambio
+            }
         }
     }
 }

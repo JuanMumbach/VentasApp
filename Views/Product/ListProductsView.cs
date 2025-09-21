@@ -17,6 +17,7 @@ namespace VentasApp.Views
     {
         public event EventHandler SearchProductEvent;
         public event EventHandler AddProductViewEvent;
+        public event EventHandler DeleteProductEvent;
 
         public ListProductsView()
         {
@@ -46,9 +47,40 @@ namespace VentasApp.Views
                     SearchProductEvent?.Invoke(this, EventArgs.Empty);
             };
 
+            dataGridView1.SelectionChanged += (s, e) =>
+            {
+                UpdateDeleteButtonState();
+            };
+
             OpenAddProductViewButton.Click += delegate { AddProductViewEvent?.Invoke(this, EventArgs.Empty); };
+            DeleteButton.Click += delegate { DeleteProductEvent?.Invoke(this, EventArgs.Empty); };
         }
 
-        
+        public int? GetSelectedProductId()
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                // Assuming the first column is the Product's ID
+                return (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+            }
+            return null;
+        }
+
+        public (int? Id, bool? Active)? GetSelectedProductInfo()
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                var productId = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                var isActive = (bool)dataGridView1.CurrentRow.Cells["Active"].Value;
+                return (productId, isActive);
+            }
+            return null;
+        }
+
+        private void UpdateDeleteButtonState()
+        {
+            var selectedProduct = GetSelectedProductInfo();
+            DeleteButton.Enabled = selectedProduct.HasValue && selectedProduct.Value.Active == true;
+        }
     }
 }

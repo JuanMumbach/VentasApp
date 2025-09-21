@@ -35,7 +35,16 @@ namespace VentasApp.Repositories
 
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                var product = context.Products.FirstOrDefault(p => p.Id == id);
+                if (product != null)
+                {
+                    product.Active = false; // Set Active to false instead of deleting
+                    product.UpdatedAt = DateTime.Now;
+                    context.SaveChanges();
+                }
+            }
         }
 
         public IEnumerable<ProductModel> GetAllProducts()
