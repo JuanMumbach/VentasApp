@@ -50,5 +50,7 @@ namespace VentasApp.Models
 
         [ForeignKey("SupplierId")]
         public SupplierModel? Supplier { get; set; }
+
+        public ICollection<SaleItemModel> SaleItems { get; set; } = new List<SaleItemModel>();
     }
 }
