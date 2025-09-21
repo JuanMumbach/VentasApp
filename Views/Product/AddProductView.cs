@@ -125,6 +125,12 @@ namespace VentasApp.Views
         public string? ImagePath { get; set; }
         public bool SecureImagePath { get; set; }
 
+        public bool NotCloseAtUpdate
+        {
+            get { return CloseAtUpdateCheckbox.Checked; }
+            set { CloseAtUpdateCheckbox.Checked = value; }
+        }
+
         private void LoadCategories()
         {
             using (var dbcontext = new VentasDBContext())

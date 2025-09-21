@@ -98,6 +98,12 @@ namespace VentasApp.Presenters
                 ImagePath = view.ImagePath
             };
             repository.AddProduct(newProduct);
+
+            if (!view.NotCloseAtUpdate)
+            {
+                view.CloseView();
+            }
+
         }
 
         private void UpdateProduct(object? sender, EventArgs e)
@@ -124,6 +130,11 @@ namespace VentasApp.Presenters
                 ImagePath = view.ImagePath
             };
             repository.UpdateProduct(newProduct);
+
+            if (!view.NotCloseAtUpdate)
+            {
+                view.CloseView();
+            }
         }
 
         private string? SaveImageInAppDomain()

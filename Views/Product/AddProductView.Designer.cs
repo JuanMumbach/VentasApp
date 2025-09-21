@@ -46,6 +46,7 @@
             ChangeImageButton = new Button();
             UpdateProductButton = new Button();
             DeleteProductButton = new Button();
+            CloseAtUpdateCheckbox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)ProductImageBox).BeginInit();
             SuspendLayout();
             // 
@@ -211,12 +212,23 @@
             DeleteProductButton.Text = "Eliminar producto";
             DeleteProductButton.UseVisualStyleBackColor = true;
             // 
+            // CloseAtUpdateCheckbox
+            // 
+            CloseAtUpdateCheckbox.AutoSize = true;
+            CloseAtUpdateCheckbox.Location = new Point(32, 413);
+            CloseAtUpdateCheckbox.Name = "CloseAtUpdateCheckbox";
+            CloseAtUpdateCheckbox.Size = new Size(295, 24);
+            CloseAtUpdateCheckbox.TabIndex = 18;
+            CloseAtUpdateCheckbox.Text = "No cerrar ventana al Agregar/Actualizar";
+            CloseAtUpdateCheckbox.UseVisualStyleBackColor = true;
+            // 
             // AddProductView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(800, 450);
+            Controls.Add(CloseAtUpdateCheckbox);
             Controls.Add(DeleteProductButton);
             Controls.Add(UpdateProductButton);
             Controls.Add(ChangeImageButton);
@@ -262,5 +274,6 @@
         private Button ChangeImageButton;
         private Button UpdateProductButton;
         private Button DeleteProductButton;
+        private CheckBox CloseAtUpdateCheckbox;
     }
 }

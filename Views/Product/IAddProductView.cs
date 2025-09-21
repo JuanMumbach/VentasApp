@@ -23,6 +23,7 @@ namespace VentasApp.Views.Product
 
         string? ImagePath { get; set; }
         bool SecureImagePath { get; set; }
+        bool NotCloseAtUpdate { get; set; }
 
         void Show();
         void CloseView();
