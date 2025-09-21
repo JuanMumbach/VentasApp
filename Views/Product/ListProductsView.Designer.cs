@@ -32,6 +32,7 @@
             SearchTextbox = new TextBox();
             OpenAddProductViewButton = new Button();
             DeleteButton = new Button();
+            RestoreButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -69,13 +70,23 @@
             // 
             // DeleteButton
             // 
-            DeleteButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            DeleteButton.Location = new Point(167, 495);
+            DeleteButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            DeleteButton.Location = new Point(762, 495);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.Size = new Size(94, 29);
             DeleteButton.TabIndex = 3;
             DeleteButton.Text = "Eliminar";
             DeleteButton.UseVisualStyleBackColor = true;
+            // 
+            // RestoreButton
+            // 
+            RestoreButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RestoreButton.Location = new Point(662, 495);
+            RestoreButton.Name = "RestoreButton";
+            RestoreButton.Size = new Size(94, 29);
+            RestoreButton.TabIndex = 4;
+            RestoreButton.Text = "Restaurar";
+            RestoreButton.UseVisualStyleBackColor = true;
             // 
             // ListProductsView
             // 
@@ -83,6 +94,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(896, 570);
+            Controls.Add(RestoreButton);
             Controls.Add(DeleteButton);
             Controls.Add(OpenAddProductViewButton);
             Controls.Add(SearchTextbox);
@@ -100,5 +112,6 @@
         private TextBox SearchTextbox;
         private Button OpenAddProductViewButton;
         private Button DeleteButton;
+        private Button RestoreButton;
     }
 }

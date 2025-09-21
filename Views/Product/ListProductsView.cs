@@ -18,6 +18,7 @@ namespace VentasApp.Views
         public event EventHandler SearchProductEvent;
         public event EventHandler AddProductViewEvent;
         public event EventHandler DeleteProductEvent;
+        public event EventHandler RestoreProductEvent;
 
         public ListProductsView()
         {
@@ -50,10 +51,12 @@ namespace VentasApp.Views
             dataGridView1.SelectionChanged += (s, e) =>
             {
                 UpdateDeleteButtonState();
+                UpdateRestoreButtonState();
             };
 
             OpenAddProductViewButton.Click += delegate { AddProductViewEvent?.Invoke(this, EventArgs.Empty); };
             DeleteButton.Click += delegate { DeleteProductEvent?.Invoke(this, EventArgs.Empty); };
+            RestoreButton.Click += delegate { RestoreProductEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public int? GetSelectedProductId()
@@ -81,6 +84,12 @@ namespace VentasApp.Views
         {
             var selectedProduct = GetSelectedProductInfo();
             DeleteButton.Enabled = selectedProduct.HasValue && selectedProduct.Value.Active == true;
+        }
+
+        private void UpdateRestoreButtonState()
+        {
+            var selectedProduct = GetSelectedProductInfo();
+            RestoreButton.Enabled = selectedProduct.HasValue && selectedProduct.Value.Active == false;
         }
     }
 }

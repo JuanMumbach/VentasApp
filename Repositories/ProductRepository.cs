@@ -47,6 +47,20 @@ namespace VentasApp.Repositories
             }
         }
 
+        public void RestoreProduct(int id)
+        {
+            using (var context = new VentasDBContext())
+            {
+                var product = context.Products.FirstOrDefault(p => p.Id == id);
+                if (product != null)
+                {
+                    product.Active = true; // Set Active to false instead of deleting
+                    product.UpdatedAt = DateTime.Now;
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public IEnumerable<ProductModel> GetAllProducts()
         {
             using (var context = new VentasDBContext())

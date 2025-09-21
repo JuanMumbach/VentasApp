@@ -17,6 +17,7 @@ namespace VentasApp.Repositories
         void AddProduct(AddProductDTO productDTO);
         void UpdateProduct(ProductModel product);
         void DeleteProduct(int id);
+        void RestoreProduct(int id);
         void AddProduct();
     }
 }
