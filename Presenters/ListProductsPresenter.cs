@@ -23,6 +23,7 @@ namespace VentasApp.Presenters
             this.view = view;
             this.repository = repository;
 
+
             this.view.SearchProductEvent += SearchProduct;
             this.view.AddProductViewEvent += LoadAddProductView;
             this.view.EditProductViewEvent += LoadEditProductView;
@@ -41,16 +42,16 @@ namespace VentasApp.Presenters
             int? id = view.GetSelectedProductId();
             if (id != null)
             {
-                IAddProductView addProductView = new AddProductView((int)id);
-                new AddProductPresenter(addProductView, repository);
+                IProductView addProductView = new ProductView((int)id);
+                new ProductPresenter(addProductView, repository);
 
                 addProductView.ShowDialogView();
             }
         }
         private void LoadAddProductView(object? sender, EventArgs e)
         {
-            IAddProductView addProductView = new AddProductView();
-            new AddProductPresenter(addProductView, repository);
+            IProductView addProductView = new ProductView();
+            new ProductPresenter(addProductView, repository);
    
             addProductView.ShowDialogView();
         }

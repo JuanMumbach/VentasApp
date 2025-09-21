@@ -12,7 +12,7 @@ using VentasApp.Views.Product;
 
 namespace VentasApp.Views
 {
-    public partial class AddProductView : Form, IAddProductView
+    public partial class ProductView : Form, IProductView
     {
         IEnumerable<CategoryModel> categories;
         IEnumerable<SupplierModel> suppliers;
@@ -22,7 +22,7 @@ namespace VentasApp.Views
         public event EventHandler ChangeProductImageEvent;
         public event EventHandler UpdateProductEvent;
 
-        public AddProductView()
+        public ProductView()
         {
             InitializeComponent();
             LoadCategories();
@@ -31,7 +31,7 @@ namespace VentasApp.Views
             SetupEventsHandler();
         }
 
-        public AddProductView(int productId)
+        public ProductView(int productId)
         {
             ProductId = productId;
             InitializeComponent();

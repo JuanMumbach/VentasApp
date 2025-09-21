@@ -69,6 +69,9 @@ namespace VentasApp.Views
             RestoreButton.Click += delegate { RestoreProductEvent?.Invoke(this, EventArgs.Empty); };
 
             ShowDeletedCheckbox.CheckedChanged += delegate { ShowDeletedCheckboxChange?.Invoke(this, EventArgs.Empty); };
+
+            this.Activated += delegate { SearchProductEvent?.Invoke(this, EventArgs.Empty); };
+            
         }
 
         public int? GetSelectedProductId()

@@ -10,11 +10,11 @@ using VentasApp.Views.Product;
 
 namespace VentasApp.Presenters
 {
-    public class AddProductPresenter
+    public class ProductPresenter
     {
-        private IAddProductView view;
+        private IProductView view;
         private IproductRepository repository;
-        public AddProductPresenter(IAddProductView view, IproductRepository repository)
+        public ProductPresenter(IProductView view, IproductRepository repository)
         {
             this.view = view;
             this.repository = repository;

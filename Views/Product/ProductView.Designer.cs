@@ -1,6 +1,6 @@
 ﻿namespace VentasApp.Views
 {
-    partial class AddProductView
+    partial class ProductView
     {
         /// <summary>
         /// Required designer variable.
