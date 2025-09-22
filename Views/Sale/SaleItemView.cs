@@ -42,7 +42,17 @@ namespace VentasApp.Views.Sale
         }
         public int Amount
         {
-            get { return int.Parse(AmountTextbox.Text); }
+            get 
+            { 
+                if (int.TryParse(AmountTextbox.Text, out int amount))
+                {
+                    return amount;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
             set { AmountTextbox.Text = value.ToString(); }
         }
         public SaleItemView(int saleId, int saleItemId)

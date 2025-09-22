@@ -68,6 +68,27 @@ namespace VentasApp.Presenters
 
         private void OnFinishSale(object? sender, EventArgs e)
         {
+            if (view.SaleId == null)
+            {
+                MessageBox.Show("No se han agregado articulos a la venta",
+                                    "Venta vacía",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            IEnumerable<SaleItemModel> items = itemRepository.GetAllItemsOfSale((int)view.SaleId);
+
+            if (items.Count() == 0)
+            {
+                MessageBox.Show("No se han agregado articulos a la venta",
+                                    "Venta vacía",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+
+                return;
+            }
             view.SaleId = null;
             LoadAllSaleItems();
         }
