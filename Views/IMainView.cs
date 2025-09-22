@@ -11,5 +11,6 @@ namespace VentasApp.Views
         public void LoadMainPanelView(Form view);
 
         event EventHandler ProductsButtonEvent;
+        event EventHandler SalesButtonEvent;
     }
 }

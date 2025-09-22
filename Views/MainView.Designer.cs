@@ -31,6 +31,7 @@
             SidePanel = new Panel();
             ProductsButton = new Button();
             MainPanel = new Panel();
+            SellButton = new Button();
             SidePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -39,20 +40,23 @@
             SidePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SidePanel.BackColor = SystemColors.Control;
+            SidePanel.Controls.Add(SellButton);
             SidePanel.Controls.Add(ProductsButton);
             SidePanel.Location = new Point(-1, 0);
+            SidePanel.Margin = new Padding(3, 2, 3, 2);
             SidePanel.Name = "SidePanel";
             SidePanel.RightToLeft = RightToLeft.No;
-            SidePanel.Size = new Size(282, 591);
+            SidePanel.Size = new Size(247, 443);
             SidePanel.TabIndex = 0;
             // 
             // ProductsButton
             // 
             ProductsButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ProductsButton.ForeColor = SystemColors.GrayText;
-            ProductsButton.Location = new Point(3, 183);
+            ProductsButton.Location = new Point(2, 181);
+            ProductsButton.Margin = new Padding(3, 2, 3, 2);
             ProductsButton.Name = "ProductsButton";
-            ProductsButton.Size = new Size(276, 46);
+            ProductsButton.Size = new Size(242, 34);
             ProductsButton.TabIndex = 0;
             ProductsButton.Text = "PRODUCTOS";
             ProductsButton.UseVisualStyleBackColor = true;
@@ -62,19 +66,33 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             MainPanel.BackColor = SystemColors.ActiveCaption;
-            MainPanel.Location = new Point(287, 0);
+            MainPanel.Location = new Point(251, 0);
+            MainPanel.Margin = new Padding(3, 2, 3, 2);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(734, 591);
+            MainPanel.Size = new Size(642, 443);
             MainPanel.TabIndex = 1;
+            // 
+            // SellButton
+            // 
+            SellButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SellButton.ForeColor = SystemColors.GrayText;
+            SellButton.Location = new Point(2, 143);
+            SellButton.Margin = new Padding(3, 2, 3, 2);
+            SellButton.Name = "SellButton";
+            SellButton.Size = new Size(242, 34);
+            SellButton.TabIndex = 1;
+            SellButton.Text = "VENDER";
+            SellButton.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(1021, 592);
+            ClientSize = new Size(893, 444);
             Controls.Add(MainPanel);
             Controls.Add(SidePanel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainView";
             Text = "MainView";
             SidePanel.ResumeLayout(false);
@@ -86,5 +104,6 @@
         private Panel SidePanel;
         private Panel MainPanel;
         private Button ProductsButton;
+        private Button SellButton;
     }
 }

@@ -16,6 +16,8 @@ namespace VentasApp.Views
     public partial class MainView : Form, IMainView
     {
         public event EventHandler ProductsButtonEvent;
+        public event EventHandler SalesButtonEvent;
+
         public MainView()
         {
             InitializeComponent();
@@ -30,12 +32,13 @@ namespace VentasApp.Views
             new ListProductsPresenter(productsView, new ProductRepository());
 
             LoadMainPanelView(productsView);
-            
+
         }
 
         private void SetupEventsHandler()
         {
             ProductsButton.Click += delegate { ProductsButtonEvent?.Invoke(this, EventArgs.Empty); };
+            SellButton.Click += delegate { SalesButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void LoadMainPanelView(Form view)
@@ -43,11 +46,13 @@ namespace VentasApp.Views
             MainPanel.Controls.Clear();
             view.TopLevel = false;
             view.FormBorderStyle = FormBorderStyle.None;
-            view.Dock = DockStyle.Fill; 
+            view.Dock = DockStyle.Fill;
 
-            
+
             MainPanel.Controls.Add(view);
             view.Show();
         }
+
+        
     }
 }

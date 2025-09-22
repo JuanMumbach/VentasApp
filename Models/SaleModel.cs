@@ -16,7 +16,7 @@ namespace VentasApp.Models
         public int Id { get; set; }
 
         [Column("user_id")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Column("address")]
         public string? Address { get; set; }

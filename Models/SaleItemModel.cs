@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace VentasApp.Models
     [Table("sale_item")]
     public class SaleItemModel
     {
+        [Key]
+        [Column("sale_item_id")]
+        public int Id { get; set; }
+
         [Column("sale_id")]
         public int SaleId { get; set; }
 

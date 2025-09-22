@@ -70,7 +70,7 @@ namespace VentasApp.Views
 
             ShowDeletedCheckbox.CheckedChanged += delegate { ShowDeletedCheckboxChange?.Invoke(this, EventArgs.Empty); };
 
-            this.Activated += delegate { SearchProductEvent?.Invoke(this, EventArgs.Empty); };
+            dataGridView1.Click += delegate { SearchProductEvent?.Invoke(this, EventArgs.Empty); };
             
         }
 

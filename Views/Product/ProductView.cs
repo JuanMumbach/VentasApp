@@ -115,7 +115,7 @@ namespace VentasApp.Views
                 }
                 else
                 {
-                    SupplierCombo.SelectedValue = null;
+                    SupplierCombo.SelectedIndex = -1;
                 }
             }
         }

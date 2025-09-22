@@ -26,23 +26,5 @@ namespace VentasApp.Models
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // 1. Configurar la clave primaria compuesta para SaleItem
-            modelBuilder.Entity<SaleItemModel>()
-                .HasKey(si => new { si.SaleId, si.ProductId });
-
-            // 2. Configurar la relación con la tabla 'Sale'
-            modelBuilder.Entity<SaleItemModel>()
-                .HasOne(si => si.Sale)
-                .WithMany(s => s.SaleItems)
-                .HasForeignKey(si => si.SaleId);
-
-            // 3. Configurar la relación con la tabla 'Product'
-            modelBuilder.Entity<SaleItemModel>()
-                .HasOne(si => si.Product)
-                .WithMany(p => p.SaleItems)
-                .HasForeignKey(si => si.ProductId);
-        }
     }
 }

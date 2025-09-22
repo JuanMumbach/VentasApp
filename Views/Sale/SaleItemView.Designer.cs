@@ -41,68 +41,73 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(21, 24);
+            label1.Location = new Point(18, 18);
             label1.Name = "label1";
-            label1.Size = new Size(232, 20);
+            label1.Size = new Size(184, 15);
             label1.TabIndex = 0;
             label1.Text = "Buscar producto por nombre o ID";
             // 
             // SearchTextbox
             // 
-            SearchTextbox.Location = new Point(259, 21);
+            SearchTextbox.Location = new Point(227, 16);
+            SearchTextbox.Margin = new Padding(3, 2, 3, 2);
             SearchTextbox.Name = "SearchTextbox";
-            SearchTextbox.Size = new Size(453, 27);
+            SearchTextbox.Size = new Size(397, 23);
             SearchTextbox.TabIndex = 1;
             // 
             // dataGridView1
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(21, 64);
+            dataGridView1.Location = new Point(18, 48);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(767, 220);
+            dataGridView1.Size = new Size(671, 165);
             dataGridView1.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(21, 306);
+            label2.Location = new Point(18, 230);
             label2.Name = "label2";
-            label2.Size = new Size(69, 20);
+            label2.Size = new Size(55, 15);
             label2.TabIndex = 3;
             label2.Text = "Cantidad";
             // 
             // AmountTextbox
             // 
-            AmountTextbox.Location = new Point(96, 303);
+            AmountTextbox.Location = new Point(84, 227);
+            AmountTextbox.Margin = new Padding(3, 2, 3, 2);
             AmountTextbox.Name = "AmountTextbox";
-            AmountTextbox.Size = new Size(100, 27);
+            AmountTextbox.Size = new Size(88, 23);
             AmountTextbox.TabIndex = 4;
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(21, 409);
+            AddButton.Location = new Point(18, 307);
+            AddButton.Margin = new Padding(3, 2, 3, 2);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(94, 29);
+            AddButton.Size = new Size(82, 22);
             AddButton.TabIndex = 5;
-            AddButton.Text = "Add item";
+            AddButton.Text = "Agregar";
             AddButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
             // 
-            CancelButton.Location = new Point(136, 409);
+            CancelButton.Location = new Point(119, 307);
+            CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(94, 29);
+            CancelButton.Size = new Size(82, 22);
             CancelButton.TabIndex = 6;
-            CancelButton.Text = "Cancel";
+            CancelButton.Text = "Cancelar";
             CancelButton.UseVisualStyleBackColor = true;
             // 
             // SaleItemView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(CancelButton);
             Controls.Add(AddButton);
             Controls.Add(AmountTextbox);
@@ -110,6 +115,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(SearchTextbox);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SaleItemView";
             Text = "SaleItemView";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

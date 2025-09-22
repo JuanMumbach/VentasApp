@@ -11,7 +11,7 @@ namespace VentasApp.Repositories
     public interface ISaleItemRepository
     {
         SaleItemModel GetSaleItemById(int id);
-        IEnumerator<SaleItemModel> GetAllItemsOfSale(int SaleId);
+        IEnumerable<SaleItemModel> GetAllItemsOfSale(int SaleId);
 
         void AddSaleItem(SaleItemModel saleItem);
         void UpdateSaleItem(SaleItemModel saleItem);
@@ -23,6 +23,8 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
+                saleItem.CreatedAt = DateTime.Now;
+                saleItem.UpdatedAt = DateTime.Now;
                 context.SalesItems.Add(saleItem);
                 context.SaveChanges();
             }
@@ -38,19 +40,31 @@ namespace VentasApp.Repositories
             }
         }
 
-        public IEnumerator<SaleItemModel> GetAllItemsOfSale(int SaleId)
+        public IEnumerable<SaleItemModel> GetAllItemsOfSale(int SaleId)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.SalesItems.Where(item => item.SaleId == SaleId).ToList();
+            }
         }
 
         public SaleItemModel GetSaleItemById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.SalesItems.Find(id);
+            }
+            
         }
 
         public void UpdateSaleItem(SaleItemModel saleItem)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                saleItem.UpdatedAt = DateTime.Now;
+                context.SalesItems.Update(saleItem);
+                context.SaveChanges();
+            }
         }
     }
 }

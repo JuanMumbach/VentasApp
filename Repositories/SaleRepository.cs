@@ -13,19 +13,20 @@ namespace VentasApp.Repositories
         IEnumerable<SaleModel> GetAllSales();
         IEnumerable<SaleModel> GetCancelledSales(bool cancelState);
         SaleModel GetSaleById(int id);
-        void AddSale(SaleModel sale);
+        int AddSale(SaleModel sale);
         void UpdateSale(SaleModel sale);
         void CancelSale(int id);
         void RestoreSale(int id);
     }
     public class SaleRepository : ISaleRepository
     {
-        public void AddSale(SaleModel sale)
+        public int AddSale(SaleModel sale)
         {
             using (var context = new VentasDBContext())
             {
                 context.Sales.Add(sale);
                 context.SaveChanges();
+                return sale.Id;
             }
         }
 
