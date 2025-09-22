@@ -11,48 +11,77 @@ namespace VentasApp.Repositories
     public interface ISaleRepository
     {
         IEnumerable<SaleModel> GetAllSales();
-        IEnumerable<SaleModel> GetCancelledProducts(bool cancelState);
+        IEnumerable<SaleModel> GetCancelledSales(bool cancelState);
         SaleModel GetSaleById(int id);
         void AddSale(SaleModel sale);
-        void UpdateSale(int id);
-        void DeleteSale(int id);
+        void UpdateSale(SaleModel sale);
+        void CancelSale(int id);
         void RestoreSale(int id);
     }
     public class SaleRepository : ISaleRepository
     {
         public void AddSale(SaleModel sale)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                context.Sales.Add(sale);
+                context.SaveChanges();
+            }
         }
 
-        public void DeleteSale(int id)
+        public void CancelSale(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                SaleModel sale = GetSaleById(id);
+                sale.CanceledAt = DateTime.Now;
+                context.Sales.Update(sale);
+                context.SaveChanges();
+            }
         }
 
         public IEnumerable<SaleModel> GetAllSales()
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales.ToList();
+            }
         }
 
-        public IEnumerable<SaleModel> GetCancelledProducts(bool cancelState)
+        public IEnumerable<SaleModel> GetCancelledSales(bool cancelState)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales.Where(p => p.CanceledAt.HasValue == cancelState).ToList();
+            }
         }
 
         public SaleModel GetSaleById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales.Find(id);
+            }
         }
 
         public void RestoreSale(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                SaleModel sale = GetSaleById(id);
+                sale.CanceledAt = null;
+                context.Sales.Update(sale);
+                context.SaveChanges();
+            }
         }
 
-        public void UpdateSale(int id)
+        public void UpdateSale(SaleModel sale)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                context.Sales.Update(sale);
+                context.SaveChanges();
+            }
         }
     }
 }

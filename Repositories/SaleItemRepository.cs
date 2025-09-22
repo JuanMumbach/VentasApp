@@ -21,12 +21,21 @@ namespace VentasApp.Repositories
     {
         public void AddSaleItem(SaleItemModel saleItem)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                context.SalesItems.Add(saleItem);
+                context.SaveChanges();
+            }
         }
 
         public void DeleteSaleItem(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                SaleItemModel saleItem = GetSaleItemById(id);
+                context.SalesItems.Remove(saleItem);
+                context.SaveChanges();
+            }
         }
 
         public IEnumerator<SaleItemModel> GetAllItemsOfSale(int SaleId)

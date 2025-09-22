@@ -13,6 +13,8 @@ namespace VentasApp.Models
         public DbSet<ProductModel> Products { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<SupplierModel> Suppliers { get; set; }
+        public DbSet<SaleModel> Sales { get; set; }
+        public DbSet<SaleItemModel> SalesItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration configuration = new ConfigurationBuilder()
