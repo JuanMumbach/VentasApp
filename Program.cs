@@ -3,7 +3,7 @@ using VentasApp.Presenters;
 using VentasApp.Repositories;
 using VentasApp.Views;
 using VentasApp.Views.User;
-using VentasApp.Utilities;
+
 
 namespace VentasApp
 {
@@ -19,10 +19,7 @@ namespace VentasApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            // Probar conexión a base de datos antes de continuar
-            Console.WriteLine("=== PRUEBA DE CONEXIÓN A BASE DE DATOS ===");
-            DatabaseTestHelper.TestDatabaseConnection();
-            Console.WriteLine("==========================================");
+            
 
             // Crear el formulario principal mejorado
             MainView mainView = new MainView();
