@@ -15,6 +15,8 @@ namespace VentasApp.Models
         public DbSet<SupplierModel> Suppliers { get; set; }
         public DbSet<UserModel> Users { get; set; }
         
+        public DbSet<SaleModel> Sales { get; set; }
+        public DbSet<SaleItemModel> SalesItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration configuration = new ConfigurationBuilder()
@@ -25,5 +27,6 @@ namespace VentasApp.Models
 
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
+
     }
 }
