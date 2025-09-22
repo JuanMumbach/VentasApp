@@ -87,6 +87,36 @@ namespace VentasApp.Presenters
                 }
             }
 
+            if (string.IsNullOrEmpty(view.ProductName))
+            {
+                MessageBox.Show("El nombre del producto no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.Price <= 0)
+            {
+                MessageBox.Show("El precio debe ser un número positivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.Stock < 0)
+            {
+                MessageBox.Show("El stock debe ser un número no negativo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.CategoryId < 0)
+            {
+                MessageBox.Show("La categoria seleccionada no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.SupplierId < 0)
+            {
+                MessageBox.Show("El proveedor seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             AddProductDTO newProduct = new AddProductDTO()
             {
                 Name = view.ProductName,
@@ -116,6 +146,30 @@ namespace VentasApp.Presenters
                     this.view.SecureImagePath = true;
                     this.view.ImagePath = newImagePath;
                 }
+            }
+
+            if (view.Price <= 0)
+            {
+                MessageBox.Show("El precio debe ser un número positivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.Stock < 0)
+            {
+                MessageBox.Show("El stock debe ser un número no negativo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.CategoryId < 0)
+            {
+                MessageBox.Show("La categoria seleccionada no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (view.SupplierId < 0)
+            {
+                MessageBox.Show("El proveedor seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             UpdateProductDTO newProduct = new UpdateProductDTO()

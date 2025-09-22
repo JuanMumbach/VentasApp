@@ -76,12 +76,32 @@ namespace VentasApp.Views
         }
         public Decimal Price
         {
-            get { return Decimal.Parse(PriceTextbox.Text); }
+            get { 
+                if (Decimal.TryParse(PriceTextbox.Text, out Decimal result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
             set { PriceTextbox.Text = value.ToString(); }
         }
         public int Stock
         {
-            get { return int.Parse(StockTextbox.Text); }
+            get 
+            {
+                if (int.TryParse(StockTextbox.Text,out int result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return -1;
+                }
+                    
+            }
             set { StockTextbox.Text = value.ToString(); }
         }
 

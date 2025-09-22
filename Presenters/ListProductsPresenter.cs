@@ -87,10 +87,16 @@ namespace VentasApp.Presenters
         private void DeleteProduct(object? sender, EventArgs e)
         {
             var selectedProductInfo = view.GetSelectedProductInfo();
+           
+
             if (selectedProductInfo.HasValue && selectedProductInfo.Value.Id.HasValue)
             {
                 repository.DeleteProduct(selectedProductInfo.Value.Id.Value);
                 LoadAllProductsList(); // Recarga la lista para reflejar el cambio
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un producto para eliminar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -101,6 +107,10 @@ namespace VentasApp.Presenters
             {
                 repository.RestoreProduct(selectedProductInfo.Value.Id.Value);
                 LoadAllProductsList(); // Recarga la lista para reflejar el cambio
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un producto para restaurar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
