@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             SidePanel = new Panel();
+            SellButton = new Button();
             ProductsButton = new Button();
             MainPanel = new Panel();
-            SellButton = new Button();
+            UsersViewButton = new Button();
             SidePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             SidePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SidePanel.BackColor = SystemColors.Control;
+            SidePanel.Controls.Add(UsersViewButton);
             SidePanel.Controls.Add(SellButton);
             SidePanel.Controls.Add(ProductsButton);
             SidePanel.Location = new Point(-1, 0);
@@ -48,6 +50,18 @@
             SidePanel.RightToLeft = RightToLeft.No;
             SidePanel.Size = new Size(247, 443);
             SidePanel.TabIndex = 0;
+            // 
+            // SellButton
+            // 
+            SellButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SellButton.ForeColor = SystemColors.GrayText;
+            SellButton.Location = new Point(2, 143);
+            SellButton.Margin = new Padding(3, 2, 3, 2);
+            SellButton.Name = "SellButton";
+            SellButton.Size = new Size(242, 34);
+            SellButton.TabIndex = 1;
+            SellButton.Text = "VENDER";
+            SellButton.UseVisualStyleBackColor = true;
             // 
             // ProductsButton
             // 
@@ -72,17 +86,17 @@
             MainPanel.Size = new Size(642, 443);
             MainPanel.TabIndex = 1;
             // 
-            // SellButton
+            // UsersViewButton
             // 
-            SellButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            SellButton.ForeColor = SystemColors.GrayText;
-            SellButton.Location = new Point(2, 143);
-            SellButton.Margin = new Padding(3, 2, 3, 2);
-            SellButton.Name = "SellButton";
-            SellButton.Size = new Size(242, 34);
-            SellButton.TabIndex = 1;
-            SellButton.Text = "VENDER";
-            SellButton.UseVisualStyleBackColor = true;
+            UsersViewButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UsersViewButton.ForeColor = SystemColors.GrayText;
+            UsersViewButton.Location = new Point(3, 219);
+            UsersViewButton.Margin = new Padding(3, 2, 3, 2);
+            UsersViewButton.Name = "UsersViewButton";
+            UsersViewButton.Size = new Size(242, 34);
+            UsersViewButton.TabIndex = 2;
+            UsersViewButton.Text = "USUARIOS";
+            UsersViewButton.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
@@ -105,5 +119,6 @@
         private Panel MainPanel;
         private Button ProductsButton;
         private Button SellButton;
+        private Button UsersViewButton;
     }
 }
