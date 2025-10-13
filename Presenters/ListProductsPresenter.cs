@@ -46,6 +46,7 @@ namespace VentasApp.Presenters
                 new ProductPresenter(addProductView, repository);
 
                 addProductView.ShowDialogView();
+                LoadAllProductsList();
             }
         }
         private void LoadAddProductView(object? sender, EventArgs e)
@@ -54,6 +55,7 @@ namespace VentasApp.Presenters
             new ProductPresenter(addProductView, repository);
    
             addProductView.ShowDialogView();
+            LoadAllProductsList();
         }
 
         private void LoadAllProductsList()
