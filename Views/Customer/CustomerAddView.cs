@@ -10,7 +10,11 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.Customer
 {
-    public partial class CustomerAddView : Form
+    public interface ICustomerAddView
+    {
+        
+    }
+    public partial class CustomerAddView : Form, ICustomerAddView
     {
         public CustomerAddView()
         {

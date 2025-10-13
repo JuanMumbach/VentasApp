@@ -10,7 +10,11 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.Customer
 {
-    public partial class CustomerEditView : Form
+    public interface ICustomerEditView
+    {
+
+    }
+    public partial class CustomerEditView : Form, ICustomerEditView
     {
         public CustomerEditView()
         {

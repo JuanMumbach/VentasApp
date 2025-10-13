@@ -20,6 +20,7 @@ namespace VentasApp.Views.Customer
         event EventHandler ShowDeletedChangeEvent;
         event EventHandler SearchCustomerEvent;
 
+        bool showDeletedCustomers { get; }
         string searchValue { get; set; }
         public int? GetSelectedCustomerId();
         void SetCustomerListBindingSource(BindingSource source);
@@ -44,6 +45,8 @@ namespace VentasApp.Views.Customer
             get { return SearchTextbox.Text; }
             set { SearchTextbox.Text = value; }
         }
+
+        public bool showDeletedCustomers => ShowDeletedCheckbox.Checked;
 
         private void SetupEventsHandler()
         {
