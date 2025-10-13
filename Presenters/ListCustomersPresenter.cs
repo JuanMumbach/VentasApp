@@ -66,10 +66,12 @@ namespace VentasApp.Presenters
 
         private void LoadEditCustomerView(object? sender, EventArgs e)
         {
-            ICustomerEditView editCustomerView = new CustomerEditView();
+            int? id = view.GetSelectedCustomerId();
+            if (id == null) return;
+            ICustomerEditView editCustomerView = new CustomerEditView((int)id);
             //new CustomerAddPresenter(addProductView, repository);
 
-            //addCustomerView.ShowDialogView();
+            editCustomerView.ShowDialogView();
         }
 
         private void LoadAddCustomerView(object? sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace VentasApp.Presenters
             ICustomerAddView addCustomerView = new CustomerAddView();
             //new CustomerAddPresenter(addProductView, repository);
 
-            //addCustomerView.ShowDialogView();
+            addCustomerView.ShowDialogView();
         }
 
         private void SearchCustomer(object? sender, EventArgs e)

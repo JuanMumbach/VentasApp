@@ -38,7 +38,7 @@
             TB_Email = new TextBox();
             TB_Phone = new TextBox();
             TB_Address = new TextBox();
-            ModifyCustomerButton = new Button();
+            UpdateCustomerButton = new Button();
             CancelButton = new Button();
             label6 = new Label();
             IdLabel = new Label();
@@ -124,15 +124,15 @@
             TB_Address.Size = new Size(348, 23);
             TB_Address.TabIndex = 10;
             // 
-            // ModifyCustomerButton
+            // UpdateCustomerButton
             // 
-            ModifyCustomerButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            ModifyCustomerButton.Location = new Point(48, 303);
-            ModifyCustomerButton.Name = "ModifyCustomerButton";
-            ModifyCustomerButton.Size = new Size(75, 23);
-            ModifyCustomerButton.TabIndex = 12;
-            ModifyCustomerButton.Text = "Modificar";
-            ModifyCustomerButton.UseVisualStyleBackColor = true;
+            UpdateCustomerButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            UpdateCustomerButton.Location = new Point(48, 303);
+            UpdateCustomerButton.Name = "UpdateCustomerButton";
+            UpdateCustomerButton.Size = new Size(75, 23);
+            UpdateCustomerButton.TabIndex = 12;
+            UpdateCustomerButton.Text = "Actualizar";
+            UpdateCustomerButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
             // 
@@ -170,7 +170,7 @@
             Controls.Add(IdLabel);
             Controls.Add(label6);
             Controls.Add(CancelButton);
-            Controls.Add(ModifyCustomerButton);
+            Controls.Add(UpdateCustomerButton);
             Controls.Add(TB_Address);
             Controls.Add(TB_Phone);
             Controls.Add(TB_Email);
@@ -183,7 +183,6 @@
             Controls.Add(label1);
             Name = "CustomerEditView";
             Text = "CustomerView";
-            Load += this.CustomerView_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -200,7 +199,7 @@
         private TextBox TB_Email;
         private TextBox TB_Phone;
         private TextBox TB_Address;
-        private Button ModifyCustomerButton;
+        private Button UpdateCustomerButton;
         private Button CancelButton;
         private Label label6;
         private Label IdLabel;
