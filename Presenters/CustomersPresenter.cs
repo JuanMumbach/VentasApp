@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Models;
+using VentasApp.Models.DTOs;
 using VentasApp.Repositories;
 using VentasApp.Views;
 using VentasApp.Views.Customer;
@@ -74,10 +75,10 @@ namespace VentasApp.Presenters
             if (customer == null) return;
 
             ICustomerEditView editCustomerView = new CustomerEditView((int)id);
-            editCustomerView.ShowDialogView();
+                    
 
             editCustomerView.CancelEvent += (sender, e) => { CloseView(editCustomerView); };
-            editCustomerView.SaveCustomerEvent += (sender, e) => { SaveCustomer(editCustomerView); };
+            editCustomerView.SaveCustomerEvent += (sender, e) => { UpdateCustomer(editCustomerView); };
 
 
             editCustomerView.CustomerName = customer.Firstname;
@@ -86,9 +87,11 @@ namespace VentasApp.Presenters
             editCustomerView.CustomerPhone = customer.PhoneNumber;
             editCustomerView.CustomerAddress = customer.Address;
 
+            editCustomerView.ShowDialogView();
+
         }
 
-        private void SaveCustomer(ICustomerEditView editCustomerView)
+        private void UpdateCustomer(ICustomerEditView editCustomerView)
         {
             int? customerId = editCustomerView.CustomerId;
             if (customerId == null) return;
@@ -101,20 +104,24 @@ namespace VentasApp.Presenters
             customer.Address = editCustomerView.CustomerAddress;
             
             repository.UpdateCustomer(customer);
+            LoadAllCustomersList();
+            editCustomerView.CloseView();
         }
 
         private void LoadAddCustomerView(object? sender, EventArgs e)
         {
             ICustomerAddView addCustomerView = new CustomerAddView();
-            addCustomerView.ShowDialogView();
+            
 
             addCustomerView.CancelEvent += (sender, e) => { CloseView(addCustomerView); };
             addCustomerView.AddCustomerEvent += (sender, e) => { AddCustomer(addCustomerView); };
+
+            addCustomerView.ShowDialogView();
         }
 
         private void AddCustomer(ICustomerAddView addCustomerView)
         {
-            CustomerModel customer = new CustomerModel
+            AddCustomerDTO customer = new AddCustomerDTO
             {
                 Firstname = addCustomerView.CustomerName,
                 Lastname = addCustomerView.CustomerLastName,
@@ -125,6 +132,7 @@ namespace VentasApp.Presenters
 
             repository.AddCustomer(customer);
             LoadAllCustomersList();
+            CloseView(addCustomerView);
         }
 
         private void CloseView(ICustomerEditView editCustomerView)

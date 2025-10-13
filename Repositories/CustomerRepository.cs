@@ -15,17 +15,28 @@ namespace VentasApp.Repositories
         IEnumerable<CustomerModel> SearchCustomers(string searchTerm);
         IEnumerable<CustomerModel> SearchCustomers(string searchTerm, bool activeState);
         CustomerModel? GetCustomerById(int id);
-        int AddCustomer(CustomerModel newCustomer);
+        int AddCustomer(AddCustomerDTO newCustomer);
         void UpdateCustomer(CustomerModel customer);
         bool DeleteCustomer(int id);
         void RestoreCustomer(int id);
     }
     public class CustomerRepository : ICustomerRepository
     {
-        public int AddCustomer(CustomerModel newCustomer)
+        public int AddCustomer(AddCustomerDTO newCustomerDTO)
         {
             using (var context = new VentasDBContext())
             {
+                CustomerModel newCustomer = new CustomerModel
+                {
+                    Firstname = newCustomerDTO.Firstname,
+                    Lastname = newCustomerDTO.Lastname,
+                    Email = newCustomerDTO.Email,
+                    PhoneNumber = newCustomerDTO.PhoneNumber,
+                    Address = newCustomerDTO.Address,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeletedAt = null
+                };
                 context.Customers.Add(newCustomer);
                 context.SaveChanges();          
                 return newCustomer.Id;
@@ -38,7 +49,8 @@ namespace VentasApp.Repositories
             {
                 CustomerModel? customer = GetCustomerById(id);
                 if (customer == null) return false;
-                context.Customers.Remove(customer);
+                customer.DeletedAt = DateTime.Now;
+                context.Customers.Update(customer);
                 return context.SaveChanges() > 0;
             }
         }

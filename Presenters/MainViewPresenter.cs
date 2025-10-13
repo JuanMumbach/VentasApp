@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Repositories;
 using VentasApp.Views;
+using VentasApp.Views.Customer;
 using VentasApp.Views.Sale;
 using VentasApp.Views.User;
 
@@ -21,8 +22,15 @@ namespace VentasApp.Presenters
             this.view.ProductsButtonEvent += LoadListProductsView;
             this.view.SalesButtonEvent += LoadSaleView;
             this.view.UsersButtonEvent += LoadUsersView;
+            this.view.CustomersButtonEvent += LoadCustomersView;
         }
 
+        private void LoadCustomersView(object? sender, EventArgs e)
+        {
+            CustomerListView customersView = new CustomerListView();
+            new CustomersPresenter(customersView, new CustomerRepository());
+            view.LoadMainPanelView(customersView);
+        }
         private void LoadUsersView(object? sender, EventArgs e)
         {
             ListUsersView usersView = new ListUsersView();

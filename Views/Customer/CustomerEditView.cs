@@ -61,9 +61,9 @@ namespace VentasApp.Views.Customer
 
         public CustomerEditView(int customerId)
         {
-            this.CustomerId = customerId;
             InitializeComponent();
             SetupEventsHandler();
+            this.CustomerId = customerId;
         }
 
         private void SetupEventsHandler()

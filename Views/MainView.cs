@@ -18,6 +18,7 @@ namespace VentasApp.Views
         public event EventHandler ProductsButtonEvent;
         public event EventHandler SalesButtonEvent;
         public event EventHandler UsersButtonEvent;
+        public event EventHandler CustomersButtonEvent;
 
         public MainView()
         {
@@ -41,6 +42,7 @@ namespace VentasApp.Views
             ProductsButton.Click += delegate { ProductsButtonEvent?.Invoke(this, EventArgs.Empty); };
             SellButton.Click += delegate { SalesButtonEvent?.Invoke(this, EventArgs.Empty); };
             UsersViewButton.Click += delegate { UsersButtonEvent?.Invoke(this, EventArgs.Empty); };
+            CustomersButton.Click += delegate { CustomersButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void LoadMainPanelView(Form view)

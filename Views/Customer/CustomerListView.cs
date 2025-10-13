@@ -75,16 +75,26 @@ namespace VentasApp.Views.Customer
 
         private void UpdateDeleteButtonState()
         {
-            var selectedProduct = GetSelectedCustomerId();
-            var isActive = (bool)dataGridView1.CurrentRow.Cells["Active"].Value;
-            DeleteButton.Enabled = selectedProduct.HasValue && isActive;
+            var selectedCustomer = GetSelectedCustomerId();
+            if (dataGridView1.CurrentRow == null)
+            {
+                DeleteButton.Enabled = false;
+                return;
+            }
+            var isActive = (bool)(dataGridView1.CurrentRow.Cells["DeletedAt"].Value == null);
+            DeleteButton.Enabled = selectedCustomer.HasValue && isActive;
         }
 
         private void UpdateRestoreButtonState()
         {
-            var selectedProduct = GetSelectedCustomerId();
-            var isActive = (bool)dataGridView1.CurrentRow.Cells["Active"].Value;
-            RestoreDeletedButton.Enabled = selectedProduct.HasValue && !isActive;
+            var selectedCustomer = GetSelectedCustomerId();
+            if (dataGridView1.CurrentRow == null)
+            {
+                RestoreDeletedButton.Enabled = false;
+                return;
+            }
+            var isActive = (bool)(dataGridView1.CurrentRow.Cells["DeletedAt"].Value == null);
+            RestoreDeletedButton.Enabled = selectedCustomer.HasValue && !isActive;
         }
 
         private void UpdateEditButtonState()
@@ -96,8 +106,10 @@ namespace VentasApp.Views.Customer
         {
             if (dataGridView1.CurrentRow != null)
             {
-                // Assuming the first column is the Product's ID
-                return (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                if (dataGridView1.CurrentRow.Cells["Id"].Value == null)
+                    return null;
+                int id = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                return id;
             }
             return null;
         }

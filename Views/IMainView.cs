@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VentasApp.Views.Customer;
 
 namespace VentasApp.Views
 {
@@ -13,5 +14,6 @@ namespace VentasApp.Views
         event EventHandler ProductsButtonEvent;
         event EventHandler SalesButtonEvent;
         event EventHandler UsersButtonEvent;
+        event EventHandler CustomersButtonEvent;
     }
 }
