@@ -22,6 +22,7 @@ namespace VentasApp.Views.Customer
         string CustomerPhone { get; set; }
         string CustomerAddress { get; set; }
         void ShowDialogView();
+        void CloseView();
     }
     public partial class CustomerEditView : Form, ICustomerEditView
     {
@@ -75,5 +76,10 @@ namespace VentasApp.Views.Customer
         {
             this.ShowDialog();
         }
+
+        public void CloseView()
+        {
+            this.Close();
+        }   
     }
 }

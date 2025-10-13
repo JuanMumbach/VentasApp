@@ -21,6 +21,7 @@ namespace VentasApp.Views.Customer
         string CustomerAddress { get; set; }
 
         void ShowDialogView();
+        void CloseView();
     }
     public partial class CustomerAddView : Form, ICustomerAddView
     {
@@ -67,6 +68,11 @@ namespace VentasApp.Views.Customer
         public void ShowDialogView()
         {
             this.ShowDialog();
+        }
+
+        public void CloseView()
+        {
+            this.Close();
         }
     }
 }
