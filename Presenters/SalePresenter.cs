@@ -106,6 +106,7 @@ namespace VentasApp.Presenters
                 ISaleItemView saleItemView = new SaleItemView((int)view.SaleId,(int)id);
                 new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
                 saleItemView.ShowDialogView();
+                LoadAllSaleItems();
             }
         }
 
@@ -116,6 +117,7 @@ namespace VentasApp.Presenters
                 ISaleItemView saleItemView = new SaleItemView((int)view.SaleId);
                 new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
                 saleItemView.ShowDialogView();
+                LoadAllSaleItems();
             }
             else
             {
@@ -130,6 +132,7 @@ namespace VentasApp.Presenters
                 ISaleItemView saleItemView = new SaleItemView((int)view.SaleId);
                 new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
                 saleItemView.ShowDialogView();
+                LoadAllSaleItems();
             }
             /*
             IProductView addProductView = new ProductView();
