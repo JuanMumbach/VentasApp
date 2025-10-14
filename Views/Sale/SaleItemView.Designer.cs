@@ -68,6 +68,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
             label2.Location = new Point(18, 230);
             label2.Name = "label2";
@@ -77,6 +78,7 @@
             // 
             // AmountTextbox
             // 
+            AmountTextbox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AmountTextbox.Location = new Point(84, 227);
             AmountTextbox.Margin = new Padding(3, 2, 3, 2);
             AmountTextbox.Name = "AmountTextbox";
@@ -85,6 +87,7 @@
             // 
             // AddButton
             // 
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddButton.Location = new Point(18, 307);
             AddButton.Margin = new Padding(3, 2, 3, 2);
             AddButton.Name = "AddButton";
@@ -95,6 +98,7 @@
             // 
             // CancelButton
             // 
+            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             CancelButton.Location = new Point(119, 307);
             CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
