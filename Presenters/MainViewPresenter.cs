@@ -48,7 +48,7 @@ namespace VentasApp.Presenters
         private void LoadSaleView(object? sender, EventArgs e)
         {
             SaleView saleView = new SaleView();
-            new SalePresenter(saleView, new SaleRepository(), new SaleItemRepository());
+            new SalePresenter(saleView, new SaleRepository(), new SaleItemRepository(), new CustomerRepository());
             view.LoadMainPanelView(saleView);
         }
     }

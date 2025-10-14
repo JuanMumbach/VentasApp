@@ -34,6 +34,8 @@
             EditSaleItemButton = new Button();
             AddSaleItemButton = new Button();
             ViewItemsPanel = new Panel();
+            label1 = new Label();
+            CustomerCombobox = new ComboBox();
             CancelButton = new Button();
             ((System.ComponentModel.ISupportInitialize)SaleItemsDatagridview).BeginInit();
             ViewItemsPanel.SuspendLayout();
@@ -51,13 +53,13 @@
             SaleItemsDatagridview.Name = "SaleItemsDatagridview";
             SaleItemsDatagridview.ReadOnly = true;
             SaleItemsDatagridview.RowHeadersWidth = 51;
-            SaleItemsDatagridview.Size = new Size(823, 263);
+            SaleItemsDatagridview.Size = new Size(734, 263);
             SaleItemsDatagridview.TabIndex = 0;
             // 
             // RemoveItemButton
             // 
             RemoveItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            RemoveItemButton.Location = new Point(728, 316);
+            RemoveItemButton.Location = new Point(639, 316);
             RemoveItemButton.Margin = new Padding(3, 2, 3, 2);
             RemoveItemButton.Name = "RemoveItemButton";
             RemoveItemButton.Size = new Size(105, 22);
@@ -79,7 +81,7 @@
             // EditSaleItemButton
             // 
             EditSaleItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            EditSaleItemButton.Location = new Point(618, 316);
+            EditSaleItemButton.Location = new Point(529, 316);
             EditSaleItemButton.Margin = new Padding(3, 2, 3, 2);
             EditSaleItemButton.Name = "EditSaleItemButton";
             EditSaleItemButton.Size = new Size(105, 22);
@@ -90,7 +92,7 @@
             // AddSaleItemButton
             // 
             AddSaleItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            AddSaleItemButton.Location = new Point(508, 316);
+            AddSaleItemButton.Location = new Point(419, 316);
             AddSaleItemButton.Margin = new Padding(3, 2, 3, 2);
             AddSaleItemButton.Name = "AddSaleItemButton";
             AddSaleItemButton.Size = new Size(105, 22);
@@ -102,6 +104,8 @@
             // 
             ViewItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ViewItemsPanel.BackColor = SystemColors.ControlLightLight;
+            ViewItemsPanel.Controls.Add(label1);
+            ViewItemsPanel.Controls.Add(CustomerCombobox);
             ViewItemsPanel.Controls.Add(CancelButton);
             ViewItemsPanel.Controls.Add(AddSaleItemButton);
             ViewItemsPanel.Controls.Add(EditSaleItemButton);
@@ -111,8 +115,27 @@
             ViewItemsPanel.Location = new Point(1, 1);
             ViewItemsPanel.Margin = new Padding(3, 2, 3, 2);
             ViewItemsPanel.Name = "ViewItemsPanel";
-            ViewItemsPanel.Size = new Size(845, 388);
+            ViewItemsPanel.Size = new Size(756, 388);
             ViewItemsPanel.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Location = new Point(508, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Cliente:";
+            // 
+            // CustomerCombobox
+            // 
+            CustomerCombobox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CustomerCombobox.FormattingEnabled = true;
+            CustomerCombobox.Location = new Point(561, 21);
+            CustomerCombobox.Name = "CustomerCombobox";
+            CustomerCombobox.Size = new Size(163, 23);
+            CustomerCombobox.TabIndex = 6;
             // 
             // CancelButton
             // 
@@ -129,13 +152,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(848, 387);
+            ClientSize = new Size(759, 387);
             Controls.Add(ViewItemsPanel);
             Margin = new Padding(3, 2, 3, 2);
             Name = "SaleView";
             Text = "SaleView";
             ((System.ComponentModel.ISupportInitialize)SaleItemsDatagridview).EndInit();
             ViewItemsPanel.ResumeLayout(false);
+            ViewItemsPanel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -148,5 +172,7 @@
         private Button AddSaleItemButton;
         private Panel ViewItemsPanel;
         private Button CancelButton;
+        private Label label1;
+        private ComboBox CustomerCombobox;
     }
 }

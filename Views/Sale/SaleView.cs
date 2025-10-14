@@ -7,18 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VentasApp.Models;
 
 namespace VentasApp.Views.Sale
 {
     public interface ISaleView
     {
         int? SaleId { get; set; }
+        int? CustomerId { get; set; }
+        IEnumerable<CustomerModel> Customers { set; }
         event EventHandler AddSaleItemViewEvent;
         event EventHandler EditSaleItemViewEvent;
         event EventHandler RemoveSaleItemEvent;
         event EventHandler FinishSaleEvent;
         event EventHandler CancelSaleEvent;
         event EventHandler OnRecoverFocusEvent;
+        event EventHandler CustomerSelectionChangedEvent;
 
         void SetSaleItemsListBindingSource(BindingSource source);
         int? GetSelectedItemId();
@@ -27,6 +31,40 @@ namespace VentasApp.Views.Sale
     public partial class SaleView : Form, ISaleView
     {
         public int? SaleId { get; set; }
+        public IEnumerable<CustomerModel> Customers
+        {
+            set
+            {
+                List<CustomerModel> _customers = value.ToList();
+                _customers.Insert(0, new CustomerModel { Id = -1, Firstname = "-- Sin definir --" });
+                
+                CustomerCombobox.DataSource = _customers;
+                CustomerCombobox.DisplayMember = "FullName";
+                CustomerCombobox.ValueMember = "Id";
+                
+            }
+        }
+
+        public int? CustomerId
+        {
+            get
+            {
+                int? value = (int?)CustomerCombobox.SelectedValue;
+                if (value == -1) return null;
+                return value;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    CustomerCombobox.SelectedValue = value.Value;
+                }
+                else
+                {
+                    CustomerCombobox.SelectedIndex = -1;
+                }
+            }
+        }
 
         public event EventHandler AddSaleItemViewEvent;
         public event EventHandler EditSaleItemViewEvent;
@@ -34,6 +72,7 @@ namespace VentasApp.Views.Sale
         public event EventHandler FinishSaleEvent;
         public event EventHandler CancelSaleEvent;
         public event EventHandler OnRecoverFocusEvent;
+        public event EventHandler CustomerSelectionChangedEvent;
 
         public SaleView()
         {
@@ -49,6 +88,7 @@ namespace VentasApp.Views.Sale
             ConfirmSaleButton.Click += delegate { FinishSaleEvent?.Invoke(this, EventArgs.Empty); };
             CancelButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.Click += delegate { OnRecoverFocusEvent?.Invoke(this, EventArgs.Empty); };
+            CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void SetSaleItemsListBindingSource(BindingSource source)

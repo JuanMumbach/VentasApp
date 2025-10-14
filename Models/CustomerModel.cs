@@ -28,6 +28,11 @@ namespace VentasApp.Models
         [StringLength(50, ErrorMessage = "Apellido no puede exceder los 50 caracteres.")]
         public string? Lastname { get; set; }
 
+        public string FullName
+        {
+            get { return $"{Firstname} {Lastname}"; }
+        }
+
         [Column("phone_number")]
         [StringLength(20, ErrorMessage = "El numero de telefono no puede exceder los 20 caracteres.")]
         [Phone(ErrorMessage = "El numero de telefono ingresado no es valido.")]

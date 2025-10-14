@@ -16,14 +16,16 @@ namespace VentasApp.Presenters
         private ISaleView view;
         private ISaleRepository saleRepository;
         private ISaleItemRepository itemRepository;
+        private ICustomerRepository customerRepository;
         private BindingSource saleItemsBindingSource;
         private IEnumerable<SaleItemModel> saleItemList;
 
-        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository)
+        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository, ICustomerRepository _customerRepository)
         {
             this.view = saleView;
             this.saleRepository = _saleRepository;
             this.itemRepository = _itemRepository;
+            this.customerRepository = _customerRepository;
             this.saleItemsBindingSource = new BindingSource();
 
             this.view.AddSaleItemViewEvent += OnAddSaleItemView;
@@ -32,8 +34,31 @@ namespace VentasApp.Presenters
             this.view.FinishSaleEvent += OnFinishSale;
             this.view.CancelSaleEvent += OnCancelSale;
             this.view.OnRecoverFocusEvent += OnRecoverFocus;
+            this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
             this.view.SetSaleItemsListBindingSource(saleItemsBindingSource);
             LoadAllSaleItems();
+            LoadCustomers();
+        }
+
+        private void UpdateSaleCustomer(object? sender, EventArgs e)
+        {
+            if (view.SaleId != null)
+            {
+               SaleModel sale = saleRepository.GetSaleById((int)view.SaleId);
+               if (sale != null)
+               {
+                   int? customerID = view.CustomerId;
+                   if (customerID == -1) customerID = null;
+                   sale.CustomerId = customerID;
+                   sale.UpdatedAt = DateTime.Now;
+                   saleRepository.UpdateSale(sale);
+                }
+            }          
+        }
+
+        private void LoadCustomers()
+        {
+            view.Customers = customerRepository.GetAllCustomers();
         }
 
         private void OnRecoverFocus(object? sender, EventArgs e)
@@ -64,6 +89,7 @@ namespace VentasApp.Presenters
                 view.SaleId = null;
             }
             LoadAllSaleItems();
+            LoadCustomers();
         }
 
         private void OnFinishSale(object? sender, EventArgs e)
@@ -91,6 +117,7 @@ namespace VentasApp.Presenters
             }
             view.SaleId = null;
             LoadAllSaleItems();
+            LoadCustomers();
         }
 
         private void OnRemoveSaleItem(object? sender, EventArgs e)
@@ -121,8 +148,12 @@ namespace VentasApp.Presenters
             }
             else
             {
+                int? customerID = view.CustomerId;
+                if (customerID == -1) customerID = null;
+
                 SaleModel newSale = new SaleModel()
                 {
+                    CustomerId = customerID,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
@@ -134,12 +165,6 @@ namespace VentasApp.Presenters
                 saleItemView.ShowDialogView();
                 LoadAllSaleItems();
             }
-            /*
-            IProductView addProductView = new ProductView();
-            new ProductPresenter(addProductView, repository);
-
-            addProductView.ShowDialogView();
-            */
         }
     }
 }
