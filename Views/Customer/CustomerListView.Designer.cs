@@ -41,6 +41,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(41, 69);
@@ -66,9 +67,9 @@
             // 
             // ShowDeletedCheckbox
             // 
-            ShowDeletedCheckbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ShowDeletedCheckbox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ShowDeletedCheckbox.AutoSize = true;
-            ShowDeletedCheckbox.Location = new Point(500, 35);
+            ShowDeletedCheckbox.Location = new Point(381, 350);
             ShowDeletedCheckbox.Name = "ShowDeletedCheckbox";
             ShowDeletedCheckbox.Size = new Size(128, 19);
             ShowDeletedCheckbox.TabIndex = 3;
