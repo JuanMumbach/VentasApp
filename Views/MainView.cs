@@ -32,8 +32,7 @@ namespace VentasApp.Views
         }
 
         private void LoadColorTheme()
-        {
-            ColorThemes.SetDarkTheme();
+        {          
             SidePanel.BackColor = ColorThemes.Back;
             MainPanel.BackColor = ColorThemes.Back2;
             WelcomeLabel.ForeColor = ColorThemes.Primary;

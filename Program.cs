@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using VentasApp.Presenters;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 
 
@@ -18,6 +19,8 @@ namespace VentasApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+
+            ColorThemes.SetLightTheme();
             LoginView loginView = new LoginView();
             new LoginPresenter(loginView, new UserRepository());
             

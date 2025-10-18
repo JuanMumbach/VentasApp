@@ -22,9 +22,11 @@ namespace VentasApp.Services
         public static Color Warning;
         public static Color WarningHighlighted;
         public static Color NormalText;
+        public static Image LogoImage;
 
         public static void SetLightTheme()
         {
+            LogoImage = Properties.Resources.VentasAppLogoClaro;
             NormalText = Color.Black;
             // Fondos (Backgrounds)
             Back = Color.FromArgb(240, 246, 255);       // F0F6FF
@@ -47,6 +49,7 @@ namespace VentasApp.Services
 
         public static void SetDarkTheme()
         {
+            LogoImage = Properties.Resources.VentasAppLogoOscuro;
             NormalText = Color.White;
 
             // Fondos (Backgrounds)
