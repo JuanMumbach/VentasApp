@@ -32,24 +32,26 @@ namespace VentasApp.Views
         }
 
         private void LoadColorTheme()
-        {          
-            SidePanel.BackColor = ColorThemes.Back;
-            MainPanel.BackColor = ColorThemes.Back2;
-            WelcomeLabel.ForeColor = ColorThemes.Primary;
+        {
+            SidePanelLogoPicturebox.Image = Themes.LogoImage;
+            MainPanelLogoPicturebox.Image = Themes.LogoImage;
+            SidePanel.BackColor = Themes.ColorBack;
+            MainPanel.BackColor = Themes.ColorBack2;
+            WelcomeLabel.ForeColor = Themes.ColorPrimary;
 
-            SellButton.BackColor = ColorThemes.Back2;
-            SellButton.ForeColor = ColorThemes.Highlight;
-            SellButton.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
-            SellButton.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
+            SellButton.BackColor = Themes.ColorBack2;
+            SellButton.ForeColor = Themes.ColorHighlight;
+            SellButton.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
+            SellButton.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
 
             Button[] buttons = { ProductsButton, UsersViewButton, CustomersButton, LogoutButton };
             foreach (Button button in buttons)
             {
-                button.BackColor = ColorThemes.Back2;
-                button.ForeColor = ColorThemes.Primary;
-                button.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
-                button.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
-               
+                button.BackColor = Themes.ColorBack2;
+                button.ForeColor = Themes.ColorPrimary;
+                button.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
+                button.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
+
             }
         }
 

@@ -84,29 +84,29 @@ namespace VentasApp.Views.Sale
 
         private void LoadColorTheme()
         {
-            ViewItemsPanel.BackColor = ColorThemes.Back2;
-            label1.ForeColor = ColorThemes.NormalText;
+            ViewItemsPanel.BackColor = Themes.ColorBack2;
+            label1.ForeColor = Themes.ColorNormalText;
 
 
             Button[] buttons = { AddSaleItemButton, EditSaleItemButton, RemoveItemButton, ConfirmSaleButton, CancelButton };
             foreach (Button button in buttons)
             {
-                button.BackColor = ColorThemes.Back;
-                button.ForeColor = ColorThemes.NormalText;
-                button.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
-                button.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
+                button.BackColor = Themes.ColorBack;
+                button.ForeColor = Themes.ColorNormalText;
+                button.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
+                button.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
             }
 
-            RemoveItemButton.ForeColor = ColorThemes.Warning;
-            AddSaleItemButton.ForeColor = ColorThemes.Highlight;
-            ConfirmSaleButton.ForeColor = ColorThemes.Highlight;
+            RemoveItemButton.ForeColor = Themes.ColorWarning;
+            AddSaleItemButton.ForeColor = Themes.ColorHighlight;
+            ConfirmSaleButton.ForeColor = Themes.ColorHighlight;
 
-            SaleItemsDatagridview.BackgroundColor = ColorThemes.Back;
-            SaleItemsDatagridview.ForeColor = ColorThemes.Primary;
-            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.BackColor = ColorThemes.Back2;
-            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.ForeColor = ColorThemes.Primary;
-            SaleItemsDatagridview.DefaultCellStyle.BackColor = ColorThemes.Back2;
-            SaleItemsDatagridview.DefaultCellStyle.ForeColor = ColorThemes.NormalText;
+            SaleItemsDatagridview.BackgroundColor = Themes.ColorBack;
+            SaleItemsDatagridview.ForeColor = Themes.ColorPrimary;
+            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.BackColor = Themes.ColorBack2;
+            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.ForeColor = Themes.ColorPrimary;
+            SaleItemsDatagridview.DefaultCellStyle.BackColor = Themes.ColorBack2;
+            SaleItemsDatagridview.DefaultCellStyle.ForeColor = Themes.ColorNormalText;
 
         }
 

@@ -34,21 +34,27 @@
             panel2 = new Panel();
             LogoutButton = new Button();
             SideLayoutPanel = new FlowLayoutPanel();
-            UsersViewButton = new Button();
-            CustomersButton = new Button();
-            ProductsButton = new Button();
-            SellButton = new Button();
             PanelLogo = new Panel();
+            SidePanelLogoPicturebox = new PictureBox();
+            SellButton = new Button();
+            ProductsButton = new Button();
+            CustomersButton = new Button();
+            UsersViewButton = new Button();
+            MainPanelLogoPicturebox = new PictureBox();
             MainPanel.SuspendLayout();
             SidePanel.SuspendLayout();
             panel2.SuspendLayout();
             SideLayoutPanel.SuspendLayout();
+            PanelLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SidePanelLogoPicturebox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
             SuspendLayout();
             // 
             // MainPanel
             // 
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = SystemColors.ActiveCaption;
+            MainPanel.Controls.Add(MainPanelLogoPicturebox);
             MainPanel.Controls.Add(WelcomeLabel);
             MainPanel.Location = new Point(198, 0);
             MainPanel.Margin = new Padding(3, 2, 3, 2);
@@ -62,7 +68,7 @@
             WelcomeLabel.Anchor = AnchorStyles.Top;
             WelcomeLabel.Font = new Font("Microsoft JhengHei", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             WelcomeLabel.ForeColor = SystemColors.HotTrack;
-            WelcomeLabel.Location = new Point(139, 54);
+            WelcomeLabel.Location = new Point(139, 231);
             WelcomeLabel.Name = "WelcomeLabel";
             WelcomeLabel.Size = new Size(478, 50);
             WelcomeLabel.TabIndex = 0;
@@ -130,56 +136,27 @@
             SideLayoutPanel.Size = new Size(200, 399);
             SideLayoutPanel.TabIndex = 1;
             // 
-            // UsersViewButton
+            // PanelLogo
             // 
-            UsersViewButton.BackColor = SystemColors.InactiveBorder;
-            UsersViewButton.Dock = DockStyle.Left;
-            UsersViewButton.FlatAppearance.BorderSize = 0;
-            UsersViewButton.FlatStyle = FlatStyle.Flat;
-            UsersViewButton.Font = new Font("Microsoft JhengHei", 12F);
-            UsersViewButton.ForeColor = SystemColors.GrayText;
-            UsersViewButton.Location = new Point(5, 221);
-            UsersViewButton.Margin = new Padding(0, 0, 0, 5);
-            UsersViewButton.Name = "UsersViewButton";
-            UsersViewButton.Size = new Size(190, 30);
-            UsersViewButton.TabIndex = 8;
-            UsersViewButton.Text = "Usuarios";
-            UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
-            UsersViewButton.UseVisualStyleBackColor = false;
+            PanelLogo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PanelLogo.Controls.Add(SidePanelLogoPicturebox);
+            PanelLogo.Dock = DockStyle.Left;
+            PanelLogo.Location = new Point(7, 10);
+            PanelLogo.Margin = new Padding(2, 5, 0, 10);
+            PanelLogo.Name = "PanelLogo";
+            PanelLogo.Size = new Size(184, 96);
+            PanelLogo.TabIndex = 6;
             // 
-            // CustomersButton
+            // SidePanelLogoPicturebox
             // 
-            CustomersButton.BackColor = SystemColors.InactiveBorder;
-            CustomersButton.Dock = DockStyle.Left;
-            CustomersButton.FlatAppearance.BorderSize = 0;
-            CustomersButton.FlatStyle = FlatStyle.Flat;
-            CustomersButton.Font = new Font("Microsoft JhengHei", 12F);
-            CustomersButton.ForeColor = SystemColors.GrayText;
-            CustomersButton.Location = new Point(5, 186);
-            CustomersButton.Margin = new Padding(0, 0, 0, 5);
-            CustomersButton.Name = "CustomersButton";
-            CustomersButton.Size = new Size(190, 30);
-            CustomersButton.TabIndex = 9;
-            CustomersButton.Text = "Clientes";
-            CustomersButton.TextAlign = ContentAlignment.MiddleLeft;
-            CustomersButton.UseVisualStyleBackColor = false;
-            // 
-            // ProductsButton
-            // 
-            ProductsButton.BackColor = SystemColors.InactiveBorder;
-            ProductsButton.Dock = DockStyle.Left;
-            ProductsButton.FlatAppearance.BorderSize = 0;
-            ProductsButton.FlatStyle = FlatStyle.Flat;
-            ProductsButton.Font = new Font("Microsoft JhengHei", 12F);
-            ProductsButton.ForeColor = SystemColors.GrayText;
-            ProductsButton.Location = new Point(5, 151);
-            ProductsButton.Margin = new Padding(0, 0, 0, 5);
-            ProductsButton.Name = "ProductsButton";
-            ProductsButton.Size = new Size(190, 30);
-            ProductsButton.TabIndex = 5;
-            ProductsButton.Text = "Productos";
-            ProductsButton.TextAlign = ContentAlignment.MiddleLeft;
-            ProductsButton.UseVisualStyleBackColor = false;
+            SidePanelLogoPicturebox.Anchor = AnchorStyles.None;
+            SidePanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
+            SidePanelLogoPicturebox.Location = new Point(45, 4);
+            SidePanelLogoPicturebox.Name = "SidePanelLogoPicturebox";
+            SidePanelLogoPicturebox.Size = new Size(90, 90);
+            SidePanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
+            SidePanelLogoPicturebox.TabIndex = 0;
+            SidePanelLogoPicturebox.TabStop = false;
             // 
             // SellButton
             // 
@@ -198,15 +175,67 @@
             SellButton.TextAlign = ContentAlignment.MiddleLeft;
             SellButton.UseVisualStyleBackColor = false;
             // 
-            // PanelLogo
+            // ProductsButton
             // 
-            PanelLogo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            PanelLogo.Dock = DockStyle.Left;
-            PanelLogo.Location = new Point(7, 10);
-            PanelLogo.Margin = new Padding(2, 5, 0, 10);
-            PanelLogo.Name = "PanelLogo";
-            PanelLogo.Size = new Size(184, 96);
-            PanelLogo.TabIndex = 6;
+            ProductsButton.BackColor = SystemColors.InactiveBorder;
+            ProductsButton.Dock = DockStyle.Left;
+            ProductsButton.FlatAppearance.BorderSize = 0;
+            ProductsButton.FlatStyle = FlatStyle.Flat;
+            ProductsButton.Font = new Font("Microsoft JhengHei", 12F);
+            ProductsButton.ForeColor = SystemColors.GrayText;
+            ProductsButton.Location = new Point(5, 151);
+            ProductsButton.Margin = new Padding(0, 0, 0, 5);
+            ProductsButton.Name = "ProductsButton";
+            ProductsButton.Size = new Size(190, 30);
+            ProductsButton.TabIndex = 5;
+            ProductsButton.Text = "Productos";
+            ProductsButton.TextAlign = ContentAlignment.MiddleLeft;
+            ProductsButton.UseVisualStyleBackColor = false;
+            // 
+            // CustomersButton
+            // 
+            CustomersButton.BackColor = SystemColors.InactiveBorder;
+            CustomersButton.Dock = DockStyle.Left;
+            CustomersButton.FlatAppearance.BorderSize = 0;
+            CustomersButton.FlatStyle = FlatStyle.Flat;
+            CustomersButton.Font = new Font("Microsoft JhengHei", 12F);
+            CustomersButton.ForeColor = SystemColors.GrayText;
+            CustomersButton.Location = new Point(5, 186);
+            CustomersButton.Margin = new Padding(0, 0, 0, 5);
+            CustomersButton.Name = "CustomersButton";
+            CustomersButton.Size = new Size(190, 30);
+            CustomersButton.TabIndex = 9;
+            CustomersButton.Text = "Clientes";
+            CustomersButton.TextAlign = ContentAlignment.MiddleLeft;
+            CustomersButton.UseVisualStyleBackColor = false;
+            // 
+            // UsersViewButton
+            // 
+            UsersViewButton.BackColor = SystemColors.InactiveBorder;
+            UsersViewButton.Dock = DockStyle.Left;
+            UsersViewButton.FlatAppearance.BorderSize = 0;
+            UsersViewButton.FlatStyle = FlatStyle.Flat;
+            UsersViewButton.Font = new Font("Microsoft JhengHei", 12F);
+            UsersViewButton.ForeColor = SystemColors.GrayText;
+            UsersViewButton.Location = new Point(5, 221);
+            UsersViewButton.Margin = new Padding(0, 0, 0, 5);
+            UsersViewButton.Name = "UsersViewButton";
+            UsersViewButton.Size = new Size(190, 30);
+            UsersViewButton.TabIndex = 8;
+            UsersViewButton.Text = "Usuarios";
+            UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
+            UsersViewButton.UseVisualStyleBackColor = false;
+            // 
+            // MainPanelLogoPicturebox
+            // 
+            MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
+            MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
+            MainPanelLogoPicturebox.Location = new Point(282, 37);
+            MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
+            MainPanelLogoPicturebox.Size = new Size(180, 180);
+            MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
+            MainPanelLogoPicturebox.TabIndex = 1;
+            MainPanelLogoPicturebox.TabStop = false;
             // 
             // MainView
             // 
@@ -227,6 +256,9 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             SideLayoutPanel.ResumeLayout(false);
+            PanelLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SidePanelLogoPicturebox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).EndInit();
             ResumeLayout(false);
         }
 
@@ -242,5 +274,7 @@
         private Button ProductsButton;
         private Button CustomersButton;
         private Button UsersViewButton;
+        private PictureBox SidePanelLogoPicturebox;
+        private PictureBox MainPanelLogoPicturebox;
     }
 }

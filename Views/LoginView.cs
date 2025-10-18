@@ -39,18 +39,18 @@ namespace VentasApp.Views
 
         private void LoadColorTheme()
         {
-            LoginImage.Image = ColorThemes.LogoImage;
-            this.BackColor = ColorThemes.Back2;
-            LoginButton.BackColor = ColorThemes.Back2;
-            LoginButton.ForeColor = ColorThemes.Primary;
-            LoginButton.FlatAppearance.BorderColor = ColorThemes.BackHighlighted;
-            LoginButton.FlatAppearance.MouseOverBackColor = ColorThemes.BackHighlighted;
-            label1.ForeColor = ColorThemes.NormalText;
-            label2.ForeColor = ColorThemes.NormalText;
-            UsernameTextbox.BackColor = ColorThemes.Back2;
-            UsernameTextbox.ForeColor = ColorThemes.NormalText;
-            PasswordTextbox.BackColor = ColorThemes.Back2;
-            PasswordTextbox.ForeColor = ColorThemes.NormalText;
+            LoginImage.Image = Themes.LogoImage;
+            this.BackColor = Themes.ColorBack2;
+            LoginButton.BackColor = Themes.ColorBack2;
+            LoginButton.ForeColor = Themes.ColorPrimary;
+            LoginButton.FlatAppearance.BorderColor = Themes.ColorBackHighlighted;
+            LoginButton.FlatAppearance.MouseOverBackColor = Themes.ColorBackHighlighted;
+            label1.ForeColor = Themes.ColorNormalText;
+            label2.ForeColor = Themes.ColorNormalText;
+            UsernameTextbox.BackColor = Themes.ColorBack2;
+            UsernameTextbox.ForeColor = Themes.ColorNormalText;
+            PasswordTextbox.BackColor = Themes.ColorBack2;
+            PasswordTextbox.ForeColor = Themes.ColorNormalText;
         }
 
         private void SetupEventsHandler()
