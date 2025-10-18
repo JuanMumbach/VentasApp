@@ -13,7 +13,7 @@ namespace VentasApp.Views
     public interface ILoginView
     {
         string Username { get; }
-        string Password { get; }
+        string Password { get; set; }
 
         event EventHandler LoginEvent;
 
@@ -24,7 +24,7 @@ namespace VentasApp.Views
     public partial class LoginView : Form, ILoginView
     {
         public string Username => UsernameTextbox.Text;
-        public string Password => PasswordTextbox.Text;
+        public string Password {get => PasswordTextbox.Text; set => PasswordTextbox.Text = value; }
 
         public event EventHandler LoginEvent;
         public LoginView()

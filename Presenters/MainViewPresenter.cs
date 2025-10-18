@@ -14,15 +14,37 @@ namespace VentasApp.Presenters
     public class MainViewPresenter
     {
         IMainView view;
+        ILoginView loginView;
+        bool logingOut;
 
-        public MainViewPresenter(IMainView mainView)
+        public MainViewPresenter(IMainView mainView, ILoginView loginView)
         {
             view = mainView;
+            this.loginView = loginView;
+            
+            logingOut = false;
 
             this.view.ProductsButtonEvent += LoadListProductsView;
             this.view.SalesButtonEvent += LoadSaleView;
             this.view.UsersButtonEvent += LoadUsersView;
             this.view.CustomersButtonEvent += LoadCustomersView;
+            this.view.LogoutButtonEvent += Logout;
+            this.view.MainViewClosedEvent += MainViewClosed;
+        }
+
+        private void MainViewClosed(object? sender, EventArgs e)
+        {
+            if (!logingOut)
+            {
+                loginView.Close();
+            }
+        }
+
+        private void Logout(object? sender, EventArgs e)
+        {
+            logingOut = true;
+            loginView.Show();
+            view.Close();
         }
 
         private void LoadCustomersView(object? sender, EventArgs e)

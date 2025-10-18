@@ -10,10 +10,13 @@ namespace VentasApp.Views
     public interface IMainView
     {
         public void LoadMainPanelView(Form view);
+        void Close();
 
         event EventHandler ProductsButtonEvent;
         event EventHandler SalesButtonEvent;
         event EventHandler UsersButtonEvent;
         event EventHandler CustomersButtonEvent;
+        event EventHandler LogoutButtonEvent;
+        event EventHandler MainViewClosedEvent;
     }
 }

@@ -25,17 +25,19 @@ namespace VentasApp.Presenters
         {
             string username = loginView.Username;
             string password = loginView.Password;
+
+            loginView.Password = string.Empty;
             bool isValidUser = userRepository.ValidateUser(username, password);
             if (isValidUser)
             {
                 MainView mainView = new MainView();
 
-                new MainViewPresenter(mainView);
+                new MainViewPresenter(mainView, loginView);
 
                 mainView.Show();
 
                 this.loginView.Hide();
-                mainView.FormClosed += (s, args) => loginView.Close();
+                //mainView.FormClosed += (s, args) => loginView.Close();
             }
             else
             {

@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             SidePanel = new Panel();
+            LogoutButton = new Button();
+            CustomersButton = new Button();
             UsersViewButton = new Button();
             SellButton = new Button();
             ProductsButton = new Button();
             MainPanel = new Panel();
-            CustomersButton = new Button();
             SidePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             SidePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SidePanel.BackColor = SystemColors.Control;
+            SidePanel.Controls.Add(LogoutButton);
             SidePanel.Controls.Add(CustomersButton);
             SidePanel.Controls.Add(UsersViewButton);
             SidePanel.Controls.Add(SellButton);
@@ -52,6 +54,30 @@
             SidePanel.RightToLeft = RightToLeft.No;
             SidePanel.Size = new Size(247, 443);
             SidePanel.TabIndex = 0;
+            // 
+            // LogoutButton
+            // 
+            LogoutButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LogoutButton.ForeColor = SystemColors.GrayText;
+            LogoutButton.Location = new Point(2, 399);
+            LogoutButton.Margin = new Padding(3, 2, 3, 2);
+            LogoutButton.Name = "LogoutButton";
+            LogoutButton.Size = new Size(242, 34);
+            LogoutButton.TabIndex = 4;
+            LogoutButton.Text = "Cerrar Sesión";
+            LogoutButton.UseVisualStyleBackColor = true;
+            // 
+            // CustomersButton
+            // 
+            CustomersButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CustomersButton.ForeColor = SystemColors.GrayText;
+            CustomersButton.Location = new Point(3, 257);
+            CustomersButton.Margin = new Padding(3, 2, 3, 2);
+            CustomersButton.Name = "CustomersButton";
+            CustomersButton.Size = new Size(242, 34);
+            CustomersButton.TabIndex = 3;
+            CustomersButton.Text = "CLIENTES";
+            CustomersButton.UseVisualStyleBackColor = true;
             // 
             // UsersViewButton
             // 
@@ -100,18 +126,6 @@
             MainPanel.Size = new Size(642, 443);
             MainPanel.TabIndex = 1;
             // 
-            // CustomersButton
-            // 
-            CustomersButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CustomersButton.ForeColor = SystemColors.GrayText;
-            CustomersButton.Location = new Point(3, 257);
-            CustomersButton.Margin = new Padding(3, 2, 3, 2);
-            CustomersButton.Name = "CustomersButton";
-            CustomersButton.Size = new Size(242, 34);
-            CustomersButton.TabIndex = 3;
-            CustomersButton.Text = "CLIENTES";
-            CustomersButton.UseVisualStyleBackColor = true;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -123,6 +137,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainView";
             Text = "MainView";
+            FormClosed += MainView_FormClosed;
             SidePanel.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -135,5 +150,6 @@
         private Button SellButton;
         private Button UsersViewButton;
         private Button CustomersButton;
+        private Button LogoutButton;
     }
 }
