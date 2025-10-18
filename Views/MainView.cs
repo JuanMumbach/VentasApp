@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VentasApp.Presenters;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views.Product;
 
 namespace VentasApp.Views
@@ -63,6 +64,11 @@ namespace VentasApp.Views
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainViewClosedEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void MainPanel_Paint(object sender, PaintEventArgs e)
+        {
+            WelcomeLabel.Text = $"Bienvenido, {SessionManager.CurrentUsername}!";
         }
     }
 }

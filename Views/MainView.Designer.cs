@@ -35,7 +35,9 @@
             SellButton = new Button();
             ProductsButton = new Button();
             MainPanel = new Panel();
+            WelcomeLabel = new Label();
             SidePanel.SuspendLayout();
+            MainPanel.SuspendLayout();
             SuspendLayout();
             // 
             // SidePanel
@@ -120,11 +122,26 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             MainPanel.BackColor = SystemColors.ActiveCaption;
+            MainPanel.Controls.Add(WelcomeLabel);
             MainPanel.Location = new Point(251, 0);
             MainPanel.Margin = new Padding(3, 2, 3, 2);
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(642, 443);
             MainPanel.TabIndex = 1;
+            MainPanel.Paint += MainPanel_Paint;
+            // 
+            // WelcomeLabel
+            // 
+            WelcomeLabel.Anchor = AnchorStyles.None;
+            WelcomeLabel.AutoSize = true;
+            WelcomeLabel.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            WelcomeLabel.ForeColor = SystemColors.HotTrack;
+            WelcomeLabel.Location = new Point(101, 181);
+            WelcomeLabel.Name = "WelcomeLabel";
+            WelcomeLabel.Size = new Size(478, 50);
+            WelcomeLabel.TabIndex = 0;
+            WelcomeLabel.Text = "Bienvenido 001 - Username";
+            WelcomeLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MainView
             // 
@@ -139,6 +156,8 @@
             Text = "MainView";
             FormClosed += MainView_FormClosed;
             SidePanel.ResumeLayout(false);
+            MainPanel.ResumeLayout(false);
+            MainPanel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -151,5 +170,6 @@
         private Button UsersViewButton;
         private Button CustomersButton;
         private Button LogoutButton;
+        private Label WelcomeLabel;
     }
 }

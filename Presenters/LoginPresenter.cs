@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 
 namespace VentasApp.Presenters
@@ -27,9 +28,12 @@ namespace VentasApp.Presenters
             string password = loginView.Password;
 
             loginView.Password = string.Empty;
-            bool isValidUser = userRepository.ValidateUser(username, password);
-            if (isValidUser)
+            int? isValidUser = userRepository.ValidateUser(username, password);
+            if (isValidUser != null)
             {
+                SessionManager.CurrentUsername = username;
+                SessionManager.CurrentUserId = isValidUser.Value;
+
                 MainView mainView = new MainView();
 
                 new MainViewPresenter(mainView, loginView);
@@ -37,7 +41,6 @@ namespace VentasApp.Presenters
                 mainView.Show();
 
                 this.loginView.Hide();
-                //mainView.FormClosed += (s, args) => loginView.Close();
             }
             else
             {

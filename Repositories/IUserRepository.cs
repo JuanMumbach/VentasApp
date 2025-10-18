@@ -16,7 +16,7 @@ namespace VentasApp.Repositories
         void UpdateUser(UpdateUserDTO userDTO);
         void DeleteUser(int id);
         void RestoreUser(int id);
-        bool ValidateUser(string username, string password);
+        int? ValidateUser(string username, string password);
         bool IsUsernameAvailable(string username);
         bool IsEmailAvailable(string email);
     }

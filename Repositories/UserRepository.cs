@@ -228,7 +228,7 @@ namespace VentasApp.Repositories
             }
         }
 
-        public bool ValidateUser(string username, string password)
+        public int? ValidateUser(string username, string password)
         {
             try
             {
@@ -237,9 +237,13 @@ namespace VentasApp.Repositories
                     var user = context.Users.FirstOrDefault(u => u.Username == username && u.Active);
                     if (user != null)
                     {
-                        return VerifyPassword(password, user.PasswordHash);
+                        if (VerifyPassword(password, user.PasswordHash))
+                        {
+                            return user.Id;
+                        }
+                        
                     }
-                    return false;
+                    return null;
                 }
             }
             catch (Exception ex)
