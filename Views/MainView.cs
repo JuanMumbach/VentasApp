@@ -28,8 +28,31 @@ namespace VentasApp.Views
             InitializeComponent();
             //LoadDefaultPanel();
             SetupEventsHandler();
+            LoadColorTheme();
         }
 
+        private void LoadColorTheme()
+        {
+            ColorThemes.SetDarkTheme();
+            SidePanel.BackColor = ColorThemes.Back;
+            MainPanel.BackColor = ColorThemes.Back2;
+            WelcomeLabel.ForeColor = ColorThemes.Primary;
+
+            SellButton.BackColor = ColorThemes.Back2;
+            SellButton.ForeColor = ColorThemes.Highlight;
+            SellButton.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
+            SellButton.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
+
+            Button[] buttons = { ProductsButton, UsersViewButton, CustomersButton, LogoutButton };
+            foreach (Button button in buttons)
+            {
+                button.BackColor = ColorThemes.Back2;
+                button.ForeColor = ColorThemes.Primary;
+                button.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
+                button.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
+               
+            }
+        }
 
         private void LoadDefaultPanel()
         {

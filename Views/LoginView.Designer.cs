@@ -96,6 +96,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "LoginView";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginView";
             ResumeLayout(false);
             PerformLayout();
