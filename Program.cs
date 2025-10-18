@@ -18,11 +18,10 @@ namespace VentasApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            MainView mainView = new MainView();
+            LoginView loginView = new LoginView();
+            new LoginPresenter(loginView, new UserRepository());
             
-            new MainViewPresenter(mainView);
-            
-            Application.Run((Form)mainView);
+            Application.Run((Form)loginView);
         }
     }
 }
