@@ -21,9 +21,11 @@ namespace VentasApp.Services
         public static Color HighlightHighlighted;
         public static Color Warning;
         public static Color WarningHighlighted;
+        public static Color NormalText;
 
         public static void SetLightTheme()
         {
+            NormalText = Color.Black;
             // Fondos (Backgrounds)
             Back = Color.FromArgb(240, 246, 255);       // F0F6FF
             BackHighlighted = Color.FromArgb(229, 239, 255);    // E5EFFF
@@ -45,6 +47,8 @@ namespace VentasApp.Services
 
         public static void SetDarkTheme()
         {
+            NormalText = Color.White;
+
             // Fondos (Backgrounds)
             Back = Color.FromArgb(30, 42, 56);         // 1E2A38
             BackHighlighted = Color.FromArgb(40, 56, 72);      // 283848

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VentasApp.Models;
+using VentasApp.Services;
 
 namespace VentasApp.Views.Sale
 {
@@ -37,11 +38,11 @@ namespace VentasApp.Views.Sale
             {
                 List<CustomerModel> _customers = value.ToList();
                 _customers.Insert(0, new CustomerModel { Id = -1, Firstname = "-- Sin definir --" });
-                
+
                 CustomerCombobox.DataSource = _customers;
                 CustomerCombobox.DisplayMember = "FullName";
                 CustomerCombobox.ValueMember = "Id";
-                
+
             }
         }
 
@@ -78,6 +79,35 @@ namespace VentasApp.Views.Sale
         {
             InitializeComponent();
             SetupEventHandler();
+            LoadColorTheme();
+        }
+
+        private void LoadColorTheme()
+        {
+            ViewItemsPanel.BackColor = ColorThemes.Back2;
+            label1.ForeColor = ColorThemes.NormalText;
+
+
+            Button[] buttons = { AddSaleItemButton, EditSaleItemButton, RemoveItemButton, ConfirmSaleButton, CancelButton };
+            foreach (Button button in buttons)
+            {
+                button.BackColor = ColorThemes.Back;
+                button.ForeColor = ColorThemes.NormalText;
+                button.FlatAppearance.BorderColor = ColorThemes.Back2Highlighted;
+                button.FlatAppearance.MouseOverBackColor = ColorThemes.Back2Highlighted;
+            }
+
+            RemoveItemButton.ForeColor = ColorThemes.Warning;
+            AddSaleItemButton.ForeColor = ColorThemes.Highlight;
+            ConfirmSaleButton.ForeColor = ColorThemes.Highlight;
+
+            SaleItemsDatagridview.BackgroundColor = ColorThemes.Back;
+            SaleItemsDatagridview.ForeColor = ColorThemes.Primary;
+            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.BackColor = ColorThemes.Back2;
+            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.ForeColor = ColorThemes.Primary;
+            SaleItemsDatagridview.DefaultCellStyle.BackColor = ColorThemes.Back2;
+            SaleItemsDatagridview.DefaultCellStyle.ForeColor = ColorThemes.NormalText;
+
         }
 
         private void SetupEventHandler()
@@ -88,7 +118,7 @@ namespace VentasApp.Views.Sale
             ConfirmSaleButton.Click += delegate { FinishSaleEvent?.Invoke(this, EventArgs.Empty); };
             CancelButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.Click += delegate { OnRecoverFocusEvent?.Invoke(this, EventArgs.Empty); };
-            CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
+            //CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void SetSaleItemsListBindingSource(BindingSource source)

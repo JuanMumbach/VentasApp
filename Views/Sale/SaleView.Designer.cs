@@ -59,6 +59,9 @@
             // RemoveItemButton
             // 
             RemoveItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RemoveItemButton.FlatAppearance.BorderSize = 0;
+            RemoveItemButton.FlatStyle = FlatStyle.Flat;
+            RemoveItemButton.Font = new Font("Microsoft JhengHei", 9F);
             RemoveItemButton.Location = new Point(639, 316);
             RemoveItemButton.Margin = new Padding(3, 2, 3, 2);
             RemoveItemButton.Name = "RemoveItemButton";
@@ -70,6 +73,9 @@
             // ConfirmSaleButton
             // 
             ConfirmSaleButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ConfirmSaleButton.FlatAppearance.BorderSize = 0;
+            ConfirmSaleButton.FlatStyle = FlatStyle.Flat;
+            ConfirmSaleButton.Font = new Font("Microsoft JhengHei", 9F);
             ConfirmSaleButton.Location = new Point(10, 356);
             ConfirmSaleButton.Margin = new Padding(3, 2, 3, 2);
             ConfirmSaleButton.Name = "ConfirmSaleButton";
@@ -81,6 +87,9 @@
             // EditSaleItemButton
             // 
             EditSaleItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            EditSaleItemButton.FlatAppearance.BorderSize = 0;
+            EditSaleItemButton.FlatStyle = FlatStyle.Flat;
+            EditSaleItemButton.Font = new Font("Microsoft JhengHei", 9F);
             EditSaleItemButton.Location = new Point(529, 316);
             EditSaleItemButton.Margin = new Padding(3, 2, 3, 2);
             EditSaleItemButton.Name = "EditSaleItemButton";
@@ -92,6 +101,9 @@
             // AddSaleItemButton
             // 
             AddSaleItemButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            AddSaleItemButton.FlatAppearance.BorderSize = 0;
+            AddSaleItemButton.FlatStyle = FlatStyle.Flat;
+            AddSaleItemButton.Font = new Font("Microsoft JhengHei", 9F);
             AddSaleItemButton.Location = new Point(419, 316);
             AddSaleItemButton.Margin = new Padding(3, 2, 3, 2);
             AddSaleItemButton.Name = "AddSaleItemButton";
@@ -122,9 +134,10 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
+            label1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(508, 24);
             label1.Name = "label1";
-            label1.Size = new Size(47, 15);
+            label1.Size = new Size(50, 17);
             label1.TabIndex = 7;
             label1.Text = "Cliente:";
             // 
@@ -140,6 +153,9 @@
             // CancelButton
             // 
             CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CancelButton.FlatAppearance.BorderSize = 0;
+            CancelButton.FlatStyle = FlatStyle.Flat;
+            CancelButton.Font = new Font("Microsoft JhengHei", 9F);
             CancelButton.Location = new Point(187, 356);
             CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
