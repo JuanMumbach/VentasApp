@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             MainPanel = new Panel();
+            MainPanelLogoPicturebox = new PictureBox();
             WelcomeLabel = new Label();
             SidePanel = new Panel();
             panel2 = new Panel();
@@ -40,14 +41,13 @@
             ProductsButton = new Button();
             CustomersButton = new Button();
             UsersViewButton = new Button();
-            MainPanelLogoPicturebox = new PictureBox();
             MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
             SidePanel.SuspendLayout();
             panel2.SuspendLayout();
             SideLayoutPanel.SuspendLayout();
             PanelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SidePanelLogoPicturebox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
             SuspendLayout();
             // 
             // MainPanel
@@ -63,9 +63,20 @@
             MainPanel.TabIndex = 1;
             MainPanel.Paint += MainPanel_Paint;
             // 
+            // MainPanelLogoPicturebox
+            // 
+            MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
+            MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
+            MainPanelLogoPicturebox.Location = new Point(282, 37);
+            MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
+            MainPanelLogoPicturebox.Size = new Size(180, 180);
+            MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
+            MainPanelLogoPicturebox.TabIndex = 1;
+            MainPanelLogoPicturebox.TabStop = false;
+            // 
             // WelcomeLabel
             // 
-            WelcomeLabel.Anchor = AnchorStyles.Top;
+            WelcomeLabel.Anchor = AnchorStyles.None;
             WelcomeLabel.Font = new Font("Microsoft JhengHei", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             WelcomeLabel.ForeColor = SystemColors.HotTrack;
             WelcomeLabel.Location = new Point(139, 231);
@@ -226,17 +237,6 @@
             UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
             UsersViewButton.UseVisualStyleBackColor = false;
             // 
-            // MainPanelLogoPicturebox
-            // 
-            MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
-            MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
-            MainPanelLogoPicturebox.Location = new Point(282, 37);
-            MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
-            MainPanelLogoPicturebox.Size = new Size(180, 180);
-            MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
-            MainPanelLogoPicturebox.TabIndex = 1;
-            MainPanelLogoPicturebox.TabStop = false;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -249,16 +249,16 @@
             MinimumSize = new Size(640, 480);
             Name = "MainView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MainView";
+            Text = "VentasApp";
             FormClosed += MainView_FormClosed;
             MainPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).EndInit();
             SidePanel.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             SideLayoutPanel.ResumeLayout(false);
             PanelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SidePanelLogoPicturebox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).EndInit();
             ResumeLayout(false);
         }
 
