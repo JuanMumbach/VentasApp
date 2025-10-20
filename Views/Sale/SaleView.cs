@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using VentasApp.Models;
 using VentasApp.Services;
@@ -81,7 +82,11 @@ namespace VentasApp.Views.Sale
             SetupEventHandler();
         }
 
-        
+        protected override void CustomTheme()
+        {
+            AddSaleItemButton.BackColor = Themes.MainActionButtonColor;
+            AddSaleItemButton.ForeColor = Themes.MainActionButtonTextColor;
+        }
 
         private void SetupEventHandler()
         {

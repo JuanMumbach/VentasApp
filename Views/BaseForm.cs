@@ -29,6 +29,12 @@ namespace VentasApp.Views
 
             // Aplica el tema a los controles de nivel superior del formulario
             ApplyThemeToControls(this.Controls);
+            CustomTheme();
+        }
+
+        virtual protected void CustomTheme()
+        {
+            // Método virtual para que las clases derivadas puedan aplicar temas personalizados
         }
 
         private void ApplyThemeToControls(Control.ControlCollection controls)
