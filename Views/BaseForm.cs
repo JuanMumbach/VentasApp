@@ -32,6 +32,26 @@ namespace VentasApp.Views
             CustomTheme();
         }
 
+        protected void SetAcceptButton(Button button)
+        {
+            this.AcceptButton = button;
+
+            button.BackColor = Themes.MainActionButtonColor;
+            button.ForeColor = Themes.MainActionButtonTextColor;
+            button.FlatAppearance.BorderColor = Themes.MainActionButtonColor;
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(
+                        Math.Clamp(Themes.MainActionButtonColor.R + Themes.MouseOverBrightness, 0, 255),
+                        Math.Clamp(Themes.MainActionButtonColor.G + Themes.MouseOverBrightness, 0, 255),
+                        Math.Clamp(Themes.MainActionButtonColor.B + Themes.MouseOverBrightness, 0, 255)
+            );
+            button.FlatAppearance.MouseDownBackColor = Color.FromArgb(
+                        Math.Clamp(Themes.MainActionButtonColor.R + Themes.MouseDownBrightness, 0, 255),
+                        Math.Clamp(Themes.MainActionButtonColor.G + Themes.MouseDownBrightness, 0, 255),
+                        Math.Clamp(Themes.MainActionButtonColor.B + Themes.MouseDownBrightness, 0, 255)
+            );
+        }
+
+
         virtual protected void CustomTheme()
         {
             // Método virtual para que las clases derivadas puedan aplicar temas personalizados
@@ -64,7 +84,9 @@ namespace VentasApp.Views
                 
                 if (control is Panel panel)
                 {
+                    byte transparency = panel.BackColor.A;
                     panel.BackColor = Themes.MainViewBackgroundColor;
+                    panel.BackColor = Color.FromArgb(transparency, panel.BackColor.R, panel.BackColor.G, panel.BackColor.B);
                     panel.ForeColor = Themes.ColorNormalText;
                 }
                 

@@ -29,7 +29,14 @@ namespace VentasApp.Views
             //LoadDefaultPanel();
             SetupEventsHandler();
 
+            
+        }
+
+        protected override void CustomTheme()
+        {
             SidePanel.BackColor = Themes.SidebarBackgroundColor;
+            //SideLayoutPanel.BackColor = Color.Transparent;
+            //panel2.BackColor = Color.Transparent;
 
             Color ButtonMouseOverColor = Color.FromArgb(
                         Math.Clamp(Themes.SidebarButtonColor.R + Themes.MouseOverBrightness, 0, 255),
@@ -54,9 +61,9 @@ namespace VentasApp.Views
                     button.FlatAppearance.MouseDownBackColor = ButtonMouseDownColor;
                 }
             }
-        }
 
-        
+            SetAcceptButton(SellButton);
+        }
 
         private void LoadDefaultPanel()
         {

@@ -60,7 +60,7 @@
             MainPanel.Margin = new Padding(3, 2, 3, 2);
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(695, 444);
-            MainPanel.TabIndex = 1;
+            MainPanel.TabIndex = 99;
             MainPanel.Paint += MainPanel_Paint;
             // 
             // MainPanelLogoPicturebox
@@ -106,7 +106,7 @@
             panel2.Name = "panel2";
             panel2.Padding = new Padding(5);
             panel2.Size = new Size(200, 45);
-            panel2.TabIndex = 1;
+            panel2.TabIndex = 99;
             // 
             // LogoutButton
             // 
@@ -124,7 +124,7 @@
             LogoutButton.MinimumSize = new Size(140, 25);
             LogoutButton.Name = "LogoutButton";
             LogoutButton.Size = new Size(190, 30);
-            LogoutButton.TabIndex = 11;
+            LogoutButton.TabIndex = 4;
             LogoutButton.Text = "Cerrar Sesión";
             LogoutButton.TextAlign = ContentAlignment.MiddleLeft;
             LogoutButton.UseVisualStyleBackColor = false;
@@ -145,7 +145,7 @@
             SideLayoutPanel.Name = "SideLayoutPanel";
             SideLayoutPanel.Padding = new Padding(5);
             SideLayoutPanel.Size = new Size(200, 399);
-            SideLayoutPanel.TabIndex = 1;
+            SideLayoutPanel.TabIndex = 99;
             // 
             // PanelLogo
             // 
@@ -181,7 +181,7 @@
             SellButton.Margin = new Padding(0, 0, 0, 5);
             SellButton.Name = "SellButton";
             SellButton.Size = new Size(190, 30);
-            SellButton.TabIndex = 7;
+            SellButton.TabIndex = 0;
             SellButton.Text = "VENDER";
             SellButton.TextAlign = ContentAlignment.MiddleLeft;
             SellButton.UseVisualStyleBackColor = false;
@@ -198,7 +198,7 @@
             ProductsButton.Margin = new Padding(0, 0, 0, 5);
             ProductsButton.Name = "ProductsButton";
             ProductsButton.Size = new Size(190, 30);
-            ProductsButton.TabIndex = 5;
+            ProductsButton.TabIndex = 1;
             ProductsButton.Text = "Productos";
             ProductsButton.TextAlign = ContentAlignment.MiddleLeft;
             ProductsButton.UseVisualStyleBackColor = false;
@@ -215,7 +215,7 @@
             CustomersButton.Margin = new Padding(0, 0, 0, 5);
             CustomersButton.Name = "CustomersButton";
             CustomersButton.Size = new Size(190, 30);
-            CustomersButton.TabIndex = 9;
+            CustomersButton.TabIndex = 2;
             CustomersButton.Text = "Clientes";
             CustomersButton.TextAlign = ContentAlignment.MiddleLeft;
             CustomersButton.UseVisualStyleBackColor = false;
@@ -232,7 +232,7 @@
             UsersViewButton.Margin = new Padding(0, 0, 0, 5);
             UsersViewButton.Name = "UsersViewButton";
             UsersViewButton.Size = new Size(190, 30);
-            UsersViewButton.TabIndex = 8;
+            UsersViewButton.TabIndex = 3;
             UsersViewButton.Text = "Usuarios";
             UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
             UsersViewButton.UseVisualStyleBackColor = false;
