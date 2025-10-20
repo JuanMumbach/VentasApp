@@ -115,6 +115,18 @@ namespace VentasApp.Views
                     dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Themes.MainViewButtonColor;
                     dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Themes.MainViewButtonTextColor;
                     dataGridView.EnableHeadersVisualStyles = false;
+                    dataGridView.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(
+                        Math.Clamp(Themes.MainViewButtonColor.R - 20, 0, 255),
+                        Math.Clamp(Themes.MainViewButtonColor.G - 20, 0, 255),
+                        Math.Clamp(Themes.MainViewButtonColor.B - 20, 0, 255)
+                    );
+                    dataGridView.DefaultCellStyle.BackColor = Color.FromArgb(
+                        Math.Clamp(Themes.MainViewBackgroundColor.R - 10, 0, 255),
+                        Math.Clamp(Themes.MainViewBackgroundColor.G - 10, 0, 255),
+                        Math.Clamp(Themes.MainViewBackgroundColor.B - 10, 0, 255)
+                    );
+                    dataGridView.DefaultCellStyle.ForeColor = Themes.ColorNormalText;
+
                 }
 
                 // Llamada recursiva para controles dentro de contenedores
