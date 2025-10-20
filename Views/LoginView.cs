@@ -23,7 +23,7 @@ namespace VentasApp.Views
         void Hide();
         void Show();
     }
-    public partial class LoginView : Form, ILoginView
+    public partial class LoginView : BaseForm, ILoginView
     {
         public string Username => UsernameTextbox.Text;
         public string Password { get => PasswordTextbox.Text; set => PasswordTextbox.Text = value; }
@@ -33,24 +33,8 @@ namespace VentasApp.Views
         {
             InitializeComponent();
             SetupEventsHandler();
-            LoadColorTheme();
 
-        }
 
-        private void LoadColorTheme()
-        {
-            LoginImage.Image = Themes.LogoImage;
-            this.BackColor = Themes.ColorBack2;
-            LoginButton.BackColor = Themes.ColorBack2;
-            LoginButton.ForeColor = Themes.ColorPrimary;
-            LoginButton.FlatAppearance.BorderColor = Themes.ColorBackHighlighted;
-            LoginButton.FlatAppearance.MouseOverBackColor = Themes.ColorBackHighlighted;
-            label1.ForeColor = Themes.ColorNormalText;
-            label2.ForeColor = Themes.ColorNormalText;
-            UsernameTextbox.BackColor = Themes.ColorBack2;
-            UsernameTextbox.ForeColor = Themes.ColorNormalText;
-            PasswordTextbox.BackColor = Themes.ColorBack2;
-            PasswordTextbox.ForeColor = Themes.ColorNormalText;
         }
 
         private void SetupEventsHandler()

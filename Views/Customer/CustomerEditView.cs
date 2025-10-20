@@ -24,7 +24,7 @@ namespace VentasApp.Views.Customer
         void ShowDialogView();
         void CloseView();
     }
-    public partial class CustomerEditView : Form, ICustomerEditView
+    public partial class CustomerEditView : BaseForm, ICustomerEditView
     {
 
         public event EventHandler SaveCustomerEvent;

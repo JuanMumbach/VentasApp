@@ -9,66 +9,87 @@ namespace VentasApp.Services
 {
     public static class Themes
     {
-        public static Color ColorBack;
-        public static Color ColorBackHighlighted;
-        public static Color ColorBack2;
-        public static Color ColorBack2Highlighted;
-        public static Color ColorPrimary;
-        public static Color ColorPrimaryHighlighted;
-        public static Color ColorSecondary;
-        public static Color ColorSecondaryHighlighted;
-        public static Color ColorHighlight;
-        public static Color ColorHighlightHighlighted;
-        public static Color ColorWarning;
-        public static Color ColorWarningHighlighted;
+        public static Color SidebarBackgroundColor;       
+        public static Color SidebarButtonColor;
+        public static Color SidebarButtonTextColor;
+        
+        public static Color MainViewBackgroundColor;
+        public static Color MainViewButtonColor;
+        public static Color MainViewButtonTextColor;
+        
+        public static Color MainActionButtonColor;
+        public static Color MainActionButtonTextColor;
+
+        public static Color WarningButtonBackground;
+        public static Color WarningButtonTextColor;
+
         public static Color ColorNormalText;
+        public static Color HighlightTextColor;
+
+        public static int MouseOverBrightness;
+        public static int MouseDownBrightness;
+
         public static Image LogoImage;
 
         public static void SetLightTheme()
         {
+            // Imagen del logo: usar la versión clara para un fondo claro
             LogoImage = Properties.Resources.VentasAppLogoClaro;
-            ColorNormalText = Color.Black;
-            // Fondos (Backgrounds)
-            ColorBack = Color.FromArgb(240, 246, 255);       // F0F6FF
-            ColorBackHighlighted = Color.FromArgb(229, 239, 255);    // E5EFFF
-            ColorBack2 = Color.FromArgb(229, 239, 255);        // E5EFFF
-            ColorBack2Highlighted = Color.FromArgb(216, 229, 247);   // D8E5F7
 
-            // Acciones y Datos (Actions and Data)
-            ColorPrimary = Color.FromArgb(126, 183, 244);      // 4285F4
-            ColorPrimaryHighlighted = Color.FromArgb(43, 108, 218); // 2B6CDA
-            ColorSecondary = Color.FromArgb(117, 169, 249);    // 75A9F9
-            ColorSecondaryHighlighted = Color.FromArgb(88, 144, 224);// 5890E0
+            MouseOverBrightness = -20; MouseDownBrightness = -40;
 
-            // Estados (States)
-            ColorHighlight = Color.FromArgb(110, 200, 210);    // A6EFA6
-            ColorHighlightHighlighted = Color.FromArgb(138, 223, 138);// 8ADF8A
-            ColorWarning = Color.FromArgb(244, 180, 180);      // F4B4B4
-            ColorWarningHighlighted = Color.FromArgb(218, 154, 154); // DA9A9A
+            // Colores de Texto
+            ColorNormalText = Color.Black; // Texto principal en negro para contraste
+            HighlightTextColor = Color.FromArgb(0, 123, 255); // Azul brillante para destacar
+
+            // Barra Lateral (Sidebar) - Ligeramente gris claro para distinguirla del fondo principal
+            SidebarBackgroundColor = Color.FromArgb(248, 249, 250); // Gris muy claro
+            SidebarButtonColor = Color.FromArgb(220, 220, 220); // Gris claro para botones no seleccionados
+            SidebarButtonTextColor = Color.Black; // Texto oscuro
+
+            // Vista Principal (MainView) - Fondo blanco puro
+            MainViewBackgroundColor = Color.White;
+            MainViewButtonColor = Color.FromArgb(220, 220, 220); // Gris claro para botones
+            MainViewButtonTextColor = Color.Black; // Texto oscuro
+
+            // Botón de Acción Principal (Main Action) - Azul primario para acción importante
+            MainActionButtonColor = Color.FromArgb(0, 123, 255); // Azul
+            MainActionButtonTextColor = Color.White; // Texto blanco en botón azul
+
+            // Botones de Advertencia/Peligro (Warning) - Rojo para indicar acción destructiva
+            WarningButtonBackground = Color.FromArgb(220, 53, 69); // Rojo
+            WarningButtonTextColor = Color.White; // Texto blanco en botón rojo
         }
 
         public static void SetDarkTheme()
         {
-            LogoImage = Properties.Resources.VentasAppLogoOscuro;
-            ColorNormalText = Color.White;
+            // Imagen del logo: usar la versión oscura/clara para un fondo oscuro
+            LogoImage = Properties.Resources.VentasAppLogoClaro;
 
-            // Fondos (Backgrounds)
-            ColorBack = Color.FromArgb(30, 42, 56);         // 1E2A38
-            ColorBackHighlighted = Color.FromArgb(40, 56, 72);      // 283848
-            ColorBack2 = Color.FromArgb(40, 56, 72);          // 283848
-            ColorBack2Highlighted = Color.FromArgb(58, 77, 99);     // 3A4D63
+            MouseOverBrightness = +40; MouseDownBrightness = +80;
 
-            // Acciones y Datos (Actions and Data)
-            ColorPrimary = Color.FromArgb(66, 133, 244);        // 4285F4
-            ColorPrimaryHighlighted = Color.FromArgb(97, 155, 248);   // 619BF8
-            ColorSecondary = Color.FromArgb(138, 180, 248);      // 8AB4F8
-            ColorSecondaryHighlighted = Color.FromArgb(163, 198, 255);  // A3C6FF
+            // Colores de Texto
+            ColorNormalText = Color.White; // Texto principal en blanco
+            HighlightTextColor = Color.FromArgb(108, 168, 255); // Azul claro para destacar
 
-            // Estados (States)
-            ColorHighlight = Color.FromArgb(128, 196, 210);      // 6AA86A
-            ColorHighlightHighlighted = Color.FromArgb(133, 198, 133);  // 85C685
-            ColorWarning = Color.FromArgb(199, 96, 96);        // C76060
-            ColorWarningHighlighted = Color.FromArgb(229, 127, 127);   // E57F7F
+            // Barra Lateral (Sidebar) - Un gris más oscuro que el fondo principal
+            SidebarBackgroundColor = Color.FromArgb(33, 37, 41); // Gris muy oscuro
+            SidebarButtonColor = Color.FromArgb(52, 58, 64); // Gris oscuro para botones
+            SidebarButtonTextColor = Color.White; // Texto blanco
+
+            // Vista Principal (MainView) - Fondo principal oscuro
+            MainViewBackgroundColor = Color.FromArgb(45, 45, 48); // Gris oscuro principal
+
+            MainViewButtonColor = Color.FromArgb(73, 80, 87); // Gris medio para botones
+            MainViewButtonTextColor = Color.White; // Texto blanco
+
+            // Botón de Acción Principal (Main Action) - Azul vibrante para acción importante
+            MainActionButtonColor = Color.FromArgb(108, 168, 255); // Azul vibrante
+            MainActionButtonTextColor = Color.FromArgb(33, 37, 41); // Texto oscuro o negro
+
+            // Botones de Advertencia/Peligro (Warning) - Rojo oscuro para indicar acción destructiva
+            WarningButtonBackground = Color.FromArgb(220, 53, 69); // Rojo
+            WarningButtonTextColor = Color.White; // Texto blanco
         }
     }
 }

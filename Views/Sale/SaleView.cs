@@ -29,7 +29,7 @@ namespace VentasApp.Views.Sale
         int? GetSelectedItemId();
 
     }
-    public partial class SaleView : Form, ISaleView
+    public partial class SaleView : BaseForm, ISaleView
     {
         public int? SaleId { get; set; }
         public IEnumerable<CustomerModel> Customers
@@ -79,36 +79,9 @@ namespace VentasApp.Views.Sale
         {
             InitializeComponent();
             SetupEventHandler();
-            LoadColorTheme();
         }
 
-        private void LoadColorTheme()
-        {
-            ViewItemsPanel.BackColor = Themes.ColorBack2;
-            label1.ForeColor = Themes.ColorNormalText;
-
-
-            Button[] buttons = { AddSaleItemButton, EditSaleItemButton, RemoveItemButton, ConfirmSaleButton, CancelButton };
-            foreach (Button button in buttons)
-            {
-                button.BackColor = Themes.ColorBack;
-                button.ForeColor = Themes.ColorNormalText;
-                button.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
-                button.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
-            }
-
-            RemoveItemButton.ForeColor = Themes.ColorWarning;
-            AddSaleItemButton.ForeColor = Themes.ColorHighlight;
-            ConfirmSaleButton.ForeColor = Themes.ColorHighlight;
-
-            SaleItemsDatagridview.BackgroundColor = Themes.ColorBack;
-            SaleItemsDatagridview.ForeColor = Themes.ColorPrimary;
-            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.BackColor = Themes.ColorBack2;
-            SaleItemsDatagridview.ColumnHeadersDefaultCellStyle.ForeColor = Themes.ColorPrimary;
-            SaleItemsDatagridview.DefaultCellStyle.BackColor = Themes.ColorBack2;
-            SaleItemsDatagridview.DefaultCellStyle.ForeColor = Themes.ColorNormalText;
-
-        }
+        
 
         private void SetupEventHandler()
         {

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.User
 {
-    public partial class ListUsersView : Form, IListUsersView
+    public partial class ListUsersView : BaseForm, IListUsersView
     {
         public event EventHandler SearchUserEvent;
         public event EventHandler AddUserViewEvent;

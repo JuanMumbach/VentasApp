@@ -14,7 +14,7 @@ using VentasApp.Views.Product;
 
 namespace VentasApp.Views
 {
-    public partial class MainView : Form, IMainView
+    public partial class MainView : BaseForm, IMainView
     {
         public event EventHandler ProductsButtonEvent;
         public event EventHandler SalesButtonEvent;
@@ -28,32 +28,35 @@ namespace VentasApp.Views
             InitializeComponent();
             //LoadDefaultPanel();
             SetupEventsHandler();
-            LoadColorTheme();
-        }
 
-        private void LoadColorTheme()
-        {
-            SidePanelLogoPicturebox.Image = Themes.LogoImage;
-            MainPanelLogoPicturebox.Image = Themes.LogoImage;
-            SidePanel.BackColor = Themes.ColorBack;
-            MainPanel.BackColor = Themes.ColorBack2;
-            WelcomeLabel.ForeColor = Themes.ColorPrimary;
+            SidePanel.BackColor = Themes.SidebarBackgroundColor;
 
-            SellButton.BackColor = Themes.ColorBack2;
-            SellButton.ForeColor = Themes.ColorHighlight;
-            SellButton.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
-            SellButton.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
+            Color ButtonMouseOverColor = Color.FromArgb(
+                        Math.Clamp(Themes.SidebarButtonColor.R + Themes.MouseOverBrightness, 0, 255),
+                        Math.Clamp(Themes.SidebarButtonColor.G + Themes.MouseOverBrightness, 0, 255),
+                        Math.Clamp(Themes.SidebarButtonColor.B + Themes.MouseOverBrightness, 0, 255)
+                    );
 
-            Button[] buttons = { ProductsButton, UsersViewButton, CustomersButton, LogoutButton };
-            foreach (Button button in buttons)
+            Color ButtonMouseDownColor = Color.FromArgb(
+                        Math.Clamp(Themes.SidebarButtonColor.R + Themes.MouseDownBrightness, 0, 255),
+                        Math.Clamp(Themes.SidebarButtonColor.G + Themes.MouseDownBrightness, 0, 255),
+                        Math.Clamp(Themes.SidebarButtonColor.B + Themes.MouseDownBrightness, 0, 255)
+                    );
+
+            foreach (Control control in SidePanel.Controls)
             {
-                button.BackColor = Themes.ColorBack2;
-                button.ForeColor = Themes.ColorPrimary;
-                button.FlatAppearance.BorderColor = Themes.ColorBack2Highlighted;
-                button.FlatAppearance.MouseOverBackColor = Themes.ColorBack2Highlighted;
-
+                if (control is Button button)
+                {
+                    button.BackColor = Themes.SidebarButtonColor;
+                    button.ForeColor = Themes.SidebarButtonTextColor;
+                    button.FlatAppearance.BorderColor = Themes.SidebarButtonColor;
+                    button.FlatAppearance.MouseOverBackColor = ButtonMouseOverColor;
+                    button.FlatAppearance.MouseDownBackColor = ButtonMouseDownColor;
+                }
             }
         }
+
+        
 
         private void LoadDefaultPanel()
         {

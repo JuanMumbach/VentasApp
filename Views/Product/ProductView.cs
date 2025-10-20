@@ -12,7 +12,7 @@ using VentasApp.Views.Product;
 
 namespace VentasApp.Views
 {
-    public partial class ProductView : Form, IProductView
+    public partial class ProductView : BaseForm, IProductView
     {
         IEnumerable<CategoryModel> categories;
         IEnumerable<SupplierModel> suppliers;

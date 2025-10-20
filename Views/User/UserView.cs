@@ -5,7 +5,7 @@ using VentasApp.Models;
 
 namespace VentasApp.Views.User
 {
-    public partial class UserView : Form, IUserView
+    public partial class UserView : BaseForm, IUserView
     {
         public event EventHandler SaveUserEvent;
         public event EventHandler CancelUserEvent;

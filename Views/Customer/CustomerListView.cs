@@ -26,7 +26,7 @@ namespace VentasApp.Views.Customer
         void SetCustomerListBindingSource(BindingSource source);
     }
 
-    public partial class CustomerListView : Form, ICustomerListView
+    public partial class CustomerListView : BaseForm, ICustomerListView
     {
         public event EventHandler AddCustomerEvent;
         public event EventHandler EditCustomerEvent;

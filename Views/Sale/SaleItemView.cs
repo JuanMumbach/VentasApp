@@ -24,7 +24,7 @@ namespace VentasApp.Views.Sale
         void SetSelectedProduct(int productId);
         void SetProductosListBindingSource(BindingSource source);
     }
-    public partial class SaleItemView : Form, ISaleItemView
+    public partial class SaleItemView : BaseForm, ISaleItemView
     {
         public event EventHandler AddItemEvent;
         public event EventHandler CancelEvent;

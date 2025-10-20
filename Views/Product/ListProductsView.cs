@@ -13,7 +13,7 @@ using VentasApp.Views.Product;
 
 namespace VentasApp.Views
 {
-    public partial class ListProductsView : Form, IListProductsView
+    public partial class ListProductsView : BaseForm, IListProductsView
     {
         public event EventHandler SearchProductEvent;
         public event EventHandler AddProductViewEvent;
