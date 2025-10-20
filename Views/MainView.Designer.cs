@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             SidePanel = new Panel();
+            LogoutButton = new Button();
+            lblUserInfo = new Label();
+            UsersViewButton = new Button();
             SellButton = new Button();
             ProductsButton = new Button();
             MainPanel = new Panel();
-            UsersViewButton = new Button();
             SidePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,6 +43,8 @@
             SidePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             SidePanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             SidePanel.BackColor = SystemColors.Control;
+            SidePanel.Controls.Add(LogoutButton);
+            SidePanel.Controls.Add(lblUserInfo);
             SidePanel.Controls.Add(UsersViewButton);
             SidePanel.Controls.Add(SellButton);
             SidePanel.Controls.Add(ProductsButton);
@@ -50,6 +54,42 @@
             SidePanel.RightToLeft = RightToLeft.No;
             SidePanel.Size = new Size(247, 443);
             SidePanel.TabIndex = 0;
+            // 
+            // LogoutButton
+            // 
+            LogoutButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            LogoutButton.BackColor = Color.IndianRed;
+            LogoutButton.Font = new Font("Cambria", 12F, FontStyle.Bold);
+            LogoutButton.ForeColor = Color.White;
+            LogoutButton.Location = new Point(13, 395);
+            LogoutButton.Margin = new Padding(3, 2, 3, 2);
+            LogoutButton.Name = "LogoutButton";
+            LogoutButton.Size = new Size(220, 35);
+            LogoutButton.TabIndex = 4;
+            LogoutButton.Text = "Cerrar Sesión";
+            LogoutButton.UseVisualStyleBackColor = false;
+            // 
+            // lblUserInfo
+            // 
+            lblUserInfo.AutoSize = true;
+            lblUserInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblUserInfo.Location = new Point(13, 20);
+            lblUserInfo.Name = "lblUserInfo";
+            lblUserInfo.Size = new Size(100, 19);
+            lblUserInfo.TabIndex = 3;
+            lblUserInfo.Text = "Usuario: N/A";
+            // 
+            // UsersViewButton
+            // 
+            UsersViewButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UsersViewButton.ForeColor = SystemColors.GrayText;
+            UsersViewButton.Location = new Point(3, 219);
+            UsersViewButton.Margin = new Padding(3, 2, 3, 2);
+            UsersViewButton.Name = "UsersViewButton";
+            UsersViewButton.Size = new Size(242, 34);
+            UsersViewButton.TabIndex = 2;
+            UsersViewButton.Text = "USUARIOS";
+            UsersViewButton.UseVisualStyleBackColor = true;
             // 
             // SellButton
             // 
@@ -86,18 +126,6 @@
             MainPanel.Size = new Size(642, 443);
             MainPanel.TabIndex = 1;
             // 
-            // UsersViewButton
-            // 
-            UsersViewButton.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            UsersViewButton.ForeColor = SystemColors.GrayText;
-            UsersViewButton.Location = new Point(3, 219);
-            UsersViewButton.Margin = new Padding(3, 2, 3, 2);
-            UsersViewButton.Name = "UsersViewButton";
-            UsersViewButton.Size = new Size(242, 34);
-            UsersViewButton.TabIndex = 2;
-            UsersViewButton.Text = "USUARIOS";
-            UsersViewButton.UseVisualStyleBackColor = true;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -108,8 +136,9 @@
             Controls.Add(SidePanel);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainView";
-            Text = "MainView";
+            Text = "VentasApp - Sistema de Ventas";
             SidePanel.ResumeLayout(false);
+            SidePanel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -120,5 +149,7 @@
         private Button ProductsButton;
         private Button SellButton;
         private Button UsersViewButton;
+        private Label lblUserInfo;
+        private Button LogoutButton;
     }
 }

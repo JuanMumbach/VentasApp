@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using VentasApp.Presenters;
 using VentasApp.Repositories;
 using VentasApp.Views.Product;
+using VentasApp.Utilities;
 
 namespace VentasApp.Views
 {
@@ -18,14 +19,34 @@ namespace VentasApp.Views
         public event EventHandler ProductsButtonEvent;
         public event EventHandler SalesButtonEvent;
         public event EventHandler UsersButtonEvent;
+        public event EventHandler LogoutButtonEvent;
 
         public MainView()
         {
             InitializeComponent();
-            //LoadDefaultPanel();
             SetupEventsHandler();
+            LoadUserInfo();
         }
 
+        /// <summary>
+        /// Carga y muestra la información del usuario actual.
+        /// </summary>
+        private void LoadUserInfo()
+        {
+            if (SessionManager.Instance.IsAuthenticated)
+            {
+                var user = SessionManager.Instance.CurrentUser;
+                UpdateUserInfo(user.Username, user.RoleName);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la información del usuario en la interfaz.
+        /// </summary>
+        public void UpdateUserInfo(string username, string role)
+        {
+            lblUserInfo.Text = $"Usuario: {username}\nRol: {role}";
+        }
 
         private void LoadDefaultPanel()
         {
@@ -33,7 +54,6 @@ namespace VentasApp.Views
             new ListProductsPresenter(productsView, new ProductRepository());
 
             LoadMainPanelView(productsView);
-
         }
 
         private void SetupEventsHandler()
@@ -41,6 +61,7 @@ namespace VentasApp.Views
             ProductsButton.Click += delegate { ProductsButtonEvent?.Invoke(this, EventArgs.Empty); };
             SellButton.Click += delegate { SalesButtonEvent?.Invoke(this, EventArgs.Empty); };
             UsersViewButton.Click += delegate { UsersButtonEvent?.Invoke(this, EventArgs.Empty); };
+            LogoutButton.Click += delegate { LogoutButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void LoadMainPanelView(Form view)
@@ -50,11 +71,8 @@ namespace VentasApp.Views
             view.FormBorderStyle = FormBorderStyle.None;
             view.Dock = DockStyle.Fill;
 
-
             MainPanel.Controls.Add(view);
             view.Show();
         }
-
-        
     }
 }

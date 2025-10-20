@@ -9,9 +9,11 @@ namespace VentasApp.Views
     public interface IMainView
     {
         public void LoadMainPanelView(Form view);
+        public void UpdateUserInfo(string username, string role);
 
         event EventHandler ProductsButtonEvent;
         event EventHandler SalesButtonEvent;
         event EventHandler UsersButtonEvent;
+        event EventHandler LogoutButtonEvent;
     }
 }
