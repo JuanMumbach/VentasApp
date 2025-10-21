@@ -20,7 +20,7 @@ namespace VentasApp
             ApplicationConfiguration.Initialize();
 
 
-            Themes.SetDarkTheme();
+            Themes.SetLightTheme();
             LoginView loginView = new LoginView();
             new LoginPresenter(loginView, new UserRepository());
             
