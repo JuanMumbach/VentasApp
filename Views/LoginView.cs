@@ -37,6 +37,10 @@ namespace VentasApp.Views
 
         }
 
+        protected override void CustomTheme()
+        {
+            LoginImage.Image = Themes.LogoImage;
+        }
         private void SetupEventsHandler()
         {
             LoginButton.Click += delegate

@@ -53,7 +53,7 @@ namespace VentasApp.Views
             foreach (Control control in SidePanel.Controls)
             {
                 if (control is Button button)
-                {
+                {                
                     button.BackColor = Themes.SidebarButtonColor;
                     button.ForeColor = Themes.SidebarButtonTextColor;
                     button.FlatAppearance.BorderColor = Themes.SidebarButtonColor;
@@ -63,6 +63,8 @@ namespace VentasApp.Views
             }
 
             SetAcceptButton(SellButton);
+            MainPanelLogoPicturebox.Image = Themes.LogoImage;
+            SidePanelLogoPicturebox.Image = Themes.LogoImage;
         }
 
         private void LoadDefaultPanel()
