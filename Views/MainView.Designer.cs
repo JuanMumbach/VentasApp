@@ -38,6 +38,7 @@
             PanelLogo = new Panel();
             SidePanelLogoPicturebox = new PictureBox();
             SellButton = new Button();
+            ListSalesButton = new Button();
             ProductsButton = new Button();
             SuppliersButton = new Button();
             CustomersButton = new Button();
@@ -153,6 +154,7 @@
             SideLayoutPanel.BackColor = Color.Transparent;
             SideLayoutPanel.Controls.Add(PanelLogo);
             SideLayoutPanel.Controls.Add(SellButton);
+            SideLayoutPanel.Controls.Add(ListSalesButton);
             SideLayoutPanel.Controls.Add(ProductsButton);
             SideLayoutPanel.Controls.Add(CustomersButton);
             SideLayoutPanel.Controls.Add(SuppliersButton);
@@ -204,6 +206,23 @@
             SellButton.Text = "VENDER";
             SellButton.TextAlign = ContentAlignment.MiddleLeft;
             SellButton.UseVisualStyleBackColor = false;
+            // 
+            // ListSalesButton
+            // 
+            ListSalesButton.BackColor = SystemColors.InactiveBorder;
+            ListSalesButton.Dock = DockStyle.Left;
+            ListSalesButton.FlatAppearance.BorderSize = 0;
+            ListSalesButton.FlatStyle = FlatStyle.Flat;
+            ListSalesButton.Font = new Font("Microsoft JhengHei", 12F);
+            ListSalesButton.ForeColor = SystemColors.GrayText;
+            ListSalesButton.Location = new Point(5, 186); // Ajustar ubicación
+            ListSalesButton.Margin = new Padding(0, 0, 0, 5);
+            ListSalesButton.Name = "ListSalesButton";
+            ListSalesButton.Size = new Size(190, 30);
+            ListSalesButton.TabIndex = 99; // Usar un índice libre o un nuevo valor
+            ListSalesButton.Text = "Historial Ventas";
+            ListSalesButton.TextAlign = ContentAlignment.MiddleLeft;
+            ListSalesButton.UseVisualStyleBackColor = false;
             // 
             // ProductsButton
             // 
@@ -290,6 +309,7 @@
         private FlowLayoutPanel SideLayoutPanel;
         private Panel PanelLogo;
         private Button SellButton;
+        private Button ListSalesButton;
         private Button ProductsButton;
         private Button CustomersButton;
         private Button SuppliersButton;

@@ -23,6 +23,7 @@ namespace VentasApp.Views
         public event EventHandler SuppliersButtonEvent;
         public event EventHandler LogoutButtonEvent;
         public event EventHandler MainViewClosedEvent;
+        public event EventHandler listSalesButtonEvent;
 
         public MainView()
         {
@@ -84,6 +85,7 @@ namespace VentasApp.Views
             CustomersButton.Click += delegate { CustomersButtonEvent?.Invoke(this, EventArgs.Empty); };
             LogoutButton.Click += delegate { LogoutButtonEvent?.Invoke(this, EventArgs.Empty); };
             SuppliersButton.Click += delegate { LoadSuppliersView(); };
+            ListSalesButton.Click += delegate { listSalesButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void LoadMainPanelView(Form view)

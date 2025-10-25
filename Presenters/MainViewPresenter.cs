@@ -30,6 +30,7 @@ namespace VentasApp.Presenters
             this.view.CustomersButtonEvent += LoadCustomersView;
             this.view.LogoutButtonEvent += Logout;
             this.view.MainViewClosedEvent += MainViewClosed;
+            this.view.listSalesButtonEvent += LoadListSalesView;
         }
 
         private void MainViewClosed(object? sender, EventArgs e)
@@ -47,6 +48,12 @@ namespace VentasApp.Presenters
             view.Close();
         }
 
+        private void LoadListSalesView(object? sender, EventArgs e)
+        {
+            ListSalesView saleHistoryView = new ListSalesView(); // Se asume que crearás SaleHistoryView
+            new ListSalesPresenter(saleHistoryView, new SaleRepository()); // Se asume que crearás SaleHistoryPresenter
+            view.LoadMainPanelView(saleHistoryView);
+        }
         private void LoadCustomersView(object? sender, EventArgs e)
         {
             CustomerListView customersView = new CustomerListView();
