@@ -29,6 +29,10 @@ public class SupplierModel
     [Column("phone_number")]
     public string? PhoneNumber { get; set; }
 
+    [Column("active_state")]
+    [Required(ErrorMessage = "Active state is required.")]
+    public bool Active { get; set; }
+
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
 

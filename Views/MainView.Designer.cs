@@ -39,6 +39,7 @@
             SidePanelLogoPicturebox = new PictureBox();
             SellButton = new Button();
             ProductsButton = new Button();
+            SuppliersButton = new Button();
             CustomersButton = new Button();
             UsersViewButton = new Button();
             MainPanel.SuspendLayout();
@@ -128,6 +129,23 @@
             LogoutButton.Text = "Cerrar Sesión";
             LogoutButton.TextAlign = ContentAlignment.MiddleLeft;
             LogoutButton.UseVisualStyleBackColor = false;
+            //
+            // suppliersButton
+            //
+            SuppliersButton.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            SuppliersButton.Dock = System.Windows.Forms.DockStyle.Left;
+            SuppliersButton.FlatAppearance.BorderSize = 0;
+            SuppliersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            SuppliersButton.Font = new System.Drawing.Font("Microsoft JhengHei", 12F);
+            SuppliersButton.ForeColor = System.Drawing.SystemColors.GrayText;
+            SuppliersButton.Location = new System.Drawing.Point(5, 186); // Esto lo ubica después de ProductsButton
+            SuppliersButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            SuppliersButton.Name = "SuppliersButton";
+            SuppliersButton.Size = new System.Drawing.Size(190, 30);
+            SuppliersButton.TabIndex = 99;
+            SuppliersButton.Text = "Proveedores";
+            SuppliersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            SuppliersButton.UseVisualStyleBackColor = false;
             // 
             // SideLayoutPanel
             // 
@@ -137,6 +155,7 @@
             SideLayoutPanel.Controls.Add(SellButton);
             SideLayoutPanel.Controls.Add(ProductsButton);
             SideLayoutPanel.Controls.Add(CustomersButton);
+            SideLayoutPanel.Controls.Add(SuppliersButton);
             SideLayoutPanel.Controls.Add(UsersViewButton);
             SideLayoutPanel.Dock = DockStyle.Top;
             SideLayoutPanel.FlowDirection = FlowDirection.TopDown;
@@ -273,6 +292,7 @@
         private Button SellButton;
         private Button ProductsButton;
         private Button CustomersButton;
+        private Button SuppliersButton;
         private Button UsersViewButton;
         private PictureBox SidePanelLogoPicturebox;
         private PictureBox MainPanelLogoPicturebox;

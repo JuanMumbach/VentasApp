@@ -20,6 +20,7 @@ namespace VentasApp.Views
         public event EventHandler SalesButtonEvent;
         public event EventHandler UsersButtonEvent;
         public event EventHandler CustomersButtonEvent;
+        public event EventHandler SuppliersButtonEvent;
         public event EventHandler LogoutButtonEvent;
         public event EventHandler MainViewClosedEvent;
 
@@ -83,6 +84,7 @@ namespace VentasApp.Views
             UsersViewButton.Click += delegate { UsersButtonEvent?.Invoke(this, EventArgs.Empty); };
             CustomersButton.Click += delegate { CustomersButtonEvent?.Invoke(this, EventArgs.Empty); };
             LogoutButton.Click += delegate { LogoutButtonEvent?.Invoke(this, EventArgs.Empty); };
+            SuppliersButton.Click += delegate { LoadSuppliersView(); };
         }
 
         public void LoadMainPanelView(Form view)
@@ -95,6 +97,14 @@ namespace VentasApp.Views
 
             MainPanel.Controls.Add(view);
             view.Show();
+        }
+
+        private void LoadSuppliersView()
+        {
+            ListSuppliersView suppliersView = new ListSuppliersView();
+            new ListSuppliersPresenter(suppliersView, new SupplierRepository());
+
+            LoadMainPanelView(suppliersView);
         }
 
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
