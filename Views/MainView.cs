@@ -63,7 +63,6 @@ namespace VentasApp.Views
                 }
             }
 
-            SetAcceptButton(SellButton);
             MainPanelLogoPicturebox.Image = Themes.LogoImage;
             SidePanelLogoPicturebox.Image = Themes.LogoImage;
         }
