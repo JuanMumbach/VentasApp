@@ -99,7 +99,7 @@
             // CancelButton
             // 
             CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            CancelButton.Location = new Point(119, 307);
+            CancelButton.Location = new Point(106, 307);
             CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(82, 22);

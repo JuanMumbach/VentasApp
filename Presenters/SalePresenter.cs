@@ -20,7 +20,7 @@ namespace VentasApp.Presenters
         private BindingSource saleItemsBindingSource;
         private IEnumerable<SaleItemModel> saleItemList;
 
-        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository, ICustomerRepository _customerRepository)
+        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository, ICustomerRepository _customerRepository, bool isReadOnly = false)
         {
             this.view = saleView;
             this.saleRepository = _saleRepository;
@@ -28,11 +28,20 @@ namespace VentasApp.Presenters
             this.customerRepository = _customerRepository;
             this.saleItemsBindingSource = new BindingSource();
 
-            this.view.AddSaleItemViewEvent += OnAddSaleItemView;
-            this.view.EditSaleItemViewEvent += OnEditSaleItemView;
-            this.view.RemoveSaleItemEvent += OnRemoveSaleItem;
-            this.view.FinishSaleEvent += OnFinishSale;
-            this.view.CancelSaleEvent += OnCancelSale;
+            if (!isReadOnly)
+            {
+                this.view.AddSaleItemViewEvent += OnAddSaleItemView;
+                this.view.EditSaleItemViewEvent += OnEditSaleItemView;
+                this.view.RemoveSaleItemEvent += OnRemoveSaleItem;
+                this.view.FinishSaleEvent += OnFinishSale;
+                this.view.CancelSaleEvent += OnCancelSale;
+                this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
+            }
+            else
+            {
+                this.view.SetReadOnlyMode();
+                this.view.CancelSaleEvent += CloseView;
+            }
             this.view.OnRecoverFocusEvent += OnRecoverFocus;
             this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
             this.view.SetSaleItemsListBindingSource(saleItemsBindingSource);
@@ -120,6 +129,13 @@ namespace VentasApp.Presenters
             LoadCustomers();
         }
 
+        private void CloseView(object? sender, EventArgs e)
+        {
+            if (view is Form form)
+            {
+                form.Close();
+            }
+        }
         private void OnRemoveSaleItem(object? sender, EventArgs e)
         {
             throw new NotImplementedException();

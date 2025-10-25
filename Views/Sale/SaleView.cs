@@ -25,7 +25,8 @@ namespace VentasApp.Views.Sale
         event EventHandler CancelSaleEvent;
         event EventHandler OnRecoverFocusEvent;
         event EventHandler CustomerSelectionChangedEvent;
-
+        
+        void SetReadOnlyMode();
         void SetSaleItemsListBindingSource(BindingSource source);
         int? GetSelectedItemId();
 
@@ -45,6 +46,18 @@ namespace VentasApp.Views.Sale
                 CustomerCombobox.ValueMember = "Id";
 
             }
+        }
+
+        public void SetReadOnlyMode()
+        {
+            AddSaleItemButton.Visible = false;
+            EditSaleItemButton.Visible = false;
+            RemoveItemButton.Visible = false;
+
+            ConfirmSaleButton.Visible = false;
+
+            // Cambiar el botón Cancelar a "Cerrar" y reposicionarlo (opcionalmente)
+            CancelButton.Text = "Cerrar";
         }
 
         public int? CustomerId

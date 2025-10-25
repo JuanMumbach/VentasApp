@@ -23,6 +23,7 @@ namespace VentasApp.Presenters
             this.view.LoadAllSalesEvent += LoadAllSales;
             this.view.RestoreSaleEvent += OnRestoreSale;
             this.view.CancelSaleEvent += OnCancelSale;
+            this.view.ViewSaleDetailEvent += OnViewSaleDetail;
 
             // Cargar la lista al iniciar
             LoadAllSales(this, EventArgs.Empty);
@@ -34,6 +35,41 @@ namespace VentasApp.Presenters
             salesBindingSource.DataSource = saleList;
         }
 
+        private void OnViewSaleDetail(object? sender, EventArgs e)
+        {
+            int? saleId = view.GetSelectedSaleId();
+
+            if (saleId != null)
+            {
+                try
+                {
+                    SaleView saleView = new SaleView();
+                    saleView.SaleId = (int)saleId;
+
+                    // 2. Crear un SalePresenter en modo SOLO LECTURA
+                    new SalePresenter(
+                        saleView,
+                        new SaleRepository(),
+                        new SaleItemRepository(),
+                        new CustomerRepository(),
+                        isReadOnly: true
+                    );
+
+                    // 3. Mostrar la vista de detalle
+                    saleView.ShowDialog();
+
+                    LoadAllSales(this, EventArgs.Empty);
+                }
+                catch (Exception ex)
+                {
+                    view.ShowMessage($"Error al cargar el detalle de la venta: {ex.Message}", "Error", MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                view.ShowMessage("Debes seleccionar una venta para ver el detalle.", "Advertencia", MessageBoxIcon.Warning);
+            }
+        }
         private void OnRestoreSale(object? sender, EventArgs e)
         {
             int? saleId = view.GetSelectedSaleId();

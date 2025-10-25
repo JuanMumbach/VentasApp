@@ -18,6 +18,7 @@ namespace VentasApp.Views.Sale
         public event EventHandler LoadAllSalesEvent;
         public event EventHandler RestoreSaleEvent;
         public event EventHandler CancelSaleEvent;
+        public event EventHandler ViewSaleDetailEvent;
 
         public ListSalesView()
         {
@@ -32,6 +33,7 @@ namespace VentasApp.Views.Sale
         {
             RestoreButton.Click += delegate { RestoreSaleEvent?.Invoke(this, EventArgs.Empty); };
             CancelSaleButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
+            ViewDetailButton.Click += delegate { ViewSaleDetailEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public BindingSource SaleListBindingSource

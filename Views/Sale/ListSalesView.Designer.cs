@@ -35,6 +35,7 @@ namespace VentasApp.Views.Sale
             SalesDataGridView = new DataGridView();
             RestoreButton = new Button();
             CancelSaleButton = new Button();
+            ViewDetailButton = new Button();
             TitleLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)SalesDataGridView).BeginInit();
             SuspendLayout();
@@ -74,6 +75,16 @@ namespace VentasApp.Views.Sale
             CancelSaleButton.Text = "Cancelar Venta";
             CancelSaleButton.UseVisualStyleBackColor = true;
             // 
+            // ViewDetailButton
+            // 
+            ViewDetailButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ViewDetailButton.Location = new Point(328, 415); // Posicionarlo después de CancelSaleButton
+            ViewDetailButton.Name = "ViewDetailButton";
+            ViewDetailButton.Size = new Size(150, 23);
+            ViewDetailButton.TabIndex = 3; // Ajustar TabIndex
+            ViewDetailButton.Text = "Ver Detalle";
+            ViewDetailButton.UseVisualStyleBackColor = true;
+            // 
             // TitleLabel
             // 
             TitleLabel.AutoSize = true;
@@ -89,6 +100,7 @@ namespace VentasApp.Views.Sale
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ViewDetailButton);
             Controls.Add(TitleLabel);
             Controls.Add(CancelSaleButton);
             Controls.Add(RestoreButton);
@@ -106,5 +118,6 @@ namespace VentasApp.Views.Sale
         private Button RestoreButton;
         private Button CancelSaleButton;
         private Label TitleLabel;
+        private Button ViewDetailButton;
     }
 }

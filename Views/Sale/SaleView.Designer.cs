@@ -152,11 +152,11 @@
             // 
             // CancelButton
             // 
-            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton.FlatAppearance.BorderSize = 0;
             CancelButton.FlatStyle = FlatStyle.Flat;
             CancelButton.Font = new Font("Microsoft JhengHei", 9F);
-            CancelButton.Location = new Point(187, 356);
+            CancelButton.Location = new Point(661, 356);
             CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(63, 22);

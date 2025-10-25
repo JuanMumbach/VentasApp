@@ -18,7 +18,7 @@ namespace VentasApp.Presenters
         private BindingSource productsBindingSource;
         private IEnumerable<ProductModel> productsList;
 
-        public SaleItemPresenter(ISaleItemView saleItemView,ISaleItemRepository saleItemRepository,IproductRepository _productRepository)
+        public SaleItemPresenter(ISaleItemView saleItemView,ISaleItemRepository saleItemRepository,IproductRepository _productRepository, bool isReadOnly = false)
         {
             this.view = saleItemView;
             this.itemRepository = saleItemRepository;
@@ -26,8 +26,16 @@ namespace VentasApp.Presenters
             productsBindingSource = new BindingSource();
 
             this.view.SetProductosListBindingSource(productsBindingSource);
-            this.view.AddItemEvent += OnAddItem;
             this.view.CancelEvent += OnCancel;
+
+            if (!isReadOnly)
+            {
+                this.view.AddItemEvent += OnAddItem;
+            }
+            else
+            {
+ 
+            }
 
             LoadAllProductsList();
             LoadProduct();
