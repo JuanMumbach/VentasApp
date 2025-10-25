@@ -75,6 +75,7 @@ namespace VentasApp.Views
             {
                 if (control is Button button)
                 {
+                    button.FlatStyle = FlatStyle.Flat;
                     button.BackColor = Themes.MainViewButtonColor;
                     button.ForeColor = Themes.MainViewButtonTextColor;
                     button.FlatAppearance.BorderColor = Themes.MainViewButtonColor;

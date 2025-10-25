@@ -16,9 +16,8 @@ namespace VentasApp.Models
         public string Username { get; set; }
 
         [Column("email")]
-        [Required(ErrorMessage = "Email es necesario.")]
         [EmailAddress(ErrorMessage = "Email invalido,revise que este bien escrito.")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column("passwordhash")]
         [Required(ErrorMessage = "Password es necesario.")]
