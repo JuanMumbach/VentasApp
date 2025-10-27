@@ -27,6 +27,7 @@ namespace VentasApp.Presenters
 
             this.view.SetProductosListBindingSource(productsBindingSource);
             this.view.CancelEvent += OnCancel;
+            this.view.SearchProductEvent += SearchProduct;
 
             if (!isReadOnly)
             {
@@ -39,6 +40,11 @@ namespace VentasApp.Presenters
 
             LoadAllProductsList();
             LoadProduct();
+        }
+
+        private void SearchProduct(object? sender, EventArgs e)
+        {
+            LoadAllProductsList();
         }
 
         private void OnCancel(object? sender, EventArgs e)
@@ -157,9 +163,34 @@ namespace VentasApp.Presenters
 
         private void LoadAllProductsList()
         {
-            productsList = productRepository.GetActiveProducts(true);
+            string searchTerm = view.searchValue ?? string.Empty;
 
-            productsBindingSource.DataSource = productsList;
+            if (String.IsNullOrEmpty(searchTerm))
+            {
+                productsList = productRepository.GetActiveProducts(true).ToList();
+            }
+            else
+            {
+                productsList = productRepository.GetActiveProducts(true)
+                .Where(p =>
+                    (p.Name != null && p.Name.ToLower().Contains(searchTerm)) ||
+                    p.Id.ToString().Contains(searchTerm) ||
+                    (p.Category != null && p.Category.CategoryName.ToLower().Contains(searchTerm)) ||
+                    (p.Description != null && p.Description.ToLower().Contains(searchTerm)))
+                .ToList();
+
+            }
+
+            var displayList = productsList.Select(p => new
+            {
+                p.Id,
+                Name = p.Name,
+                p.Price,
+                p.Stock,
+                Category = p.Category.CategoryName
+            }).ToList();
+
+            productsBindingSource.DataSource = displayList;
         }
     }
 }

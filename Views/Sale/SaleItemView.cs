@@ -15,9 +15,11 @@ namespace VentasApp.Views.Sale
     {
         event EventHandler AddItemEvent;
         event EventHandler CancelEvent;
+        event EventHandler SearchProductEvent;
         int? SaleItemId { get; set; }
         int SaleId { get; set; }
         int Amount { get; set; }
+        string searchValue { get; set; }
         void ShowDialogView();
         void CloseView();
         int? GetSelectedProductId();
@@ -28,10 +30,16 @@ namespace VentasApp.Views.Sale
     {
         public event EventHandler AddItemEvent;
         public event EventHandler CancelEvent;
+        public event EventHandler SearchProductEvent;
         public int? SaleItemId { get; set; }
 
         public int SaleId { get; set; }
-        
+
+        public string searchValue
+        {
+            get { return SearchTextbox.Text; }
+            set { SearchTextbox.Text = value; }
+        }
         public SaleItemView(int saleId)
         {
             this.SaleId = saleId;
@@ -39,6 +47,11 @@ namespace VentasApp.Views.Sale
 
             AddButton.Click += delegate { AddItemEvent?.Invoke(this, EventArgs.Empty); };
             CancelButton.Click += delegate { CancelEvent?.Invoke(this, EventArgs.Empty); };
+            SearchTextbox.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                    SearchProductEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
         public int Amount
         {
