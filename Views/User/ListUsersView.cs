@@ -75,7 +75,7 @@ namespace VentasApp.Views.User
             if (dataGridView1.CurrentRow != null)
             {
                 var userId = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
-                var isActive = (bool)dataGridView1.CurrentRow.Cells["Active"].Value;
+                bool isActive = dataGridView1.CurrentRow.Cells["Active"].Value == "Activo";
                 return (userId, isActive);
             }
             return null;

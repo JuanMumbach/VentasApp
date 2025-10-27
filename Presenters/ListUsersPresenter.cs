@@ -80,7 +80,20 @@ namespace VentasApp.Presenters
                     userList = repository.GetActiveUsers(true);
                 }
 
-                usersBindingSource.DataSource = userList;
+
+
+                var displayList = userList.Select(u => new
+                {
+                    u.Id,
+                    u.Username,
+                    Role = u.RoleName,
+                    u.Email,
+                    u.FullName,
+                    u.Phone,
+                    Active = u.Active ? "Activo" : "Eliminado"
+                }).ToList();
+
+                usersBindingSource.DataSource = displayList;
             }
             catch (Exception ex)
             {
@@ -109,7 +122,18 @@ namespace VentasApp.Presenters
                     }
                 }
 
-                usersBindingSource.DataSource = userList;
+                var displayList = userList.Select(u => new
+                {
+                    u.Id,
+                    u.Username,
+                    Role = u.RoleName,
+                    u.Email,
+                    u.FullName,
+                    u.Phone,
+                    Active = u.Active ? "Activo" : "Eliminado"
+                }).ToList();
+
+                usersBindingSource.DataSource = displayList;
             }
             catch (Exception ex)
             {

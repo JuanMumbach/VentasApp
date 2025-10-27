@@ -36,7 +36,18 @@ namespace VentasApp.Presenters
         private void LoadSuppliersList()
         {
             var suppliers = repository.GetSuppliers(view.searchValue, view.showDeletedSuppliers);
-            suppliersBindingSource.DataSource = suppliers;
+            
+            var displayList = suppliers.Select(s => new
+            {
+                Id = s.SupplierId,
+                SupplierName = s.SupplierName,
+                Cuil = s.Cuil,
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber,
+                LastUpdate = s.UpdatedAt,
+                Active = s.Active ? "Activo" : "Eliminado"
+            }).ToList();
+            suppliersBindingSource.DataSource = displayList;
         }
 
         private void SearchSupplier(object? sender, EventArgs e)

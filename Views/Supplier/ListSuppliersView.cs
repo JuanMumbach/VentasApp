@@ -69,9 +69,9 @@ namespace VentasApp.Views
             if (dataGridView1.CurrentRow != null)
             {
                 // Asumiendo que las columnas son 'SupplierId' y 'Active'
-                var supplierId = (int)dataGridView1.CurrentRow.Cells["SupplierId"].Value;
+                var supplierId = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
                 // Si la columna 'Active' existe en el DataSource:
-                var isActive = (bool)dataGridView1.CurrentRow.Cells["Active"].Value;
+                bool isActive = dataGridView1.CurrentRow.Cells["Active"].Value == "Activo";
                 return (supplierId, isActive);
             }
             return null;
