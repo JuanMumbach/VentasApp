@@ -45,12 +45,12 @@ namespace VentasApp.Views.Sale
             SalesDataGridView.AllowUserToAddRows = false;
             SalesDataGridView.AllowUserToDeleteRows = false;
             SalesDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SalesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SalesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SalesDataGridView.Location = new Point(12, 50);
             SalesDataGridView.Name = "SalesDataGridView";
             SalesDataGridView.ReadOnly = true;
             SalesDataGridView.RowHeadersWidth = 51;
-            SalesDataGridView.RowTemplate.Height = 25;
             SalesDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             SalesDataGridView.Size = new Size(776, 350);
             SalesDataGridView.TabIndex = 0;
@@ -78,10 +78,10 @@ namespace VentasApp.Views.Sale
             // ViewDetailButton
             // 
             ViewDetailButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            ViewDetailButton.Location = new Point(328, 415); // Posicionarlo después de CancelSaleButton
+            ViewDetailButton.Location = new Point(328, 415);
             ViewDetailButton.Name = "ViewDetailButton";
             ViewDetailButton.Size = new Size(150, 23);
-            ViewDetailButton.TabIndex = 3; // Ajustar TabIndex
+            ViewDetailButton.TabIndex = 3;
             ViewDetailButton.Text = "Ver Detalle";
             ViewDetailButton.UseVisualStyleBackColor = true;
             // 
@@ -91,11 +91,11 @@ namespace VentasApp.Views.Sale
             TitleLabel.Font = new System.Drawing.Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TitleLabel.Location = new Point(12, 9);
             TitleLabel.Name = "TitleLabel";
-            TitleLabel.Size = new Size(220, 32);
+            TitleLabel.Size = new Size(212, 32);
             TitleLabel.TabIndex = 3;
             TitleLabel.Text = "Historial de Ventas";
             // 
-            // SaleHistoryView
+            // ListSalesView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -105,7 +105,7 @@ namespace VentasApp.Views.Sale
             Controls.Add(CancelSaleButton);
             Controls.Add(RestoreButton);
             Controls.Add(SalesDataGridView);
-            Name = "SaleHistoryView";
+            Name = "ListSalesView";
             Text = "Historial de Ventas";
             ((System.ComponentModel.ISupportInitialize)SalesDataGridView).EndInit();
             ResumeLayout(false);

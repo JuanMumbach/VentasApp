@@ -47,6 +47,7 @@
             SaleItemsDatagridview.AllowUserToDeleteRows = false;
             SaleItemsDatagridview.AllowUserToOrderColumns = true;
             SaleItemsDatagridview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SaleItemsDatagridview.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SaleItemsDatagridview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SaleItemsDatagridview.Location = new Point(10, 49);
             SaleItemsDatagridview.Margin = new Padding(3, 2, 3, 2);
