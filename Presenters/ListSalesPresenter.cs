@@ -32,7 +32,19 @@ namespace VentasApp.Presenters
         private void LoadAllSales(object? sender, EventArgs e)
         {
             IEnumerable<SaleModel> saleList = saleRepository.GetAllSales();
-            salesBindingSource.DataSource = saleList;
+
+            var displayList = saleList.Select(item => new
+            {
+                Id = item.Id,
+                Cliente = item.Customer != null ? $"{item.Customer.Firstname} {item.Customer.Lastname}" : "No registrado",
+                Fecha = item.CreatedAt.ToString("g"),
+                Actualizado = item.UpdatedAt.ToString("g"),
+                Estado = item.CanceledAt != null ? $"Cancelado {((DateTime)item.CanceledAt).ToString("g")}" : "Activo",
+                Entrega = item.DeliveryState,
+                Total = item.TotalPrice.ToString("C2"),
+            }).ToList();
+
+            salesBindingSource.DataSource = displayList;
         }
 
         private void OnViewSaleDetail(object? sender, EventArgs e)

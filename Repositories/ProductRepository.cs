@@ -33,7 +33,10 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.Products.Where(p => p.Active == activeState).ToList();
+                return context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Supplier)
+                    .Where(p => p.Active == activeState).ToList();
             }
         }
         public void AddProduct()
@@ -73,7 +76,10 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.Products.ToList();
+                return context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Supplier)
+                    .ToList();
             }
         }
 
@@ -81,13 +87,22 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.Products.Find(id);
+                return context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Supplier)
+                    .FirstOrDefault(p => p.Id == id);
             }
         }
 
         public IEnumerable<ProductModel> GetProductsByCategory(string category)
         {
-            throw new NotImplementedException();
+            using (var context = new VentasDBContext())
+            {
+                return context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Supplier)
+                    .Where(p => p.Category.CategoryName == category);
+            }
         }
 
         public IEnumerable<ProductModel> SearchProducts(string searchTerm)

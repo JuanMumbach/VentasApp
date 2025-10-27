@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Models.DTOs;
 using VentasApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VentasApp.Repositories
 {
@@ -45,7 +46,7 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.Sales.ToList();
+                return context.Sales.Include(sale => sale.Customer).ToList();
             }
         }
 
@@ -61,7 +62,9 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.Sales.Find(id);
+                return context.Sales
+                      .Include(s => s.Customer) 
+                      .FirstOrDefault(s => s.Id == id);
             }
         }
 

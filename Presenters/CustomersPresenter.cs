@@ -43,7 +43,16 @@ namespace VentasApp.Presenters
             else
             { customersList = repository.GetActiveCustomers(true); }
 
-            productsBindingSource.DataSource = customersList;
+            var displayList = customersList.Select(c => new
+            {
+                c.Id,
+                Nombre = c.FullName,
+                Email = c.Email,
+                Telefono = c.PhoneNumber,
+                Direccion = c.Address,
+                Estado = c.DeletedAt == null ? "Activo" : $"Eliminado {((DateTime)c.DeletedAt).ToString("g")}"
+            });
+            productsBindingSource.DataSource = displayList;
         }
 
         private void RestoreCustomer(object? sender, EventArgs e)
@@ -160,7 +169,16 @@ namespace VentasApp.Presenters
                 { customersList = repository.SearchCustomers(view.searchValue, activeState: true); }
             }
 
-            productsBindingSource.DataSource = customersList;
+            var displayList = customersList.Select(c => new
+            {
+                c.Id,
+                Nombre = c.FullName,
+                Email = c.Email,
+                Telefono = c.PhoneNumber,
+                Direccion = c.Address,
+                Estado = c.DeletedAt == null ? "Activo" : $"Eliminado {((DateTime)c.DeletedAt).ToString("g")}"
+            });
+            productsBindingSource.DataSource = displayList;
         }
     }
 }

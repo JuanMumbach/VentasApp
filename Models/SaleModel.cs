@@ -40,5 +40,6 @@ namespace VentasApp.Models
         public DateTime UpdatedAt { get; set; }
 
         public ICollection<SaleItemModel> SaleItems { get; set; } = new List<SaleItemModel>();
+        public CustomerModel? Customer { get; set; } = null!;
     }
 }

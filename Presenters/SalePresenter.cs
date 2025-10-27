@@ -13,6 +13,7 @@ namespace VentasApp.Presenters
 {
     public class SalePresenter
     {
+        private SaleModel? sale;
         private ISaleView view;
         private ISaleRepository saleRepository;
         private ISaleItemRepository itemRepository;
@@ -83,11 +84,26 @@ namespace VentasApp.Presenters
             }
             else
             {
-                saleItemList = new List<SaleItemModel>();
+                if (sale != null)
+                {
+                    saleItemList = sale.SaleItems;
+                }
+                else
+                {
+                    saleItemList = new List<SaleItemModel>();
+                }               
             }
-            
-            saleItemsBindingSource.DataSource = saleItemList; 
-        
+
+            var displayList = saleItemList.Select(item => new
+            {
+                IdProducto = item.ProductId,
+                Producto = item.Product.Name,
+                Cantidad = item.Amount,
+                PrecioUnitario = item.Price,
+                SubTotal = item.Amount * item.Price
+            }).ToList();
+
+            saleItemsBindingSource.DataSource = displayList;      
         }
 
         private void OnCancelSale(object? sender, EventArgs e)
@@ -97,33 +113,29 @@ namespace VentasApp.Presenters
                 saleRepository.CancelSale((int)view.SaleId);
                 view.SaleId = null;
             }
+            else
+            {
+                if (sale != null)
+                {
+                    sale = null;
+                }
+            }
             LoadAllSaleItems();
             LoadCustomers();
         }
 
         private void OnFinishSale(object? sender, EventArgs e)
         {
-            if (view.SaleId == null)
+            if (sale == null || sale.SaleItems.Count == 0)
             {
                 MessageBox.Show("No se han agregado articulos a la venta",
                                     "Venta vacía",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Warning);
-
                 return;
             }
 
-            IEnumerable<SaleItemModel> items = itemRepository.GetAllItemsOfSale((int)view.SaleId);
-
-            if (items.Count() == 0)
-            {
-                MessageBox.Show("No se han agregado articulos a la venta",
-                                    "Venta vacía",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-
-                return;
-            }
+            saleRepository.AddSale(sale);
             view.SaleId = null;
             LoadAllSaleItems();
             LoadCustomers();
@@ -138,7 +150,14 @@ namespace VentasApp.Presenters
         }
         private void OnRemoveSaleItem(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            int? id = view.GetSelectedItemId();
+            if (id != null)
+            {
+                ISaleItemView saleItemView = new SaleItemView((int)view.SaleId, (int)id);
+                new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
+                saleItemView.ShowDialogView();
+                LoadAllSaleItems();
+            }
         }
 
         private void OnEditSaleItemView(object? sender, EventArgs e)

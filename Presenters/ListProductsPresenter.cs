@@ -65,7 +65,19 @@ namespace VentasApp.Presenters
             else
             { productList = repository.GetActiveProducts(true); }
 
-            productsBindingSource.DataSource = productList;
+
+            var displayList = productList.Select(p => new
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Stock = p.Stock,
+                Category = p.Category.CategoryName,
+                Supplier = p.Supplier != null ? p.Supplier.SupplierName : "No registrado",
+                Active = p.Active
+            }).ToList();
+            productsBindingSource.DataSource = displayList;
         }
 
         private void SearchProduct(object? sender, EventArgs e)
@@ -83,7 +95,19 @@ namespace VentasApp.Presenters
                 { productList = repository.SearchProducts(view.searchValue, activeState: true); }
             }
 
-            productsBindingSource.DataSource = productList;
+            var displayList = productList.Select(p => new
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Stock = p.Stock,
+                Category = p.Category.CategoryName,
+                Supplier = p.Supplier != null ? p.Supplier.SupplierName : "No registrado",
+                Active = p.Active
+            }).ToList();
+            productsBindingSource.DataSource = displayList;
+
         }
 
         private void DeleteProduct(object? sender, EventArgs e)

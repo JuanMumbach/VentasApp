@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VentasApp.Models.DTOs;
 using VentasApp.Models;
+using VentasApp.Models.DTOs;
 
 namespace VentasApp.Repositories
 {
@@ -44,7 +45,9 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                return context.SalesItems.Where(item => item.SaleId == SaleId).ToList();
+                return context.SalesItems
+                    .Include(item => item.Product)
+                    .Where(item => item.SaleId == SaleId).ToList();
             }
         }
 

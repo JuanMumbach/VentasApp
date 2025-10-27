@@ -81,7 +81,7 @@ namespace VentasApp.Views.Customer
                 DeleteButton.Enabled = false;
                 return;
             }
-            var isActive = (bool)(dataGridView1.CurrentRow.Cells["DeletedAt"].Value == null);
+            bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
             DeleteButton.Enabled = selectedCustomer.HasValue && isActive;
         }
 
@@ -93,7 +93,7 @@ namespace VentasApp.Views.Customer
                 RestoreDeletedButton.Enabled = false;
                 return;
             }
-            var isActive = (bool)(dataGridView1.CurrentRow.Cells["DeletedAt"].Value == null);
+            bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
             RestoreDeletedButton.Enabled = selectedCustomer.HasValue && !isActive;
         }
 
