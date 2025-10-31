@@ -34,6 +34,7 @@
             EditSaleItemButton = new Button();
             AddSaleItemButton = new Button();
             ViewItemsPanel = new Panel();
+            CustomerLabel = new Label();
             label1 = new Label();
             CustomerCombobox = new ComboBox();
             CancelButton = new Button();
@@ -117,6 +118,7 @@
             // 
             ViewItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ViewItemsPanel.BackColor = SystemColors.ControlLightLight;
+            ViewItemsPanel.Controls.Add(CustomerLabel);
             ViewItemsPanel.Controls.Add(label1);
             ViewItemsPanel.Controls.Add(CustomerCombobox);
             ViewItemsPanel.Controls.Add(CancelButton);
@@ -130,6 +132,15 @@
             ViewItemsPanel.Name = "ViewItemsPanel";
             ViewItemsPanel.Size = new Size(756, 388);
             ViewItemsPanel.TabIndex = 1;
+            // 
+            // CustomerLabel
+            // 
+            CustomerLabel.AutoSize = true;
+            CustomerLabel.Location = new Point(561, 25);
+            CustomerLabel.Name = "CustomerLabel";
+            CustomerLabel.Size = new Size(91, 15);
+            CustomerLabel.TabIndex = 8;
+            CustomerLabel.Text = "Nombre Cliente";
             // 
             // label1
             // 
@@ -191,5 +202,6 @@
         private Button CancelButton;
         private Label label1;
         private ComboBox CustomerCombobox;
+        private Label CustomerLabel;
     }
 }

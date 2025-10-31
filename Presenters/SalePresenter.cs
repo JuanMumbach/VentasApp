@@ -38,6 +38,8 @@ namespace VentasApp.Presenters
                 this.view.FinishSaleEvent += OnFinishSale;
                 this.view.CancelSaleEvent += OnCancelSale;
                 this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
+                
+                
 
                 this.sale = new SaleModel
                 {
@@ -49,6 +51,8 @@ namespace VentasApp.Presenters
             {
                 this.sale = _sale;
                 this.view.SetReadOnlyMode();
+                this.view.SetCustomerName(_sale.Customer != null ? _sale.Customer.FullName : "No Registrado");
+                this.view.CustomerId = _sale.CustomerId;
                 this.view.CancelSaleEvent += CloseView;
             }
 

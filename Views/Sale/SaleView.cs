@@ -26,6 +26,7 @@ namespace VentasApp.Views.Sale
         event EventHandler CustomerSelectionChangedEvent;
         
         void SetReadOnlyMode();
+        void SetCustomerName(string name);
         int GetSelectedRowIndex();
         void SetSaleItemsListBindingSource(BindingSource source);
         int? GetSelectedItemId();
@@ -80,6 +81,8 @@ namespace VentasApp.Views.Sale
         {
             InitializeComponent();
             SetupEventHandler();
+
+            CustomerLabel.Visible = false;
         }
         public void SetReadOnlyMode()
         {
@@ -89,8 +92,17 @@ namespace VentasApp.Views.Sale
 
             ConfirmSaleButton.Visible = false;
 
+            CustomerCombobox.Visible = false;
+            CustomerCombobox.Enabled = false;
+            CustomerLabel.Visible = true;
+
             // Cambiar el botón Cancelar a "Cerrar" y reposicionarlo (opcionalmente)
             CancelButton.Text = "Cerrar";
+        }
+
+        public void SetCustomerName(string name)
+        {
+            CustomerLabel.Text = name;
         }
 
         protected override void CustomTheme()
@@ -128,7 +140,7 @@ namespace VentasApp.Views.Sale
 
         public void SetSaleItemsListBindingSource(BindingSource source)
         {
-            SaleItemsDatagridview.DataSource = source;     
+            SaleItemsDatagridview.DataSource = source;
         }
 
         public int GetSelectedRowIndex()
