@@ -15,9 +15,8 @@ namespace VentasApp.Views.Sale
 {
     public interface ISaleView
     {
-        int? SaleId { get; set; }
-        int? CustomerId { get; set; }
         IEnumerable<CustomerModel> Customers { set; }
+        int? CustomerId { get; set; }
         event EventHandler AddSaleItemViewEvent;
         event EventHandler EditSaleItemViewEvent;
         event EventHandler RemoveSaleItemEvent;
@@ -33,7 +32,6 @@ namespace VentasApp.Views.Sale
     }
     public partial class SaleView : BaseForm, ISaleView
     {
-        public int? SaleId { get; set; }
         public IEnumerable<CustomerModel> Customers
         {
             set
@@ -48,17 +46,6 @@ namespace VentasApp.Views.Sale
             }
         }
 
-        public void SetReadOnlyMode()
-        {
-            AddSaleItemButton.Visible = false;
-            EditSaleItemButton.Visible = false;
-            RemoveItemButton.Visible = false;
-
-            ConfirmSaleButton.Visible = false;
-
-            // Cambiar el botón Cancelar a "Cerrar" y reposicionarlo (opcionalmente)
-            CancelButton.Text = "Cerrar";
-        }
 
         public int? CustomerId
         {
@@ -94,6 +81,17 @@ namespace VentasApp.Views.Sale
             InitializeComponent();
             SetupEventHandler();
         }
+        public void SetReadOnlyMode()
+        {
+            AddSaleItemButton.Visible = false;
+            EditSaleItemButton.Visible = false;
+            RemoveItemButton.Visible = false;
+
+            ConfirmSaleButton.Visible = false;
+
+            // Cambiar el botón Cancelar a "Cerrar" y reposicionarlo (opcionalmente)
+            CancelButton.Text = "Cerrar";
+        }
 
         protected override void CustomTheme()
         {
@@ -109,12 +107,28 @@ namespace VentasApp.Views.Sale
             ConfirmSaleButton.Click += delegate { FinishSaleEvent?.Invoke(this, EventArgs.Empty); };
             CancelButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.Click += delegate { OnRecoverFocusEvent?.Invoke(this, EventArgs.Empty); };
+            SaleItemsDatagridview.DataBindingComplete += SaleItemsDatagridview_DataBindingComplete;
             //CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
+        }
+
+        private void SaleItemsDatagridview_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (SaleItemsDatagridview.Columns.Contains("Id"))
+            {
+                SaleItemsDatagridview.Columns["Id"].Visible = false;
+            }
+
+            /*
+            if (SaleItemsDatagridview.Columns.Contains("PrecioUnitario"))
+            {
+                SaleItemsDatagridview.Columns["PrecioUnitario"].HeaderText = "P. Unitario";
+            }
+            */
         }
 
         public void SetSaleItemsListBindingSource(BindingSource source)
         {
-            SaleItemsDatagridview.DataSource = source;
+            SaleItemsDatagridview.DataSource = source;     
         }
 
         public int? GetSelectedItemId()

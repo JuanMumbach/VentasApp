@@ -13,7 +13,7 @@ namespace VentasApp.Presenters
 {
     public class SalePresenter
     {
-        private SaleModel? sale;
+        private SaleModel sale;
         private ISaleView view;
         private ISaleRepository saleRepository;
         private ISaleItemRepository itemRepository;
@@ -21,7 +21,7 @@ namespace VentasApp.Presenters
         private BindingSource saleItemsBindingSource;
         private IEnumerable<SaleItemModel> saleItemList;
 
-        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository, ICustomerRepository _customerRepository, bool isReadOnly = false)
+        public SalePresenter(ISaleView saleView, ISaleRepository _saleRepository,ISaleItemRepository _itemRepository, ICustomerRepository _customerRepository, SaleModel? _sale = null)
         {
             this.view = saleView;
             this.saleRepository = _saleRepository;
@@ -29,7 +29,8 @@ namespace VentasApp.Presenters
             this.customerRepository = _customerRepository;
             this.saleItemsBindingSource = new BindingSource();
 
-            if (!isReadOnly)
+
+            if (_sale == null)
             {
                 this.view.AddSaleItemViewEvent += OnAddSaleItemView;
                 this.view.EditSaleItemViewEvent += OnEditSaleItemView;
@@ -37,12 +38,20 @@ namespace VentasApp.Presenters
                 this.view.FinishSaleEvent += OnFinishSale;
                 this.view.CancelSaleEvent += OnCancelSale;
                 this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
+
+                this.sale = new SaleModel
+                {
+                    Customer = null,
+                    SaleItems = new List<SaleItemModel>()
+                };
             }
             else
             {
+                this.sale = _sale;
                 this.view.SetReadOnlyMode();
                 this.view.CancelSaleEvent += CloseView;
             }
+
             this.view.OnRecoverFocusEvent += OnRecoverFocus;
             this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
             this.view.SetSaleItemsListBindingSource(saleItemsBindingSource);
@@ -52,6 +61,7 @@ namespace VentasApp.Presenters
 
         private void UpdateSaleCustomer(object? sender, EventArgs e)
         {
+            /*
             if (view.SaleId != null)
             {
                SaleModel sale = saleRepository.GetSaleById((int)view.SaleId);
@@ -63,7 +73,11 @@ namespace VentasApp.Presenters
                    sale.UpdatedAt = DateTime.Now;
                    saleRepository.UpdateSale(sale);
                 }
-            }          
+            } 
+            */
+            int? customerID = view.CustomerId;
+            if (customerID == -1) customerID = null;
+            sale.CustomerId = customerID;
         }
 
         private void LoadCustomers()
@@ -78,24 +92,23 @@ namespace VentasApp.Presenters
 
         private void LoadAllSaleItems()
         {
-            if (view.SaleId != null)
+            if (sale != null)
             {
-                saleItemList = itemRepository.GetAllItemsOfSale((int)view.SaleId);
+                if (sale.SaleItems == null)
+                {
+                    sale.SaleItems = new List<SaleItemModel>();
+                }
+                saleItemList = sale.SaleItems;
             }
             else
             {
-                if (sale != null)
-                {
-                    saleItemList = sale.SaleItems;
-                }
-                else
-                {
-                    saleItemList = new List<SaleItemModel>();
-                }               
-            }
+                saleItemList = new List<SaleItemModel>();
+            }               
+            
 
             var displayList = saleItemList.Select(item => new
             {
+                Id = item.Id,
                 IdProducto = item.ProductId,
                 Producto = item.Product.Name,
                 Cantidad = item.Amount,
@@ -108,18 +121,13 @@ namespace VentasApp.Presenters
 
         private void OnCancelSale(object? sender, EventArgs e)
         {
-            if (view.SaleId != null)
+            
+            sale = new SaleModel()
             {
-                saleRepository.CancelSale((int)view.SaleId);
-                view.SaleId = null;
-            }
-            else
-            {
-                if (sale != null)
-                {
-                    sale = null;
-                }
-            }
+                CustomerId = null,
+                SaleItems = new List<SaleItemModel>(),
+            };
+
             LoadAllSaleItems();
             LoadCustomers();
         }
@@ -135,8 +143,14 @@ namespace VentasApp.Presenters
                 return;
             }
 
+            sale.CreatedAt = DateTime.Now;
+            sale.UpdatedAt = DateTime.Now;
             saleRepository.AddSale(sale);
-            view.SaleId = null;
+            sale = new SaleModel()
+            {
+                CustomerId = null,
+                SaleItems = new List<SaleItemModel>(),
+            };
             LoadAllSaleItems();
             LoadCustomers();
         }
@@ -150,6 +164,7 @@ namespace VentasApp.Presenters
         }
         private void OnRemoveSaleItem(object? sender, EventArgs e)
         {
+            /*
             int? id = view.GetSelectedItemId();
             if (id != null)
             {
@@ -158,15 +173,35 @@ namespace VentasApp.Presenters
                 saleItemView.ShowDialogView();
                 LoadAllSaleItems();
             }
+            */
+            int? id = view.GetSelectedItemId();
+            SaleItemModel item = sale.SaleItems.FirstOrDefault(i => i.Id == id);
+            if (item != null)
+            {
+                sale.SaleItems.Remove(item);
+                LoadAllSaleItems();
+            }
         }
 
         private void OnEditSaleItemView(object? sender, EventArgs e)
         {
+            /*
             int? id = view.GetSelectedItemId();
             if (id != null)
             {
                 ISaleItemView saleItemView = new SaleItemView((int)view.SaleId,(int)id);
-                new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
+                SaleItemPresenter presenter = new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
+                saleItemView.ShowDialogView();
+                LoadAllSaleItems();
+            }
+            */
+            int? id = view.GetSelectedItemId();
+            SaleItemModel item = sale.SaleItems.FirstOrDefault(i => i.ProductId == id);
+
+            if (item != null)
+            {
+                ISaleItemView saleItemView = new SaleItemView();
+                SaleItemPresenter presenter = new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository(), item);
                 saleItemView.ShowDialogView();
                 LoadAllSaleItems();
             }
@@ -174,6 +209,7 @@ namespace VentasApp.Presenters
 
         private void OnAddSaleItemView(object? sender, EventArgs e)
         {
+            /*
             if (view.SaleId != null)
             {
                 ISaleItemView saleItemView = new SaleItemView((int)view.SaleId);
@@ -200,6 +236,11 @@ namespace VentasApp.Presenters
                 saleItemView.ShowDialogView();
                 LoadAllSaleItems();
             }
+            */
+            ISaleItemView saleItemView = new SaleItemView();
+            new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository(),this.sale);
+            saleItemView.ShowDialogView();
+            LoadAllSaleItems();
         }
     }
 }

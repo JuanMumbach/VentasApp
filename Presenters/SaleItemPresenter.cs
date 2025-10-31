@@ -12,14 +12,17 @@ namespace VentasApp.Presenters
     
     public class SaleItemPresenter
     {
+        private SaleModel sale;
+        private SaleItemModel? saleItem;
         private ISaleItemView view;
         private ISaleItemRepository itemRepository;
         private IproductRepository productRepository;
         private BindingSource productsBindingSource;
         private IEnumerable<ProductModel> productsList;
 
-        public SaleItemPresenter(ISaleItemView saleItemView,ISaleItemRepository saleItemRepository,IproductRepository _productRepository, bool isReadOnly = false)
+        public SaleItemPresenter(ISaleItemView saleItemView,ISaleItemRepository saleItemRepository,IproductRepository _productRepository, SaleModel sale)
         {
+            this.sale = sale;
             this.view = saleItemView;
             this.itemRepository = saleItemRepository;
             this.productRepository = _productRepository;
@@ -29,19 +32,36 @@ namespace VentasApp.Presenters
             this.view.CancelEvent += OnCancel;
             this.view.SearchProductEvent += SearchProduct;
 
-            if (!isReadOnly)
-            {
-                this.view.AddItemEvent += OnAddItem;
-            }
-            else
-            {
- 
-            }
 
+            this.view.AddItemEvent += OnAddItem;
             LoadAllProductsList();
             LoadProduct();
         }
 
+        public SaleItemPresenter(ISaleItemView saleItemView, ISaleItemRepository saleItemRepository, IproductRepository _productRepository, SaleItemModel saleItem)
+        {
+            this.saleItem = saleItem;
+
+            this.view = saleItemView;
+            this.view.SetEditMode(saleItem.Product.Name);
+
+            this.itemRepository = saleItemRepository;
+            this.productRepository = _productRepository;
+            productsBindingSource = new BindingSource();
+
+            this.view.SetProductosListBindingSource(productsBindingSource);
+            this.view.CancelEvent += OnCancel;
+            this.view.SearchProductEvent += SearchProduct;
+
+            this.view.EditItemEvent += OnEditItem;
+            LoadAllProductsList();
+            LoadProduct();
+
+            /*this.saleItem = saleItem;
+            this.view.AddItemEvent -= OnAddItem;
+            this.view.EditItemEvent += OnEditItem;
+            LoadProduct();*/
+        }
         private void SearchProduct(object? sender, EventArgs e)
         {
             LoadAllProductsList();
@@ -54,103 +74,109 @@ namespace VentasApp.Presenters
 
         private void OnAddItem(object? sender, EventArgs e)
         {
-            if (view.SaleItemId == null)
+            if (view.GetSelectedProductId() == null)
             {
-
-                if (view.GetSelectedProductId() == null)
-                {
-                    MessageBox.Show("Debes seleccionar un producto para agregar un nuevo artículo.",
-                                    "Error de Selección",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                ProductModel selectedProduct = productRepository.GetProductById((int)view.GetSelectedProductId());
-                
-                if (selectedProduct == null)
-                {
-                    MessageBox.Show("El producto seleccionado no es válido.",
-                                    "Error de producto",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (view.Amount <= 0)
-                {
-                    MessageBox.Show("La cantidad debe ser un número positivo.",
-                                    "Error de cantidad",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                SaleItemModel saleItem = new SaleItemModel()
-                {
-                    ProductId = (int)view.GetSelectedProductId(),
-                    Amount = view.Amount,
-                    SaleId = view.SaleId,
-                    Price = selectedProduct.Price * view.Amount
-                };
-
-                itemRepository.AddSaleItem(saleItem);
-
-                view.Amount = 1;
-                view.SetSelectedProduct(0);
-                MessageBox.Show("Artículo agregado correctamente.",
-                                "Éxito",
+                MessageBox.Show("Debes seleccionar un producto para agregar un nuevo artículo.",
+                                "Error de Selección",
                                 MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                                MessageBoxIcon.Warning);
+                return;
+            }
 
+            ProductModel selectedProduct = productRepository.GetProductById((int)view.GetSelectedProductId());
+
+            if (selectedProduct == null)
+            {
+                MessageBox.Show("El producto seleccionado no es válido.",
+                                "Error de producto",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (view.Amount <= 0)
+            {
+                MessageBox.Show("La cantidad debe ser un número positivo.",
+                                "Error de cantidad",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            //itemRepository.AddSaleItem(saleItem); //
+            SaleItemModel newSaleItem = new SaleItemModel()
+            {
+                Id = 0,
+                ProductId = selectedProduct.Id,
+                Product = selectedProduct,
+                Amount = view.Amount,
+                Price = selectedProduct.Price * view.Amount,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            if (sale.SaleItems.Any(item => item.ProductId == newSaleItem.ProductId))
+            {
+                var existingItem = sale.SaleItems.FirstOrDefault(item => item.ProductId == newSaleItem.ProductId);
+
+                if (existingItem != null)
+                {
+                    existingItem.Amount += newSaleItem.Amount;
+                }
             }
             else
             {
-                if (view.GetSelectedProductId() == null)
-                {
-                    // Muestra el mensaje de error
-                    MessageBox.Show("Debes seleccionar un producto para agregar un nuevo artículo.",
-                                    "Error de Selección",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                ProductModel selectedProduct = productRepository.GetProductById((int)view.GetSelectedProductId());
-
-                if (selectedProduct == null)
-                {
-                    // Muestra el mensaje de error
-                    MessageBox.Show("El producto seleccionado no es válido.",
-                                    "Error de producto",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (view.Amount <= 0)
-                {
-                    MessageBox.Show("La cantidad debe ser un número positivo.",
-                                    "Error de cantidad",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-                    return;
-                }
-
-                SaleItemModel saleItem = itemRepository.GetSaleItemById((int)view.SaleItemId);
-                saleItem.ProductId = (int)view.GetSelectedProductId();
-                saleItem.SaleId = view.SaleId;
-                saleItem.Amount = view.Amount;
-                saleItem.Price = selectedProduct.Price * view.Amount;
-                itemRepository.UpdateSaleItem(saleItem);
+                sale.SaleItems.Add(newSaleItem);
             }
+
+            view.Amount = 1;
+            view.SetSelectedProduct(0);
+            MessageBox.Show("Artículo agregado correctamente.",
+                            "Éxito",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
         }
 
+        private void OnEditItem(object? sender, EventArgs e)
+        {
+            if (view.GetSelectedProductId() == null)
+            {
+                MessageBox.Show("Debes seleccionar un producto para agregar un nuevo artículo.",
+                                "Error de Selección",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ProductModel selectedProduct = productRepository.GetProductById((int)view.GetSelectedProductId());
+
+            if (selectedProduct == null)
+            {
+                MessageBox.Show("El producto seleccionado no es válido.",
+                                "Error de producto",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (view.Amount <= 0)
+            {
+                MessageBox.Show("La cantidad debe ser un número positivo.",
+                                "Error de cantidad",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            //saleItem.ProductId = (int)view.GetSelectedProductId();
+            saleItem.Product = selectedProduct;
+            saleItem.Amount = view.Amount;
+            saleItem.Price = selectedProduct.Price;
+        }
         private void LoadProduct()
         {
-            if (view.SaleItemId != null)
+            if (saleItem != null)
             {
-                SaleItemModel saleItem = itemRepository.GetSaleItemById((int)view.SaleItemId);
                 view.SetSelectedProduct(saleItem.ProductId);
                 view.Amount = saleItem.Amount;
             }

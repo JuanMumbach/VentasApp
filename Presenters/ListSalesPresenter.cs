@@ -51,12 +51,13 @@ namespace VentasApp.Presenters
         {
             int? saleId = view.GetSelectedSaleId();
 
+
             if (saleId != null)
             {
                 try
                 {
-                    SaleView saleView = new SaleView();
-                    saleView.SaleId = (int)saleId;
+                    SaleModel sale = saleRepository.GetSaleById((int)saleId);
+                    SaleView saleView = new SaleView();                    
 
                     // 2. Crear un SalePresenter en modo SOLO LECTURA
                     new SalePresenter(
@@ -64,7 +65,7 @@ namespace VentasApp.Presenters
                         new SaleRepository(),
                         new SaleItemRepository(),
                         new CustomerRepository(),
-                        isReadOnly: true
+                        sale
                     );
 
                     // 3. Mostrar la vista de detalle

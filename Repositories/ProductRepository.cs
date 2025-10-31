@@ -89,7 +89,9 @@ namespace VentasApp.Repositories
             {
                 return context.Products
                     .Include(p => p.Category)
+                    .AsNoTracking()
                     .Include(p => p.Supplier)
+                    .AsNoTracking()
                     .FirstOrDefault(p => p.Id == id);
             }
         }

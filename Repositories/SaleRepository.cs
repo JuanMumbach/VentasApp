@@ -25,6 +25,41 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
+                SaleModel newSale = new SaleModel
+                {
+                    CustomerId = sale.CustomerId,
+                    CreatedAt = DateTime.Now,
+                    SaleItems = sale.SaleItems,
+                    TotalPrice = 0
+                };
+                
+                foreach (var item in newSale.SaleItems)
+                {
+                    if (item.Product != null)
+                    {
+                        //sumar el precio del item al total de la venta
+                        newSale.TotalPrice += item.Price * item.Amount;
+                        
+                        // Marcar la Categoria como "Unchanged"
+                        // Esto resuelve el error "Duplicate entry for category.PRIMARY"
+                        if (item.Product.Category != null)
+                        {
+                            
+                            context.Entry(item.Product.Category).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                        }
+
+                        // Marcar el Proveedor (Supplier) como "Unchanged"
+                        if (item.Product.Supplier != null)
+                        {
+                            context.Entry(item.Product.Supplier).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                        }
+
+                        // Marcar el Producto como "Unchanged"
+                        // Esto es necesario para que EF no intente insertarlo de nuevo.
+                        context.Entry(item.Product).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+                    }
+                }
+                
                 context.Sales.Add(sale);
                 context.SaveChanges();
                 return sale.Id;
@@ -64,6 +99,9 @@ namespace VentasApp.Repositories
             {
                 return context.Sales
                       .Include(s => s.Customer) 
+                      .Include(s => s.SaleItems)
+                          .ThenInclude(si => si.Product)
+                              .ThenInclude(p => p.Category)
                       .FirstOrDefault(s => s.Id == id);
             }
         }
