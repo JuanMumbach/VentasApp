@@ -26,6 +26,7 @@ namespace VentasApp.Views.Sale
         event EventHandler CustomerSelectionChangedEvent;
         
         void SetReadOnlyMode();
+        int GetSelectedRowIndex();
         void SetSaleItemsListBindingSource(BindingSource source);
         int? GetSelectedItemId();
 
@@ -45,7 +46,6 @@ namespace VentasApp.Views.Sale
 
             }
         }
-
 
         public int? CustomerId
         {
@@ -131,6 +131,14 @@ namespace VentasApp.Views.Sale
             SaleItemsDatagridview.DataSource = source;     
         }
 
+        public int GetSelectedRowIndex()
+        {
+            if (SaleItemsDatagridview.CurrentRow != null)
+            {
+                return SaleItemsDatagridview.CurrentRow.Index;
+            }
+            return -1;
+        }
         public int? GetSelectedItemId()
         {
             if (SaleItemsDatagridview.CurrentRow != null)

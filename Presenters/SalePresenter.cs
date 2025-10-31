@@ -174,8 +174,9 @@ namespace VentasApp.Presenters
                 LoadAllSaleItems();
             }
             */
-            int? id = view.GetSelectedItemId();
-            SaleItemModel item = sale.SaleItems.FirstOrDefault(i => i.Id == id);
+            int index = view.GetSelectedRowIndex();
+            SaleItemModel item = sale.SaleItems.ElementAt(index);
+
             if (item != null)
             {
                 sale.SaleItems.Remove(item);
@@ -185,18 +186,8 @@ namespace VentasApp.Presenters
 
         private void OnEditSaleItemView(object? sender, EventArgs e)
         {
-            /*
-            int? id = view.GetSelectedItemId();
-            if (id != null)
-            {
-                ISaleItemView saleItemView = new SaleItemView((int)view.SaleId,(int)id);
-                SaleItemPresenter presenter = new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository());
-                saleItemView.ShowDialogView();
-                LoadAllSaleItems();
-            }
-            */
-            int? id = view.GetSelectedItemId();
-            SaleItemModel item = sale.SaleItems.FirstOrDefault(i => i.ProductId == id);
+            int index = view.GetSelectedRowIndex();
+            SaleItemModel item = sale.SaleItems.ElementAt(index);
 
             if (item != null)
             {

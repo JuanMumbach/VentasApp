@@ -44,6 +44,7 @@ namespace VentasApp.Presenters
 
             this.view = saleItemView;
             this.view.SetEditMode(saleItem.Product.Name);
+            this.view.searchValue = saleItem.Product.Name;
 
             this.itemRepository = saleItemRepository;
             this.productRepository = _productRepository;
@@ -172,6 +173,12 @@ namespace VentasApp.Presenters
             saleItem.Product = selectedProduct;
             saleItem.Amount = view.Amount;
             saleItem.Price = selectedProduct.Price;
+            view.SetSelectedProduct(0);
+            MessageBox.Show("Artículo actualizado correctamente.",
+                            "Éxito",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+            this.view.CloseView();
         }
         private void LoadProduct()
         {
@@ -191,20 +198,27 @@ namespace VentasApp.Presenters
         {
             string searchTerm = view.searchValue ?? string.Empty;
 
-            if (String.IsNullOrEmpty(searchTerm))
+            if (saleItem != null)
             {
-                productsList = productRepository.GetActiveProducts(true).ToList();
+                productsList = new List<ProductModel> { saleItem.Product };
             }
             else
             {
-                productsList = productRepository.GetActiveProducts(true)
-                .Where(p =>
-                    (p.Name != null && p.Name.ToLower().Contains(searchTerm)) ||
-                    p.Id.ToString().Contains(searchTerm) ||
-                    (p.Category != null && p.Category.CategoryName.ToLower().Contains(searchTerm)) ||
-                    (p.Description != null && p.Description.ToLower().Contains(searchTerm)))
-                .ToList();
+                if (String.IsNullOrEmpty(searchTerm))
+                {
+                    productsList = productRepository.GetActiveProducts(true).ToList();
+                }
+                else
+                {
+                    productsList = productRepository.GetActiveProducts(true)
+                    .Where(p =>
+                        (p.Name != null && p.Name.ToLower().Contains(searchTerm)) ||
+                        p.Id.ToString().Contains(searchTerm) ||
+                        (p.Category != null && p.Category.CategoryName.ToLower().Contains(searchTerm)) ||
+                        (p.Description != null && p.Description.ToLower().Contains(searchTerm)))
+                    .ToList();
 
+                }
             }
 
             var displayList = productsList.Select(p => new

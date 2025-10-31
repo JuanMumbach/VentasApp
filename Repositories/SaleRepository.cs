@@ -35,8 +35,11 @@ namespace VentasApp.Repositories
                 
                 foreach (var item in newSale.SaleItems)
                 {
+                    item.Product = null;
                     if (item.Product != null)
                     {
+                        
+                        
                         //sumar el precio del item al total de la venta
                         newSale.TotalPrice += item.Price * item.Amount;
                         
