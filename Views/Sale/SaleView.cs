@@ -108,7 +108,7 @@ namespace VentasApp.Views.Sale
             CancelButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.Click += delegate { OnRecoverFocusEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.DataBindingComplete += SaleItemsDatagridview_DataBindingComplete;
-            //CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
+            CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         private void SaleItemsDatagridview_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
