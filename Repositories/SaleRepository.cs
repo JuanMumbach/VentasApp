@@ -25,24 +25,12 @@ namespace VentasApp.Repositories
         {
             using (var context = new VentasDBContext())
             {
-                SaleModel newSale = new SaleModel
-                {
-                    CustomerId = sale.CustomerId,
-                    CreatedAt = DateTime.Now,
-                    SaleItems = sale.SaleItems,
-                    TotalPrice = 0
-                };
-                
-                foreach (var item in newSale.SaleItems)
+                decimal total = 0;
+                foreach (var item in sale.SaleItems)
                 {
                     item.Product = null;
                     if (item.Product != null)
-                    {
-                        
-                        
-                        //sumar el precio del item al total de la venta
-                        newSale.TotalPrice += item.Price * item.Amount;
-                        
+                    {                     
                         // Marcar la Categoria como "Unchanged"
                         // Esto resuelve el error "Duplicate entry for category.PRIMARY"
                         if (item.Product.Category != null)
@@ -61,8 +49,12 @@ namespace VentasApp.Repositories
                         // Esto es necesario para que EF no intente insertarlo de nuevo.
                         context.Entry(item.Product).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                     }
+                    total += item.Price * item.Amount;
+                    
                 }
-                
+
+                sale.TotalPrice = total;
+
                 context.Sales.Add(sale);
                 context.SaveChanges();
                 return sale.Id;
