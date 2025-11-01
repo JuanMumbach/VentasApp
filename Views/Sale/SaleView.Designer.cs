@@ -38,6 +38,7 @@
             label1 = new Label();
             CustomerCombobox = new ComboBox();
             CancelButton = new Button();
+            PrintReceiptButton = new Button();
             ((System.ComponentModel.ISupportInitialize)SaleItemsDatagridview).BeginInit();
             ViewItemsPanel.SuspendLayout();
             SuspendLayout();
@@ -118,6 +119,7 @@
             // 
             ViewItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ViewItemsPanel.BackColor = SystemColors.ControlLightLight;
+            ViewItemsPanel.Controls.Add(PrintReceiptButton);
             ViewItemsPanel.Controls.Add(CustomerLabel);
             ViewItemsPanel.Controls.Add(label1);
             ViewItemsPanel.Controls.Add(CustomerCombobox);
@@ -176,6 +178,20 @@
             CancelButton.Text = "cancelar";
             CancelButton.UseVisualStyleBackColor = true;
             // 
+            // PrintReceiptButton
+            // 
+            PrintReceiptButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            PrintReceiptButton.FlatAppearance.BorderSize = 0;
+            PrintReceiptButton.FlatStyle = FlatStyle.Flat;
+            PrintReceiptButton.Font = new Font("Microsoft JhengHei", 9F);
+            PrintReceiptButton.Location = new Point(11, 356);
+            PrintReceiptButton.Margin = new Padding(3, 2, 3, 2);
+            PrintReceiptButton.Name = "PrintReceiptButton";
+            PrintReceiptButton.Size = new Size(158, 22);
+            PrintReceiptButton.TabIndex = 9;
+            PrintReceiptButton.Text = "Imprimir Factura";
+            PrintReceiptButton.UseVisualStyleBackColor = true;
+            // 
             // SaleView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -203,5 +219,6 @@
         private Label label1;
         private ComboBox CustomerCombobox;
         private Label CustomerLabel;
+        private Button PrintReceiptButton;
     }
 }

@@ -24,7 +24,8 @@ namespace VentasApp.Views.Sale
         event EventHandler CancelSaleEvent;
         event EventHandler OnRecoverFocusEvent;
         event EventHandler CustomerSelectionChangedEvent;
-        
+        event EventHandler PrintReceiptEvent;
+
         void SetReadOnlyMode();
         void SetCustomerName(string name);
         int GetSelectedRowIndex();
@@ -76,6 +77,7 @@ namespace VentasApp.Views.Sale
         public event EventHandler CancelSaleEvent;
         public event EventHandler OnRecoverFocusEvent;
         public event EventHandler CustomerSelectionChangedEvent;
+        public event EventHandler PrintReceiptEvent;
 
         public SaleView()
         {
@@ -83,18 +85,19 @@ namespace VentasApp.Views.Sale
             SetupEventHandler();
 
             CustomerLabel.Visible = false;
+            PrintReceiptButton.Visible = false;
         }
         public void SetReadOnlyMode()
         {
             AddSaleItemButton.Visible = false;
             EditSaleItemButton.Visible = false;
             RemoveItemButton.Visible = false;
-
             ConfirmSaleButton.Visible = false;
-
             CustomerCombobox.Visible = false;
             CustomerCombobox.Enabled = false;
+            
             CustomerLabel.Visible = true;
+            PrintReceiptButton.Visible = true;
 
             // Cambiar el botón Cancelar a "Cerrar" y reposicionarlo (opcionalmente)
             CancelButton.Text = "Cerrar";
@@ -121,6 +124,7 @@ namespace VentasApp.Views.Sale
             SaleItemsDatagridview.Click += delegate { OnRecoverFocusEvent?.Invoke(this, EventArgs.Empty); };
             SaleItemsDatagridview.DataBindingComplete += SaleItemsDatagridview_DataBindingComplete;
             CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
+            PrintReceiptButton.Click += delegate { PrintReceiptEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         private void SaleItemsDatagridview_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)

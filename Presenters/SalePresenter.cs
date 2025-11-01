@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Models;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Product;
 using VentasApp.Views.Sale;
@@ -54,6 +55,7 @@ namespace VentasApp.Presenters
                 this.view.SetCustomerName(_sale.Customer != null ? _sale.Customer.FullName : "No Registrado");
                 this.view.CustomerId = _sale.CustomerId;
                 this.view.CancelSaleEvent += CloseView;
+                this.view.PrintReceiptEvent += (s, e) => PrintSaleReceipt(this.sale);
             }
 
             this.view.OnRecoverFocusEvent += OnRecoverFocus;
@@ -149,12 +151,33 @@ namespace VentasApp.Presenters
 
             sale.CreatedAt = DateTime.Now;
             sale.UpdatedAt = DateTime.Now;
-            saleRepository.AddSale(sale);
+            int newSaleId = saleRepository.AddSale(sale);
+
+            SaleModel newSale = saleRepository.GetSaleById(newSaleId);
+            if (newSale == null)
+            {
+                MessageBox.Show("Error al guardar la venta.",
+                                    "Error de venta",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Venta agregada con éxito.",
+                                        "Venta exitosa",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                PrintSaleReceipt(newSale);
+            }
+            
             sale = new SaleModel()
             {
                 CustomerId = null,
                 SaleItems = new List<SaleItemModel>(),
             };
+            
+            
             LoadAllSaleItems();
             LoadCustomers();
         }
@@ -236,6 +259,16 @@ namespace VentasApp.Presenters
             new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository(),this.sale);
             saleItemView.ShowDialogView();
             LoadAllSaleItems();
+        }
+
+        void PrintSaleReceipt(SaleModel saleToPrint)
+        { 
+            if (saleToPrint != null)
+            {
+                PrinterManager printerManager = new PrinterManager();
+                printerManager.PrintSaleReceipt(saleToPrint);
+                
+            } 
         }
     }
 }
