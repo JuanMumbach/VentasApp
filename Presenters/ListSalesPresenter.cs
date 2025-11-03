@@ -38,14 +38,6 @@ namespace VentasApp.Presenters
 
         private void CheckForPermission(object? sender, EventArgs e)
         {
-            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
-            {
-                showOnlyUserSales = false;
-                AccessGranted = true;
-                LoadAllSales(this, EventArgs.Empty);
-                return;
-            }
-
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage))
             {
                 showOnlyUserSales = false;
@@ -53,6 +45,17 @@ namespace VentasApp.Presenters
                 LoadAllSales(this, EventArgs.Empty);
                 return;
             }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
+            {
+                showOnlyUserSales = false;
+                AccessGranted = true;
+                view.SetViewOnlyMode();
+                LoadAllSales(this, EventArgs.Empty);
+                return;
+            }
+
+            
 
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate))
             {

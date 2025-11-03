@@ -42,19 +42,22 @@ namespace VentasApp.Presenters
 
         private void CheckForPermission(object? sender, EventArgs e)
         {
-            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsView))
-            {
-                accessGranted = true;
-                LoadAllProductsList();
-                return;
-            }
-
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsManage))
             {
                 accessGranted = true;
                 LoadAllProductsList();
                 return;
             }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsView))
+            {
+                accessGranted = true;
+                view.SetViewOnlyMode();
+                LoadAllProductsList();
+                return;
+            }
+
+            
 
             MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             view.CloseView();

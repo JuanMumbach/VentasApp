@@ -69,5 +69,14 @@ namespace VentasApp.Views.Sale
         {
             this.Close();
         }
+
+        public void SetViewOnlyMode()
+        {
+            CancelSaleButton.Enabled = false;
+            CancelSaleButton.Visible = false;
+            RestoreButton.Enabled = false;
+            RestoreButton.Visible = false;
+
+        }
     }
 }

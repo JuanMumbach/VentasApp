@@ -11,11 +11,12 @@ using VentasApp.Services;
 
 namespace VentasApp.Views
 {
-    public interface IBaseForm
+    public interface IBaseForm 
     {
         event EventHandler FormLoadEvent;
+        void CloseView();
     }
-    public partial class BaseForm : Form
+    public partial class BaseForm : Form, IBaseForm
     {
         public event EventHandler FormLoadEvent;
         public BaseForm()
@@ -150,6 +151,11 @@ namespace VentasApp.Views
                     ApplyThemeToControls(control.Controls);
                 }
             }
+        }
+
+        public virtual void CloseView()
+        {
+            this.Close();
         }
     }
 }

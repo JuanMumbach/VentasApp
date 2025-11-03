@@ -112,9 +112,19 @@ namespace VentasApp.Views
             EditProductButton.Enabled = GetSelectedProductId().HasValue;
         }
 
+
+
         public void CloseView()
         {
             this.Close();
+        }
+
+        public void SetViewOnlyMode()
+        {
+            DeleteButton.Visible = false;
+            RestoreButton.Visible = false;
+            OpenAddProductViewButton.Visible = false;
+            EditProductButton.Visible = false;
         }
     }
 }

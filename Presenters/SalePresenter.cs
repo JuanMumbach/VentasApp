@@ -96,6 +96,11 @@ namespace VentasApp.Presenters
                     Permissions.SalesCreate)
                     ) return;
 
+                if (HasPermission(
+                    (Roles)SessionManager.CurrentUserRoleId,
+                    Permissions.SalesViewAll)
+                    ) return;
+
                 MessageBox.Show("No tienes permiso para acceder a esta venta",
                                     "Acceso denegado",
                                     MessageBoxButtons.OK,

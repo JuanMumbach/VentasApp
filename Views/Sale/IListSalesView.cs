@@ -18,6 +18,6 @@ namespace VentasApp.Views.Sale
 
         void ShowMessage(string message, string title, MessageBoxIcon icon);
 
-        void CloseView();
+        void SetViewOnlyMode();
     }
 }

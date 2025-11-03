@@ -14,5 +14,6 @@
         public (int? Id, bool? Active)? GetSelectedProductInfo();
         void SetProductosListBindingSource(BindingSource productosList);
         void CloseView();
+        void SetViewOnlyMode();
     }
 }

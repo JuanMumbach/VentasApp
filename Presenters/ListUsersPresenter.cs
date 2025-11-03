@@ -6,6 +6,7 @@ using VentasApp.Models;
 using VentasApp.Repositories;
 using VentasApp.Services;
 using VentasApp.Views.User;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -15,6 +16,7 @@ namespace VentasApp.Presenters
         private IUserRepository repository;
         private BindingSource usersBindingSource;
         private IEnumerable<UserModel> userList;
+        private bool accessGranted = false;
 
         public ListUsersPresenter(IListUsersView view, IUserRepository repository)
         {
@@ -23,6 +25,7 @@ namespace VentasApp.Presenters
             this.view = view;
             this.repository = repository;
 
+            this.view.FormLoadEvent += CheckForPermission;
             this.view.SearchUserEvent += SearchUser;
             this.view.AddUserViewEvent += LoadAddUserView;
             this.view.EditUserViewEvent += LoadEditUserView;
@@ -32,6 +35,31 @@ namespace VentasApp.Presenters
             this.view.SetUsersListBindingSource(usersBindingSource);
 
             LoadAllUsersList();
+        }
+
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.UsersManage))
+            {
+                accessGranted = true;
+                LoadAllUsersList();
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.UsersView))
+            {
+                accessGranted = true;
+                view.SetViewOnlyMode();
+                LoadAllUsersList();
+                return;
+            }
+
+            
+
+            MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado", 
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            view.CloseView();
         }
 
         private void LoadEditUserView(object? sender, EventArgs e)
@@ -72,6 +100,8 @@ namespace VentasApp.Presenters
 
         private void LoadAllUsersList()
         {
+            if (!accessGranted) return;
+
             try
             {
                 if (view.showDeletedUsers)
@@ -107,6 +137,8 @@ namespace VentasApp.Presenters
 
         private void SearchUser(object? sender, EventArgs e)
         {
+            if (!accessGranted) return;
+
             try
             {
                 if (string.IsNullOrWhiteSpace(view.searchValue))

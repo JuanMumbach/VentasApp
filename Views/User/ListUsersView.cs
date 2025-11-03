@@ -97,5 +97,13 @@ namespace VentasApp.Views.User
         {
             EditUserButton.Enabled = GetSelectedUserId().HasValue;
         }
+
+        public void SetViewOnlyMode()
+        {
+            OpenAddUserViewButton.Visible = false;
+            EditUserButton.Visible = false;
+            DeleteButton.Visible = false;
+            RestoreButton.Visible = false;
+        }
     }
 }

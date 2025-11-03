@@ -17,5 +17,6 @@ namespace VentasApp.Views.User
         int? GetSelectedUserId();
         (int? Id, bool? Active)? GetSelectedUserInfo();
         void SetUsersListBindingSource(BindingSource usersList);
+        void SetViewOnlyMode();
     }
 }
