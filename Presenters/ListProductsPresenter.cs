@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Product;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -15,6 +17,7 @@ namespace VentasApp.Presenters
         private IproductRepository repository;
         private BindingSource productsBindingSource;
         private IEnumerable<Models.ProductModel> productList;
+        private bool accessGranted = false;
 
         public ListProductsPresenter(IListProductsView view, IproductRepository repository)
         {
@@ -23,7 +26,7 @@ namespace VentasApp.Presenters
             this.view = view;
             this.repository = repository;
 
-
+            this.view.FormLoadEvent += CheckForPermission;
             this.view.SearchProductEvent += SearchProduct;
             this.view.AddProductViewEvent += LoadAddProductView;
             this.view.EditProductViewEvent += LoadEditProductView;
@@ -35,6 +38,26 @@ namespace VentasApp.Presenters
             LoadAllProductsList();
 
             //this.view.BuscarProductoEvent += BuscarProducto;
+        }
+
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsView))
+            {
+                accessGranted = true;
+                LoadAllProductsList();
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsManage))
+            {
+                accessGranted = true;
+                LoadAllProductsList();
+                return;
+            }
+
+            MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            view.CloseView();
         }
 
         private void LoadEditProductView(object? sender, EventArgs e)
@@ -60,6 +83,8 @@ namespace VentasApp.Presenters
 
         private void LoadAllProductsList()
         {
+            if (!accessGranted) return;
+            
             if (view.showDeletedProducts)
             { productList = repository.GetAllProducts(); }
             else
@@ -82,6 +107,8 @@ namespace VentasApp.Presenters
 
         private void SearchProduct(object? sender, EventArgs e)
         {
+            if (!accessGranted) return;
+
             if (string.IsNullOrWhiteSpace(view.searchValue))
             {
                 LoadAllProductsList();

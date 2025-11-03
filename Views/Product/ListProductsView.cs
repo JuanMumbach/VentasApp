@@ -111,5 +111,10 @@ namespace VentasApp.Views
         {
             EditProductButton.Enabled = GetSelectedProductId().HasValue;
         }
+
+        public void CloseView()
+        {
+            this.Close();
+        }
     }
 }
