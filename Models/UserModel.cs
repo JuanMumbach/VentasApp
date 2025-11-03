@@ -45,20 +45,5 @@ namespace VentasApp.Models
 
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; }
-
-        // Propiedad calculada para obtener el nombre del rol
-        [NotMapped]
-        public string RoleName
-        {
-            get
-            {
-                return RoleId switch
-                {
-                    1 => "Admin",
-                    2 => "Employee",
-                    _ => "Unknown"
-                };
-            }
-        }
     }
 }

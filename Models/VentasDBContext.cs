@@ -17,6 +17,9 @@ namespace VentasApp.Models
         public DbSet<SaleModel> Sales { get; set; }
         public DbSet<SaleItemModel> SalesItems { get; set; }
         public DbSet<CustomerModel> Customers { get; set; }
+
+        public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<PermissionModel> Permissions { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration configuration = new ConfigurationBuilder()
@@ -26,6 +29,14 @@ namespace VentasApp.Models
             string connectionString = configuration["MySqlConnection"];
 
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RoleModel>()
+                .HasMany(r => r.Permissions)
+                .WithMany(p => p.Roles)
+                .UsingEntity(j => j.ToTable("role_permission"));
         }
 
     }

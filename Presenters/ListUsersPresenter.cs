@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using VentasApp.Models;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views.User;
 
 namespace VentasApp.Presenters
@@ -43,6 +44,7 @@ namespace VentasApp.Presenters
                     IUserView userView = new UserView((int)id);
                     new UserPresenter(userView, repository);
                     userView.ShowDialogView();
+                    SearchUser(this, EventArgs.Empty);
                 }
                 catch (Exception ex)
                 {
@@ -59,6 +61,7 @@ namespace VentasApp.Presenters
                 IUserView userView = new UserView();
                 new UserPresenter(userView, repository);
                 userView.ShowDialogView();
+                SearchUser(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {
@@ -86,7 +89,7 @@ namespace VentasApp.Presenters
                 {
                     u.Id,
                     u.Username,
-                    Role = u.RoleName,
+                    Role = PermissionManager.getRoleNameById(u.RoleId),
                     u.Email,
                     u.FullName,
                     u.Phone,
@@ -126,7 +129,7 @@ namespace VentasApp.Presenters
                 {
                     u.Id,
                     u.Username,
-                    Role = u.RoleName,
+                    Role = PermissionManager.getRoleNameById(u.RoleId),
                     u.Email,
                     u.FullName,
                     u.Phone,

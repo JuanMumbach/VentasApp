@@ -81,8 +81,12 @@ namespace VentasApp.Views.Customer
                 DeleteButton.Enabled = false;
                 return;
             }
-            bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
-            DeleteButton.Enabled = selectedCustomer.HasValue && isActive;
+
+            if (dataGridView1.Columns.Contains("Estado"))
+            {
+                bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
+                DeleteButton.Enabled = selectedCustomer.HasValue && isActive;
+            }
         }
 
         private void UpdateRestoreButtonState()
@@ -93,8 +97,13 @@ namespace VentasApp.Views.Customer
                 RestoreDeletedButton.Enabled = false;
                 return;
             }
-            bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
-            RestoreDeletedButton.Enabled = selectedCustomer.HasValue && !isActive;
+            
+            if (dataGridView1.Columns.Contains("Estado"))
+            {
+                bool isActive = dataGridView1.CurrentRow.Cells["Estado"].Value == "Activo";
+                RestoreDeletedButton.Enabled = selectedCustomer.HasValue && !isActive;
+            }
+            
         }
 
         private void UpdateEditButtonState()
@@ -106,6 +115,8 @@ namespace VentasApp.Views.Customer
         {
             if (dataGridView1.CurrentRow != null)
             {
+                if (dataGridView1.Columns.Contains("Id") == false)
+                    return null;
                 if (dataGridView1.CurrentRow.Cells["Id"].Value == null)
                     return null;
                 int id = (int)dataGridView1.CurrentRow.Cells["Id"].Value;

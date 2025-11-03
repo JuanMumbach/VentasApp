@@ -5,6 +5,7 @@ using VentasApp.Models.DTOs;
 using VentasApp.Repositories;
 using VentasApp.Views.User;
 using VentasApp.Models;
+using VentasApp.Services;
 
 namespace VentasApp.Presenters
 {
@@ -150,16 +151,13 @@ namespace VentasApp.Presenters
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(view.Email))
+            if (!string.IsNullOrWhiteSpace(view.Email))
             {
-                view.ShowMessage("El email es requerido.", "Error", MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (!IsValidEmail(view.Email))
-            {
-                view.ShowMessage("El formato del email no es válido.", "Error", MessageBoxIcon.Warning);
-                return false;
+                if (!IsValidEmail(view.Email))
+                {
+                    view.ShowMessage("El formato del email no es válido.", "Error", MessageBoxIcon.Warning);
+                    return false;
+                }
             }
 
             if (string.IsNullOrWhiteSpace(view.FullName))
@@ -168,7 +166,8 @@ namespace VentasApp.Presenters
                 return false;
             }
 
-            if (!UserRoles.IsValidRoleId(view.RoleId))
+            
+            if (string.IsNullOrEmpty(PermissionManager.getRoleNameById(view.RoleId)))
             {
                 view.ShowMessage("El rol seleccionado no es válido.", "Error", MessageBoxIcon.Warning);
                 return false;

@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using VentasApp.Models;
+using VentasApp.Services;
 
 namespace VentasApp.Views.User
 {
@@ -66,11 +67,11 @@ namespace VentasApp.Views.User
             get 
             { 
                 var selectedRole = RoleComboBox.SelectedItem?.ToString();
-                return UserRoles.GetRoleId(selectedRole ?? "");
+                return PermissionManager.GetRoleIdByName(selectedRole ?? "");
             }
             set 
-            { 
-                var roleName = UserRoles.GetRoleName(value);
+            {
+                var roleName = PermissionManager.getRoleNameById(value);
                 if (RoleComboBox.Items.Contains(roleName))
                     RoleComboBox.SelectedItem = roleName; 
                 else
@@ -99,7 +100,7 @@ namespace VentasApp.Views.User
         {
             // Usar roles definidos en UserRoles
             RoleComboBox.Items.Clear();
-            RoleComboBox.Items.AddRange(UserRoles.GetRoleNames().ToArray());
+            RoleComboBox.Items.AddRange(PermissionManager.getRoleNames());
             RoleComboBox.SelectedIndex = 1; // Employee por defecto (índice 1)
         }
 
