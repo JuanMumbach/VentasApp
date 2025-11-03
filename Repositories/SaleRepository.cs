@@ -12,6 +12,7 @@ namespace VentasApp.Repositories
     public interface ISaleRepository
     {
         IEnumerable<SaleModel> GetAllSales();
+        IEnumerable<SaleModel> GetAllSalesByUser(int UserId);
         IEnumerable<SaleModel> GetCancelledSales(bool cancelState);
         SaleModel GetSaleById(int id);
         int AddSale(SaleModel sale);
@@ -77,6 +78,16 @@ namespace VentasApp.Repositories
             using (var context = new VentasDBContext())
             {
                 return context.Sales.Include(sale => sale.Customer).ToList();
+            }
+        }
+
+        public IEnumerable<SaleModel> GetAllSalesByUser(int UserId)
+        {
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales.Where(sale => sale.UserId == UserId)
+                    .Include(sale => sale.Customer)
+                    .ToList();
             }
         }
 

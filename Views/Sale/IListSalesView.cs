@@ -17,5 +17,7 @@ namespace VentasApp.Views.Sale
         int? GetSelectedSaleId();
 
         void ShowMessage(string message, string title, MessageBoxIcon icon);
+
+        void CloseView();
     }
 }

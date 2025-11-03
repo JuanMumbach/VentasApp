@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using VentasApp.Models;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views.Sale;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -12,6 +14,8 @@ namespace VentasApp.Presenters
         private IListSalesView view;
         private ISaleRepository saleRepository;
         private BindingSource salesBindingSource;
+        private bool showOnlyUserSales = false;
+        private bool AccessGranted = false;
 
         public ListSalesPresenter(IListSalesView listSalesView, ISaleRepository _saleRepository)
         {
@@ -25,13 +29,60 @@ namespace VentasApp.Presenters
             this.view.CancelSaleEvent += OnCancelSale;
             this.view.ViewSaleDetailEvent += OnViewSaleDetail;
 
+            this.view.FormLoadEvent += CheckForPermission;
+
             // Cargar la lista al iniciar
-            LoadAllSales(this, EventArgs.Empty);
+            // Comentado para cargar lista despues de ejecutar el CheckForPermission
+            //LoadAllSales(this, EventArgs.Empty);
+        }
+
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
+            {
+                showOnlyUserSales = false;
+                AccessGranted = true;
+                LoadAllSales(this, EventArgs.Empty);
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage))
+            {
+                showOnlyUserSales = false;
+                AccessGranted = true;
+                LoadAllSales(this, EventArgs.Empty);
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate))
+            {
+                showOnlyUserSales = true;
+                AccessGranted = true;
+                LoadAllSales(this, EventArgs.Empty);
+                return;
+            }
+
+            MessageBox.Show("No tienes permisos para ver esta sección.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            view.CloseView();
+
         }
 
         private void LoadAllSales(object? sender, EventArgs e)
         {
-            IEnumerable<SaleModel> saleList = saleRepository.GetAllSales();
+
+            if (!AccessGranted) return;
+
+            IEnumerable<SaleModel> saleList = new List<SaleModel>();
+            
+            if (showOnlyUserSales)
+            {
+                saleList = saleRepository.GetAllSalesByUser(SessionManager.CurrentUserId);
+            }
+            else
+            {
+                saleList = saleRepository.GetAllSales();
+            }
+                
 
             var displayList = saleList.Select(item => new
             {

@@ -64,5 +64,10 @@ namespace VentasApp.Views.Sale
         {
             // Puedes aplicar tu tema aquí si es necesario
         }
+
+        public void CloseView()
+        {
+            this.Close();
+        }
     }
 }
