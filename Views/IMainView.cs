@@ -7,7 +7,7 @@ using VentasApp.Views.Customer;
 
 namespace VentasApp.Views
 {
-    public interface IMainView
+    public interface IMainView : IBaseForm
     {
         public void LoadMainPanelView(Form view);
         void Close();

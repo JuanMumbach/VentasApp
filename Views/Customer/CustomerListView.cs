@@ -11,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace VentasApp.Views.Customer
 {
-    public interface ICustomerListView
+    public interface ICustomerListView : IBaseForm
     {
         event EventHandler AddCustomerEvent;
         event EventHandler EditCustomerEvent;

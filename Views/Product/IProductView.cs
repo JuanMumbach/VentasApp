@@ -7,7 +7,7 @@ using VentasApp.Models;
 
 namespace VentasApp.Views.Product
 {
-    public interface IProductView
+    public interface IProductView : IBaseForm
     {
         event EventHandler AddProductEvent;
         event EventHandler UpdateProductEvent;

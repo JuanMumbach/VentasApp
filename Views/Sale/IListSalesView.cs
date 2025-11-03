@@ -5,7 +5,7 @@ using VentasApp.Models;
 
 namespace VentasApp.Views.Sale
 {
-    public interface IListSalesView
+    public interface IListSalesView : IBaseForm
     {
         BindingSource SaleListBindingSource { set; }
         event EventHandler LoadAllSalesEvent;

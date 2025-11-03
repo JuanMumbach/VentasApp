@@ -1,6 +1,6 @@
 ﻿namespace VentasApp.Views.Product
 {
-    public interface IListProductsView
+    public interface IListProductsView : IBaseForm
     {
         event EventHandler SearchProductEvent;
         string searchValue { get; set; }

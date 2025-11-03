@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.User
 {
-    public interface IUserView
+    public interface IUserView : IBaseForm
     {
         int UserId { get; set; }
         string Username { get; set; }

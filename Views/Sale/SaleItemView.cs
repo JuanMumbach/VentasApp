@@ -11,7 +11,7 @@ using VentasApp.Models;
 
 namespace VentasApp.Views.Sale
 {
-    public interface ISaleItemView
+    public interface ISaleItemView : IBaseForm
     {
         event EventHandler AddItemEvent;
         event EventHandler EditItemEvent;

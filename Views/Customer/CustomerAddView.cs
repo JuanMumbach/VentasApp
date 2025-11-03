@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.Customer
 {
-    public interface ICustomerAddView
+    public interface ICustomerAddView : IBaseForm
     {
         event EventHandler AddCustomerEvent;
         event EventHandler CancelEvent;

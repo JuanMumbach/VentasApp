@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace VentasApp.Views.User
 {
-    public interface IListUsersView
+    public interface IListUsersView : IBaseForm
     {
         event EventHandler SearchUserEvent;
         string searchValue { get; set; }

@@ -12,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace VentasApp.Views
 {
-    public interface ILoginView
+    public interface ILoginView : IBaseForm
     {
         string Username { get; }
         string Password { get; set; }

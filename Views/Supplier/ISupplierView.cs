@@ -2,7 +2,7 @@
 
 namespace VentasApp.Views.Supplier
 {
-    public interface ISupplierView
+    public interface ISupplierView : IBaseForm
     {
         event EventHandler AddSupplierEvent;
         event EventHandler UpdateSupplierEvent;

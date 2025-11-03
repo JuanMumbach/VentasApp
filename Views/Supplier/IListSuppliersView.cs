@@ -2,7 +2,7 @@
 
 namespace VentasApp.Views.Supplier
 {
-    public interface IListSuppliersView
+    public interface IListSuppliersView : IBaseForm
     {
         event EventHandler SearchSupplierEvent;
         string searchValue { get; set; }

@@ -11,7 +11,7 @@ using VentasApp.Models;
 
 namespace VentasApp.Views.Customer
 {
-    public interface ICustomerEditView
+    public interface ICustomerEditView : IBaseForm
     {
         event EventHandler SaveCustomerEvent;
         event EventHandler CancelEvent;
