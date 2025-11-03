@@ -90,6 +90,8 @@ namespace VentasApp.Views
 
         public void LoadMainPanelView(Form view)
         {
+            if (view == null) return; 
+
             MainPanel.Controls.Clear();
             view.TopLevel = false;
             view.FormBorderStyle = FormBorderStyle.None;

@@ -11,13 +11,27 @@ using VentasApp.Services;
 
 namespace VentasApp.Views
 {
+    public interface IBaseForm
+    {
+        event EventHandler FormLoadEvent;
+    }
     public partial class BaseForm : Form
     {
+        public event EventHandler FormLoadEvent;
         public BaseForm()
         {
             InitializeComponent();
 
-            this.Load += (s, e) => LoadColorTheme();
+            this.Load += (s, e) =>
+            {
+                LoadColorTheme();
+                
+            };
+
+            this.Shown += (s, e) =>
+            {
+                FormLoadEvent?.Invoke(s, e);
+            };
 
         }
 

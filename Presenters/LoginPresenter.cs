@@ -33,6 +33,7 @@ namespace VentasApp.Presenters
             {
                 SessionManager.CurrentUsername = username;
                 SessionManager.CurrentUserId = isValidUser.Value;
+                SessionManager.CurrentUserRoleId = userRepository.GetUserByUsername(username).RoleId;
 
                 MainView mainView = new MainView();
 

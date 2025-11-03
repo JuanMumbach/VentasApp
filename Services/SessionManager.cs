@@ -10,5 +10,7 @@ namespace VentasApp.Services
     {
         public static int CurrentUserId { get; set; }
         public static string CurrentUsername { get; set; }
+
+        public static int CurrentUserRoleId { get; set; }
     }
 }

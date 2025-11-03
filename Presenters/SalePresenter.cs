@@ -9,6 +9,7 @@ using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Product;
 using VentasApp.Views.Sale;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -32,7 +33,7 @@ namespace VentasApp.Presenters
 
 
             if (_sale == null)
-            {
+            {              
                 this.view.AddSaleItemViewEvent += OnAddSaleItemView;
                 this.view.EditSaleItemViewEvent += OnEditSaleItemView;
                 this.view.RemoveSaleItemEvent += OnRemoveSaleItem;
@@ -58,12 +59,53 @@ namespace VentasApp.Presenters
                 this.view.PrintReceiptEvent += (s, e) => PrintSaleReceipt(this.sale);
             }
 
+            this.view.FormLoadEvent += CheckForPermissions;
             this.view.OnRecoverFocusEvent += OnRecoverFocus;
             this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
             this.view.SetSaleItemsListBindingSource(saleItemsBindingSource);
             LoadAllSaleItems();
             LoadCustomers();
         }
+
+        private void CheckForPermissions(object? sender, EventArgs e)
+        {
+            if (this.sale.Id < 1)
+            {
+                if (HasPermission(
+                    (Roles)SessionManager.CurrentUserRoleId,
+                    Permissions.SalesCreate)
+                    )return;
+
+                MessageBox.Show("No tienes permiso para realizar ventas.",
+                                    "Acceso denegado",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                CloseView(sender, e);
+                return;
+            }
+            else
+            {
+                if (HasPermission(
+                    (Roles)SessionManager.CurrentUserRoleId,
+                    Permissions.SalesManage)
+                    ) return;
+
+                if (sale.UserId == SessionManager.CurrentUserId &&
+                    HasPermission(
+                    (Roles)SessionManager.CurrentUserRoleId,
+                    Permissions.SalesCreate)
+                    ) return;
+
+                MessageBox.Show("No tienes permiso para acceder a esta venta",
+                                    "Acceso denegado",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                CloseView(sender, e);
+                return;
+            }
+        }
+
+       
 
         private void UpdateSaleCustomer(object? sender, EventArgs e)
         {

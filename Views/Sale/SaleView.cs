@@ -13,7 +13,7 @@ using VentasApp.Services;
 
 namespace VentasApp.Views.Sale
 {
-    public interface ISaleView
+    public interface ISaleView : IBaseForm
     {
         IEnumerable<CustomerModel> Customers { set; }
         int? CustomerId { get; set; }

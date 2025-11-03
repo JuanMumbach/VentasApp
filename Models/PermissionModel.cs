@@ -19,6 +19,6 @@ namespace VentasApp.Models
         [Required(ErrorMessage = "Permission name is required.")]
         public string PermissionName { get; set; }
 
-        public ICollection<RoleModel> Roles { get; set; } = new List<RoleModel>();
+        public ICollection<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
     }
 }

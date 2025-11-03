@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,18 +42,20 @@ namespace VentasApp.Services
         public static bool HasPermission(Roles _role, Permissions permission)
         {
             using (var context = new VentasDBContext())
-            {               
+            {
                 var role = context.Roles
-                .Where(r => r.RoleId == (int)_role)
-                .FirstOrDefault();
+                    .Where(r => r.RoleId == (int)_role)
+                    .Include(r => r.RolePermissions)
+                    .ThenInclude(rp => rp.Permission)
+                    .FirstOrDefault();
+
                 if (role != null)
                 {
-                    var hasPermission = role.Permissions
-                        .Any(p => p.PermissionId == (int)permission);
-                    return hasPermission;
+                    return role.RolePermissions
+                               .Any(rp => rp.Permission.PermissionId == (int)permission);
                 }
+                return false;
             }
-            return false;
         }
 
         internal static int GetRoleIdByName(string v)

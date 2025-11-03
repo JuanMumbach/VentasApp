@@ -88,16 +88,20 @@ namespace VentasApp.Presenters
                 return;
             }
 
-            if (!repository.IsEmailAvailable(view.Email))
+            if (!string.IsNullOrEmpty(view.Email))
             {
-                view.ShowMessage("El email ya está registrado.", "Error", MessageBoxIcon.Warning);
-                return;
+                if (!repository.IsEmailAvailable(view.Email))
+                {
+                    view.ShowMessage("El email ya está registrado.", "Error", MessageBoxIcon.Warning);
+                    return;
+                }
             }
+            
 
             var userDTO = new AddUserDTO
             {
                 Username = view.Username,
-                Email = view.Email,
+                Email = string.IsNullOrWhiteSpace(view.Email) ? null : view.Email,
                 Password = view.Password,
                 FullName = view.FullName,
                 RoleId = view.RoleId, // Usar RoleId en lugar de Role
@@ -119,18 +123,22 @@ namespace VentasApp.Presenters
                 return;
             }
 
-            var existingUserByEmail = repository.GetUserByEmail(view.Email);
-            if (existingUserByEmail != null && existingUserByEmail.Id != view.UserId)
+            if (!string.IsNullOrWhiteSpace(view.Email))
             {
-                view.ShowMessage("El email ya está registrado.", "Error", MessageBoxIcon.Warning);
-                return;
+                var existingUserByEmail = repository.GetUserByEmail(view.Email);
+                if (existingUserByEmail != null && existingUserByEmail.Id != view.UserId)
+                {
+                    view.ShowMessage("El email ya está registrado.", "Error", MessageBoxIcon.Warning);
+                    return;
+                }
             }
+            
 
             var userDTO = new UpdateUserDTO
             {
                 Id = view.UserId,
                 Username = view.Username,
-                Email = view.Email,
+                Email = string.IsNullOrWhiteSpace(view.Email) ? null : view.Email,
                 FullName = view.FullName,
                 RoleId = view.RoleId, // Usar RoleId en lugar de Role
                 Phone = string.IsNullOrWhiteSpace(view.Phone) ? null : view.Phone,

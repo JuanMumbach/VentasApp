@@ -8,7 +8,6 @@ namespace VentasApp.Models.DTOs
         [StringLength(50, ErrorMessage = "Username no puede exceder 50 caracteres.")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Email es requerido.")]
         [EmailAddress(ErrorMessage = "Email inválido, revise que esté ingresado correctamente.")]
         public string Email { get; set; }
 
