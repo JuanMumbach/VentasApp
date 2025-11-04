@@ -111,7 +111,7 @@ namespace VentasApp.Presenters
                 ProductId = selectedProduct.Id,
                 Product = selectedProduct,
                 Amount = view.Amount,
-                Price = selectedProduct.Price * view.Amount,
+                Price = selectedProduct.Price,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             };
