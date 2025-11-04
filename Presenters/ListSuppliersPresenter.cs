@@ -2,8 +2,10 @@
 using System.Windows.Forms;
 using VentasApp.Models;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Supplier;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -12,6 +14,7 @@ namespace VentasApp.Presenters
         private IListSuppliersView view;
         private ISupplierRepository repository;
         private BindingSource suppliersBindingSource;
+        private bool accessGranted = false;
 
         public ListSuppliersPresenter(IListSuppliersView view, ISupplierRepository repository)
         {
@@ -28,13 +31,37 @@ namespace VentasApp.Presenters
             this.view.DeleteSupplierEvent += DeleteSupplier;
             this.view.RestoreSupplierEvent += RestoreSupplier;
             this.view.ShowDeletedCheckboxChange += SearchSupplier;
-
+            this.view.FormLoadEvent += CheckForPermission;
             // Cargar datos iniciales
             LoadSuppliersList();
         }
 
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SuppliersManage))
+            {
+                accessGranted = true;
+                LoadSuppliersList();
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SuppliersView))
+            {
+                accessGranted = true;
+                view.SetViewOnlyMode();
+                LoadSuppliersList();
+                return;
+            }
+
+            MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            view.CloseView();
+        }
+
         private void LoadSuppliersList()
         {
+            if (!accessGranted) return;
+
             var suppliers = repository.GetSuppliers(view.searchValue, view.showDeletedSuppliers);
             
             var displayList = suppliers.Select(s => new

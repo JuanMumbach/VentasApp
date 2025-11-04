@@ -93,5 +93,13 @@ namespace VentasApp.Views
         {
             EditSupplierButton.Enabled = GetSelectedSupplierInfo().HasValue;
         }
+
+        public void SetViewOnlyMode()
+        {
+            DeleteButton.Visible = false;
+            RestoreButton.Visible = false;
+            OpenAddSupplierViewButton.Visible = false;
+            EditSupplierButton.Visible = false;
+        }
     }
 }

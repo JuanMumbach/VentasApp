@@ -16,5 +16,6 @@ namespace VentasApp.Views.Supplier
         public (int? Id, bool? Active)? GetSelectedSupplierInfo();
         void SetSuppliersListBindingSource(BindingSource suppliersList);
         void Show();
+        void SetViewOnlyMode();
     }
 }
