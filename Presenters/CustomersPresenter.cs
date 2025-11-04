@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using VentasApp.Models;
 using VentasApp.Models.DTOs;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Customer;
 using VentasApp.Views.Product;
+using static VentasApp.Services.PermissionManager;
+
 
 namespace VentasApp.Presenters
 {
@@ -18,6 +21,7 @@ namespace VentasApp.Presenters
         private ICustomerRepository repository;
         private BindingSource productsBindingSource;
         private IEnumerable<Models.CustomerModel> customersList;
+        private bool accessGranted = false;
 
         public CustomersPresenter(ICustomerListView view, ICustomerRepository repository)
         {
@@ -32,12 +36,37 @@ namespace VentasApp.Presenters
             this.view.RestoreDeletedCustomerEvent += RestoreCustomer;
             this.view.ShowDeletedChangeEvent += (s, e) => LoadAllCustomersList();
             this.view.SetCustomerListBindingSource(productsBindingSource);
+            this.view.FormLoadEvent += CheckForPermission;
 
             LoadAllCustomersList();
         }
 
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId,Permissions.CustomersManage))
+            {
+                accessGranted = true;
+                LoadAllCustomersList();
+                return;
+            }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.CustomersView))
+            {
+                accessGranted = true;
+                view.SetViewOnlyMode();
+                LoadAllCustomersList();
+                return;
+            }
+
+            MessageBox.Show("No tiene permisos para acceder a esta sección.", "Acceso denegado",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            view.CloseView();
+        }
+
         private void LoadAllCustomersList()
         {
+            if (!accessGranted) return;
+
             if (view.showDeletedCustomers)
             { customersList = repository.GetAllCustomers(); }
             else
@@ -156,6 +185,8 @@ namespace VentasApp.Presenters
 
         private void SearchCustomer(object? sender, EventArgs e)
         {
+            if (!accessGranted) return;
+
             if (string.IsNullOrWhiteSpace(view.searchValue))
             {
                 LoadAllCustomersList();

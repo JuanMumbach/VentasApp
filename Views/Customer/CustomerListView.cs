@@ -24,6 +24,7 @@ namespace VentasApp.Views.Customer
         string searchValue { get; set; }
         public int? GetSelectedCustomerId();
         void SetCustomerListBindingSource(BindingSource source);
+        void SetViewOnlyMode();
     }
 
     public partial class CustomerListView : BaseForm, ICustomerListView
@@ -128,6 +129,18 @@ namespace VentasApp.Views.Customer
         public void SetCustomerListBindingSource(BindingSource source)
         {
             dataGridView1.DataSource = source;
+        }
+
+        public void SetViewOnlyMode()
+        {
+            AddCustomerButton.Enabled = false;
+            AddCustomerButton.Visible = false;
+            EditCustomerButton.Enabled = false;
+            EditCustomerButton.Visible = false;
+            DeleteButton.Enabled = false;
+            DeleteButton.Visible = false;
+            RestoreDeletedButton.Enabled = false;
+            RestoreDeletedButton.Visible = false;
         }
     }
 }
