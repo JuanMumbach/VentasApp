@@ -25,6 +25,7 @@ namespace VentasApp.Views.Sale
         event EventHandler OnRecoverFocusEvent;
         event EventHandler CustomerSelectionChangedEvent;
         event EventHandler PrintReceiptEvent;
+        event EventHandler SearchCustomerEvent;
 
         void SetReadOnlyMode();
         void SetCustomerName(string name);
@@ -78,6 +79,7 @@ namespace VentasApp.Views.Sale
         public event EventHandler OnRecoverFocusEvent;
         public event EventHandler CustomerSelectionChangedEvent;
         public event EventHandler PrintReceiptEvent;
+        public event EventHandler SearchCustomerEvent;
 
         public SaleView()
         {
@@ -125,6 +127,7 @@ namespace VentasApp.Views.Sale
             SaleItemsDatagridview.DataBindingComplete += SaleItemsDatagridview_DataBindingComplete;
             CustomerCombobox.SelectionChangeCommitted += delegate { CustomerSelectionChangedEvent?.Invoke(this, EventArgs.Empty); };
             PrintReceiptButton.Click += delegate { PrintReceiptEvent?.Invoke(this, EventArgs.Empty); };
+            SearchCustomerButton.Click += delegate { SearchCustomerEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         private void SaleItemsDatagridview_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)

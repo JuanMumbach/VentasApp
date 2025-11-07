@@ -34,11 +34,12 @@
             EditSaleItemButton = new Button();
             AddSaleItemButton = new Button();
             ViewItemsPanel = new Panel();
+            SearchCustomerButton = new Button();
+            PrintReceiptButton = new Button();
             CustomerLabel = new Label();
             label1 = new Label();
             CustomerCombobox = new ComboBox();
             CancelButton = new Button();
-            PrintReceiptButton = new Button();
             ((System.ComponentModel.ISupportInitialize)SaleItemsDatagridview).BeginInit();
             ViewItemsPanel.SuspendLayout();
             SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             ViewItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ViewItemsPanel.BackColor = SystemColors.ControlLightLight;
+            ViewItemsPanel.Controls.Add(SearchCustomerButton);
             ViewItemsPanel.Controls.Add(PrintReceiptButton);
             ViewItemsPanel.Controls.Add(CustomerLabel);
             ViewItemsPanel.Controls.Add(label1);
@@ -135,10 +137,37 @@
             ViewItemsPanel.Size = new Size(756, 388);
             ViewItemsPanel.TabIndex = 1;
             // 
+            // SearchCustomerButton
+            // 
+            SearchCustomerButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SearchCustomerButton.BackgroundImage = Properties.Resources.search_icon;
+            SearchCustomerButton.BackgroundImageLayout = ImageLayout.Stretch;
+            SearchCustomerButton.FlatStyle = FlatStyle.Flat;
+            SearchCustomerButton.ForeColor = Color.Transparent;
+            SearchCustomerButton.Location = new Point(695, 21);
+            SearchCustomerButton.Name = "SearchCustomerButton";
+            SearchCustomerButton.Size = new Size(23, 23);
+            SearchCustomerButton.TabIndex = 10;
+            SearchCustomerButton.UseVisualStyleBackColor = true;
+            // 
+            // PrintReceiptButton
+            // 
+            PrintReceiptButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            PrintReceiptButton.FlatAppearance.BorderSize = 0;
+            PrintReceiptButton.FlatStyle = FlatStyle.Flat;
+            PrintReceiptButton.Font = new Font("Microsoft JhengHei", 9F);
+            PrintReceiptButton.Location = new Point(11, 356);
+            PrintReceiptButton.Margin = new Padding(3, 2, 3, 2);
+            PrintReceiptButton.Name = "PrintReceiptButton";
+            PrintReceiptButton.Size = new Size(158, 22);
+            PrintReceiptButton.TabIndex = 9;
+            PrintReceiptButton.Text = "Imprimir Factura";
+            PrintReceiptButton.UseVisualStyleBackColor = true;
+            // 
             // CustomerLabel
             // 
             CustomerLabel.AutoSize = true;
-            CustomerLabel.Location = new Point(561, 25);
+            CustomerLabel.Location = new Point(526, 25);
             CustomerLabel.Name = "CustomerLabel";
             CustomerLabel.Size = new Size(91, 15);
             CustomerLabel.TabIndex = 8;
@@ -149,7 +178,7 @@
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(508, 24);
+            label1.Location = new Point(473, 24);
             label1.Name = "label1";
             label1.Size = new Size(50, 17);
             label1.TabIndex = 7;
@@ -159,7 +188,7 @@
             // 
             CustomerCombobox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CustomerCombobox.FormattingEnabled = true;
-            CustomerCombobox.Location = new Point(561, 21);
+            CustomerCombobox.Location = new Point(526, 21);
             CustomerCombobox.Name = "CustomerCombobox";
             CustomerCombobox.Size = new Size(163, 23);
             CustomerCombobox.TabIndex = 6;
@@ -177,20 +206,6 @@
             CancelButton.TabIndex = 5;
             CancelButton.Text = "cancelar";
             CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // PrintReceiptButton
-            // 
-            PrintReceiptButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            PrintReceiptButton.FlatAppearance.BorderSize = 0;
-            PrintReceiptButton.FlatStyle = FlatStyle.Flat;
-            PrintReceiptButton.Font = new Font("Microsoft JhengHei", 9F);
-            PrintReceiptButton.Location = new Point(11, 356);
-            PrintReceiptButton.Margin = new Padding(3, 2, 3, 2);
-            PrintReceiptButton.Name = "PrintReceiptButton";
-            PrintReceiptButton.Size = new Size(158, 22);
-            PrintReceiptButton.TabIndex = 9;
-            PrintReceiptButton.Text = "Imprimir Factura";
-            PrintReceiptButton.UseVisualStyleBackColor = true;
             // 
             // SaleView
             // 
@@ -220,5 +235,6 @@
         private ComboBox CustomerCombobox;
         private Label CustomerLabel;
         private Button PrintReceiptButton;
+        private Button SearchCustomerButton;
     }
 }

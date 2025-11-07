@@ -7,6 +7,7 @@ using VentasApp.Models;
 using VentasApp.Repositories;
 using VentasApp.Services;
 using VentasApp.Views;
+using VentasApp.Views.Customer;
 using VentasApp.Views.Product;
 using VentasApp.Views.Sale;
 using static VentasApp.Services.PermissionManager;
@@ -40,8 +41,8 @@ namespace VentasApp.Presenters
                 this.view.FinishSaleEvent += OnFinishSale;
                 this.view.CancelSaleEvent += OnCancelSale;
                 this.view.CustomerSelectionChangedEvent += UpdateSaleCustomer;
-                
-                
+                this.view.SearchCustomerEvent += (s, e) => OnSearchCustomer();
+
 
                 this.sale = new SaleModel
                 {
@@ -307,6 +308,24 @@ namespace VentasApp.Presenters
             new SaleItemPresenter(saleItemView, itemRepository, new ProductRepository(),this.sale);
             saleItemView.ShowDialogView();
             LoadAllSaleItems();
+        }
+
+        private void OnSearchCustomer()
+        {
+            ICustomerListView view = new CustomerListView();
+            CustomerSelectionPresenter presenter = new CustomerSelectionPresenter(view, new CustomerRepository());
+            presenter.ConfirmSelectionEvent += (s, e) =>
+            {
+                int customerId = (int)s;
+                if (customerId != null && customerId > 0)
+                {
+                    this.view.CustomerId = customerId;
+                    UpdateSaleCustomer(this, EventArgs.Empty);
+                }
+                
+            };
+
+            view.ShowDialogView();
         }
 
         void PrintSaleReceipt(SaleModel saleToPrint)

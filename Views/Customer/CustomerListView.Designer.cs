@@ -82,7 +82,7 @@
             AddCustomerButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddCustomerButton.Location = new Point(41, 347);
             AddCustomerButton.Name = "AddCustomerButton";
-            AddCustomerButton.Size = new Size(75, 23);
+            AddCustomerButton.Size = new Size(88, 23);
             AddCustomerButton.TabIndex = 4;
             AddCustomerButton.Text = "Agregar";
             AddCustomerButton.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             // EditCustomerButton
             // 
             EditCustomerButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            EditCustomerButton.Location = new Point(122, 347);
+            EditCustomerButton.Location = new Point(135, 346);
             EditCustomerButton.Name = "EditCustomerButton";
             EditCustomerButton.Size = new Size(75, 23);
             EditCustomerButton.TabIndex = 5;

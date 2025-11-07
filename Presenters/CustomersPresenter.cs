@@ -17,7 +17,7 @@ namespace VentasApp.Presenters
 {
     public class CustomersPresenter
     {
-        private ICustomerListView view;
+        protected ICustomerListView view;
         private ICustomerRepository repository;
         private BindingSource productsBindingSource;
         private IEnumerable<Models.CustomerModel> customersList;
@@ -146,7 +146,7 @@ namespace VentasApp.Presenters
             editCustomerView.CloseView();
         }
 
-        private void LoadAddCustomerView(object? sender, EventArgs e)
+        protected void LoadAddCustomerView(object? sender, EventArgs e)
         {
             ICustomerAddView addCustomerView = new CustomerAddView();
             

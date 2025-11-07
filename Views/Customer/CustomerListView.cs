@@ -25,6 +25,8 @@ namespace VentasApp.Views.Customer
         public int? GetSelectedCustomerId();
         void SetCustomerListBindingSource(BindingSource source);
         void SetViewOnlyMode();
+        void ShowDialogView();
+        void SetSelectionMode();
     }
 
     public partial class CustomerListView : BaseForm, ICustomerListView
@@ -141,6 +143,22 @@ namespace VentasApp.Views.Customer
             DeleteButton.Visible = false;
             RestoreDeletedButton.Enabled = false;
             RestoreDeletedButton.Visible = false;
+        }
+
+        public void SetSelectionMode()
+        {
+            AddCustomerButton.Text = "Seleccionar";
+            RestoreDeletedButton.Enabled = false;
+            RestoreDeletedButton.Visible = false;
+            DeleteButton.Enabled = false;
+            DeleteButton.Visible = false;
+            EditCustomerButton.Enabled = false;
+            EditCustomerButton.Visible = false;
+        }
+
+        public void ShowDialogView()
+        {
+            this.ShowDialog();
         }
     }
 }
