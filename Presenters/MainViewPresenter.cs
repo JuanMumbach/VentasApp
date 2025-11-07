@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Customer;
 using VentasApp.Views.Sale;
 using VentasApp.Views.User;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -16,6 +18,9 @@ namespace VentasApp.Presenters
         IMainView view;
         ILoginView loginView;
         bool logingOut;
+        #if DEBUG
+            bool NotHideMenuButtons = false;
+        #endif
 
         public MainViewPresenter(IMainView mainView, ILoginView loginView)
         {
@@ -24,6 +29,8 @@ namespace VentasApp.Presenters
             
             logingOut = false;
 
+            SetMenuButtonsVisibility();
+
             this.view.ProductsButtonEvent += LoadListProductsView;
             this.view.SalesButtonEvent += LoadSaleView;
             this.view.UsersButtonEvent += LoadUsersView;
@@ -31,6 +38,43 @@ namespace VentasApp.Presenters
             this.view.LogoutButtonEvent += Logout;
             this.view.MainViewClosedEvent += MainViewClosed;
             this.view.listSalesButtonEvent += LoadListSalesView;
+        }
+
+        private void SetMenuButtonsVisibility()
+        {
+#if DEBUG
+            if (NotHideMenuButtons)return;
+#endif
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId,Permissions.SalesManage))
+            { view.SetMenuButtonVisibility("Sell", true); }
+            else { view.SetMenuButtonVisibility("Sell", false); }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
+            { view.SetMenuButtonVisibility("Sales", true); }
+            else { view.SetMenuButtonVisibility("Sales", false); }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsView) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.ProductsManage))
+            { view.SetMenuButtonVisibility("Products", true); }
+            else { view.SetMenuButtonVisibility("Products", false); }
+            
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.CustomersManage) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.CustomersView))
+            { view.SetMenuButtonVisibility("Customers", true); }
+            else { view.SetMenuButtonVisibility("Customers", false); }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SuppliersManage) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SuppliersView))
+            { view.SetMenuButtonVisibility("Suppliers", true); }
+            else { view.SetMenuButtonVisibility("Suppliers", false); }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.UsersManage) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.UsersView))
+            { view.SetMenuButtonVisibility("Users", true); }
+            else { view.SetMenuButtonVisibility("Users", false); }
         }
 
         private void MainViewClosed(object? sender, EventArgs e)

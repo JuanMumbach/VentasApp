@@ -88,6 +88,33 @@ namespace VentasApp.Views
             ListSalesButton.Click += delegate { listSalesButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
+        public void SetMenuButtonVisibility(string buttonName, bool isVisible)
+        {
+            switch (buttonName)
+            {
+                case "Products":
+                    ProductsButton.Visible = isVisible;
+                    break;
+                case "Sell":
+                    SellButton.Visible = isVisible;
+                    break;
+                case "Users":
+                    UsersViewButton.Visible = isVisible;
+                    break;
+                case "Customers":
+                    CustomersButton.Visible = isVisible;
+                    break;
+                case "Suppliers":
+                    SuppliersButton.Visible = isVisible;
+                    break;
+                case "Sales":
+                    ListSalesButton.Visible = isVisible;
+                    break;
+                default:
+                    throw new ArgumentException($"Button with name {buttonName} does not exist.");
+            }
+        }
+
         public void LoadMainPanelView(Form view)
         {
             if (view == null) return; 

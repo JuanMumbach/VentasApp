@@ -11,6 +11,7 @@ namespace VentasApp.Views
     {
         public void LoadMainPanelView(Form view);
         void Close();
+        void SetMenuButtonVisibility(string buttonName, bool isVisible);
 
         event EventHandler ProductsButtonEvent;
         event EventHandler SalesButtonEvent;
