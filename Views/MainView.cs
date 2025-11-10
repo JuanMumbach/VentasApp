@@ -24,6 +24,7 @@ namespace VentasApp.Views
         public event EventHandler LogoutButtonEvent;
         public event EventHandler MainViewClosedEvent;
         public event EventHandler listSalesButtonEvent;
+        public event EventHandler DashboardButtonEvent;
 
         public MainView()
         {
@@ -86,6 +87,7 @@ namespace VentasApp.Views
             LogoutButton.Click += delegate { LogoutButtonEvent?.Invoke(this, EventArgs.Empty); };
             SuppliersButton.Click += delegate { LoadSuppliersView(); };
             ListSalesButton.Click += delegate { listSalesButtonEvent?.Invoke(this, EventArgs.Empty); };
+            DashboardButton.Click += delegate { DashboardButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void SetMenuButtonVisibility(string buttonName, bool isVisible)

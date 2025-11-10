@@ -38,10 +38,11 @@
             PanelLogo = new Panel();
             SidePanelLogoPicturebox = new PictureBox();
             SellButton = new Button();
+            DashboardButton = new Button();
             ListSalesButton = new Button();
             ProductsButton = new Button();
-            SuppliersButton = new Button();
             CustomersButton = new Button();
+            SuppliersButton = new Button();
             UsersViewButton = new Button();
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
@@ -130,23 +131,6 @@
             LogoutButton.Text = "Cerrar Sesión";
             LogoutButton.TextAlign = ContentAlignment.MiddleLeft;
             LogoutButton.UseVisualStyleBackColor = false;
-            //
-            // suppliersButton
-            //
-            SuppliersButton.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            SuppliersButton.Dock = System.Windows.Forms.DockStyle.Left;
-            SuppliersButton.FlatAppearance.BorderSize = 0;
-            SuppliersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            SuppliersButton.Font = new System.Drawing.Font("Microsoft JhengHei", 12F);
-            SuppliersButton.ForeColor = System.Drawing.SystemColors.GrayText;
-            SuppliersButton.Location = new System.Drawing.Point(5, 186); // Esto lo ubica después de ProductsButton
-            SuppliersButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            SuppliersButton.Name = "SuppliersButton";
-            SuppliersButton.Size = new System.Drawing.Size(190, 30);
-            SuppliersButton.TabIndex = 99;
-            SuppliersButton.Text = "Proveedores";
-            SuppliersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            SuppliersButton.UseVisualStyleBackColor = false;
             // 
             // SideLayoutPanel
             // 
@@ -154,6 +138,7 @@
             SideLayoutPanel.BackColor = Color.Transparent;
             SideLayoutPanel.Controls.Add(PanelLogo);
             SideLayoutPanel.Controls.Add(SellButton);
+            SideLayoutPanel.Controls.Add(DashboardButton);
             SideLayoutPanel.Controls.Add(ListSalesButton);
             SideLayoutPanel.Controls.Add(ProductsButton);
             SideLayoutPanel.Controls.Add(CustomersButton);
@@ -207,6 +192,23 @@
             SellButton.TextAlign = ContentAlignment.MiddleLeft;
             SellButton.UseVisualStyleBackColor = false;
             // 
+            // DashboardButton
+            // 
+            DashboardButton.BackColor = SystemColors.InactiveBorder;
+            DashboardButton.Dock = DockStyle.Left;
+            DashboardButton.FlatAppearance.BorderSize = 0;
+            DashboardButton.FlatStyle = FlatStyle.Flat;
+            DashboardButton.Font = new Font("Microsoft JhengHei", 12F);
+            DashboardButton.ForeColor = SystemColors.GrayText;
+            DashboardButton.Location = new Point(5, 151);
+            DashboardButton.Margin = new Padding(0, 0, 0, 5);
+            DashboardButton.Name = "DashboardButton";
+            DashboardButton.Size = new Size(190, 30);
+            DashboardButton.TabIndex = 100;
+            DashboardButton.Text = "Dashboard";
+            DashboardButton.TextAlign = ContentAlignment.MiddleLeft;
+            DashboardButton.UseVisualStyleBackColor = false;
+            // 
             // ListSalesButton
             // 
             ListSalesButton.BackColor = SystemColors.InactiveBorder;
@@ -215,11 +217,11 @@
             ListSalesButton.FlatStyle = FlatStyle.Flat;
             ListSalesButton.Font = new Font("Microsoft JhengHei", 12F);
             ListSalesButton.ForeColor = SystemColors.GrayText;
-            ListSalesButton.Location = new Point(5, 186); // Ajustar ubicación
+            ListSalesButton.Location = new Point(5, 186);
             ListSalesButton.Margin = new Padding(0, 0, 0, 5);
             ListSalesButton.Name = "ListSalesButton";
             ListSalesButton.Size = new Size(190, 30);
-            ListSalesButton.TabIndex = 99; // Usar un índice libre o un nuevo valor
+            ListSalesButton.TabIndex = 104;
             ListSalesButton.Text = "Historial Ventas";
             ListSalesButton.TextAlign = ContentAlignment.MiddleLeft;
             ListSalesButton.UseVisualStyleBackColor = false;
@@ -232,11 +234,11 @@
             ProductsButton.FlatStyle = FlatStyle.Flat;
             ProductsButton.Font = new Font("Microsoft JhengHei", 12F);
             ProductsButton.ForeColor = SystemColors.GrayText;
-            ProductsButton.Location = new Point(5, 151);
+            ProductsButton.Location = new Point(5, 221);
             ProductsButton.Margin = new Padding(0, 0, 0, 5);
             ProductsButton.Name = "ProductsButton";
             ProductsButton.Size = new Size(190, 30);
-            ProductsButton.TabIndex = 1;
+            ProductsButton.TabIndex = 101;
             ProductsButton.Text = "Productos";
             ProductsButton.TextAlign = ContentAlignment.MiddleLeft;
             ProductsButton.UseVisualStyleBackColor = false;
@@ -249,14 +251,31 @@
             CustomersButton.FlatStyle = FlatStyle.Flat;
             CustomersButton.Font = new Font("Microsoft JhengHei", 12F);
             CustomersButton.ForeColor = SystemColors.GrayText;
-            CustomersButton.Location = new Point(5, 186);
+            CustomersButton.Location = new Point(5, 256);
             CustomersButton.Margin = new Padding(0, 0, 0, 5);
             CustomersButton.Name = "CustomersButton";
             CustomersButton.Size = new Size(190, 30);
-            CustomersButton.TabIndex = 2;
+            CustomersButton.TabIndex = 102;
             CustomersButton.Text = "Clientes";
             CustomersButton.TextAlign = ContentAlignment.MiddleLeft;
             CustomersButton.UseVisualStyleBackColor = false;
+            // 
+            // SuppliersButton
+            // 
+            SuppliersButton.BackColor = SystemColors.InactiveBorder;
+            SuppliersButton.Dock = DockStyle.Left;
+            SuppliersButton.FlatAppearance.BorderSize = 0;
+            SuppliersButton.FlatStyle = FlatStyle.Flat;
+            SuppliersButton.Font = new Font("Microsoft JhengHei", 12F);
+            SuppliersButton.ForeColor = SystemColors.GrayText;
+            SuppliersButton.Location = new Point(5, 291);
+            SuppliersButton.Margin = new Padding(0, 0, 0, 5);
+            SuppliersButton.Name = "SuppliersButton";
+            SuppliersButton.Size = new Size(190, 30);
+            SuppliersButton.TabIndex = 105;
+            SuppliersButton.Text = "Proveedores";
+            SuppliersButton.TextAlign = ContentAlignment.MiddleLeft;
+            SuppliersButton.UseVisualStyleBackColor = false;
             // 
             // UsersViewButton
             // 
@@ -266,11 +285,11 @@
             UsersViewButton.FlatStyle = FlatStyle.Flat;
             UsersViewButton.Font = new Font("Microsoft JhengHei", 12F);
             UsersViewButton.ForeColor = SystemColors.GrayText;
-            UsersViewButton.Location = new Point(5, 221);
+            UsersViewButton.Location = new Point(5, 326);
             UsersViewButton.Margin = new Padding(0, 0, 0, 5);
             UsersViewButton.Name = "UsersViewButton";
             UsersViewButton.Size = new Size(190, 30);
-            UsersViewButton.TabIndex = 3;
+            UsersViewButton.TabIndex = 103;
             UsersViewButton.Text = "Usuarios";
             UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
             UsersViewButton.UseVisualStyleBackColor = false;
@@ -309,12 +328,13 @@
         private FlowLayoutPanel SideLayoutPanel;
         private Panel PanelLogo;
         private Button SellButton;
+        private PictureBox SidePanelLogoPicturebox;
+        private PictureBox MainPanelLogoPicturebox;
+        private Button DashboardButton;
         private Button ListSalesButton;
         private Button ProductsButton;
         private Button CustomersButton;
         private Button SuppliersButton;
         private Button UsersViewButton;
-        private PictureBox SidePanelLogoPicturebox;
-        private PictureBox MainPanelLogoPicturebox;
     }
 }

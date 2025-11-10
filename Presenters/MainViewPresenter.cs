@@ -7,6 +7,7 @@ using VentasApp.Repositories;
 using VentasApp.Services;
 using VentasApp.Views;
 using VentasApp.Views.Customer;
+using VentasApp.Views.Dashboard;
 using VentasApp.Views.Sale;
 using VentasApp.Views.User;
 using static VentasApp.Services.PermissionManager;
@@ -38,6 +39,20 @@ namespace VentasApp.Presenters
             this.view.LogoutButtonEvent += Logout;
             this.view.MainViewClosedEvent += MainViewClosed;
             this.view.listSalesButtonEvent += LoadListSalesView;
+            this.view.DashboardButtonEvent += LoadDashboardView;
+        }
+
+        private void LoadDashboardView(object? sender, EventArgs e)
+        {
+            /*
+            CustomerListView customersView = new CustomerListView();
+            new CustomersPresenter(customersView, new CustomerRepository());
+            view.LoadMainPanelView(customersView);
+             */
+
+            DashboardView dashboardView = new DashboardView();
+            new DashboardPresenter(dashboardView, new SaleRepository());
+            view.LoadMainPanelView(dashboardView);
         }
 
         private void SetMenuButtonsVisibility()

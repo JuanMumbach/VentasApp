@@ -1,5 +1,4 @@
-﻿using LiveCharts.WinForms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,34 +7,80 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace VentasApp.Views.Dashboard
-{
+{ 
     public interface IDashboardView : IBaseForm
     {
-
+        DateOnly StartDate { get; set; }
+        DateOnly EndDate { get; set; }
+        void LoadGraph1(Chart chart);
+        event EventHandler OnTimePeriodChanged;
+        event EventHandler OnSetWeeklyTimePeriod;
+        event EventHandler OnSetMonthlyTimePeriod;
+        event EventHandler OnSetTrimesterTimePeriod;
+        event EventHandler OnSetYearlyTimePeriod;
     }
 
     public partial class DashboardView : BaseForm, IDashboardView
     {
+        public event EventHandler OnTimePeriodChanged;
+        public event EventHandler OnSetWeeklyTimePeriod;
+        public event EventHandler OnSetMonthlyTimePeriod;
+        public event EventHandler OnSetTrimesterTimePeriod;
+        public event EventHandler OnSetYearlyTimePeriod;
+
+        public DateOnly StartDate 
+        {
+            get { return DateOnly.FromDateTime(StartDatePicker.Value);}
+            set { StartDatePicker.Value = value.ToDateTime(new TimeOnly(0,0)); }
+        }
+
+        public DateOnly EndDate 
+        {
+            get { return DateOnly.FromDateTime(EndDatePicker.Value);}
+            set 
+            { 
+                if (value < StartDate)
+                {
+                    value = StartDate;
+                }
+                EndDatePicker.Value = value.ToDateTime(new TimeOnly(0, 0)); 
+            }
+        }
+
         public DashboardView()
         {
             InitializeComponent();
 
-            LoadGraphs();
-        }
+            StartDate = DateOnly.FromDateTime(DateTime.Now).AddMonths(-1);
+            EndDate = DateOnly.FromDateTime(DateTime.Now);
 
-        private void LoadGraphs()
-        {
-            CartesianChart cartesianChart = new CartesianChart();
-
-            cartesianChart.Series.Add(new LiveCharts.Wpf.LineSeries
+            StartDatePicker.ValueChanged += (s, e) =>
             {
-                Title = "Ventas",
-                Values = new LiveCharts.ChartValues<double> { 3, 5, 7, 4, 6, 8 }
-            });
+                StartDate = DateOnly.FromDateTime(StartDatePicker.Value);
+                OnTimePeriodChanged?.Invoke(s, e);
+            };
 
+            EndDatePicker.ValueChanged += (s, e) =>
+            {
+                EndDate = DateOnly.FromDateTime(EndDatePicker.Value);
+                OnTimePeriodChanged?.Invoke(s, e);
+            };
 
+            WeeklyPeriodButton.Click += (s, e) => {OnSetWeeklyTimePeriod?.Invoke(s, e);};
+            MonthlyPeriodButton.Click += (s, e) => {OnSetMonthlyTimePeriod?.Invoke(s, e);};
+            TrimesterPeriodButton.Click += (s, e) => {OnSetTrimesterTimePeriod?.Invoke(s, e);};
+            YearlyPeriodButton.Click += (s, e) => {OnSetYearlyTimePeriod?.Invoke(s, e);};
         }
+
+        public void LoadGraph1(Chart chart)
+        {
+            SalesGraphPanel.Controls.Clear();
+            SalesGraphPanel.Controls.Add(chart);
+            SalesGraphPanel.Refresh();
+        }
+        
     }
 }

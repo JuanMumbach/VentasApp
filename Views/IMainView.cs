@@ -20,5 +20,6 @@ namespace VentasApp.Views
         event EventHandler LogoutButtonEvent;
         event EventHandler MainViewClosedEvent;
         event EventHandler listSalesButtonEvent;
+        event EventHandler DashboardButtonEvent;
     }
 }

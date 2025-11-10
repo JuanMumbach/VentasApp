@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VentasApp.Models.DTOs;
 using VentasApp.Models;
-using Microsoft.EntityFrameworkCore;
+using VentasApp.Models.DTOs;
 
 namespace VentasApp.Repositories
 {
@@ -19,6 +20,7 @@ namespace VentasApp.Repositories
         void UpdateSale(SaleModel sale);
         void CancelSale(int id);
         void RestoreSale(int id);
+        IEnumerable<SalesDataPoint> GetSalesGroupedByDate(DateTime start, DateTime end, int intervalDays);
     }
     public class SaleRepository : ISaleRepository
     {
@@ -109,6 +111,43 @@ namespace VentasApp.Repositories
                           .ThenInclude(si => si.Product)
                               .ThenInclude(p => p.Category)
                       .FirstOrDefault(s => s.Id == id);
+            }
+        }
+
+        public IEnumerable<SalesDataPoint> GetSalesGroupedByDate(DateTime start, DateTime end, int intervalDays)
+        {
+            if (intervalDays <= 0)
+            {
+                throw new ArgumentException("El intervalo de días debe ser mayor que cero.", nameof(intervalDays));
+            }
+
+            using (var context = new VentasDBContext())
+            {
+                // --- 1. Ejecutar la consulta en la DB hasta aquí ---
+                // Se trae la lista de ventas del rango (la parte simple) a la memoria de la aplicación.
+                var salesInRange = context.Sales
+                    .Where(sale => sale.CreatedAt >= start && sale.CreatedAt <= end && sale.CanceledAt == null)
+                    .ToList(); // <--- ¡AQUÍ ESTÁ LA CLAVE! El .ToList() ejecuta el SQL.
+
+                // --- 2. Continuar con LINQ to Objects (en memoria) ---
+                var query = salesInRange
+                    // Ahora este GroupBy se ejecuta en la memoria de C#, donde la lambda compleja es válida.
+                    .GroupBy(sale =>
+                    {
+                        // La lógica compleja que no se traduce a SQL
+                        var daysDifference = (sale.CreatedAt.Date - start.Date).Days;
+                        var groupIndex = daysDifference / intervalDays;
+                        return start.Date.AddDays(groupIndex * intervalDays);
+                    })
+                    .Select(group => new SalesDataPoint
+                    {
+                        Date = group.Key,
+                        TotalSales = group.Sum(sale => sale.TotalPrice),
+                        SaleCount = group.Count()
+                    })
+                    .OrderBy(result => result.Date);
+
+                return query.ToList();
             }
         }
 
