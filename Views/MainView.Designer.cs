@@ -38,12 +38,12 @@
             PanelLogo = new Panel();
             SidePanelLogoPicturebox = new PictureBox();
             SellButton = new Button();
-            DashboardButton = new Button();
             ListSalesButton = new Button();
             ProductsButton = new Button();
             CustomersButton = new Button();
             SuppliersButton = new Button();
             UsersViewButton = new Button();
+            BackupButton = new Button();
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
             SidePanel.SuspendLayout();
@@ -56,13 +56,12 @@
             // MainPanel
             // 
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MainPanel.BackColor = SystemColors.ActiveCaption;
+            MainPanel.BackColor = Color.White;
             MainPanel.Controls.Add(MainPanelLogoPicturebox);
             MainPanel.Controls.Add(WelcomeLabel);
-            MainPanel.Location = new Point(198, 0);
-            MainPanel.Margin = new Padding(3, 2, 3, 2);
+            MainPanel.Location = new Point(220, 0);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(695, 444);
+            MainPanel.Size = new Size(780, 600);
             MainPanel.TabIndex = 99;
             MainPanel.Paint += MainPanel_Paint;
             // 
@@ -70,7 +69,7 @@
             // 
             MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
             MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
-            MainPanelLogoPicturebox.Location = new Point(282, 37);
+            MainPanelLogoPicturebox.Location = new Point(300, 150);
             MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
             MainPanelLogoPicturebox.Size = new Size(180, 180);
             MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -80,24 +79,24 @@
             // WelcomeLabel
             // 
             WelcomeLabel.Anchor = AnchorStyles.None;
-            WelcomeLabel.Font = new Font("Microsoft JhengHei", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            WelcomeLabel.ForeColor = SystemColors.HotTrack;
-            WelcomeLabel.Location = new Point(139, 231);
+            WelcomeLabel.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
+            WelcomeLabel.ForeColor = Color.FromArgb(0, 123, 255);
+            WelcomeLabel.Location = new Point(100, 350);
             WelcomeLabel.Name = "WelcomeLabel";
-            WelcomeLabel.Size = new Size(478, 50);
+            WelcomeLabel.Size = new Size(580, 60);
             WelcomeLabel.TabIndex = 0;
-            WelcomeLabel.Text = "Bienvenido 001 - Username";
+            WelcomeLabel.Text = "Bienvenido, Usuario";
             WelcomeLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // SidePanel
             // 
-            SidePanel.BackColor = SystemColors.AppWorkspace;
+            SidePanel.BackColor = Color.FromArgb(248, 249, 250);
             SidePanel.Controls.Add(panel2);
             SidePanel.Controls.Add(SideLayoutPanel);
             SidePanel.Dock = DockStyle.Left;
             SidePanel.Location = new Point(0, 0);
             SidePanel.Name = "SidePanel";
-            SidePanel.Size = new Size(200, 444);
+            SidePanel.Size = new Size(220, 600);
             SidePanel.TabIndex = 2;
             // 
             // panel2
@@ -105,31 +104,25 @@
             panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(LogoutButton);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 399);
+            panel2.Location = new Point(0, 545);
             panel2.Name = "panel2";
-            panel2.Padding = new Padding(5);
-            panel2.Size = new Size(200, 45);
+            panel2.Padding = new Padding(10);
+            panel2.Size = new Size(220, 55);
             panel2.TabIndex = 99;
             // 
             // LogoutButton
             // 
-            LogoutButton.AutoSize = true;
-            LogoutButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            LogoutButton.BackColor = SystemColors.InactiveBorder;
-            LogoutButton.Dock = DockStyle.Bottom;
+            LogoutButton.BackColor = Color.FromArgb(220, 53, 69);
+            LogoutButton.Dock = DockStyle.Fill;
             LogoutButton.FlatAppearance.BorderSize = 0;
             LogoutButton.FlatStyle = FlatStyle.Flat;
-            LogoutButton.Font = new Font("Microsoft JhengHei", 12F);
-            LogoutButton.ForeColor = SystemColors.GrayText;
-            LogoutButton.Location = new Point(5, 10);
-            LogoutButton.Margin = new Padding(0, 10, 0, 0);
-            LogoutButton.MaximumSize = new Size(0, 50);
-            LogoutButton.MinimumSize = new Size(140, 25);
+            LogoutButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            LogoutButton.ForeColor = Color.White;
+            LogoutButton.Location = new Point(10, 10);
             LogoutButton.Name = "LogoutButton";
-            LogoutButton.Size = new Size(190, 30);
-            LogoutButton.TabIndex = 4;
-            LogoutButton.Text = "Cerrar Sesión";
-            LogoutButton.TextAlign = ContentAlignment.MiddleLeft;
+            LogoutButton.Size = new Size(200, 35);
+            LogoutButton.TabIndex = 0;
+            LogoutButton.Text = "🚪  Cerrar Sesión";
             LogoutButton.UseVisualStyleBackColor = false;
             // 
             // SideLayoutPanel
@@ -138,181 +131,162 @@
             SideLayoutPanel.BackColor = Color.Transparent;
             SideLayoutPanel.Controls.Add(PanelLogo);
             SideLayoutPanel.Controls.Add(SellButton);
-            SideLayoutPanel.Controls.Add(DashboardButton);
             SideLayoutPanel.Controls.Add(ListSalesButton);
             SideLayoutPanel.Controls.Add(ProductsButton);
             SideLayoutPanel.Controls.Add(CustomersButton);
             SideLayoutPanel.Controls.Add(SuppliersButton);
             SideLayoutPanel.Controls.Add(UsersViewButton);
+            SideLayoutPanel.Controls.Add(BackupButton);
             SideLayoutPanel.Dock = DockStyle.Top;
             SideLayoutPanel.FlowDirection = FlowDirection.TopDown;
             SideLayoutPanel.Location = new Point(0, 0);
-            SideLayoutPanel.Margin = new Padding(0);
             SideLayoutPanel.Name = "SideLayoutPanel";
-            SideLayoutPanel.Padding = new Padding(5);
-            SideLayoutPanel.Size = new Size(200, 399);
+            SideLayoutPanel.Padding = new Padding(10);
+            SideLayoutPanel.Size = new Size(220, 545);
             SideLayoutPanel.TabIndex = 99;
             // 
             // PanelLogo
             // 
-            PanelLogo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             PanelLogo.Controls.Add(SidePanelLogoPicturebox);
-            PanelLogo.Dock = DockStyle.Left;
-            PanelLogo.Location = new Point(7, 10);
-            PanelLogo.Margin = new Padding(2, 5, 0, 10);
+            PanelLogo.Location = new Point(10, 10);
+            PanelLogo.Margin = new Padding(0, 0, 0, 20);
             PanelLogo.Name = "PanelLogo";
-            PanelLogo.Size = new Size(184, 96);
-            PanelLogo.TabIndex = 6;
+            PanelLogo.Size = new Size(200, 100);
+            PanelLogo.TabIndex = 0;
             // 
             // SidePanelLogoPicturebox
             // 
-            SidePanelLogoPicturebox.Anchor = AnchorStyles.None;
             SidePanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
-            SidePanelLogoPicturebox.Location = new Point(45, 4);
+            SidePanelLogoPicturebox.Location = new Point(50, 5);
             SidePanelLogoPicturebox.Name = "SidePanelLogoPicturebox";
-            SidePanelLogoPicturebox.Size = new Size(90, 90);
+            SidePanelLogoPicturebox.Size = new Size(100, 100);
             SidePanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
             SidePanelLogoPicturebox.TabIndex = 0;
             SidePanelLogoPicturebox.TabStop = false;
             // 
             // SellButton
             // 
-            SellButton.BackColor = SystemColors.InactiveBorder;
-            SellButton.Dock = DockStyle.Left;
+            SellButton.BackColor = Color.White;
             SellButton.FlatAppearance.BorderSize = 0;
             SellButton.FlatStyle = FlatStyle.Flat;
-            SellButton.Font = new Font("Microsoft JhengHei", 12F);
-            SellButton.ForeColor = SystemColors.GrayText;
-            SellButton.Location = new Point(5, 116);
+            SellButton.Font = new Font("Segoe UI", 11F);
+            SellButton.Location = new Point(10, 130);
             SellButton.Margin = new Padding(0, 0, 0, 5);
             SellButton.Name = "SellButton";
-            SellButton.Size = new Size(190, 30);
-            SellButton.TabIndex = 0;
+            SellButton.Size = new Size(200, 40);
+            SellButton.TabIndex = 1;
             SellButton.Text = "VENDER";
             SellButton.TextAlign = ContentAlignment.MiddleLeft;
             SellButton.UseVisualStyleBackColor = false;
             // 
-            // DashboardButton
-            // 
-            DashboardButton.BackColor = SystemColors.InactiveBorder;
-            DashboardButton.Dock = DockStyle.Left;
-            DashboardButton.FlatAppearance.BorderSize = 0;
-            DashboardButton.FlatStyle = FlatStyle.Flat;
-            DashboardButton.Font = new Font("Microsoft JhengHei", 12F);
-            DashboardButton.ForeColor = SystemColors.GrayText;
-            DashboardButton.Location = new Point(5, 151);
-            DashboardButton.Margin = new Padding(0, 0, 0, 5);
-            DashboardButton.Name = "DashboardButton";
-            DashboardButton.Size = new Size(190, 30);
-            DashboardButton.TabIndex = 100;
-            DashboardButton.Text = "Dashboard";
-            DashboardButton.TextAlign = ContentAlignment.MiddleLeft;
-            DashboardButton.UseVisualStyleBackColor = false;
-            // 
             // ListSalesButton
             // 
-            ListSalesButton.BackColor = SystemColors.InactiveBorder;
-            ListSalesButton.Dock = DockStyle.Left;
+            ListSalesButton.BackColor = Color.White;
             ListSalesButton.FlatAppearance.BorderSize = 0;
             ListSalesButton.FlatStyle = FlatStyle.Flat;
-            ListSalesButton.Font = new Font("Microsoft JhengHei", 12F);
-            ListSalesButton.ForeColor = SystemColors.GrayText;
-            ListSalesButton.Location = new Point(5, 186);
+            ListSalesButton.Font = new Font("Segoe UI", 11F);
+            ListSalesButton.Location = new Point(10, 175);
             ListSalesButton.Margin = new Padding(0, 0, 0, 5);
             ListSalesButton.Name = "ListSalesButton";
-            ListSalesButton.Size = new Size(190, 30);
-            ListSalesButton.TabIndex = 104;
+            ListSalesButton.Size = new Size(200, 40);
+            ListSalesButton.TabIndex = 2;
             ListSalesButton.Text = "Historial Ventas";
             ListSalesButton.TextAlign = ContentAlignment.MiddleLeft;
             ListSalesButton.UseVisualStyleBackColor = false;
             // 
             // ProductsButton
             // 
-            ProductsButton.BackColor = SystemColors.InactiveBorder;
-            ProductsButton.Dock = DockStyle.Left;
+            ProductsButton.BackColor = Color.White;
             ProductsButton.FlatAppearance.BorderSize = 0;
             ProductsButton.FlatStyle = FlatStyle.Flat;
-            ProductsButton.Font = new Font("Microsoft JhengHei", 12F);
-            ProductsButton.ForeColor = SystemColors.GrayText;
-            ProductsButton.Location = new Point(5, 221);
+            ProductsButton.Font = new Font("Segoe UI", 11F);
+            ProductsButton.Location = new Point(10, 220);
             ProductsButton.Margin = new Padding(0, 0, 0, 5);
             ProductsButton.Name = "ProductsButton";
-            ProductsButton.Size = new Size(190, 30);
-            ProductsButton.TabIndex = 101;
+            ProductsButton.Size = new Size(200, 40);
+            ProductsButton.TabIndex = 3;
             ProductsButton.Text = "Productos";
             ProductsButton.TextAlign = ContentAlignment.MiddleLeft;
             ProductsButton.UseVisualStyleBackColor = false;
             // 
             // CustomersButton
             // 
-            CustomersButton.BackColor = SystemColors.InactiveBorder;
-            CustomersButton.Dock = DockStyle.Left;
+            CustomersButton.BackColor = Color.White;
             CustomersButton.FlatAppearance.BorderSize = 0;
             CustomersButton.FlatStyle = FlatStyle.Flat;
-            CustomersButton.Font = new Font("Microsoft JhengHei", 12F);
-            CustomersButton.ForeColor = SystemColors.GrayText;
-            CustomersButton.Location = new Point(5, 256);
+            CustomersButton.Font = new Font("Segoe UI", 11F);
+            CustomersButton.Location = new Point(10, 265);
             CustomersButton.Margin = new Padding(0, 0, 0, 5);
             CustomersButton.Name = "CustomersButton";
-            CustomersButton.Size = new Size(190, 30);
-            CustomersButton.TabIndex = 102;
+            CustomersButton.Size = new Size(200, 40);
+            CustomersButton.TabIndex = 4;
             CustomersButton.Text = "Clientes";
             CustomersButton.TextAlign = ContentAlignment.MiddleLeft;
             CustomersButton.UseVisualStyleBackColor = false;
             // 
             // SuppliersButton
             // 
-            SuppliersButton.BackColor = SystemColors.InactiveBorder;
-            SuppliersButton.Dock = DockStyle.Left;
+            SuppliersButton.BackColor = Color.White;
             SuppliersButton.FlatAppearance.BorderSize = 0;
             SuppliersButton.FlatStyle = FlatStyle.Flat;
-            SuppliersButton.Font = new Font("Microsoft JhengHei", 12F);
-            SuppliersButton.ForeColor = SystemColors.GrayText;
-            SuppliersButton.Location = new Point(5, 291);
+            SuppliersButton.Font = new Font("Segoe UI", 11F);
+            SuppliersButton.Location = new Point(10, 310);
             SuppliersButton.Margin = new Padding(0, 0, 0, 5);
             SuppliersButton.Name = "SuppliersButton";
-            SuppliersButton.Size = new Size(190, 30);
-            SuppliersButton.TabIndex = 105;
+            SuppliersButton.Size = new Size(200, 40);
+            SuppliersButton.TabIndex = 5;
             SuppliersButton.Text = "Proveedores";
             SuppliersButton.TextAlign = ContentAlignment.MiddleLeft;
             SuppliersButton.UseVisualStyleBackColor = false;
             // 
             // UsersViewButton
             // 
-            UsersViewButton.BackColor = SystemColors.InactiveBorder;
-            UsersViewButton.Dock = DockStyle.Left;
+            UsersViewButton.BackColor = Color.White;
             UsersViewButton.FlatAppearance.BorderSize = 0;
             UsersViewButton.FlatStyle = FlatStyle.Flat;
-            UsersViewButton.Font = new Font("Microsoft JhengHei", 12F);
-            UsersViewButton.ForeColor = SystemColors.GrayText;
-            UsersViewButton.Location = new Point(5, 326);
+            UsersViewButton.Font = new Font("Segoe UI", 11F);
+            UsersViewButton.Location = new Point(10, 355);
             UsersViewButton.Margin = new Padding(0, 0, 0, 5);
             UsersViewButton.Name = "UsersViewButton";
-            UsersViewButton.Size = new Size(190, 30);
-            UsersViewButton.TabIndex = 103;
+            UsersViewButton.Size = new Size(200, 40);
+            UsersViewButton.TabIndex = 6;
             UsersViewButton.Text = "Usuarios";
             UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
             UsersViewButton.UseVisualStyleBackColor = false;
+            // 
+            // BackupButton
+            // 
+            BackupButton.BackColor = Color.White;
+            BackupButton.FlatAppearance.BorderSize = 0;
+            BackupButton.FlatStyle = FlatStyle.Flat;
+            BackupButton.Font = new Font("Segoe UI", 11F);
+            BackupButton.Location = new Point(10, 400);
+            BackupButton.Margin = new Padding(0, 0, 0, 5);
+            BackupButton.Name = "BackupButton";
+            BackupButton.Size = new Size(200, 40);
+            BackupButton.TabIndex = 7;
+            BackupButton.Text = "Backups";
+            BackupButton.TextAlign = ContentAlignment.MiddleLeft;
+            BackupButton.UseVisualStyleBackColor = false;
             // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(893, 444);
-            Controls.Add(SidePanel);
+            BackColor = Color.White;
+            ClientSize = new Size(1000, 600);
             Controls.Add(MainPanel);
-            Margin = new Padding(3, 2, 3, 2);
-            MinimumSize = new Size(640, 480);
+            Controls.Add(SidePanel);
+            MinimumSize = new Size(1024, 600);
             Name = "MainView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "VentasApp";
+            Text = "VentasApp - Sistema de Ventas";
+            WindowState = FormWindowState.Maximized;
             FormClosed += MainView_FormClosed;
             MainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).EndInit();
             SidePanel.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             SideLayoutPanel.ResumeLayout(false);
             PanelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)SidePanelLogoPicturebox).EndInit();
@@ -328,13 +302,13 @@
         private FlowLayoutPanel SideLayoutPanel;
         private Panel PanelLogo;
         private Button SellButton;
-        private PictureBox SidePanelLogoPicturebox;
-        private PictureBox MainPanelLogoPicturebox;
-        private Button DashboardButton;
         private Button ListSalesButton;
         private Button ProductsButton;
         private Button CustomersButton;
         private Button SuppliersButton;
         private Button UsersViewButton;
+        private Button BackupButton;
+        private PictureBox SidePanelLogoPicturebox;
+        private PictureBox MainPanelLogoPicturebox;
     }
 }
