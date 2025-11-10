@@ -22,6 +22,8 @@ namespace VentasApp.Repositories
         void RestoreSale(int id);
         IEnumerable<SalesDataPoint> GetSalesGroupedByDate(DateTime start, DateTime end, int intervalDays);
         IEnumerable<TopSellerDTO> GetTopSellers(DateTime start, DateTime end);
+        List<TopCategoriesDTO> GetTopCategories(DateTime start, DateTime end);
+        List<TopProductsDTO> GetTopProducts(DateTime start, DateTime end);
     }
     public class SaleRepository : ISaleRepository
     {
@@ -124,18 +126,14 @@ namespace VentasApp.Repositories
 
             using (var context = new VentasDBContext())
             {
-                // --- 1. Ejecutar la consulta en la DB hasta aquí ---
-                // Se trae la lista de ventas del rango (la parte simple) a la memoria de la aplicación.
+                
                 var salesInRange = context.Sales
                     .Where(sale => sale.CreatedAt >= start && sale.CreatedAt <= end && sale.CanceledAt == null)
-                    .ToList(); // <--- ¡AQUÍ ESTÁ LA CLAVE! El .ToList() ejecuta el SQL.
+                    .ToList();
 
-                // --- 2. Continuar con LINQ to Objects (en memoria) ---
                 var query = salesInRange
-                    // Ahora este GroupBy se ejecuta en la memoria de C#, donde la lambda compleja es válida.
                     .GroupBy(sale =>
                     {
-                        // La lógica compleja que no se traduce a SQL
                         var daysDifference = (sale.CreatedAt.Date - start.Date).Days;
                         var groupIndex = daysDifference / intervalDays;
                         return start.Date.AddDays(groupIndex * intervalDays);
@@ -190,6 +188,47 @@ namespace VentasApp.Repositories
                         TotalSales = group.Count()
                     })
                     .OrderByDescending(metric => metric.TotalValue)
+                    .Take(3)
+                    .ToList();
+            }
+        }
+
+        public List<TopCategoriesDTO> GetTopCategories(DateTime start, DateTime end)
+        {
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales
+                    .Where(sale => sale.CreatedAt >= start && sale.CreatedAt <= end && sale.CanceledAt == null)
+                    .SelectMany(sale => sale.SaleItems)
+                    .GroupBy(detail => detail.Product.Category)
+                    .Select(group => new TopCategoriesDTO
+                    {
+                        CategoryId = group.Key.CategoryId,
+                        CategoryName = group.Key.CategoryName,
+                        TotalValue = group.Sum(detail => detail.Price * detail.Amount)
+                    })
+                    .OrderByDescending(dto => dto.TotalValue)
+                    .Take(5)
+                    .ToList();
+            }
+        }
+
+        public List<TopProductsDTO> GetTopProducts(DateTime start, DateTime end)
+        {
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales
+                    .Where(sale => sale.CreatedAt >= start && sale.CreatedAt <= end && sale.CanceledAt == null)
+                    .SelectMany(sale => sale.SaleItems)
+                    .GroupBy(detail => detail.Product)
+                    .Select(group => new TopProductsDTO
+                    {
+                        ProductId = group.Key.Id,
+                        ProductName = group.Key.Name,
+                        TotalValue = group.Sum(detail => detail.Price * detail.Amount)
+                    })
+                    .OrderByDescending(dto => dto.TotalValue)
+                    .Take(5)
                     .ToList();
             }
         }

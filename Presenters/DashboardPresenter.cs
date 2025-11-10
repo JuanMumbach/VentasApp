@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 using VentasApp.Models.DTOs;
 using VentasApp.Repositories;
+using VentasApp.Services;
 using VentasApp.Views.Dashboard;
+using static System.Windows.Forms.AxHost;
+using static VentasApp.Services.PermissionManager;
 
 namespace VentasApp.Presenters
 {
@@ -16,13 +19,14 @@ namespace VentasApp.Presenters
         private IDashboardView view;
         private ISaleRepository salesRepository;
         private IUserRepository userRepository;
+        private bool AccessGranted = false;
 
         public DashboardPresenter(IDashboardView dashboardView, ISaleRepository _salesRepository, IUserRepository userRepository)
         {
             this.view = dashboardView;
             this.salesRepository = _salesRepository;
 
-            this.view.FormLoadEvent += LoadGraphs;
+            this.view.FormLoadEvent += CheckForPermission;
             this.view.OnTimePeriodChanged += LoadGraphs;
 
             this.view.OnSetWeeklyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(7)), DateTime.Today); };
@@ -30,6 +34,20 @@ namespace VentasApp.Presenters
             this.view.OnSetTrimesterTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(90)), DateTime.Today); };
             this.view.OnSetYearlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(365)), DateTime.Today); };
             this.userRepository = userRepository;
+        }
+
+        private void CheckForPermission(object? sender, EventArgs e)
+        {
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage) ||
+               HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
+            {
+                AccessGranted = true;
+                LoadGraphs(this, EventArgs.Empty);
+                return;
+            }
+
+            MessageBox.Show("No tienes permisos para ver esta sección.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            view.CloseView();
         }
 
         private void SetTimePeriod(DateTime startTime, DateTime endTime)
@@ -45,8 +63,91 @@ namespace VentasApp.Presenters
 
         private void LoadGraphs(object? sender, EventArgs e)
         {
+            if (!AccessGranted) return;
             LoadSalesGraph();
             LoadTopSellersGraph();
+            LoadTopCategoriesGraph();
+            LoadTopProductsGraph();
+        }
+
+        private void LoadTopProductsGraph()
+        {
+            DateTime start = view.StartDate.ToDateTime(TimeOnly.MinValue);
+            DateTime end = view.EndDate.ToDateTime(TimeOnly.MinValue);
+
+            var topProducts = salesRepository.GetTopProducts(start, end);
+
+            if (!topProducts.Any()) return; // No hacer nada si no hay datos
+
+            Chart chart = new Chart();
+
+            ChartArea chartArea = new ChartArea("PieArea");
+            chart.ChartAreas.Add(chartArea);
+
+            Series series = new Series
+            {
+                Name = "Productos",
+                ChartType = SeriesChartType.Pie,
+                ChartArea = "PieArea",
+                IsValueShownAsLabel = false,
+                LabelFormat = "",
+            };
+
+            chart.Titles.Add("Top Productos");
+            chart.Legends.Add(new Legend("Legend") { Docking = Docking.Bottom });
+
+            foreach (var product in topProducts)
+            {
+                series.Points.AddXY(product.ProductName, product.TotalValue);
+            }
+
+            chart.Series.Add(series);
+            chart.Dock = DockStyle.Fill;
+
+            chart.Series[0]["PieLabelStyle"] = "Disabled";
+
+            view.LoadTopProductsGraph(chart);
+        }
+
+        private void LoadTopCategoriesGraph()
+        {
+            DateTime start = view.StartDate.ToDateTime(TimeOnly.MinValue);
+            DateTime end = view.EndDate.ToDateTime(TimeOnly.MinValue);
+
+            var topCategories = salesRepository.GetTopCategories(start, end);
+
+            if (!topCategories.Any()) return; // No hacer nada si no hay datos
+
+            Chart chart = new Chart();
+
+            ChartArea chartArea = new ChartArea("PieArea");
+            chart.ChartAreas.Add(chartArea);
+            
+
+            Series series = new Series
+            {
+                Name = "Categorias",
+                ChartType = SeriesChartType.Pie,
+                ChartArea = "PieArea",
+                IsValueShownAsLabel = false,
+                LabelFormat = "",
+            };
+
+            
+            chart.Titles.Add("Top Categorias");
+            chart.Legends.Add(new Legend("Legend") { Docking = Docking.Bottom });
+
+            foreach (var category in topCategories)
+            {
+                series.Points.AddXY(category.CategoryName, category.TotalValue);
+            }
+
+            chart.Series.Add(series);
+            chart.Dock = DockStyle.Fill;
+
+            chart.Series[0]["PieLabelStyle"] = "Disabled";
+
+            view.LoadTopCategoriasGraph(chart);
         }
 
         private void LoadTopSellersGraph()

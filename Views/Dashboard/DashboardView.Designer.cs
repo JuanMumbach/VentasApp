@@ -30,6 +30,10 @@
         {
             AutoscrollPanel = new Panel();
             panel3 = new Panel();
+            panel4 = new Panel();
+            TopProductsChartPanel = new Panel();
+            panel1 = new Panel();
+            TopCategoriasChartPanel = new Panel();
             label5 = new Label();
             TopSellersPanel = new Panel();
             Top3SellerPanel = new Panel();
@@ -67,6 +71,9 @@
             label1 = new Label();
             SalesGraphPanel = new Panel();
             AutoscrollPanel.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            panel1.SuspendLayout();
             TopSellersPanel.SuspendLayout();
             Top3SellerPanel.SuspendLayout();
             Top2SellerPanel.SuspendLayout();
@@ -93,10 +100,46 @@
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(panel1);
             panel3.Location = new Point(14, 806);
             panel3.Name = "panel3";
-            panel3.Size = new Size(722, 236);
+            panel3.Size = new Size(722, 298);
             panel3.TabIndex = 13;
+            // 
+            // panel4
+            // 
+            panel4.Anchor = AnchorStyles.Top;
+            panel4.Controls.Add(TopProductsChartPanel);
+            panel4.Location = new Point(366, 13);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(339, 273);
+            panel4.TabIndex = 1;
+            // 
+            // TopProductsChartPanel
+            // 
+            TopProductsChartPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TopProductsChartPanel.Location = new Point(18, 20);
+            TopProductsChartPanel.Name = "TopProductsChartPanel";
+            TopProductsChartPanel.Size = new Size(302, 234);
+            TopProductsChartPanel.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top;
+            panel1.Controls.Add(TopCategoriasChartPanel);
+            panel1.Location = new Point(16, 13);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(344, 273);
+            panel1.TabIndex = 0;
+            // 
+            // TopCategoriasChartPanel
+            // 
+            TopCategoriasChartPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TopCategoriasChartPanel.Location = new Point(18, 20);
+            TopCategoriasChartPanel.Name = "TopCategoriasChartPanel";
+            TopCategoriasChartPanel.Size = new Size(307, 234);
+            TopCategoriasChartPanel.TabIndex = 1;
             // 
             // label5
             // 
@@ -291,12 +334,12 @@
             Top1SellerPanel.Size = new Size(154, 195);
             Top1SellerPanel.TabIndex = 0;
             // 
-            // Top1SelletIncomesLabel
+            // Top1SellerIncomesLabel
             // 
             Top1SellerIncomesLabel.Anchor = AnchorStyles.Top;
             Top1SellerIncomesLabel.AutoSize = true;
             Top1SellerIncomesLabel.Location = new Point(103, 133);
-            Top1SellerIncomesLabel.Name = "Top1SelletIncomesLabel";
+            Top1SellerIncomesLabel.Name = "Top1SellerIncomesLabel";
             Top1SellerIncomesLabel.Size = new Size(49, 15);
             Top1SellerIncomesLabel.TabIndex = 5;
             Top1SellerIncomesLabel.Text = "$459000";
@@ -504,6 +547,9 @@
             Text = "DashboardView";
             AutoscrollPanel.ResumeLayout(false);
             AutoscrollPanel.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             TopSellersPanel.ResumeLayout(false);
             Top3SellerPanel.ResumeLayout(false);
             Top3SellerPanel.PerformLayout();
@@ -556,5 +602,9 @@
         private Label label12;
         private Label Top2SellerNameLabel;
         private Label label14;
+        private Panel panel1;
+        private Panel TopCategoriasChartPanel;
+        private Panel panel4;
+        private Panel TopProductsChartPanel;
     }
 }

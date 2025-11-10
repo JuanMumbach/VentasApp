@@ -94,6 +94,9 @@ namespace VentasApp.Views
         {
             switch (buttonName)
             {
+                case "Dashboard":
+                    DashboardButton.Visible = isVisible;
+                    break;
                 case "Products":
                     ProductsButton.Visible = isVisible;
                     break;

@@ -60,6 +60,11 @@ namespace VentasApp.Presenters
 #if DEBUG
             if (NotHideMenuButtons)return;
 #endif
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
+            { view.SetMenuButtonVisibility("Dashboard", true); }
+            else { view.SetMenuButtonVisibility("Dashboard", false); }
+
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate) ||
                 HasPermission((Roles)SessionManager.CurrentUserRoleId,Permissions.SalesManage))
             { view.SetMenuButtonVisibility("Sell", true); }

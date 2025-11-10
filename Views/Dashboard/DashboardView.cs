@@ -17,6 +17,8 @@ namespace VentasApp.Views.Dashboard
         DateOnly StartDate { get; set; }
         DateOnly EndDate { get; set; }
         void LoadGraph1(Chart chart);
+        void LoadTopCategoriasGraph(Chart chart);
+        void LoadTopProductsGraph(Chart chart);
         event EventHandler OnTimePeriodChanged;
         event EventHandler OnSetWeeklyTimePeriod;
         event EventHandler OnSetMonthlyTimePeriod;
@@ -84,7 +86,21 @@ namespace VentasApp.Views.Dashboard
             SalesGraphPanel.Controls.Add(chart);
             SalesGraphPanel.Refresh();
         }
-        
+
+        public void LoadTopCategoriasGraph(Chart chart)
+        {
+            TopCategoriasChartPanel.Controls.Clear();
+            TopCategoriasChartPanel.Controls.Add(chart);
+            TopCategoriasChartPanel.Refresh();
+        }
+
+        public void LoadTopProductsGraph(Chart chart)
+        {
+            TopProductsChartPanel.Controls.Clear();
+            TopProductsChartPanel.Controls.Add(chart);
+            TopProductsChartPanel.Refresh();
+        }
+
         public void SetTopSellers(List<TopSellerDTO> topSellers)
         {
             if (topSellers.Count > 0)
