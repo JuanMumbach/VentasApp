@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,9 @@ namespace VentasApp.Presenters
     {
         private IDashboardView view;
         private ISaleRepository salesRepository;
+        private IUserRepository userRepository;
 
-        public DashboardPresenter(IDashboardView dashboardView, ISaleRepository _salesRepository)
+        public DashboardPresenter(IDashboardView dashboardView, ISaleRepository _salesRepository, IUserRepository userRepository)
         {
             this.view = dashboardView;
             this.salesRepository = _salesRepository;
@@ -27,6 +29,7 @@ namespace VentasApp.Presenters
             this.view.OnSetMonthlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(30)), DateTime.Today); };
             this.view.OnSetTrimesterTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(90)), DateTime.Today); };
             this.view.OnSetYearlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(365)), DateTime.Today); };
+            this.userRepository = userRepository;
         }
 
         private void SetTimePeriod(DateTime startTime, DateTime endTime)
@@ -43,6 +46,17 @@ namespace VentasApp.Presenters
         private void LoadGraphs(object? sender, EventArgs e)
         {
             LoadSalesGraph();
+            LoadTopSellersGraph();
+        }
+
+        private void LoadTopSellersGraph()
+        {
+            DateTime start = view.StartDate.ToDateTime(TimeOnly.MinValue);
+            DateTime end = view.EndDate.ToDateTime(TimeOnly.MinValue);
+
+            IEnumerable<TopSellerDTO> topSellers = salesRepository.GetTopSellers(start, end);
+
+            this.view.SetTopSellers(topSellers.ToList());
         }
 
         private void LoadSalesGraph()

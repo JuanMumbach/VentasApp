@@ -31,7 +31,28 @@
             AutoscrollPanel = new Panel();
             panel3 = new Panel();
             label5 = new Label();
-            panel1 = new Panel();
+            TopSellersPanel = new Panel();
+            Top3SellerPanel = new Panel();
+            Top3SellerIncomesLabel = new Label();
+            Top3SellerSalesLabel = new Label();
+            label17 = new Label();
+            label18 = new Label();
+            Top3SellerNameLabel = new Label();
+            label20 = new Label();
+            Top2SellerPanel = new Panel();
+            Top2SellerIncomesLabel = new Label();
+            Top2SellerSalesLabel = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            Top2SellerNameLabel = new Label();
+            label14 = new Label();
+            Top1SellerPanel = new Panel();
+            Top1SellerIncomesLabel = new Label();
+            Top1SellerSalesLabel = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            Top1SellerNameLabel = new Label();
+            label6 = new Label();
             label4 = new Label();
             label3 = new Label();
             panel2 = new Panel();
@@ -46,6 +67,10 @@
             label1 = new Label();
             SalesGraphPanel = new Panel();
             AutoscrollPanel.SuspendLayout();
+            TopSellersPanel.SuspendLayout();
+            Top3SellerPanel.SuspendLayout();
+            Top2SellerPanel.SuspendLayout();
+            Top1SellerPanel.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +79,7 @@
             AutoscrollPanel.AutoScroll = true;
             AutoscrollPanel.Controls.Add(panel3);
             AutoscrollPanel.Controls.Add(label5);
-            AutoscrollPanel.Controls.Add(panel1);
+            AutoscrollPanel.Controls.Add(TopSellersPanel);
             AutoscrollPanel.Controls.Add(label4);
             AutoscrollPanel.Controls.Add(label3);
             AutoscrollPanel.Controls.Add(panel2);
@@ -83,13 +108,253 @@
             label5.TabIndex = 14;
             label5.Text = "Productos";
             // 
-            // panel1
+            // TopSellersPanel
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Location = new Point(12, 490);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(722, 236);
-            panel1.TabIndex = 10;
+            TopSellersPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TopSellersPanel.Controls.Add(Top3SellerPanel);
+            TopSellersPanel.Controls.Add(Top2SellerPanel);
+            TopSellersPanel.Controls.Add(Top1SellerPanel);
+            TopSellersPanel.Location = new Point(12, 490);
+            TopSellersPanel.Name = "TopSellersPanel";
+            TopSellersPanel.Size = new Size(722, 236);
+            TopSellersPanel.TabIndex = 10;
+            // 
+            // Top3SellerPanel
+            // 
+            Top3SellerPanel.Anchor = AnchorStyles.Top;
+            Top3SellerPanel.Controls.Add(Top3SellerIncomesLabel);
+            Top3SellerPanel.Controls.Add(Top3SellerSalesLabel);
+            Top3SellerPanel.Controls.Add(label17);
+            Top3SellerPanel.Controls.Add(label18);
+            Top3SellerPanel.Controls.Add(Top3SellerNameLabel);
+            Top3SellerPanel.Controls.Add(label20);
+            Top3SellerPanel.Location = new Point(465, 21);
+            Top3SellerPanel.Name = "Top3SellerPanel";
+            Top3SellerPanel.Size = new Size(160, 195);
+            Top3SellerPanel.TabIndex = 7;
+            // 
+            // Top3SellerIncomesLabel
+            // 
+            Top3SellerIncomesLabel.Anchor = AnchorStyles.Top;
+            Top3SellerIncomesLabel.AutoSize = true;
+            Top3SellerIncomesLabel.Location = new Point(106, 133);
+            Top3SellerIncomesLabel.Name = "Top3SellerIncomesLabel";
+            Top3SellerIncomesLabel.Size = new Size(49, 15);
+            Top3SellerIncomesLabel.TabIndex = 5;
+            Top3SellerIncomesLabel.Text = "$459000";
+            Top3SellerIncomesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // Top3SellerSalesLabel
+            // 
+            Top3SellerSalesLabel.Anchor = AnchorStyles.Top;
+            Top3SellerSalesLabel.AutoSize = true;
+            Top3SellerSalesLabel.Location = new Point(106, 105);
+            Top3SellerSalesLabel.Name = "Top3SellerSalesLabel";
+            Top3SellerSalesLabel.Size = new Size(25, 15);
+            Top3SellerSalesLabel.TabIndex = 4;
+            Top3SellerSalesLabel.Text = "149";
+            Top3SellerSalesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label17
+            // 
+            label17.Anchor = AnchorStyles.Top;
+            label17.AutoSize = true;
+            label17.Location = new Point(5, 133);
+            label17.Name = "label17";
+            label17.Size = new Size(92, 15);
+            label17.TabIndex = 3;
+            label17.Text = "Ingresos totales:";
+            label17.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            label18.Anchor = AnchorStyles.Top;
+            label18.AutoSize = true;
+            label18.Location = new Point(5, 105);
+            label18.Name = "label18";
+            label18.Size = new Size(95, 15);
+            label18.TabIndex = 2;
+            label18.Text = "Cantidad ventas:";
+            label18.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // Top3SellerNameLabel
+            // 
+            Top3SellerNameLabel.Anchor = AnchorStyles.Top;
+            Top3SellerNameLabel.AutoSize = true;
+            Top3SellerNameLabel.Location = new Point(29, 42);
+            Top3SellerNameLabel.Name = "Top3SellerNameLabel";
+            Top3SellerNameLabel.Size = new Size(104, 15);
+            Top3SellerNameLabel.TabIndex = 1;
+            Top3SellerNameLabel.Text = "Nombre vendedor";
+            Top3SellerNameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            label20.Anchor = AnchorStyles.Top;
+            label20.AutoSize = true;
+            label20.Location = new Point(63, 15);
+            label20.Name = "label20";
+            label20.Size = new Size(37, 15);
+            label20.TabIndex = 0;
+            label20.Text = "TOP 3";
+            // 
+            // Top2SellerPanel
+            // 
+            Top2SellerPanel.Anchor = AnchorStyles.Top;
+            Top2SellerPanel.Controls.Add(Top2SellerIncomesLabel);
+            Top2SellerPanel.Controls.Add(Top2SellerSalesLabel);
+            Top2SellerPanel.Controls.Add(label11);
+            Top2SellerPanel.Controls.Add(label12);
+            Top2SellerPanel.Controls.Add(Top2SellerNameLabel);
+            Top2SellerPanel.Controls.Add(label14);
+            Top2SellerPanel.Location = new Point(286, 21);
+            Top2SellerPanel.Name = "Top2SellerPanel";
+            Top2SellerPanel.Size = new Size(156, 195);
+            Top2SellerPanel.TabIndex = 6;
+            // 
+            // Top2SellerIncomesLabel
+            // 
+            Top2SellerIncomesLabel.Anchor = AnchorStyles.Top;
+            Top2SellerIncomesLabel.AutoSize = true;
+            Top2SellerIncomesLabel.Location = new Point(104, 133);
+            Top2SellerIncomesLabel.Name = "Top2SellerIncomesLabel";
+            Top2SellerIncomesLabel.Size = new Size(49, 15);
+            Top2SellerIncomesLabel.TabIndex = 5;
+            Top2SellerIncomesLabel.Text = "$459000";
+            Top2SellerIncomesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // Top2SellerSalesLabel
+            // 
+            Top2SellerSalesLabel.Anchor = AnchorStyles.Top;
+            Top2SellerSalesLabel.AutoSize = true;
+            Top2SellerSalesLabel.Location = new Point(104, 105);
+            Top2SellerSalesLabel.Name = "Top2SellerSalesLabel";
+            Top2SellerSalesLabel.Size = new Size(25, 15);
+            Top2SellerSalesLabel.TabIndex = 4;
+            Top2SellerSalesLabel.Text = "149";
+            Top2SellerSalesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.Top;
+            label11.AutoSize = true;
+            label11.Location = new Point(3, 133);
+            label11.Name = "label11";
+            label11.Size = new Size(92, 15);
+            label11.TabIndex = 3;
+            label11.Text = "Ingresos totales:";
+            label11.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.Top;
+            label12.AutoSize = true;
+            label12.Location = new Point(3, 105);
+            label12.Name = "label12";
+            label12.Size = new Size(95, 15);
+            label12.TabIndex = 2;
+            label12.Text = "Cantidad ventas:";
+            label12.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // Top2SellerNameLabel
+            // 
+            Top2SellerNameLabel.Anchor = AnchorStyles.Top;
+            Top2SellerNameLabel.AutoSize = true;
+            Top2SellerNameLabel.Location = new Point(27, 42);
+            Top2SellerNameLabel.Name = "Top2SellerNameLabel";
+            Top2SellerNameLabel.Size = new Size(104, 15);
+            Top2SellerNameLabel.TabIndex = 1;
+            Top2SellerNameLabel.Text = "Nombre vendedor";
+            Top2SellerNameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            label14.Anchor = AnchorStyles.Top;
+            label14.AutoSize = true;
+            label14.Location = new Point(61, 15);
+            label14.Name = "label14";
+            label14.Size = new Size(37, 15);
+            label14.TabIndex = 0;
+            label14.Text = "TOP 2";
+            // 
+            // Top1SellerPanel
+            // 
+            Top1SellerPanel.Anchor = AnchorStyles.Top;
+            Top1SellerPanel.Controls.Add(Top1SellerIncomesLabel);
+            Top1SellerPanel.Controls.Add(Top1SellerSalesLabel);
+            Top1SellerPanel.Controls.Add(label8);
+            Top1SellerPanel.Controls.Add(label7);
+            Top1SellerPanel.Controls.Add(Top1SellerNameLabel);
+            Top1SellerPanel.Controls.Add(label6);
+            Top1SellerPanel.Location = new Point(106, 21);
+            Top1SellerPanel.Name = "Top1SellerPanel";
+            Top1SellerPanel.Size = new Size(154, 195);
+            Top1SellerPanel.TabIndex = 0;
+            // 
+            // Top1SelletIncomesLabel
+            // 
+            Top1SellerIncomesLabel.Anchor = AnchorStyles.Top;
+            Top1SellerIncomesLabel.AutoSize = true;
+            Top1SellerIncomesLabel.Location = new Point(103, 133);
+            Top1SellerIncomesLabel.Name = "Top1SelletIncomesLabel";
+            Top1SellerIncomesLabel.Size = new Size(49, 15);
+            Top1SellerIncomesLabel.TabIndex = 5;
+            Top1SellerIncomesLabel.Text = "$459000";
+            Top1SellerIncomesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // Top1SellerSalesLabel
+            // 
+            Top1SellerSalesLabel.Anchor = AnchorStyles.Top;
+            Top1SellerSalesLabel.AutoSize = true;
+            Top1SellerSalesLabel.Location = new Point(103, 105);
+            Top1SellerSalesLabel.Name = "Top1SellerSalesLabel";
+            Top1SellerSalesLabel.Size = new Size(25, 15);
+            Top1SellerSalesLabel.TabIndex = 4;
+            Top1SellerSalesLabel.Text = "149";
+            Top1SellerSalesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Top;
+            label8.AutoSize = true;
+            label8.Location = new Point(2, 133);
+            label8.Name = "label8";
+            label8.Size = new Size(92, 15);
+            label8.TabIndex = 3;
+            label8.Text = "Ingresos totales:";
+            label8.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top;
+            label7.AutoSize = true;
+            label7.Location = new Point(2, 105);
+            label7.Name = "label7";
+            label7.Size = new Size(95, 15);
+            label7.TabIndex = 2;
+            label7.Text = "Cantidad ventas:";
+            label7.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // Top1SellerNameLabel
+            // 
+            Top1SellerNameLabel.Anchor = AnchorStyles.Top;
+            Top1SellerNameLabel.AutoSize = true;
+            Top1SellerNameLabel.Location = new Point(26, 42);
+            Top1SellerNameLabel.Name = "Top1SellerNameLabel";
+            Top1SellerNameLabel.Size = new Size(104, 15);
+            Top1SellerNameLabel.TabIndex = 1;
+            Top1SellerNameLabel.Text = "Nombre vendedor";
+            Top1SellerNameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Top;
+            label6.AutoSize = true;
+            label6.Location = new Point(60, 15);
+            label6.Name = "label6";
+            label6.Size = new Size(37, 15);
+            label6.TabIndex = 0;
+            label6.Text = "TOP 1";
             // 
             // label4
             // 
@@ -234,10 +499,18 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 749);
             Controls.Add(AutoscrollPanel);
+            MinimumSize = new Size(800, 480);
             Name = "DashboardView";
             Text = "DashboardView";
             AutoscrollPanel.ResumeLayout(false);
             AutoscrollPanel.PerformLayout();
+            TopSellersPanel.ResumeLayout(false);
+            Top3SellerPanel.ResumeLayout(false);
+            Top3SellerPanel.PerformLayout();
+            Top2SellerPanel.ResumeLayout(false);
+            Top2SellerPanel.PerformLayout();
+            Top1SellerPanel.ResumeLayout(false);
+            Top1SellerPanel.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -260,7 +533,28 @@
         private Panel SalesGraphPanel;
         private Panel panel3;
         private Label label5;
-        private Panel panel1;
+        private Panel TopSellersPanel;
         private Label label4;
+        private Panel Top1SellerPanel;
+        private Label Top1SellerNameLabel;
+        private Label label6;
+        private Label Top1SellerIncomesLabel;
+        private Label Top1SellerSalesLabel;
+        private Label label8;
+        private Label label7;
+        private Panel Top3SellerPanel;
+        private Label Top3SellerIncomesLabel;
+        private Label Top3SellerSalesLabel;
+        private Label label17;
+        private Label label18;
+        private Label Top3SellerNameLabel;
+        private Label label20;
+        private Panel Top2SellerPanel;
+        private Label Top2SellerIncomesLabel;
+        private Label Top2SellerSalesLabel;
+        private Label label11;
+        private Label label12;
+        private Label Top2SellerNameLabel;
+        private Label label14;
     }
 }

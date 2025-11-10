@@ -51,7 +51,7 @@ namespace VentasApp.Presenters
              */
 
             DashboardView dashboardView = new DashboardView();
-            new DashboardPresenter(dashboardView, new SaleRepository());
+            new DashboardPresenter(dashboardView, new SaleRepository(), new UserRepository());
             view.LoadMainPanelView(dashboardView);
         }
 

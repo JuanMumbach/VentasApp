@@ -21,6 +21,7 @@ namespace VentasApp.Repositories
         void CancelSale(int id);
         void RestoreSale(int id);
         IEnumerable<SalesDataPoint> GetSalesGroupedByDate(DateTime start, DateTime end, int intervalDays);
+        IEnumerable<TopSellerDTO> GetTopSellers(DateTime start, DateTime end);
     }
     public class SaleRepository : ISaleRepository
     {
@@ -168,6 +169,28 @@ namespace VentasApp.Repositories
             {
                 context.Sales.Update(sale);
                 context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<TopSellerDTO> GetTopSellers(DateTime start, DateTime end)
+        {
+            using (var context = new VentasDBContext())
+            {
+                return context.Sales
+                    .Where(sale => sale.CreatedAt >= start && sale.CreatedAt <= end && sale.CanceledAt == null)
+                    .GroupBy(sale => sale.UserId)
+                    .Select(group => new TopSellerDTO
+                    {
+                        SellerId = group.Key.Value,
+                        SellerName = context.Users
+                            .Where(user => user.Id == group.Key)
+                            .Select(user => user.FullName)
+                            .FirstOrDefault(),
+                        TotalValue = group.Sum(sale => sale.TotalPrice),
+                        TotalSales = group.Count()
+                    })
+                    .OrderByDescending(metric => metric.TotalValue)
+                    .ToList();
             }
         }
     }
