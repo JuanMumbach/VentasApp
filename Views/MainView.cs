@@ -25,6 +25,7 @@ namespace VentasApp.Views
         public event EventHandler MainViewClosedEvent;
         public event EventHandler listSalesButtonEvent;
         public event EventHandler DashboardButtonEvent;
+        static bool HideDisabledMenuButtons = false;
 
         public MainView()
         {
@@ -62,6 +63,29 @@ namespace VentasApp.Views
                     button.FlatAppearance.BorderColor = Themes.SidebarButtonColor;
                     button.FlatAppearance.MouseOverBackColor = ButtonMouseOverColor;
                     button.FlatAppearance.MouseDownBackColor = ButtonMouseDownColor;
+
+
+                    /* Cambia el color si el boton esta desactivado */
+                    if (!button.Enabled)
+                    {
+                        Color newBackColor = button.BackColor;
+                        Color newForeColor = button.ForeColor;
+
+                        newBackColor = Color.FromArgb(
+                            Math.Clamp(newBackColor.R - 60, 0, 255),
+                            Math.Clamp(newBackColor.G - 60, 0, 255),
+                            Math.Clamp(newBackColor.B - 60, 0, 255)
+                        );
+
+                        newForeColor = Color.FromArgb(
+                            Math.Clamp(newForeColor.R - 60, 0, 255),
+                            Math.Clamp(newForeColor.G - 60, 0, 255),
+                            Math.Clamp(newForeColor.B - 60, 0, 255)
+                        );
+
+                        button.BackColor = newBackColor;
+                        button.ForeColor = newForeColor;
+                    }
                 }
             }
 
@@ -95,25 +119,32 @@ namespace VentasApp.Views
             switch (buttonName)
             {
                 case "Dashboard":
-                    DashboardButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) DashboardButton.Visible = isVisible;
+                    DashboardButton.Enabled = isVisible;
                     break;
                 case "Products":
-                    ProductsButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) ProductsButton.Visible = isVisible;
+                    ProductsButton.Enabled = isVisible;
                     break;
                 case "Sell":
-                    SellButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) SellButton.Visible = isVisible;
+                    SellButton.Enabled = isVisible;
                     break;
                 case "Users":
-                    UsersViewButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) UsersViewButton.Visible = isVisible;
+                    UsersViewButton.Enabled = isVisible;
                     break;
                 case "Customers":
-                    CustomersButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) CustomersButton.Visible = isVisible;
+                    CustomersButton.Enabled = isVisible;
                     break;
                 case "Suppliers":
-                    SuppliersButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) SuppliersButton.Visible = isVisible;
+                    SuppliersButton.Enabled = isVisible;
                     break;
                 case "Sales":
-                    ListSalesButton.Visible = isVisible;
+                    if (HideDisabledMenuButtons) ListSalesButton.Visible = isVisible;
+                    ListSalesButton.Enabled = isVisible;
                     break;
                 default:
                     throw new ArgumentException($"Button with name {buttonName} does not exist.");

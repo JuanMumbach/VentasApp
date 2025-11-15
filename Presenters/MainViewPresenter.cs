@@ -65,8 +65,7 @@ namespace VentasApp.Presenters
             { view.SetMenuButtonVisibility("Dashboard", true); }
             else { view.SetMenuButtonVisibility("Dashboard", false); }
 
-            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate) ||
-                HasPermission((Roles)SessionManager.CurrentUserRoleId,Permissions.SalesManage))
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesCreate))
             { view.SetMenuButtonVisibility("Sell", true); }
             else { view.SetMenuButtonVisibility("Sell", false); }
 

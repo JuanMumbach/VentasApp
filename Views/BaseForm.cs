@@ -96,6 +96,28 @@ namespace VentasApp.Views
                     button.FlatAppearance.BorderColor = Themes.MainViewButtonColor;
                     button.FlatAppearance.MouseOverBackColor = ButtonMouseOverColor;
                     button.FlatAppearance.MouseDownBackColor = ButtonMouseDownColor;
+
+                    /* Cambia el color si el boton esta desactivado */
+                    if (!button.Enabled)
+                    {
+                        Color newBackColor = button.BackColor;
+                        Color newForeColor = button.ForeColor;
+
+                        newBackColor = Color.FromArgb(
+                            Math.Clamp(newBackColor.R - 60, 0, 255),
+                            Math.Clamp(newBackColor.G - 60, 0, 255),
+                            Math.Clamp(newBackColor.B - 60, 0, 255)
+                        );
+
+                        newForeColor = Color.FromArgb(
+                            Math.Clamp(newForeColor.R - 60, 0, 255),
+                            Math.Clamp(newForeColor.G - 60, 0, 255),
+                            Math.Clamp(newForeColor.B - 60, 0, 255)
+                        );
+
+                        button.BackColor = newBackColor;
+                        button.ForeColor = newForeColor;
+                    }
                 }
                 
                 if (control is Panel panel)
