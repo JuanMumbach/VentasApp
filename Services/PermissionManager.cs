@@ -12,12 +12,10 @@ namespace VentasApp.Services
     {
         public enum Roles
         {
-            SysAdmin = 1,
+            Admin = 1,
             SalesManager = 2,
             Salesperson = 3,
-            InventoryManager = 4,
-            Accountant = 5,
-            ExecutiveViewer = 6
+            Inventory = 4
         }
 
         public enum Permissions
@@ -34,9 +32,9 @@ namespace VentasApp.Services
             UsersView = 10,
             UsersManage = 11,
             DashboardView = 12,
-            AccountableView = 13,
-            SystemView = 14,
-            SystemManage = 15
+            SystemView = 13,
+            SystemManage = 14,
+            SystemBackup = 15
         }
 
         public static bool HasPermission(Roles _role, Permissions permission)
