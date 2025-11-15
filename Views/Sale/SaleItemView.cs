@@ -17,6 +17,8 @@ namespace VentasApp.Views.Sale
         event EventHandler EditItemEvent;
         event EventHandler CancelEvent;
         event EventHandler SearchProductEvent;
+        event EventHandler OnAmountChangedEvent;
+        event EventHandler OnSelectedProductChangedEvent;
         int Amount { get; set; }
         string searchValue { get; set; }
         void ShowDialogView();
@@ -25,6 +27,8 @@ namespace VentasApp.Views.Sale
         int? GetSelectedProductId();
         void SetSelectedProduct(int productId);
         void SetProductosListBindingSource(BindingSource source);
+
+        void ClearSelectedProduct();
     }
     public partial class SaleItemView : BaseForm, ISaleItemView
     {
@@ -32,6 +36,8 @@ namespace VentasApp.Views.Sale
         public event EventHandler CancelEvent;
         public event EventHandler SearchProductEvent;
         public event EventHandler EditItemEvent;
+        public event EventHandler OnAmountChangedEvent;
+        public event EventHandler OnSelectedProductChangedEvent;
 
         public int Amount
         {
@@ -64,6 +70,16 @@ namespace VentasApp.Views.Sale
                 if (e.KeyCode == Keys.Enter)
                     SearchProductEvent?.Invoke(this, EventArgs.Empty);
             };
+            
+            AmountTextbox.TextChanged += (s, e) =>
+            {
+                OnAmountChangedEvent?.Invoke(this, EventArgs.Empty);
+            };
+
+            dataGridView1.SelectionChanged += (s, e) =>
+            {
+                OnSelectedProductChangedEvent?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         public void SetEditMode(string productName)
@@ -80,6 +96,11 @@ namespace VentasApp.Views.Sale
 
         }
 
+        public void ClearSelectedProduct()
+        {
+            dataGridView1.ClearSelection();
+            
+        }
 
         public void ShowDialogView()
         {

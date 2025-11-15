@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,8 @@ namespace VentasApp.Presenters
             this.view.SetProductosListBindingSource(productsBindingSource);
             this.view.CancelEvent += OnCancel;
             this.view.SearchProductEvent += SearchProduct;
-
+            this.view.OnAmountChangedEvent += CompareAmountWithStock;
+            this.view.OnSelectedProductChangedEvent += CompareAmountWithStock;
 
             this.view.AddItemEvent += OnAddItem;
             LoadAllProductsList();
@@ -53,6 +55,8 @@ namespace VentasApp.Presenters
             this.view.SetProductosListBindingSource(productsBindingSource);
             this.view.CancelEvent += OnCancel;
             this.view.SearchProductEvent += SearchProduct;
+            this.view.OnAmountChangedEvent += CompareAmountWithStock;
+            this.view.OnSelectedProductChangedEvent += CompareAmountWithStock;
 
             this.view.EditItemEvent += OnEditItem;
             LoadAllProductsList();
@@ -63,6 +67,39 @@ namespace VentasApp.Presenters
             this.view.EditItemEvent += OnEditItem;
             LoadProduct();*/
         }
+
+        private void CompareAmountWithStock(object? sender, EventArgs e)
+        {
+            if (view.GetSelectedProductId() == null) return;
+            
+            ProductModel selectedProduct = productRepository.GetProductById((int)view.GetSelectedProductId());
+
+            if (selectedProduct == null) return;
+            
+            if (selectedProduct.Stock <= 0)
+            {
+                //this.view.ClearSelectedProduct();
+                this.view.SetSelectedProduct(-1);
+                MessageBox.Show("El producto seleccionado no tiene stock disponible.",
+                                "Sin stock",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (view.Amount <= 0)
+            {
+                view.Amount = 1;
+                return;
+            }
+
+            if (view.Amount > selectedProduct.Stock)
+            {
+                view.Amount = (int)selectedProduct.Stock;
+                return;
+            }
+        }
+
         private void SearchProduct(object? sender, EventArgs e)
         {
             LoadAllProductsList();
@@ -98,6 +135,15 @@ namespace VentasApp.Presenters
             if (view.Amount <= 0)
             {
                 MessageBox.Show("La cantidad debe ser un número positivo.",
+                                "Error de cantidad",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (view.Amount > selectedProduct.Stock)
+            {
+                MessageBox.Show("La cantidad seleccionada es mayor al stock disponible",
                                 "Error de cantidad",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
@@ -221,16 +267,33 @@ namespace VentasApp.Presenters
                 }
             }
 
+            
+
             var displayList = productsList.Select(p => new
             {
                 p.Id,
                 Name = p.Name,
                 p.Price,
-                p.Stock,
+                Stock = (int)p.Stock,
                 Category = p.Category.CategoryName
             }).ToList();
+            
+            if (sale != null)
+            {
+                displayList = productsList.Select(p => new
+                {
+                    p.Id,
+                    Name = p.Name,
+                    p.Price,
+                    Stock = (int)p.Stock - (sale?.SaleItems.Where(si => si.ProductId == p.Id).Sum(si => si.Amount) ?? 0),
+                    Category = p.Category.CategoryName
+                }).ToList();
+            }
 
-            productsBindingSource.DataSource = displayList;
+
+
+
+                productsBindingSource.DataSource = displayList;
         }
     }
 }
