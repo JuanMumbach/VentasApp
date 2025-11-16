@@ -93,7 +93,7 @@ namespace VentasApp.Presenters
 
             var result = MessageBox.Show(
                 "¿Está seguro de que desea iniciar una copia de seguridad de la base de datos?\n" +
-                "El proceso puede tardar unos momentos y requiere que 'mysqldump.exe' esté accesible.",
+                "El proceso puede demorar varios minutos.",
                 "Confirmar Backup",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);

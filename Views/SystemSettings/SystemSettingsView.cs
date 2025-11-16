@@ -36,6 +36,8 @@ namespace VentasApp.Views.SystemSettings
             DisclaimerLabel.ForeColor = Themes.WarningButtonBackground;
             RestoreBackupButton.BackColor = Themes.WarningButtonBackground;
             RestoreBackupButton.ForeColor = Themes.WarningButtonTextColor;
+            PerformBackupButton.BackColor = Themes.MainViewButtonColor;
+            PerformBackupButton.ForeColor = Themes.MainViewButtonTextColor;
 
             var buttons = new List<Button>
             {
