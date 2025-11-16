@@ -28,6 +28,8 @@ namespace VentasApp.Presenters
             this.view.RestoreSaleEvent += OnRestoreSale;
             this.view.CancelSaleEvent += OnCancelSale;
             this.view.ViewSaleDetailEvent += OnViewSaleDetail;
+            this.view.OnChangeSelectedSaleEvent += ChangeSelectedDeliveryState;
+            this.view.OnChangeDeliveryStateEvent += UpdateSaleDeliveryState;
 
             this.view.FormLoadEvent += CheckForPermission;
 
@@ -36,6 +38,48 @@ namespace VentasApp.Presenters
             //LoadAllSales(this, EventArgs.Empty);
         }
 
+        private void UpdateSaleDeliveryState(object? sender, EventArgs e)
+        {
+            if (view.GetSelectedSaleId() == null) return;
+
+            int selectedSaleId = (int)view.GetSelectedSaleId();
+            SaleModel sale = saleRepository.GetSaleById(selectedSaleId);
+
+            if (sale == null) return;
+
+            if (sale.DeliveryState == this.view.DeliveryState) return;
+
+            if (MessageBox.Show("¿Está seguro de que desea actualizar el estado de la entrega?\n" +
+                        $"Estado actual: {sale.DeliveryState}\n" +
+                        $"Nuevo estado: {this.view.DeliveryState}",
+                        "Confirmar Actualización",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+            {
+                ChangeSelectedDeliveryState(this, EventArgs.Empty);
+                return; 
+            }
+
+            sale.DeliveryState = this.view.DeliveryState;
+            saleRepository.UpdateSale(sale);
+            LoadAllSales(this,EventArgs.Empty);
+        }
+
+        private void ChangeSelectedDeliveryState(object? sender, EventArgs e)
+        {
+            if (view.GetSelectedSaleId() == null) return;
+
+            int selectedSaleId = (int)view.GetSelectedSaleId();
+            SaleModel sale = saleRepository.GetSaleById(selectedSaleId);
+
+            if (sale == null) return;
+
+            this.view.DeliveryState = sale.DeliveryState;
+        }
+
+        
+
         private void CheckForPermission(object? sender, EventArgs e)
         {
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage))
@@ -43,6 +87,7 @@ namespace VentasApp.Presenters
                 showOnlyUserSales = false;
                 AccessGranted = true;
                 LoadAllSales(this, EventArgs.Empty);
+                LoadDeliveryStates();
                 return;
             }
 
@@ -62,6 +107,7 @@ namespace VentasApp.Presenters
                 showOnlyUserSales = true;
                 AccessGranted = true;
                 LoadAllSales(this, EventArgs.Empty);
+                LoadDeliveryStates();
                 return;
             }
 
@@ -99,6 +145,13 @@ namespace VentasApp.Presenters
             }).ToList();
 
             salesBindingSource.DataSource = displayList;
+        }
+
+        void LoadDeliveryStates()
+        {
+            var states = saleRepository.GetDeliveryStates();
+
+            this.view.SetDeliveryStateOptions(states);
         }
 
         private void OnViewSaleDetail(object? sender, EventArgs e)

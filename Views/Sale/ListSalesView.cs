@@ -19,14 +19,31 @@ namespace VentasApp.Views.Sale
         public event EventHandler RestoreSaleEvent;
         public event EventHandler CancelSaleEvent;
         public event EventHandler ViewSaleDetailEvent;
+        public event EventHandler OnChangeSelectedSaleEvent;
+        public event EventHandler OnChangeDeliveryStateEvent;
 
         public ListSalesView()
         {
             InitializeComponent();
             SetupEventHandlers();
 
-            // Llama a cargar las ventas al iniciar la vista
             this.Load += delegate { LoadAllSalesEvent?.Invoke(this, EventArgs.Empty); };
+        }
+
+        public string DeliveryState { 
+            get 
+            {
+                if (DeliveryStateCombobox.SelectedItem != null)
+                {
+                    return DeliveryStateCombobox.SelectedItem.ToString();
+                }
+                return null;
+            }
+
+            set             
+            {
+                DeliveryStateCombobox.SelectedItem = value;
+            }
         }
 
         private void SetupEventHandlers()
@@ -34,6 +51,8 @@ namespace VentasApp.Views.Sale
             RestoreButton.Click += delegate { RestoreSaleEvent?.Invoke(this, EventArgs.Empty); };
             CancelSaleButton.Click += delegate { CancelSaleEvent?.Invoke(this, EventArgs.Empty); };
             ViewDetailButton.Click += delegate { ViewSaleDetailEvent?.Invoke(this, EventArgs.Empty); };
+            SalesDataGridView.SelectionChanged += delegate { OnChangeSelectedSaleEvent?.Invoke(this, EventArgs.Empty); };
+            DeliveryStateCombobox.SelectedIndexChanged += delegate { OnChangeDeliveryStateEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public BindingSource SaleListBindingSource
@@ -41,7 +60,6 @@ namespace VentasApp.Views.Sale
             set
             {
                 SalesDataGridView.DataSource = value;
-                // Configuración opcional de columnas aquí
             }
         }
 
@@ -49,7 +67,6 @@ namespace VentasApp.Views.Sale
         {
             if (SalesDataGridView.CurrentRow != null)
             {
-                // Asumiendo que la columna de ID se llama "Id"
                 return (int)SalesDataGridView.CurrentRow.Cells["Id"].Value;
             }
             return null;
@@ -60,10 +77,6 @@ namespace VentasApp.Views.Sale
             MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
         }
 
-        protected override void CustomTheme()
-        {
-            // Puedes aplicar tu tema aquí si es necesario
-        }
 
         public void CloseView()
         {
@@ -76,7 +89,20 @@ namespace VentasApp.Views.Sale
             CancelSaleButton.Visible = false;
             RestoreButton.Enabled = false;
             RestoreButton.Visible = false;
+            DeliveryStateLabel.Enabled = false;
+            DeliveryStateLabel.Visible = false;
+            DeliveryStateCombobox.Enabled = false;
+            DeliveryStateCombobox.Visible = false;
 
+        }
+
+        public void SetDeliveryStateOptions(List<string> states)
+        {
+            DeliveryStateCombobox.Items.Clear();
+            foreach (var state in states)
+            {
+                DeliveryStateCombobox.Items.Add(state);
+            }
         }
     }
 }

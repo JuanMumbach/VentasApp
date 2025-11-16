@@ -13,11 +13,15 @@ namespace VentasApp.Views.Sale
 
         event EventHandler CancelSaleEvent;
         event EventHandler ViewSaleDetailEvent;
+        event EventHandler OnChangeSelectedSaleEvent;
+        event EventHandler OnChangeDeliveryStateEvent;
 
+        string DeliveryState { get; set; }
         int? GetSelectedSaleId();
 
         void ShowMessage(string message, string title, MessageBoxIcon icon);
 
         void SetViewOnlyMode();
+        void SetDeliveryStateOptions(List<string> states);
     }
 }

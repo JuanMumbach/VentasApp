@@ -182,6 +182,7 @@ namespace VentasApp.Presenters
                             "Éxito",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
+            LoadAllProductsList();
         }
 
         private void OnEditItem(object? sender, EventArgs e)

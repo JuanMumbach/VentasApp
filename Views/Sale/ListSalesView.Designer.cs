@@ -37,6 +37,8 @@ namespace VentasApp.Views.Sale
             CancelSaleButton = new Button();
             ViewDetailButton = new Button();
             TitleLabel = new Label();
+            DeliveryStateLabel = new Label();
+            DeliveryStateCombobox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)SalesDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -95,11 +97,33 @@ namespace VentasApp.Views.Sale
             TitleLabel.TabIndex = 3;
             TitleLabel.Text = "Historial de Ventas";
             // 
+            // DeliveryStateLabel
+            // 
+            DeliveryStateLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            DeliveryStateLabel.AutoSize = true;
+            DeliveryStateLabel.Location = new Point(561, 419);
+            DeliveryStateLabel.Name = "DeliveryStateLabel";
+            DeliveryStateLabel.Size = new Size(104, 15);
+            DeliveryStateLabel.TabIndex = 4;
+            DeliveryStateLabel.Text = "Estado de entrega:";
+            DeliveryStateLabel.TextAlign = ContentAlignment.TopRight;
+            // 
+            // DeliveryStateCombobox
+            // 
+            DeliveryStateCombobox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            DeliveryStateCombobox.FormattingEnabled = true;
+            DeliveryStateCombobox.Location = new Point(667, 416);
+            DeliveryStateCombobox.Name = "DeliveryStateCombobox";
+            DeliveryStateCombobox.Size = new Size(121, 23);
+            DeliveryStateCombobox.TabIndex = 5;
+            // 
             // ListSalesView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(DeliveryStateCombobox);
+            Controls.Add(DeliveryStateLabel);
             Controls.Add(ViewDetailButton);
             Controls.Add(TitleLabel);
             Controls.Add(CancelSaleButton);
@@ -119,5 +143,7 @@ namespace VentasApp.Views.Sale
         private Button CancelSaleButton;
         private Label TitleLabel;
         private Button ViewDetailButton;
+        private Label DeliveryStateLabel;
+        private ComboBox DeliveryStateCombobox;
     }
 }

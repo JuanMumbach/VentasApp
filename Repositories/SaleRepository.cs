@@ -24,6 +24,7 @@ namespace VentasApp.Repositories
         IEnumerable<TopSellerDTO> GetTopSellers(DateTime start, DateTime end);
         List<TopCategoriesDTO> GetTopCategories(DateTime start, DateTime end);
         List<TopProductsDTO> GetTopProducts(DateTime start, DateTime end);
+        List<string> GetDeliveryStates();
     }
     public class SaleRepository : ISaleRepository
     {
@@ -231,6 +232,20 @@ namespace VentasApp.Repositories
                     .Take(5)
                     .ToList();
             }
+        }
+
+        public List<string> GetDeliveryStates()
+        {
+            var states = new List<string>
+            {
+                "pendiente",
+                "confirmado",
+                "en proceso",
+                "en camino",
+                "finalizado",
+                "cancelado"
+            };
+            return states;
         }
     }
 }
