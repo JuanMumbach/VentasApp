@@ -25,6 +25,7 @@ namespace VentasApp.Views
         public event EventHandler MainViewClosedEvent;
         public event EventHandler listSalesButtonEvent;
         public event EventHandler DashboardButtonEvent;
+        public event EventHandler SystemSettingsButtonEvent;
         static bool HideDisabledMenuButtons = false;
 
         public MainView()
@@ -112,6 +113,7 @@ namespace VentasApp.Views
             SuppliersButton.Click += delegate { LoadSuppliersView(); };
             ListSalesButton.Click += delegate { listSalesButtonEvent?.Invoke(this, EventArgs.Empty); };
             DashboardButton.Click += delegate { DashboardButtonEvent?.Invoke(this, EventArgs.Empty); };
+            SystemSettingsViewButton.Click += delegate { SystemSettingsButtonEvent?.Invoke(this, EventArgs.Empty); };
         }
 
         public void SetMenuButtonVisibility(string buttonName, bool isVisible)
@@ -145,6 +147,10 @@ namespace VentasApp.Views
                 case "Sales":
                     if (HideDisabledMenuButtons) ListSalesButton.Visible = isVisible;
                     ListSalesButton.Enabled = isVisible;
+                    break;
+                case "SystemSettings":
+                    if (HideDisabledMenuButtons) SystemSettingsViewButton.Visible = isVisible;
+                    SystemSettingsViewButton.Enabled = isVisible;
                     break;
                 default:
                     throw new ArgumentException($"Button with name {buttonName} does not exist.");

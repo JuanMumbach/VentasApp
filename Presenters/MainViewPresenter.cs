@@ -9,6 +9,7 @@ using VentasApp.Views;
 using VentasApp.Views.Customer;
 using VentasApp.Views.Dashboard;
 using VentasApp.Views.Sale;
+using VentasApp.Views.SystemSettings;
 using VentasApp.Views.User;
 using static VentasApp.Services.PermissionManager;
 
@@ -20,7 +21,7 @@ namespace VentasApp.Presenters
         ILoginView loginView;
         bool logingOut;
         #if DEBUG
-            bool NotHideMenuButtons = false;
+            bool NotDisableMenuViewButtons = false;
         #endif
 
         public MainViewPresenter(IMainView mainView, ILoginView loginView)
@@ -40,6 +41,14 @@ namespace VentasApp.Presenters
             this.view.MainViewClosedEvent += MainViewClosed;
             this.view.listSalesButtonEvent += LoadListSalesView;
             this.view.DashboardButtonEvent += LoadDashboardView;
+            this.view.SystemSettingsButtonEvent += LoadSystemSettingsView;
+        }
+
+        private void LoadSystemSettingsView(object? sender, EventArgs e)
+        {
+            SystemSettingsView systemSettingsView = new SystemSettingsView();
+            new SystemSettingsPresenter(systemSettingsView);
+            view.LoadMainPanelView(systemSettingsView);
         }
 
         private void LoadDashboardView(object? sender, EventArgs e)
@@ -58,7 +67,7 @@ namespace VentasApp.Presenters
         private void SetMenuButtonsVisibility()
         {
 #if DEBUG
-            if (NotHideMenuButtons)return;
+            if (NotDisableMenuViewButtons)return;
 #endif
             if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesManage) ||
                 HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SalesViewAll))
@@ -94,6 +103,11 @@ namespace VentasApp.Presenters
                 HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.UsersView))
             { view.SetMenuButtonVisibility("Users", true); }
             else { view.SetMenuButtonVisibility("Users", false); }
+
+            if (HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SystemView) ||
+                HasPermission((Roles)SessionManager.CurrentUserRoleId, Permissions.SystemManage))
+            { view.SetMenuButtonVisibility("SystemSettings", true); }
+            else { view.SetMenuButtonVisibility("SystemSettings", false); }
         }
 
         private void MainViewClosed(object? sender, EventArgs e)

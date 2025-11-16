@@ -44,6 +44,7 @@
             CustomersButton = new Button();
             SuppliersButton = new Button();
             UsersViewButton = new Button();
+            SystemSettingsViewButton = new Button();
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainPanelLogoPicturebox).BeginInit();
             SidePanel.SuspendLayout();
@@ -62,7 +63,7 @@
             MainPanel.Location = new Point(198, 0);
             MainPanel.Margin = new Padding(3, 2, 3, 2);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(695, 444);
+            MainPanel.Size = new Size(695, 507);
             MainPanel.TabIndex = 99;
             MainPanel.Paint += MainPanel_Paint;
             // 
@@ -70,7 +71,7 @@
             // 
             MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
             MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
-            MainPanelLogoPicturebox.Location = new Point(282, 37);
+            MainPanelLogoPicturebox.Location = new Point(282, 68);
             MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
             MainPanelLogoPicturebox.Size = new Size(180, 180);
             MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -82,7 +83,7 @@
             WelcomeLabel.Anchor = AnchorStyles.None;
             WelcomeLabel.Font = new Font("Microsoft JhengHei", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             WelcomeLabel.ForeColor = SystemColors.HotTrack;
-            WelcomeLabel.Location = new Point(139, 231);
+            WelcomeLabel.Location = new Point(139, 262);
             WelcomeLabel.Name = "WelcomeLabel";
             WelcomeLabel.Size = new Size(478, 50);
             WelcomeLabel.TabIndex = 0;
@@ -97,7 +98,7 @@
             SidePanel.Dock = DockStyle.Left;
             SidePanel.Location = new Point(0, 0);
             SidePanel.Name = "SidePanel";
-            SidePanel.Size = new Size(200, 444);
+            SidePanel.Size = new Size(200, 507);
             SidePanel.TabIndex = 2;
             // 
             // panel2
@@ -105,7 +106,7 @@
             panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(LogoutButton);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 399);
+            panel2.Location = new Point(0, 462);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(5);
             panel2.Size = new Size(200, 45);
@@ -144,13 +145,14 @@
             SideLayoutPanel.Controls.Add(CustomersButton);
             SideLayoutPanel.Controls.Add(SuppliersButton);
             SideLayoutPanel.Controls.Add(UsersViewButton);
+            SideLayoutPanel.Controls.Add(SystemSettingsViewButton);
             SideLayoutPanel.Dock = DockStyle.Top;
             SideLayoutPanel.FlowDirection = FlowDirection.TopDown;
             SideLayoutPanel.Location = new Point(0, 0);
             SideLayoutPanel.Margin = new Padding(0);
             SideLayoutPanel.Name = "SideLayoutPanel";
             SideLayoutPanel.Padding = new Padding(5);
-            SideLayoutPanel.Size = new Size(200, 399);
+            SideLayoutPanel.Size = new Size(200, 420);
             SideLayoutPanel.TabIndex = 99;
             // 
             // PanelLogo
@@ -294,12 +296,29 @@
             UsersViewButton.TextAlign = ContentAlignment.MiddleLeft;
             UsersViewButton.UseVisualStyleBackColor = false;
             // 
+            // SystemSettingsViewButton
+            // 
+            SystemSettingsViewButton.BackColor = SystemColors.InactiveBorder;
+            SystemSettingsViewButton.Dock = DockStyle.Left;
+            SystemSettingsViewButton.FlatAppearance.BorderSize = 0;
+            SystemSettingsViewButton.FlatStyle = FlatStyle.Flat;
+            SystemSettingsViewButton.Font = new Font("Microsoft JhengHei", 12F);
+            SystemSettingsViewButton.ForeColor = SystemColors.GrayText;
+            SystemSettingsViewButton.Location = new Point(5, 361);
+            SystemSettingsViewButton.Margin = new Padding(0, 0, 0, 5);
+            SystemSettingsViewButton.Name = "SystemSettingsViewButton";
+            SystemSettingsViewButton.Size = new Size(190, 30);
+            SystemSettingsViewButton.TabIndex = 106;
+            SystemSettingsViewButton.Text = "Sistema";
+            SystemSettingsViewButton.TextAlign = ContentAlignment.MiddleLeft;
+            SystemSettingsViewButton.UseVisualStyleBackColor = false;
+            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(893, 444);
+            ClientSize = new Size(893, 507);
             Controls.Add(SidePanel);
             Controls.Add(MainPanel);
             Margin = new Padding(3, 2, 3, 2);
@@ -336,5 +355,6 @@
         private Button CustomersButton;
         private Button SuppliersButton;
         private Button UsersViewButton;
+        private Button SystemSettingsViewButton;
     }
 }
