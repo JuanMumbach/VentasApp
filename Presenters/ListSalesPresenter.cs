@@ -220,7 +220,8 @@ namespace VentasApp.Presenters
                 DialogResult dialogResult = MessageBox.Show($"¿Estás seguro de que deseas cancelar la venta #{saleId}?",
                                                             "Confirmar Cancelación",
                                                             MessageBoxButtons.YesNo,
-                                                            MessageBoxIcon.Question);
+                                                            MessageBoxIcon.Question,
+                                                            MessageBoxDefaultButton.Button2);
 
                 if (dialogResult == DialogResult.Yes)
                 {
