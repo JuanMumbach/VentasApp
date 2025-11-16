@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             AutoscrollPanel = new Panel();
+            label9 = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
             TopProductsChartPanel = new Panel();
@@ -84,6 +85,7 @@
             // AutoscrollPanel
             // 
             AutoscrollPanel.AutoScroll = true;
+            AutoscrollPanel.Controls.Add(label9);
             AutoscrollPanel.Controls.Add(panel3);
             AutoscrollPanel.Controls.Add(label5);
             AutoscrollPanel.Controls.Add(TopSellersPanel);
@@ -93,9 +95,20 @@
             AutoscrollPanel.Controls.Add(SalesGraphPanel);
             AutoscrollPanel.Dock = DockStyle.Fill;
             AutoscrollPanel.Location = new Point(0, 0);
+            AutoscrollPanel.MinimumSize = new Size(784, 0);
             AutoscrollPanel.Name = "AutoscrollPanel";
             AutoscrollPanel.Size = new Size(784, 749);
             AutoscrollPanel.TabIndex = 0;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.Location = new Point(30, 21);
+            label9.Name = "label9";
+            label9.Size = new Size(141, 40);
+            label9.TabIndex = 15;
+            label9.Text = "Informes";
             // 
             // panel3
             // 
@@ -104,14 +117,14 @@
             panel3.Controls.Add(panel1);
             panel3.Location = new Point(14, 806);
             panel3.Name = "panel3";
-            panel3.Size = new Size(722, 298);
+            panel3.Size = new Size(737, 298);
             panel3.TabIndex = 13;
             // 
             // panel4
             // 
             panel4.Anchor = AnchorStyles.Top;
             panel4.Controls.Add(TopProductsChartPanel);
-            panel4.Location = new Point(366, 13);
+            panel4.Location = new Point(373, 13);
             panel4.Name = "panel4";
             panel4.Size = new Size(339, 273);
             panel4.TabIndex = 1;
@@ -128,7 +141,7 @@
             // 
             panel1.Anchor = AnchorStyles.Top;
             panel1.Controls.Add(TopCategoriasChartPanel);
-            panel1.Location = new Point(16, 13);
+            panel1.Location = new Point(23, 13);
             panel1.Name = "panel1";
             panel1.Size = new Size(344, 273);
             panel1.TabIndex = 0;
@@ -159,7 +172,7 @@
             TopSellersPanel.Controls.Add(Top1SellerPanel);
             TopSellersPanel.Location = new Point(12, 490);
             TopSellersPanel.Name = "TopSellersPanel";
-            TopSellersPanel.Size = new Size(722, 236);
+            TopSellersPanel.Size = new Size(739, 236);
             TopSellersPanel.TabIndex = 10;
             // 
             // Top3SellerPanel
@@ -171,7 +184,7 @@
             Top3SellerPanel.Controls.Add(label18);
             Top3SellerPanel.Controls.Add(Top3SellerNameLabel);
             Top3SellerPanel.Controls.Add(label20);
-            Top3SellerPanel.Location = new Point(465, 21);
+            Top3SellerPanel.Location = new Point(473, 21);
             Top3SellerPanel.Name = "Top3SellerPanel";
             Top3SellerPanel.Size = new Size(160, 195);
             Top3SellerPanel.TabIndex = 7;
@@ -250,7 +263,7 @@
             Top2SellerPanel.Controls.Add(label12);
             Top2SellerPanel.Controls.Add(Top2SellerNameLabel);
             Top2SellerPanel.Controls.Add(label14);
-            Top2SellerPanel.Location = new Point(286, 21);
+            Top2SellerPanel.Location = new Point(294, 21);
             Top2SellerPanel.Name = "Top2SellerPanel";
             Top2SellerPanel.Size = new Size(156, 195);
             Top2SellerPanel.TabIndex = 6;
@@ -329,7 +342,7 @@
             Top1SellerPanel.Controls.Add(label7);
             Top1SellerPanel.Controls.Add(Top1SellerNameLabel);
             Top1SellerPanel.Controls.Add(label6);
-            Top1SellerPanel.Location = new Point(106, 21);
+            Top1SellerPanel.Location = new Point(114, 21);
             Top1SellerPanel.Name = "Top1SellerPanel";
             Top1SellerPanel.Size = new Size(154, 195);
             Top1SellerPanel.TabIndex = 0;
@@ -431,7 +444,7 @@
             panel2.Controls.Add(label2);
             panel2.Controls.Add(StartDatePicker);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(242, 10);
+            panel2.Location = new Point(237, 10);
             panel2.Name = "panel2";
             panel2.Size = new Size(514, 102);
             panel2.TabIndex = 10;
@@ -533,7 +546,7 @@
             SalesGraphPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             SalesGraphPanel.Location = new Point(12, 180);
             SalesGraphPanel.Name = "SalesGraphPanel";
-            SalesGraphPanel.Size = new Size(722, 236);
+            SalesGraphPanel.Size = new Size(739, 236);
             SalesGraphPanel.TabIndex = 9;
             // 
             // DashboardView
@@ -542,7 +555,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 749);
             Controls.Add(AutoscrollPanel);
-            MinimumSize = new Size(800, 480);
+            MinimumSize = new Size(800, 0);
             Name = "DashboardView";
             Text = "DashboardView";
             AutoscrollPanel.ResumeLayout(false);
@@ -606,5 +619,6 @@
         private Panel TopCategoriasChartPanel;
         private Panel panel4;
         private Panel TopProductsChartPanel;
+        private Label label9;
     }
 }

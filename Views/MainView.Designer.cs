@@ -62,8 +62,9 @@
             MainPanel.Controls.Add(WelcomeLabel);
             MainPanel.Location = new Point(198, 0);
             MainPanel.Margin = new Padding(3, 2, 3, 2);
+            MainPanel.MinimumSize = new Size(800, 0);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(695, 507);
+            MainPanel.Size = new Size(800, 507);
             MainPanel.TabIndex = 99;
             MainPanel.Paint += MainPanel_Paint;
             // 
@@ -71,7 +72,7 @@
             // 
             MainPanelLogoPicturebox.Anchor = AnchorStyles.None;
             MainPanelLogoPicturebox.Image = Properties.Resources.VentasAppLogoClaro;
-            MainPanelLogoPicturebox.Location = new Point(282, 68);
+            MainPanelLogoPicturebox.Location = new Point(335, 68);
             MainPanelLogoPicturebox.Name = "MainPanelLogoPicturebox";
             MainPanelLogoPicturebox.Size = new Size(180, 180);
             MainPanelLogoPicturebox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -83,7 +84,7 @@
             WelcomeLabel.Anchor = AnchorStyles.None;
             WelcomeLabel.Font = new Font("Microsoft JhengHei", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             WelcomeLabel.ForeColor = SystemColors.HotTrack;
-            WelcomeLabel.Location = new Point(139, 262);
+            WelcomeLabel.Location = new Point(192, 262);
             WelcomeLabel.Name = "WelcomeLabel";
             WelcomeLabel.Size = new Size(478, 50);
             WelcomeLabel.TabIndex = 0;
@@ -318,11 +319,11 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(893, 507);
+            ClientSize = new Size(999, 507);
             Controls.Add(SidePanel);
             Controls.Add(MainPanel);
             Margin = new Padding(3, 2, 3, 2);
-            MinimumSize = new Size(640, 480);
+            MinimumSize = new Size(1015, 480);
             Name = "MainView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "VentasApp";
