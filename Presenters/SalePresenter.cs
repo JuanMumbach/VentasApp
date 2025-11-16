@@ -199,6 +199,7 @@ namespace VentasApp.Presenters
 
             sale.CreatedAt = DateTime.Now;
             sale.UpdatedAt = DateTime.Now;
+            sale.DeliveryState = "pendiente";
             sale.UserId = SessionManager.CurrentUserId;
             int newSaleId = saleRepository.AddSale(sale);
 
