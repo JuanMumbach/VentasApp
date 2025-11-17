@@ -306,6 +306,120 @@ namespace VentasApp.Services
             return container.BorderBottom(1).BorderColor(Colors.Grey.Lighten4).Padding(5);
         }
 
+        public void ExportarReporteVendedores(SalesmenReportExportDTO datos, string rutaArchivo)
+        {
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(1, Unit.Centimetre);
+                    page.Size(PageSizes.A4);
+                    page.DefaultTextStyle(x => x.FontSize(10));
+
+                    // --- CABECERA ---
+                    page.Header().Row(row =>
+                    {
+                        row.RelativeItem().Column(col =>
+                        {
+                            col.Item().Text("Desempeño de Vendedores").Bold().FontSize(20).FontColor(Colors.Blue.Medium);
+                            col.Item().Text($"Generado: {datos.FechaGeneracion:g}").FontSize(10).FontColor(Colors.Grey.Medium);
+                            col.Item().Text(datos.Periodo).FontSize(12).SemiBold();
+                        });
+                    });
+
+                    // --- CONTENIDO ---
+                    page.Content().PaddingVertical(10).Column(col =>
+                    {
+                        // 1. SECCIÓN DE KPIs (Tarjetas)
+                        col.Item().Row(row =>
+                        {
+                            // Tarjeta: Total Ingresos
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Ingresos Generados").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"${datos.TotalIngresos:N2}").Bold().FontSize(18).FontColor(Colors.Green.Darken2);
+                            });
+
+                            row.ConstantItem(10); // Espacio
+
+                            // Tarjeta: Total Ventas
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Ventas Realizadas").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"{datos.TotalVentas}").Bold().FontSize(18).FontColor(Colors.Blue.Darken2);
+                            });
+
+                            row.ConstantItem(10); // Espacio
+
+                            // Tarjeta: Mejor Vendedor
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Mejor Vendedor").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text(datos.MejorVendedor).Bold().FontSize(14).FontColor(Colors.Orange.Darken2);
+                            });
+                        });
+
+                        col.Item().Height(20); // Separador
+
+                        // 2. TABLA DETALLADA
+                        col.Item().Text("Detalle por Vendedor").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
+
+                        col.Item().PaddingTop(5).Table(table =>
+                        {
+                            // Definición de columnas (4 columnas basadas en SalesmenReportDTO)
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.RelativeColumn(2); // Vendedor (más ancha)
+                                columns.RelativeColumn();  // Ventas
+                                columns.RelativeColumn();  // Canceladas
+                                columns.RelativeColumn(1.5f); // Ingresos
+                            });
+
+                            // Encabezados
+                            table.Header(header =>
+                            {
+                                header.Cell().Element(EstiloCeldaHeader).Text("Vendedor");
+                                header.Cell().Element(EstiloCeldaHeader).AlignCenter().Text("Ventas");
+                                header.Cell().Element(EstiloCeldaHeader).AlignCenter().Text("Canceladas");
+                                header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("Ingresos");
+                            });
+
+                            // Datos
+                            if (datos.DetalleVendedores != null)
+                            {
+                                uint i = 0;
+                                foreach (var item in datos.DetalleVendedores)
+                                {
+                                    var bgColor = i % 2 == 0 ? Colors.White : Colors.Grey.Lighten4;
+
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).Text(item.Vendedor);
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignCenter().Text(item.Ventas.ToString());
+
+                                    // Destacar cancelaciones si son > 0 (opcional)
+                                    var colorCanceladas = item.Canceladas > 0 ? Colors.Red.Medium : Colors.Black;
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignCenter().Text(item.Canceladas.ToString()).FontColor(colorCanceladas);
+
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignRight().Text(item.Ingresos);
+
+                                    i++;
+                                }
+                            }
+                        });
+                    });
+
+                    // --- PIE DE PAGINA ---
+                    page.Footer().AlignCenter().Text(x =>
+                    {
+                        x.Span("Página ");
+                        x.CurrentPageNumber();
+                        x.Span(" de ");
+                        x.TotalPages();
+                    });
+                });
+            })
+            .GeneratePdf(rutaArchivo);
+        }
+
         private class PlaceholderKpi : IComponent
         {
             public void Compose(IContainer container)

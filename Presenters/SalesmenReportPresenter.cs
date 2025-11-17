@@ -99,16 +99,64 @@ namespace VentasApp.Presenters
             {
                 try
                 {
-                    PdfService pdfService = new PdfService();
+                    using (var context = new VentasDBContext())
+                    {
+                        // 1. Configurar fechas
+                        DateTime startDt = StartPeriod.ToDateTime(new TimeOnly(0, 0));
+                        DateTime endDt = EndPeriod.ToDateTime(new TimeOnly(23, 59));
 
-                    string titulo = "Rendimiento de Vendedores";
-                    string periodo = $"Periodo: {StartPeriod} - {EndPeriod}";
+                        // 2. Obtener ID del Rol
+                        int salesmanRoleId = context.Roles.FirstOrDefault(r => r.RoleName == "Salesperson")?.RoleId ?? 0;
 
-                    pdfService.ExportarDatosTabla(titulo, periodo, currentDataList, saveFileDialog.FileName);
+                        // 3. QUERY UNIFICADA CON JOIN
+                        // Como Sale no tiene 'User', los unimos manualmente por UserId
+                        var queryBase = from s in context.Sales
+                                        join u in context.Users on s.UserId equals u.Id
+                                        where u.RoleId == salesmanRoleId
+                                           && s.CreatedAt >= startDt
+                                           && s.CreatedAt <= endDt
+                                           && s.CanceledAt == null
+                                        select new { Venta = s, Usuario = u };
 
-                    MessageBox.Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // 4. Calcular Totales
+                        int totalVentas = queryBase.Count();
 
-                    new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                        // Validamos si hay datos para evitar error en Sum si está vacío
+                        decimal totalIngresos = 0;
+                        if (totalVentas > 0)
+                        {
+                            totalIngresos = queryBase.Sum(x => x.Venta.TotalPrice);
+                        }
+
+                        // 5. Encontrar al Mejor Vendedor
+                        var mejorDatos = queryBase
+                             .GroupBy(x => x.Usuario.FullName)
+                             .Select(g => new {
+                                 Nombre = g.Key,
+                                 Total = g.Sum(x => x.Venta.TotalPrice)
+                             })
+                             .OrderByDescending(x => x.Total)
+                             .FirstOrDefault();
+
+                        string nombreMejor = mejorDatos != null ? mejorDatos.Nombre : "N/A";
+
+                        // 6. Crear el DTO y Exportar
+                        var exportDto = new SalesmenReportExportDTO
+                        {
+                            Periodo = $"Periodo: {StartPeriod} - {EndPeriod}",
+                            TotalVentas = totalVentas,
+                            TotalIngresos = totalIngresos,
+                            MejorVendedor = nombreMejor,
+                            DetalleVendedores = this.currentDataList
+                        };
+
+                        PdfService pdfService = new PdfService();
+                        pdfService.ExportarReporteVendedores(exportDto, saveFileDialog.FileName);
+
+                        MessageBox.Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                    }
                 }
                 catch (Exception ex)
                 {
