@@ -13,12 +13,13 @@ using VentasApp.Models.DTOs;
 namespace VentasApp.Views.Dashboard
 { 
     public interface IDashboardView : IBaseForm
-    {
+    {     
         DateOnly StartDate { get; set; }
         DateOnly EndDate { get; set; }
-        void LoadGraph1(Chart chart);
-        void LoadTopCategoriasGraph(Chart chart);
-        void LoadTopProductsGraph(Chart chart);
+        byte[] GetSalesChartImage();
+        byte[] GetTopCategoriesChartImage();
+        byte[] GetTopProductsChartImage();
+        
         event EventHandler OnTimePeriodChanged;
         event EventHandler OnSetWeeklyTimePeriod;
         event EventHandler OnSetMonthlyTimePeriod;
@@ -26,7 +27,10 @@ namespace VentasApp.Views.Dashboard
         event EventHandler OnSetYearlyTimePeriod;
         event EventHandler OpenSalesmenReportEvent;
         event EventHandler OpenProductsReportEvent;
-
+        event EventHandler ExportDashboardEvent;
+        void LoadGraph1(Chart chart);
+        void LoadTopCategoriasGraph(Chart chart);
+        void LoadTopProductsGraph(Chart chart);
         void SetTopSellers(List<TopSellerDTO> topSellers);
     }
 
@@ -39,6 +43,7 @@ namespace VentasApp.Views.Dashboard
         public event EventHandler OnSetYearlyTimePeriod;
         public event EventHandler OpenSalesmenReportEvent;
         public event EventHandler OpenProductsReportEvent;
+        public event EventHandler ExportDashboardEvent;
 
         public DateOnly StartDate 
         {
@@ -84,6 +89,7 @@ namespace VentasApp.Views.Dashboard
             YearlyPeriodButton.Click += (s, e) => {OnSetYearlyTimePeriod?.Invoke(s, e);};
             DetailedSalesmenReportButton.Click += (s, e) => { OpenSalesmenReportEvent?.Invoke(s, e); };
             DetailedProductsReportButton.Click += (s, e) => { OpenProductsReportEvent?.Invoke(s, e); };
+            GenerateGeneralReportButton.Click += (s, e) => { ExportDashboardEvent?.Invoke(s, e); };
         }
 
         public void LoadGraph1(Chart chart)
@@ -134,6 +140,35 @@ namespace VentasApp.Views.Dashboard
                 Top3SellerIncomesLabel.Text = $"{topSellers[2].TotalValue:C2}";
             }
             else { Top3SellerPanel.Visible = false; }
+        }
+
+        public byte[] GetSalesChartImage()
+        {
+            return GetChartImageFromPanel(SalesGraphPanel);
+        }
+
+        public byte[] GetTopCategoriesChartImage()
+        {
+            return GetChartImageFromPanel(TopCategoriasChartPanel);
+        }
+
+        public byte[] GetTopProductsChartImage()
+        {
+            return GetChartImageFromPanel(TopProductsChartPanel);
+        }
+
+        private byte[] GetChartImageFromPanel(Panel panel)
+        {
+            if (panel.Controls.Count > 0 && panel.Controls[0] is Chart chart)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    
+                    chart.SaveImage(ms, ChartImageFormat.Png);
+                    return ms.ToArray();
+                }
+            }
+            return Array.Empty<byte>();
         }
     }
 }

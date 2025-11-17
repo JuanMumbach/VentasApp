@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using VentasApp.Models; 
+using VentasApp.Models;
+using VentasApp.Models.DTOs;
 
 namespace VentasApp.Services
 {
@@ -157,6 +158,127 @@ namespace VentasApp.Services
                     });
 
                     page.Footer().AlignCenter().Text("Gracias por su compra.");
+                });
+            })
+            .GeneratePdf(rutaArchivo);
+        }
+
+        public void ExportFullDashboard(DashboardExportDTO datos, string rutaArchivo)
+        {
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(1, Unit.Centimetre);
+                    page.Size(PageSizes.A4);
+                    page.DefaultTextStyle(x => x.FontSize(10));
+
+                    // --- CABECERA ---
+                    page.Header().Row(row =>
+                    {
+                        row.RelativeItem().Column(col =>
+                        {
+                            col.Item().Text("Resumen Ejecutivo del Dashboard").Bold().FontSize(20).FontColor(Colors.Blue.Medium);
+                            col.Item().Text($"Generado el: {datos.FechaGeneracion:g}");
+                            col.Item().Text(datos.Periodo).FontSize(12).SemiBold();
+                        });
+                    });
+
+                    // --- CONTENIDO ---
+                    page.Content().PaddingVertical(10).Column(col =>
+                    {
+                        // 1. Gráfico Principal de Ventas
+                        col.Item().Text("Evolución de Ventas").Bold().FontSize(14);
+
+                        if (datos.SalesChartImage != null && datos.SalesChartImage.Length > 0)
+                        {
+                            // CORRECCIÓN AQUÍ: Usamos FitArea() dentro de un contenedor con altura fija
+                            // o FitWidth() si queremos altura automática.
+                            col.Item()
+                               .Height(200)            // Definimos altura máxima
+                               .Image(datos.SalesChartImage)
+                               .FitArea();             // <--- ESTO EVITA EL ERROR (ajusta la imagen al espacio)
+                        }
+                        else
+                        {
+                            col.Item().Text("(Gráfico no disponible)").Italic().FontColor(Colors.Grey.Medium);
+                        }
+
+                        col.Item().Height(20); // Espaciador
+
+                        // 2. Sección Dividida: Gráficos Circulares y Top Vendedores
+                        col.Item().Row(row =>
+                        {
+                            // Columna Izquierda: Gráficos de Torta
+                            row.RelativeItem().Column(leftCol =>
+                            {
+                                leftCol.Item().Text("Distribución por Categoría").Bold();
+                                if (datos.CategoriesChartImage != null && datos.CategoriesChartImage.Length > 0)
+                                {
+                                    leftCol.Item()
+                                           .Height(150)
+                                           .Image(datos.CategoriesChartImage)
+                                           .FitArea(); // <--- CORRECCIÓN
+                                }
+
+                                leftCol.Item().Height(10);
+
+                                leftCol.Item().Text("Productos Top").Bold();
+                                if (datos.ProductsChartImage != null && datos.ProductsChartImage.Length > 0)
+                                {
+                                    leftCol.Item()
+                                           .Height(150)
+                                           .Image(datos.ProductsChartImage)
+                                           .FitArea(); // <--- CORRECCIÓN
+                                }
+                            });
+
+                            row.ConstantItem(20); // Espacio entre columnas
+
+                            // Columna Derecha: Tabla de Mejores Vendedores
+                            row.RelativeItem().Column(rightCol =>
+                            {
+                                rightCol.Item().Text("Ranking Vendedores").Bold().FontSize(14);
+
+                                // Usamos MinimalBox para asegurar que la tabla no intente expandirse infinitamente
+                                rightCol.Item().PaddingTop(5).MinimalBox().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn();   // Nombre
+                                        columns.ConstantColumn(50); // Ventas
+                                        columns.ConstantColumn(70); // Total
+                                    });
+
+                                    // Header Tabla
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Element(EstiloCeldaHeader).Text("Vendedor");
+                                        header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("#");
+                                        header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("Total");
+                                    });
+
+                                    // Datos Tabla
+                                    if (datos.TopSellers != null)
+                                    {
+                                        foreach (var seller in datos.TopSellers)
+                                        {
+                                            table.Cell().Element(EstiloCeldaDato).Text(seller.SellerName);
+                                            table.Cell().Element(EstiloCeldaDato).AlignRight().Text(seller.TotalSales.ToString());
+                                            table.Cell().Element(EstiloCeldaDato).AlignRight().Text($"${seller.TotalValue:N0}");
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    });
+
+                    // --- PIE DE PAGINA ---
+                    page.Footer().AlignCenter().Text(x =>
+                    {
+                        x.Span("Página ");
+                        x.CurrentPageNumber();
+                    });
                 });
             })
             .GeneratePdf(rutaArchivo);

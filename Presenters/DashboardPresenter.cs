@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,51 @@ namespace VentasApp.Presenters
             this.view.OnSetYearlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(365)), DateTime.Today); };
             this.view.OpenProductsReportEvent += LoadProductsReportView;
             this.view.OpenSalesmenReportEvent += LoadSalesmenReportView;
+            this.view.ExportDashboardEvent += ExportFullDashboard;
             this.userRepository = userRepository;
+        }
+
+        private void ExportFullDashboard(object? sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Files|*.pdf";
+            saveFileDialog.FileName = $"Dashboard_Resumen_{DateTime.Now:yyyyMMdd}.pdf";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // 1. Obtener datos frescos de la base para los vendedores
+                    // (Reutilizamos la lógica que ya tienes para cargar el gráfico, pero aquí la necesitamos para el DTO)
+                    DateTime start = view.StartDate.ToDateTime(TimeOnly.MinValue);
+                    DateTime end = view.EndDate.ToDateTime(TimeOnly.MaxValue);
+
+                    var topSellers = salesRepository.GetTopSellers(start, end).ToList();
+
+                    // 2. Construir el DTO capturando las imágenes de la Vista
+                    var exportDto = new DashboardExportDTO
+                    {
+                        Periodo = $"Periodo: {view.StartDate} - {view.EndDate}",
+                        TopSellers = topSellers,
+                        SalesChartImage = view.GetSalesChartImage(),
+                        CategoriesChartImage = view.GetTopCategoriesChartImage(),
+                        ProductsChartImage = view.GetTopProductsChartImage()
+                    };
+
+                    // 3. Generar PDF
+                    PdfService pdfService = new PdfService();
+                    pdfService.ExportFullDashboard(exportDto, saveFileDialog.FileName);
+
+                    MessageBox.Show("Reporte de Dashboard exportado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Abrir archivo
+                    new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al exportar dashboard: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void LoadSalesmenReportView(object? sender, EventArgs e)

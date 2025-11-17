@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             AutoscrollPanel = new Panel();
+            DetailedProductsReportButton = new Button();
+            DetailedSalesmenReportButton = new Button();
+            GenerateGeneralReportButton = new Button();
             label9 = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -71,9 +74,6 @@
             StartDatePicker = new DateTimePicker();
             label1 = new Label();
             SalesGraphPanel = new Panel();
-            GenerateGeneralReport = new Button();
-            DetailedSalesmenReportButton = new Button();
-            DetailedProductsReportButton = new Button();
             AutoscrollPanel.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -90,7 +90,7 @@
             AutoscrollPanel.AutoScroll = true;
             AutoscrollPanel.Controls.Add(DetailedProductsReportButton);
             AutoscrollPanel.Controls.Add(DetailedSalesmenReportButton);
-            AutoscrollPanel.Controls.Add(GenerateGeneralReport);
+            AutoscrollPanel.Controls.Add(GenerateGeneralReportButton);
             AutoscrollPanel.Controls.Add(label9);
             AutoscrollPanel.Controls.Add(panel3);
             AutoscrollPanel.Controls.Add(label5);
@@ -105,6 +105,34 @@
             AutoscrollPanel.Name = "AutoscrollPanel";
             AutoscrollPanel.Size = new Size(784, 749);
             AutoscrollPanel.TabIndex = 0;
+            // 
+            // DetailedProductsReportButton
+            // 
+            DetailedProductsReportButton.Location = new Point(605, 783);
+            DetailedProductsReportButton.Name = "DetailedProductsReportButton";
+            DetailedProductsReportButton.Size = new Size(146, 23);
+            DetailedProductsReportButton.TabIndex = 18;
+            DetailedProductsReportButton.Text = "Ver informe detallado";
+            DetailedProductsReportButton.UseVisualStyleBackColor = true;
+            // 
+            // DetailedSalesmenReportButton
+            // 
+            DetailedSalesmenReportButton.Location = new Point(605, 477);
+            DetailedSalesmenReportButton.Name = "DetailedSalesmenReportButton";
+            DetailedSalesmenReportButton.Size = new Size(146, 23);
+            DetailedSalesmenReportButton.TabIndex = 17;
+            DetailedSalesmenReportButton.Text = "Ver informe detallado";
+            DetailedSalesmenReportButton.UseVisualStyleBackColor = true;
+            // 
+            // GenerateGeneralReportButton
+            // 
+            GenerateGeneralReportButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            GenerateGeneralReportButton.Location = new Point(635, 121);
+            GenerateGeneralReportButton.Name = "GenerateGeneralReportButton";
+            GenerateGeneralReportButton.Size = new Size(116, 45);
+            GenerateGeneralReportButton.TabIndex = 16;
+            GenerateGeneralReportButton.Text = "Exportar resumen del periodo (PDF)";
+            GenerateGeneralReportButton.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -555,34 +583,6 @@
             SalesGraphPanel.Size = new Size(739, 236);
             SalesGraphPanel.TabIndex = 9;
             // 
-            // GenerateGeneralReport
-            // 
-            GenerateGeneralReport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            GenerateGeneralReport.Location = new Point(635, 121);
-            GenerateGeneralReport.Name = "GenerateGeneralReport";
-            GenerateGeneralReport.Size = new Size(116, 45);
-            GenerateGeneralReport.TabIndex = 16;
-            GenerateGeneralReport.Text = "Exportar resumen del periodo (PDF)";
-            GenerateGeneralReport.UseVisualStyleBackColor = true;
-            // 
-            // DetailedSalesmenReportButton
-            // 
-            DetailedSalesmenReportButton.Location = new Point(605, 477);
-            DetailedSalesmenReportButton.Name = "DetailedSalesmenReportButton";
-            DetailedSalesmenReportButton.Size = new Size(146, 23);
-            DetailedSalesmenReportButton.TabIndex = 17;
-            DetailedSalesmenReportButton.Text = "Ver informe detallado";
-            DetailedSalesmenReportButton.UseVisualStyleBackColor = true;
-            // 
-            // DetailedProductsReportButton
-            // 
-            DetailedProductsReportButton.Location = new Point(605, 783);
-            DetailedProductsReportButton.Name = "DetailedProductsReportButton";
-            DetailedProductsReportButton.Size = new Size(146, 23);
-            DetailedProductsReportButton.TabIndex = 18;
-            DetailedProductsReportButton.Text = "Ver informe detallado";
-            DetailedProductsReportButton.UseVisualStyleBackColor = true;
-            // 
             // DashboardView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -654,7 +654,7 @@
         private Panel panel4;
         private Panel TopProductsChartPanel;
         private Label label9;
-        private Button GenerateGeneralReport;
+        private Button GenerateGeneralReportButton;
         private Button DetailedProductsReportButton;
         private Button DetailedSalesmenReportButton;
     }
