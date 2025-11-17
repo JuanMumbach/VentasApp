@@ -48,7 +48,8 @@ namespace VentasApp.Presenters
         private void LoadProductsReportView(object? sender, EventArgs e)
         {
             ProductsReportView view = new ProductsReportView();
-            //ProductsReportPresenter presenter = new ProductsReportPresenter(view, this.view.StartDate, this.view.EndDate);
+            ProductsReportPresenter presenter = new ProductsReportPresenter(view, this.view.StartDate, this.view.EndDate);
+
             view.ShowDialog();
         }
 

@@ -17,10 +17,12 @@ namespace VentasApp.Views.Dashboard
         void ChangePeriodLabel(DateOnly startPeriod, DateOnly endPeriod);
         void DataGridBindSource(object source);
     }
+
     public partial class ProductsReportView : BaseForm, IProductReportView
     {
         public event EventHandler CloseButtonClickEvent;
         public event EventHandler ExportReportEvent;
+
         public ProductsReportView()
         {
             InitializeComponent();
