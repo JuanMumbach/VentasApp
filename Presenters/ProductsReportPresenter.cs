@@ -1,9 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using VentasApp.Models;
+using VentasApp.Models.DTOs;
+using VentasApp.Services;
+using VentasApp.Services;
 using VentasApp.Views.Dashboard;
 
 namespace VentasApp.Presenters
@@ -14,6 +19,7 @@ namespace VentasApp.Presenters
         private DateOnly StartPeriod;
         private DateOnly EndPeriod;
         private BindingSource dataSource = new BindingSource();
+        private List<ProductReportDTO> currentDataList;
 
         public ProductsReportPresenter(IProductReportView view, DateOnly startPeriod, DateOnly endPeriod)
         {
@@ -27,6 +33,7 @@ namespace VentasApp.Presenters
             LoadFilters();
 
             this.view.FilterChangedEvent += (s, e) => GenerateReportData();
+            this.view.ExportReportEvent += ExportarPdf;
 
             GenerateReportData();
         }
@@ -97,19 +104,21 @@ namespace VentasApp.Presenters
                                          && si.Sale.CanceledAt == null)
                             .ToList();
 
-                        return new
+                        return new ProductReportDTO
                         {
                             ID = p.Id,
                             Producto = p.Name,
                             Categoria = p.Category != null ? p.Category.CategoryName : "N/A",
-                            UnidadesVendidas = salesItemsInPeriod.Sum(si => si.Amount),
-                            IngresosGenerados = "$" + salesItemsInPeriod.Sum(si => si.Amount * si.Price).ToString("N2"),
-                            StockActual = p.Stock,
+                            Vendidos = salesItemsInPeriod.Sum(si => si.Amount),
+                            Ingresos = "$" + salesItemsInPeriod.Sum(si => si.Amount * si.Price).ToString("N2"),
+                            Stock = p.Stock,
                             Proveedor = p.Supplier != null ? p.Supplier.SupplierName : "N/A"
                         };
                     })
-                    .OrderByDescending(x => x.UnidadesVendidas) 
+                    .OrderByDescending(x => x.Vendidos) 
                     .ToList();
+
+                    this.currentDataList = new List<ProductReportDTO>(reportData);
 
                     dataSource.DataSource = reportData;
                 }
@@ -117,6 +126,41 @@ namespace VentasApp.Presenters
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al generar el reporte de productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportarPdf(object? sender, EventArgs e)
+        {
+            if (currentDataList == null || currentDataList.Count == 0)
+            {
+                MessageBox.Show("No hay datos para exportar.");
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Files|*.pdf";
+            saveFileDialog.FileName = $"Reporte_Productos_{DateTime.Now:yyyyMMdd}.pdf";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    PdfService pdfService = new PdfService();
+
+                    string titulo = "Reporte de Productos";
+                    string periodo = $"Periodo: {StartPeriod} - {EndPeriod}";
+
+                    pdfService.ExportarDatosTabla(titulo, periodo, currentDataList, saveFileDialog.FileName);
+
+                    MessageBox.Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al exportar: {ex.Message}");
+                }
             }
         }
     }
