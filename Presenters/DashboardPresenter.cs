@@ -50,30 +50,38 @@ namespace VentasApp.Presenters
             {
                 try
                 {
-                    // 1. Obtener datos frescos de la base para los vendedores
-                    // (Reutilizamos la lógica que ya tienes para cargar el gráfico, pero aquí la necesitamos para el DTO)
                     DateTime start = view.StartDate.ToDateTime(TimeOnly.MinValue);
                     DateTime end = view.EndDate.ToDateTime(TimeOnly.MaxValue);
 
+                    // 1. Obtener Top Vendedores
                     var topSellers = salesRepository.GetTopSellers(start, end).ToList();
 
-                    // 2. Construir el DTO capturando las imágenes de la Vista
+                    // 2. CALCULAR TOTALES GENERALES (NUEVO)
+                    // Reutilizamos el método que agrupa por ventas para sumar todo el periodo
+                    var salesData = salesRepository.GetSalesGroupedByDate(start, end, 1);
+                    var totalIngresos = salesData.Sum(x => x.TotalSales);
+                    var totalVentas = salesData.Sum(x => x.SaleCount);
+
+                    // 3. Construir DTO con los nuevos datos
                     var exportDto = new DashboardExportDTO
                     {
                         Periodo = $"Periodo: {view.StartDate} - {view.EndDate}",
                         TopSellers = topSellers,
+
+                        // Asignar los totales calculados
+                        TotalIngresos = (double)totalIngresos,
+                        TotalVentas = totalVentas,
+
                         SalesChartImage = view.GetSalesChartImage(),
                         CategoriesChartImage = view.GetTopCategoriesChartImage(),
                         ProductsChartImage = view.GetTopProductsChartImage()
                     };
 
-                    // 3. Generar PDF
                     PdfService pdfService = new PdfService();
                     pdfService.ExportFullDashboard(exportDto, saveFileDialog.FileName);
 
                     MessageBox.Show("Reporte de Dashboard exportado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Abrir archivo
                     new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
                 }
                 catch (Exception ex)

@@ -178,8 +178,8 @@ namespace VentasApp.Services
                     {
                         row.RelativeItem().Column(col =>
                         {
-                            col.Item().Text("Resumen Ejecutivo del Dashboard").Bold().FontSize(20).FontColor(Colors.Blue.Medium);
-                            col.Item().Text($"Generado el: {datos.FechaGeneracion:g}");
+                            col.Item().Text("Resumen Ejecutivo").Bold().FontSize(22).FontColor(Colors.Blue.Darken2);
+                            col.Item().Text($"Generado: {datos.FechaGeneracion:g}").FontSize(10).FontColor(Colors.Grey.Medium);
                             col.Item().Text(datos.Periodo).FontSize(12).SemiBold();
                         });
                     });
@@ -187,85 +187,98 @@ namespace VentasApp.Services
                     // --- CONTENIDO ---
                     page.Content().PaddingVertical(10).Column(col =>
                     {
-                        // 1. Gráfico Principal de Ventas
-                        col.Item().Text("Evolución de Ventas").Bold().FontSize(14);
-
-                        if (datos.SalesChartImage != null && datos.SalesChartImage.Length > 0)
-                        {
-                            // CORRECCIÓN AQUÍ: Usamos FitArea() dentro de un contenedor con altura fija
-                            // o FitWidth() si queremos altura automática.
-                            col.Item()
-                               .Height(200)            // Definimos altura máxima
-                               .Image(datos.SalesChartImage)
-                               .FitArea();             // <--- ESTO EVITA EL ERROR (ajusta la imagen al espacio)
-                        }
-                        else
-                        {
-                            col.Item().Text("(Gráfico no disponible)").Italic().FontColor(Colors.Grey.Medium);
-                        }
-
-                        col.Item().Height(20); // Espaciador
-
-                        // 2. Sección Dividida: Gráficos Circulares y Top Vendedores
+                        // 1. NUEVA SECCIÓN: TARJETAS DE INDICADORES (KPIs)
                         col.Item().Row(row =>
                         {
-                            // Columna Izquierda: Gráficos de Torta
+                            // Tarjeta de Ingresos
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Ingresos del Periodo").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"${datos.TotalIngresos:N2}").Bold().FontSize(20).FontColor(Colors.Green.Darken2);
+                            });
+
+                            row.ConstantItem(10); // Espacio
+
+                            // Tarjeta de Ventas
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Total Operaciones").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"{datos.TotalVentas}").Bold().FontSize(20).FontColor(Colors.Blue.Darken2);
+                            });
+
+                            // Puedes agregar una tercera tarjeta vacía o con otro dato si quisieras (ej. Promedio)
+                            row.ConstantItem(10);
+                            row.RelativeItem().Component(new PlaceholderKpi()); // Relleno visual opcional
+                        });
+
+                        col.Item().Height(20); // Espacio
+
+                        // 2. Gráfico Principal
+                        col.Item().Text("Evolución de Ventas").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
+                        if (datos.SalesChartImage != null && datos.SalesChartImage.Length > 0)
+                        {
+                            col.Item().Height(200).Image(datos.SalesChartImage).FitArea();
+                        }
+
+                        col.Item().Height(20);
+
+                        // 3. Sección Inferior Dividida
+                        col.Item().Row(row =>
+                        {
+                            // Izquierda: Gráficos Circulares
                             row.RelativeItem().Column(leftCol =>
                             {
-                                leftCol.Item().Text("Distribución por Categoría").Bold();
                                 if (datos.CategoriesChartImage != null && datos.CategoriesChartImage.Length > 0)
                                 {
-                                    leftCol.Item()
-                                           .Height(150)
-                                           .Image(datos.CategoriesChartImage)
-                                           .FitArea(); // <--- CORRECCIÓN
+                                    leftCol.Item().Text("Por Categoría").Bold();
+                                    leftCol.Item().Height(140).Image(datos.CategoriesChartImage).FitArea();
                                 }
 
                                 leftCol.Item().Height(10);
 
-                                leftCol.Item().Text("Productos Top").Bold();
                                 if (datos.ProductsChartImage != null && datos.ProductsChartImage.Length > 0)
                                 {
-                                    leftCol.Item()
-                                           .Height(150)
-                                           .Image(datos.ProductsChartImage)
-                                           .FitArea(); // <--- CORRECCIÓN
+                                    leftCol.Item().Text("Por Producto").Bold();
+                                    leftCol.Item().Height(140).Image(datos.ProductsChartImage).FitArea();
                                 }
                             });
 
-                            row.ConstantItem(20); // Espacio entre columnas
+                            row.ConstantItem(20);
 
-                            // Columna Derecha: Tabla de Mejores Vendedores
+                            // Derecha: Tabla Mejorada
                             row.RelativeItem().Column(rightCol =>
                             {
-                                rightCol.Item().Text("Ranking Vendedores").Bold().FontSize(14);
+                                rightCol.Item().Text("Ranking Vendedores").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
 
-                                // Usamos MinimalBox para asegurar que la tabla no intente expandirse infinitamente
                                 rightCol.Item().PaddingTop(5).MinimalBox().Table(table =>
                                 {
                                     table.ColumnsDefinition(columns =>
                                     {
-                                        columns.RelativeColumn();   // Nombre
-                                        columns.ConstantColumn(50); // Ventas
-                                        columns.ConstantColumn(70); // Total
+                                        columns.RelativeColumn(2);  // Nombre más ancho
+                                        columns.RelativeColumn(1);  // Ventas
+                                        columns.RelativeColumn(1.5f); // Total
                                     });
 
-                                    // Header Tabla
+                                    // Header con color
                                     table.Header(header =>
                                     {
-                                        header.Cell().Element(EstiloCeldaHeader).Text("Vendedor");
-                                        header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("#");
-                                        header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("Total");
+                                        header.Cell().Background(Colors.Blue.Darken3).Padding(5).Text("Vendedor").FontColor(Colors.White).SemiBold();
+                                        header.Cell().Background(Colors.Blue.Darken3).Padding(5).AlignRight().Text("Cant.").FontColor(Colors.White).SemiBold();
+                                        header.Cell().Background(Colors.Blue.Darken3).Padding(5).AlignRight().Text("Total ($)").FontColor(Colors.White).SemiBold();
                                     });
 
-                                    // Datos Tabla
+                                    // Datos con filas alternadas
                                     if (datos.TopSellers != null)
                                     {
+                                        uint i = 0;
                                         foreach (var seller in datos.TopSellers)
                                         {
-                                            table.Cell().Element(EstiloCeldaDato).Text(seller.SellerName);
-                                            table.Cell().Element(EstiloCeldaDato).AlignRight().Text(seller.TotalSales.ToString());
-                                            table.Cell().Element(EstiloCeldaDato).AlignRight().Text($"${seller.TotalValue:N0}");
+                                            var bgColor = i % 2 == 0 ? Colors.White : Colors.Grey.Lighten4;
+
+                                            table.Cell().Background(bgColor).BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).Text(seller.SellerName);
+                                            table.Cell().Background(bgColor).BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).AlignRight().Text(seller.TotalSales.ToString());
+                                            table.Cell().Background(bgColor).BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).AlignRight().Text($"${seller.TotalValue:N0}");
+                                            i++;
                                         }
                                     }
                                 });
@@ -273,7 +286,6 @@ namespace VentasApp.Services
                         });
                     });
 
-                    // --- PIE DE PAGINA ---
                     page.Footer().AlignCenter().Text(x =>
                     {
                         x.Span("Página ");
@@ -293,5 +305,19 @@ namespace VentasApp.Services
         {
             return container.BorderBottom(1).BorderColor(Colors.Grey.Lighten4).Padding(5);
         }
+
+        private class PlaceholderKpi : IComponent
+        {
+            public void Compose(IContainer container)
+            {
+                // Dejar vacío o poner otro dato
+                container.Padding(10).Column(c => {
+                    // c.Item().Text("Ticket Promedio").Medium().FontColor(Colors.Grey.Darken2);
+                    // c.Item().Text("$...").Bold().FontSize(20);
+                });
+            }
+        }
     }
+
+
 }
