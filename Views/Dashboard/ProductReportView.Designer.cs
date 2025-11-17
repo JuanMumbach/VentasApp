@@ -33,6 +33,11 @@
             PeriodLabel = new Label();
             label1 = new Label();
             dataGridView1 = new DataGridView();
+            label2 = new Label();
+            CategoryFilterCombobox = new ComboBox();
+            SupplierFilterCombobox = new ComboBox();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -89,14 +94,68 @@
             dataGridView1.Location = new Point(40, 70);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(673, 265);
+            dataGridView1.Size = new Size(673, 253);
             dataGridView1.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Location = new Point(40, 369);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Categoria";
+            // 
+            // CategoryFilterCombobox
+            // 
+            CategoryFilterCombobox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CategoryFilterCombobox.FormattingEnabled = true;
+            CategoryFilterCombobox.Location = new Point(104, 366);
+            CategoryFilterCombobox.Name = "CategoryFilterCombobox";
+            CategoryFilterCombobox.Size = new Size(121, 23);
+            CategoryFilterCombobox.TabIndex = 11;
+            // 
+            // SupplierFilterCombobox
+            // 
+            SupplierFilterCombobox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            SupplierFilterCombobox.FormattingEnabled = true;
+            SupplierFilterCombobox.Location = new Point(305, 366);
+            SupplierFilterCombobox.Name = "SupplierFilterCombobox";
+            SupplierFilterCombobox.Size = new Size(121, 23);
+            SupplierFilterCombobox.TabIndex = 13;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new Point(241, 369);
+            label3.Name = "label3";
+            label3.Size = new Size(61, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Proveedor";
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(210, 335);
+            label4.Name = "label4";
+            label4.Size = new Size(53, 21);
+            label4.TabIndex = 14;
+            label4.Text = "Filtros";
             // 
             // ProductsReportView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(752, 409);
+            Controls.Add(label4);
+            Controls.Add(SupplierFilterCombobox);
+            Controls.Add(label3);
+            Controls.Add(CategoryFilterCombobox);
+            Controls.Add(label2);
             Controls.Add(ExportReportButton);
             Controls.Add(CloseButton);
             Controls.Add(PeriodLabel);
@@ -116,5 +175,10 @@
         private Label PeriodLabel;
         private Label label1;
         private DataGridView dataGridView1;
+        private Label label2;
+        private ComboBox CategoryFilterCombobox;
+        private ComboBox SupplierFilterCombobox;
+        private Label label3;
+        private Label label4;
     }
 }

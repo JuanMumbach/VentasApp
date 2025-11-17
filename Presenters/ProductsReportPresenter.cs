@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VentasApp.Models;
 using VentasApp.Views.Dashboard;
@@ -24,10 +22,36 @@ namespace VentasApp.Presenters
             this.EndPeriod = endPeriod;
 
             this.view.ChangePeriodLabel(startPeriod, endPeriod);
-
             this.view.DataGridBindSource(dataSource);
 
+            LoadFilters();
+
+            this.view.FilterChangedEvent += (s, e) => GenerateReportData();
+
             GenerateReportData();
+        }
+
+        private void LoadFilters()
+        {
+            try
+            {
+                using (var context = new VentasDBContext())
+                {
+                    var categories = context.Categories.ToList();
+
+                    categories.Insert(0, new CategoryModel { CategoryId = 0, CategoryName = "Todas las Categorías" });
+                    view.SetCategoriesDataSource(categories);
+
+                    var suppliers = context.Suppliers.ToList();
+                    
+                    suppliers.Insert(0, new SupplierModel { SupplierId = 0, SupplierName = "Todos los Proveedores" });
+                    view.SetSuppliersDataSource(suppliers);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar filtros: {ex.Message}");
+            }
         }
 
         private void GenerateReportData()
@@ -37,11 +61,26 @@ namespace VentasApp.Presenters
                 using (var context = new VentasDBContext())
                 {
                     
-                    var products = context.Products
+                    var productsQuery = context.Products
                                           .Include(p => p.Category)
                                           .Include(p => p.Supplier)
                                           .Where(p => p.Active)
-                                          .ToList();
+                                          .AsQueryable(); // sirve para ir agregando filtros
+
+                    
+                    if (view.SelectedCategoryId > 0)
+                    {
+                        productsQuery = productsQuery.Where(p => p.CategoryId == view.SelectedCategoryId);
+                    }
+
+                    
+                    if (view.SelectedSupplierId > 0)
+                    {
+                        productsQuery = productsQuery.Where(p => p.SupplierId == view.SelectedSupplierId);
+                    }
+
+                    
+                    var products = productsQuery.ToList();
 
                     DateTime startDt = StartPeriod.ToDateTime(new TimeOnly(0, 0));
                     DateTime endDt = EndPeriod.ToDateTime(new TimeOnly(23, 59));
@@ -69,7 +108,6 @@ namespace VentasApp.Presenters
                             Proveedor = p.Supplier != null ? p.Supplier.SupplierName : "N/A"
                         };
                     })
-                    //.Where(x => x.UnidadesVendidas > 0) 
                     .OrderByDescending(x => x.UnidadesVendidas) 
                     .ToList();
 
