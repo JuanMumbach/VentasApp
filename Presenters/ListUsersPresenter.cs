@@ -186,7 +186,8 @@ namespace VentasApp.Presenters
                     "¿Está seguro que desea eliminar este usuario?",
                     "Confirmar eliminación",
                     MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
 
                 if (result == DialogResult.Yes)
                 {
