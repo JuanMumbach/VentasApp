@@ -24,6 +24,8 @@ namespace VentasApp.Views.Dashboard
         event EventHandler OnSetMonthlyTimePeriod;
         event EventHandler OnSetTrimesterTimePeriod;
         event EventHandler OnSetYearlyTimePeriod;
+        event EventHandler OpenSalesmenReportEvent;
+        event EventHandler OpenProductsReportEvent;
 
         void SetTopSellers(List<TopSellerDTO> topSellers);
     }
@@ -35,6 +37,8 @@ namespace VentasApp.Views.Dashboard
         public event EventHandler OnSetMonthlyTimePeriod;
         public event EventHandler OnSetTrimesterTimePeriod;
         public event EventHandler OnSetYearlyTimePeriod;
+        public event EventHandler OpenSalesmenReportEvent;
+        public event EventHandler OpenProductsReportEvent;
 
         public DateOnly StartDate 
         {
@@ -78,6 +82,8 @@ namespace VentasApp.Views.Dashboard
             MonthlyPeriodButton.Click += (s, e) => {OnSetMonthlyTimePeriod?.Invoke(s, e);};
             TrimesterPeriodButton.Click += (s, e) => {OnSetTrimesterTimePeriod?.Invoke(s, e);};
             YearlyPeriodButton.Click += (s, e) => {OnSetYearlyTimePeriod?.Invoke(s, e);};
+            DetailedSalesmenReportButton.Click += (s, e) => { OpenSalesmenReportEvent?.Invoke(s, e); };
+            DetailedProductsReportButton.Click += (s, e) => { OpenProductsReportEvent?.Invoke(s, e); };
         }
 
         public void LoadGraph1(Chart chart)

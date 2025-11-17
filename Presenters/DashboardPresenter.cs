@@ -33,7 +33,23 @@ namespace VentasApp.Presenters
             this.view.OnSetMonthlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(30)), DateTime.Today); };
             this.view.OnSetTrimesterTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(90)), DateTime.Today); };
             this.view.OnSetYearlyTimePeriod += (s, e) => { SetTimePeriod(DateTime.Today.Subtract(TimeSpan.FromDays(365)), DateTime.Today); };
+            this.view.OpenProductsReportEvent += LoadProductsReportView;
+            this.view.OpenSalesmenReportEvent += LoadSalesmenReportView;
             this.userRepository = userRepository;
+        }
+
+        private void LoadSalesmenReportView(object? sender, EventArgs e)
+        {
+            SalesmenReportView view = new SalesmenReportView();
+            SalesmenReportPresenter presenter = new SalesmenReportPresenter(view, this.view.StartDate, this.view.EndDate);
+            view.ShowDialog();
+        }
+
+        private void LoadProductsReportView(object? sender, EventArgs e)
+        {
+            ProductsReportView view = new ProductsReportView();
+            //ProductsReportPresenter presenter = new ProductsReportPresenter(view, this.view.StartDate, this.view.EndDate);
+            view.ShowDialog();
         }
 
         private void CheckForPermission(object? sender, EventArgs e)

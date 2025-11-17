@@ -71,6 +71,9 @@
             StartDatePicker = new DateTimePicker();
             label1 = new Label();
             SalesGraphPanel = new Panel();
+            GenerateGeneralReport = new Button();
+            DetailedSalesmenReportButton = new Button();
+            DetailedProductsReportButton = new Button();
             AutoscrollPanel.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -85,6 +88,9 @@
             // AutoscrollPanel
             // 
             AutoscrollPanel.AutoScroll = true;
+            AutoscrollPanel.Controls.Add(DetailedProductsReportButton);
+            AutoscrollPanel.Controls.Add(DetailedSalesmenReportButton);
+            AutoscrollPanel.Controls.Add(GenerateGeneralReport);
             AutoscrollPanel.Controls.Add(label9);
             AutoscrollPanel.Controls.Add(panel3);
             AutoscrollPanel.Controls.Add(label5);
@@ -104,7 +110,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(30, 21);
+            label9.Location = new Point(37, 34);
             label9.Name = "label9";
             label9.Size = new Size(141, 40);
             label9.TabIndex = 15;
@@ -115,7 +121,7 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel1);
-            panel3.Location = new Point(14, 806);
+            panel3.Location = new Point(14, 818);
             panel3.Name = "panel3";
             panel3.Size = new Size(737, 298);
             panel3.TabIndex = 13;
@@ -158,7 +164,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(14, 761);
+            label5.Location = new Point(14, 773);
             label5.Name = "label5";
             label5.Size = new Size(120, 32);
             label5.TabIndex = 14;
@@ -170,7 +176,7 @@
             TopSellersPanel.Controls.Add(Top3SellerPanel);
             TopSellersPanel.Controls.Add(Top2SellerPanel);
             TopSellersPanel.Controls.Add(Top1SellerPanel);
-            TopSellersPanel.Location = new Point(12, 490);
+            TopSellersPanel.Location = new Point(12, 512);
             TopSellersPanel.Name = "TopSellersPanel";
             TopSellersPanel.Size = new Size(739, 236);
             TopSellersPanel.TabIndex = 10;
@@ -416,7 +422,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(12, 445);
+            label4.Location = new Point(12, 467);
             label4.Name = "label4";
             label4.Size = new Size(232, 32);
             label4.TabIndex = 12;
@@ -426,7 +432,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(12, 134);
+            label3.Location = new Point(12, 156);
             label3.Name = "label3";
             label3.Size = new Size(84, 32);
             label3.TabIndex = 11;
@@ -544,10 +550,38 @@
             // SalesGraphPanel
             // 
             SalesGraphPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            SalesGraphPanel.Location = new Point(12, 180);
+            SalesGraphPanel.Location = new Point(12, 202);
             SalesGraphPanel.Name = "SalesGraphPanel";
             SalesGraphPanel.Size = new Size(739, 236);
             SalesGraphPanel.TabIndex = 9;
+            // 
+            // GenerateGeneralReport
+            // 
+            GenerateGeneralReport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            GenerateGeneralReport.Location = new Point(635, 121);
+            GenerateGeneralReport.Name = "GenerateGeneralReport";
+            GenerateGeneralReport.Size = new Size(116, 45);
+            GenerateGeneralReport.TabIndex = 16;
+            GenerateGeneralReport.Text = "Exportar resumen del periodo (PDF)";
+            GenerateGeneralReport.UseVisualStyleBackColor = true;
+            // 
+            // DetailedSalesmenReportButton
+            // 
+            DetailedSalesmenReportButton.Location = new Point(605, 477);
+            DetailedSalesmenReportButton.Name = "DetailedSalesmenReportButton";
+            DetailedSalesmenReportButton.Size = new Size(146, 23);
+            DetailedSalesmenReportButton.TabIndex = 17;
+            DetailedSalesmenReportButton.Text = "Ver informe detallado";
+            DetailedSalesmenReportButton.UseVisualStyleBackColor = true;
+            // 
+            // DetailedProductsReportButton
+            // 
+            DetailedProductsReportButton.Location = new Point(605, 783);
+            DetailedProductsReportButton.Name = "DetailedProductsReportButton";
+            DetailedProductsReportButton.Size = new Size(146, 23);
+            DetailedProductsReportButton.TabIndex = 18;
+            DetailedProductsReportButton.Text = "Ver informe detallado";
+            DetailedProductsReportButton.UseVisualStyleBackColor = true;
             // 
             // DashboardView
             // 
@@ -620,5 +654,8 @@
         private Panel panel4;
         private Panel TopProductsChartPanel;
         private Label label9;
+        private Button GenerateGeneralReport;
+        private Button DetailedProductsReportButton;
+        private Button DetailedSalesmenReportButton;
     }
 }
