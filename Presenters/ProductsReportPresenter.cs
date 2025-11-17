@@ -145,17 +145,84 @@ namespace VentasApp.Presenters
             {
                 try
                 {
-                    PdfService pdfService = new PdfService();
+                    using (var context = new VentasDBContext())
+                    {
+                        DateTime startDt = StartPeriod.ToDateTime(new TimeOnly(0, 0));
+                        DateTime endDt = EndPeriod.ToDateTime(new TimeOnly(23, 59));
 
-                    string titulo = "Reporte de Productos";
-                    string periodo = $"Periodo: {StartPeriod} - {EndPeriod}";
+                        
+                        var queryBase = from si in context.SalesItems
+                                        join s in context.Sales on si.SaleId equals s.Id
+                                        join p in context.Products on si.ProductId equals p.Id
+                                        where s.CreatedAt >= startDt
+                                           && s.CreatedAt <= endDt
+                                           && s.CanceledAt == null
+                                        select new { Item = si, Venta = s, Producto = p };
 
-                    pdfService.ExportarDatosTabla(titulo, periodo, currentDataList, saveFileDialog.FileName);
+                        
+                        int totalUnidades = 0;
+                        decimal totalIngresos = 0;
+                        string productoEstrella = "N/A";
 
-                    MessageBox.Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string nombreCategoria = "Todas";
+                        if (view.SelectedCategoryId > 0)
+                        {
+                            var cat = context.Categories.Find(view.SelectedCategoryId);
+                            nombreCategoria = cat != null ? cat.CategoryName : "Desconocida";
+                        }
+
+                        string nombreProveedor = "Todos";
+                        if (view.SelectedSupplierId > 0)
+                        {
+                            var sup = context.Suppliers.Find(view.SelectedSupplierId);
+                            nombreProveedor = sup != null ? sup.SupplierName : "Desconocido";
+                        }
+
+                        if (queryBase.Any())
+                        {
+                            totalUnidades = queryBase.Sum(x => x.Item.Amount);
+                            totalIngresos = queryBase.Sum(x => x.Item.Amount * x.Item.Price);
+
+                            
+                            var mejorProd = queryBase
+                                .GroupBy(x => x.Producto.Name)
+                                .Select(g => new
+                                {
+                                    Nombre = g.Key,
+                                    TotalGenerado = g.Sum(x => x.Item.Amount * x.Item.Price)
+                                })
+                                .OrderByDescending(x => x.TotalGenerado)
+                                .FirstOrDefault();
+
+                            if (mejorProd != null)
+                            {
+                                productoEstrella = mejorProd.Nombre;
+                            }
+                        }
 
 
-                    new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                        var exportDto = new ProductReportExportDTO
+                        {
+                            Periodo = $"Periodo: {StartPeriod} - {EndPeriod}",
+       
+                            FiltroCategoria = nombreCategoria,
+                            FiltroProveedor = nombreProveedor,
+
+                            TotalUnidades = totalUnidades,
+                            TotalIngresos = totalIngresos,
+                            ProductoEstrella = productoEstrella,
+                            DetalleProductos = this.currentDataList
+                        };
+
+
+                        PdfService pdfService = new PdfService();
+                        pdfService.ExportarReporteProductos(exportDto, saveFileDialog.FileName);
+
+                        MessageBox.Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        
+                        new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                    }
                 }
                 catch (Exception ex)
                 {

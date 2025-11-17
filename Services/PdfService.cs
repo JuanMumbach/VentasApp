@@ -187,33 +187,33 @@ namespace VentasApp.Services
                     // --- CONTENIDO ---
                     page.Content().PaddingVertical(10).Column(col =>
                     {
-                        // 1. NUEVA SECCIÓN: TARJETAS DE INDICADORES (KPIs)
+
                         col.Item().Row(row =>
                         {
-                            // Tarjeta de Ingresos
+                           
                             row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
                             {
                                 c.Item().Text("Ingresos del Periodo").Medium().FontColor(Colors.Grey.Darken2);
                                 c.Item().Text($"${datos.TotalIngresos:N2}").Bold().FontSize(20).FontColor(Colors.Green.Darken2);
                             });
 
-                            row.ConstantItem(10); // Espacio
+                            row.ConstantItem(10);
 
-                            // Tarjeta de Ventas
+                        
                             row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
                             {
                                 c.Item().Text("Total Operaciones").Medium().FontColor(Colors.Grey.Darken2);
                                 c.Item().Text($"{datos.TotalVentas}").Bold().FontSize(20).FontColor(Colors.Blue.Darken2);
                             });
 
-                            // Puedes agregar una tercera tarjeta vacía o con otro dato si quisieras (ej. Promedio)
+                            
                             row.ConstantItem(10);
-                            row.RelativeItem().Component(new PlaceholderKpi()); // Relleno visual opcional
+                            row.RelativeItem().Component(new PlaceholderKpi());
                         });
 
-                        col.Item().Height(20); // Espacio
+                        col.Item().Height(20);
 
-                        // 2. Gráfico Principal
+                        // Gráfico Principal
                         col.Item().Text("Evolución de Ventas").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
                         if (datos.SalesChartImage != null && datos.SalesChartImage.Length > 0)
                         {
@@ -222,10 +222,9 @@ namespace VentasApp.Services
 
                         col.Item().Height(20);
 
-                        // 3. Sección Inferior Dividida
                         col.Item().Row(row =>
                         {
-                            // Izquierda: Gráficos Circulares
+                            // Gráficos Circulares
                             row.RelativeItem().Column(leftCol =>
                             {
                                 if (datos.CategoriesChartImage != null && datos.CategoriesChartImage.Length > 0)
@@ -245,7 +244,7 @@ namespace VentasApp.Services
 
                             row.ConstantItem(20);
 
-                            // Derecha: Tabla Mejorada
+                            // Tabla
                             row.RelativeItem().Column(rightCol =>
                             {
                                 rightCol.Item().Text("Ranking Vendedores").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
@@ -259,7 +258,6 @@ namespace VentasApp.Services
                                         columns.RelativeColumn(1.5f); // Total
                                     });
 
-                                    // Header con color
                                     table.Header(header =>
                                     {
                                         header.Cell().Background(Colors.Blue.Darken3).Padding(5).Text("Vendedor").FontColor(Colors.White).SemiBold();
@@ -267,7 +265,6 @@ namespace VentasApp.Services
                                         header.Cell().Background(Colors.Blue.Darken3).Padding(5).AlignRight().Text("Total ($)").FontColor(Colors.White).SemiBold();
                                     });
 
-                                    // Datos con filas alternadas
                                     if (datos.TopSellers != null)
                                     {
                                         uint i = 0;
@@ -316,7 +313,6 @@ namespace VentasApp.Services
                     page.Size(PageSizes.A4);
                     page.DefaultTextStyle(x => x.FontSize(10));
 
-                    // --- CABECERA ---
                     page.Header().Row(row =>
                     {
                         row.RelativeItem().Column(col =>
@@ -327,31 +323,31 @@ namespace VentasApp.Services
                         });
                     });
 
-                    // --- CONTENIDO ---
+
                     page.Content().PaddingVertical(10).Column(col =>
                     {
-                        // 1. SECCIÓN DE KPIs (Tarjetas)
+
                         col.Item().Row(row =>
                         {
-                            // Tarjeta: Total Ingresos
+
                             row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
                             {
                                 c.Item().Text("Ingresos Generados").Medium().FontColor(Colors.Grey.Darken2);
                                 c.Item().Text($"${datos.TotalIngresos:N2}").Bold().FontSize(18).FontColor(Colors.Green.Darken2);
                             });
 
-                            row.ConstantItem(10); // Espacio
+                            row.ConstantItem(10);
 
-                            // Tarjeta: Total Ventas
+
                             row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
                             {
                                 c.Item().Text("Ventas Realizadas").Medium().FontColor(Colors.Grey.Darken2);
                                 c.Item().Text($"{datos.TotalVentas}").Bold().FontSize(18).FontColor(Colors.Blue.Darken2);
                             });
 
-                            row.ConstantItem(10); // Espacio
+                            row.ConstantItem(10);
 
-                            // Tarjeta: Mejor Vendedor
+                            
                             row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
                             {
                                 c.Item().Text("Mejor Vendedor").Medium().FontColor(Colors.Grey.Darken2);
@@ -359,14 +355,14 @@ namespace VentasApp.Services
                             });
                         });
 
-                        col.Item().Height(20); // Separador
+                        col.Item().Height(20);
 
-                        // 2. TABLA DETALLADA
+                        // TABLA 
                         col.Item().Text("Detalle por Vendedor").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
 
                         col.Item().PaddingTop(5).Table(table =>
                         {
-                            // Definición de columnas (4 columnas basadas en SalesmenReportDTO)
+                            
                             table.ColumnsDefinition(columns =>
                             {
                                 columns.RelativeColumn(2); // Vendedor (más ancha)
@@ -420,14 +416,155 @@ namespace VentasApp.Services
             .GeneratePdf(rutaArchivo);
         }
 
+        public void ExportarReporteProductos(ProductReportExportDTO datos, string rutaArchivo)
+        {
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(1, Unit.Centimetre);
+                    page.Size(PageSizes.A4);
+                    page.DefaultTextStyle(x => x.FontSize(9));
+
+                    // --- CABECERA ---
+                    page.Header().Row(row =>
+                    {
+                        row.RelativeItem().Column(col =>
+                        {
+                            col.Item().Text("Reporte de Rendimiento de Productos").Bold().FontSize(20).FontColor(Colors.Blue.Medium);
+                            col.Item().Text($"Generado: {datos.FechaGeneracion:g}").FontSize(10).FontColor(Colors.Grey.Medium);
+                            col.Item().Text(datos.Periodo).FontSize(12).SemiBold();
+
+                            
+                            if (datos.FiltroCategoria != "Todas" || datos.FiltroProveedor != "Todos")
+                            {
+                                col.Item().PaddingTop(5).Border(1).BorderColor(Colors.Orange.Medium).Background(Colors.Orange.Lighten5).Padding(5).Text(txt =>
+                                {
+                                    txt.Span("⚠️ Filtros aplicados: ").Bold().FontColor(Colors.Orange.Darken2);
+
+                                    if (datos.FiltroCategoria != "Todas")
+                                        txt.Span($"[Categoría: {datos.FiltroCategoria}] ").SemiBold();
+
+                                    if (datos.FiltroProveedor != "Todos")
+                                        txt.Span($"[Proveedor: {datos.FiltroProveedor}] ").SemiBold();
+                                });
+                            }
+                        });
+                    });
+
+                    // --- CONTENIDO ---
+                    page.Content().PaddingVertical(10).Column(col =>
+                    {
+
+                        col.Item().Row(row =>
+                        {
+
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Ingresos Totales").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"${datos.TotalIngresos:N2}").Bold().FontSize(16).FontColor(Colors.Green.Darken2);
+                            });
+                            row.ConstantItem(10);
+
+
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Unidades Vendidas").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text($"{datos.TotalUnidades}").Bold().FontSize(16).FontColor(Colors.Blue.Darken2);
+                            });
+                            row.ConstantItem(10);
+
+    
+                            row.RelativeItem().Border(1).BorderColor(Colors.Grey.Lighten2).Background(Colors.Grey.Lighten4).Padding(10).Column(c =>
+                            {
+                                c.Item().Text("Producto Estrella").Medium().FontColor(Colors.Grey.Darken2);
+                                c.Item().Text(txt =>
+                                {
+                                  
+                                    txt.Span(datos.ProductoEstrella)
+                                       .Bold()
+                                       .FontSize(12)
+                                       .FontColor(Colors.Orange.Darken2);
+
+                                    
+                                    txt.ClampLines(2);
+                                });
+                            });
+                        });
+
+                        col.Item().Height(15);
+
+                        // TABLA
+                        col.Item().Text("Detalle por Producto").Bold().FontSize(14).FontColor(Colors.Blue.Darken2);
+                        col.Item().PaddingTop(5).Table(table =>
+                        {
+                            
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(30); // ID
+                                columns.RelativeColumn(3);  // Producto (Ancho)
+                                columns.RelativeColumn(2);  // Categoría
+                                columns.RelativeColumn(2);  // Proveedor
+                                columns.RelativeColumn(1);  // Vendidos
+                                columns.RelativeColumn(1);  // Stock
+                                columns.RelativeColumn(1.5f); // Ingresos
+                            });
+
+                            
+                            table.Header(header =>
+                            {
+                                header.Cell().Element(EstiloCeldaHeader).Text("ID");
+                                header.Cell().Element(EstiloCeldaHeader).Text("Producto");
+                                header.Cell().Element(EstiloCeldaHeader).Text("Categoría");
+                                header.Cell().Element(EstiloCeldaHeader).Text("Proveedor");
+                                header.Cell().Element(EstiloCeldaHeader).AlignCenter().Text("Vend.");
+                                header.Cell().Element(EstiloCeldaHeader).AlignCenter().Text("Stock");
+                                header.Cell().Element(EstiloCeldaHeader).AlignRight().Text("Ingresos");
+                            });
+
+                            
+                            if (datos.DetalleProductos != null)
+                            {
+                                uint i = 0;
+                                foreach (var item in datos.DetalleProductos)
+                                {
+                                    var bgColor = i % 2 == 0 ? Colors.White : Colors.Grey.Lighten4;
+
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).Text(item.ID.ToString());
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).Text(item.Producto);
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).Text(item.Categoria);
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).Text(item.Proveedor);
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignCenter().Text(item.Vendidos.ToString());
+
+                                    
+                                    var stockColor = item.Stock < 5 ? Colors.Red.Medium : Colors.Black;
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignCenter().Text(item.Stock.ToString()).FontColor(stockColor);
+
+                                    table.Cell().Background(bgColor).Element(EstiloCeldaDato).AlignRight().Text(item.Ingresos);
+
+                                    i++;
+                                }
+                            }
+                        });
+                    });
+
+                    page.Footer().AlignCenter().Text(x =>
+                    {
+                        x.Span("Página ");
+                        x.CurrentPageNumber();
+                    });
+                });
+            })
+            .GeneratePdf(rutaArchivo);
+        }
+
+
         private class PlaceholderKpi : IComponent
         {
             public void Compose(IContainer container)
             {
-                // Dejar vacío o poner otro dato
+                
                 container.Padding(10).Column(c => {
-                    // c.Item().Text("Ticket Promedio").Medium().FontColor(Colors.Grey.Darken2);
-                    // c.Item().Text("$...").Bold().FontSize(20);
                 });
             }
         }
