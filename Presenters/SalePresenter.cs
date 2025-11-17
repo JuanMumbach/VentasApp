@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -330,13 +331,87 @@ namespace VentasApp.Presenters
         }
 
         void PrintSaleReceipt(SaleModel saleToPrint)
-        { 
-            if (saleToPrint != null)
+        {
+            if (saleToPrint == null) return;
+
+            // Preguntar al usuario
+            DialogResult result = MessageBox.Show(
+                "¿Cómo deseas obtener la factura?\n\n" +
+                "Sí: Guardar el archivo PDF (Guardar como...)\n" +
+                "No: Imprimir directamente\n" +
+                "Cancelar: Salir",
+                "Emitir Factura",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel) return;
+
+            try
             {
-                PrinterManager printerManager = new PrinterManager();
-                printerManager.PrintSaleReceipt(saleToPrint);
-                
-            } 
+                PdfService pdfService = new PdfService();
+
+                if (result == DialogResult.Yes) // GUARDAR PDF
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.FileName = $"Factura_{saleToPrint.Id}.pdf";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        pdfService.ExportarFactura(saleToPrint, saveFileDialog.FileName);
+                        MessageBox.Show("Factura guardada correctamente.");
+
+                        // Opcional: Abrir el archivo guardado
+                        new Process { StartInfo = new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true } }.Start();
+                    }
+                }
+                else if (result == DialogResult.No) // IMPRIMIR DIRECTAMENTE
+                {
+                    // 1. Generar ruta temporal
+                    string tempFilePath = Path.Combine(Path.GetTempPath(), $"VentasApp_Factura_{saleToPrint.Id}_{DateTime.Now.Ticks}.pdf");
+
+                    // 2. Crear el PDF
+                    pdfService.ExportarFactura(saleToPrint, tempFilePath);
+
+                    // 3. Intentar imprimir automáticamente
+                    try
+                    {
+                        ProcessStartInfo printInfo = new ProcessStartInfo
+                        {
+                            FileName = tempFilePath,
+                            Verb = "print",              // Intentamos la acción "Imprimir"
+                            UseShellExecute = true,      // Necesario para Verbs
+                            CreateNoWindow = true,
+                            WindowStyle = ProcessWindowStyle.Hidden
+                        };
+
+                        using (Process p = Process.Start(printInfo))
+                        {
+                            // Dejamos que el proceso de impresión se encargue
+                        }
+                    }
+                    catch (System.ComponentModel.Win32Exception)
+                    {
+               
+                        MessageBox.Show("No se detectó un lector de PDF con soporte de impresión automática (como Adobe Reader).\n\nSe abrirá el archivo para impresion manual.", "Información de Impresión", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ProcessStartInfo openInfo = new ProcessStartInfo
+                        {
+                            FileName = tempFilePath,
+                            UseShellExecute = true // Esto solo abre el archivo como doble clic
+                        };
+                        Process.Start(openInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error inesperado al imprimir: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al procesar el documento: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

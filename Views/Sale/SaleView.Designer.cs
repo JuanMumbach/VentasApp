@@ -161,7 +161,7 @@
             PrintReceiptButton.Name = "PrintReceiptButton";
             PrintReceiptButton.Size = new Size(158, 22);
             PrintReceiptButton.TabIndex = 9;
-            PrintReceiptButton.Text = "Imprimir Factura";
+            PrintReceiptButton.Text = "Imprimir / Exportar PDF";
             PrintReceiptButton.UseVisualStyleBackColor = true;
             // 
             // CustomerLabel
