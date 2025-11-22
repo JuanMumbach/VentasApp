@@ -32,6 +32,7 @@ namespace VentasApp.Views.Sale
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListSalesView));
             SalesDataGridView = new DataGridView();
             RestoreButton = new Button();
             CancelSaleButton = new Button();
@@ -129,6 +130,7 @@ namespace VentasApp.Views.Sale
             Controls.Add(CancelSaleButton);
             Controls.Add(RestoreButton);
             Controls.Add(SalesDataGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ListSalesView";
             Text = "Historial de Ventas";
             ((System.ComponentModel.ISupportInitialize)SalesDataGridView).EndInit();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleView));
             SaleItemsDatagridview = new DataGridView();
             RemoveItemButton = new Button();
             ConfirmSaleButton = new Button();
@@ -213,6 +214,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(759, 387);
             Controls.Add(ViewItemsPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "SaleView";
             Text = "SaleView";

@@ -21,13 +21,14 @@ namespace VentasApp.Views
 
         private void InitializeComponent()
         {
-            dataGridView1 = new System.Windows.Forms.DataGridView();
-            SearchTextbox = new System.Windows.Forms.TextBox();
-            OpenAddSupplierViewButton = new System.Windows.Forms.Button();
-            DeleteButton = new System.Windows.Forms.Button();
-            RestoreButton = new System.Windows.Forms.Button();
-            ShowDeletedCheckbox = new System.Windows.Forms.CheckBox();
-            EditSupplierButton = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListSuppliersView));
+            dataGridView1 = new DataGridView();
+            SearchTextbox = new TextBox();
+            OpenAddSupplierViewButton = new Button();
+            DeleteButton = new Button();
+            RestoreButton = new Button();
+            ShowDeletedCheckbox = new CheckBox();
+            EditSupplierButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -36,80 +37,87 @@ namespace VentasApp.Views
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new System.Drawing.Point(38, 93);
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(33, 70);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new System.Drawing.Size(818, 381);
+            dataGridView1.Size = new Size(716, 286);
             dataGridView1.TabIndex = 0;
             // 
             // SearchTextbox
             // 
-            SearchTextbox.Location = new System.Drawing.Point(51, 56);
+            SearchTextbox.Location = new Point(45, 42);
+            SearchTextbox.Margin = new Padding(3, 2, 3, 2);
             SearchTextbox.Name = "SearchTextbox";
-            SearchTextbox.Size = new System.Drawing.Size(522, 27);
+            SearchTextbox.Size = new Size(457, 23);
             SearchTextbox.TabIndex = 1;
             // 
             // OpenAddSupplierViewButton
             // 
-            OpenAddSupplierViewButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            OpenAddSupplierViewButton.Location = new System.Drawing.Point(38, 495);
+            OpenAddSupplierViewButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            OpenAddSupplierViewButton.Location = new Point(33, 371);
+            OpenAddSupplierViewButton.Margin = new Padding(3, 2, 3, 2);
             OpenAddSupplierViewButton.Name = "OpenAddSupplierViewButton";
-            OpenAddSupplierViewButton.Size = new System.Drawing.Size(94, 29);
+            OpenAddSupplierViewButton.Size = new Size(82, 22);
             OpenAddSupplierViewButton.TabIndex = 2;
             OpenAddSupplierViewButton.Text = "Agregar";
             OpenAddSupplierViewButton.UseVisualStyleBackColor = true;
             // 
             // DeleteButton
             // 
-            DeleteButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            DeleteButton.Location = new System.Drawing.Point(762, 495);
+            DeleteButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            DeleteButton.Location = new Point(667, 371);
+            DeleteButton.Margin = new Padding(3, 2, 3, 2);
             DeleteButton.Name = "DeleteButton";
-            DeleteButton.Size = new System.Drawing.Size(94, 29);
+            DeleteButton.Size = new Size(82, 22);
             DeleteButton.TabIndex = 3;
             DeleteButton.Text = "Eliminar";
             DeleteButton.UseVisualStyleBackColor = true;
             // 
             // RestoreButton
             // 
-            RestoreButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            RestoreButton.Location = new System.Drawing.Point(662, 495);
+            RestoreButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RestoreButton.Location = new Point(579, 371);
+            RestoreButton.Margin = new Padding(3, 2, 3, 2);
             RestoreButton.Name = "RestoreButton";
-            RestoreButton.Size = new System.Drawing.Size(94, 29);
+            RestoreButton.Size = new Size(82, 22);
             RestoreButton.TabIndex = 4;
             RestoreButton.Text = "Restaurar";
             RestoreButton.UseVisualStyleBackColor = true;
             // 
             // ShowDeletedCheckbox
             // 
-            ShowDeletedCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            ShowDeletedCheckbox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ShowDeletedCheckbox.AutoSize = true;
-            ShowDeletedCheckbox.Location = new System.Drawing.Point(497, 498);
+            ShowDeletedCheckbox.Location = new Point(446, 373);
+            ShowDeletedCheckbox.Margin = new Padding(3, 2, 3, 2);
             ShowDeletedCheckbox.Name = "ShowDeletedCheckbox";
-            ShowDeletedCheckbox.Size = new System.Drawing.Size(159, 24);
+            ShowDeletedCheckbox.Size = new Size(128, 19);
             ShowDeletedCheckbox.TabIndex = 5;
             ShowDeletedCheckbox.Text = "Mostrar eliminados";
             ShowDeletedCheckbox.UseVisualStyleBackColor = true;
             // 
             // EditSupplierButton
             // 
-            EditSupplierButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            EditSupplierButton.Location = new System.Drawing.Point(153, 495);
+            EditSupplierButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            EditSupplierButton.Location = new Point(134, 371);
+            EditSupplierButton.Margin = new Padding(3, 2, 3, 2);
             EditSupplierButton.Name = "EditSupplierButton";
-            EditSupplierButton.Size = new System.Drawing.Size(94, 29);
+            EditSupplierButton.Size = new Size(82, 22);
             EditSupplierButton.TabIndex = 6;
             EditSupplierButton.Text = "Editar";
             EditSupplierButton.UseVisualStyleBackColor = true;
             // 
             // ListSuppliersView
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.SystemColors.ControlLight;
-            ClientSize = new System.Drawing.Size(896, 570);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(784, 428);
             Controls.Add(EditSupplierButton);
             Controls.Add(ShowDeletedCheckbox);
             Controls.Add(RestoreButton);
@@ -117,6 +125,8 @@ namespace VentasApp.Views
             Controls.Add(OpenAddSupplierViewButton);
             Controls.Add(SearchTextbox);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ListSuppliersView";
             Text = "Lista de Proveedores";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

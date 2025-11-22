@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemSettingsView));
             panel1 = new Panel();
+            DisclaimerLabel = new Label();
+            RestoreLabel = new Label();
+            PerformLabel = new Label();
+            RestoreBackupButton = new Button();
+            PerformBackupButton = new Button();
             label1 = new Label();
             saveFileDialog1 = new SaveFileDialog();
-            PerformBackupButton = new Button();
-            RestoreBackupButton = new Button();
-            PerformLabel = new Label();
-            RestoreLabel = new Label();
-            DisclaimerLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,43 +54,15 @@
             panel1.Size = new Size(732, 171);
             panel1.TabIndex = 0;
             // 
-            // label1
+            // DisclaimerLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(24, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(91, 32);
-            label1.TabIndex = 0;
-            label1.Text = "Backup";
-            // 
-            // PerformBackupButton
-            // 
-            PerformBackupButton.Location = new Point(24, 68);
-            PerformBackupButton.Name = "PerformBackupButton";
-            PerformBackupButton.Size = new Size(130, 51);
-            PerformBackupButton.TabIndex = 1;
-            PerformBackupButton.Text = "Realizar Backup";
-            PerformBackupButton.UseVisualStyleBackColor = true;
-            // 
-            // RestoreBackupButton
-            // 
-            RestoreBackupButton.Location = new Point(371, 68);
-            RestoreBackupButton.Name = "RestoreBackupButton";
-            RestoreBackupButton.Size = new Size(130, 51);
-            RestoreBackupButton.TabIndex = 2;
-            RestoreBackupButton.Text = "Restaurar Base de Datos desde archivo";
-            RestoreBackupButton.UseVisualStyleBackColor = true;
-            // 
-            // PerformLabel
-            // 
-            PerformLabel.AllowDrop = true;
-            PerformLabel.Location = new Point(160, 68);
-            PerformLabel.Name = "PerformLabel";
-            PerformLabel.Size = new Size(172, 51);
-            PerformLabel.TabIndex = 3;
-            PerformLabel.Text = "Realizar una copia de seguridad de la base de datos.";
-            PerformLabel.TextAlign = ContentAlignment.MiddleLeft;
+            DisclaimerLabel.AllowDrop = true;
+            DisclaimerLabel.Location = new Point(371, 122);
+            DisclaimerLabel.Name = "DisclaimerLabel";
+            DisclaimerLabel.Size = new Size(308, 40);
+            DisclaimerLabel.TabIndex = 5;
+            DisclaimerLabel.Text = "ATENCION: esta accion elimina toda la base de datos actual, utilizar con precaución.";
+            DisclaimerLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // RestoreLabel
             // 
@@ -101,15 +74,43 @@
             RestoreLabel.Text = "Restaurar la base de datos desde un archivo de restauracion.";
             RestoreLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // DisclaimerLabel
+            // PerformLabel
             // 
-            DisclaimerLabel.AllowDrop = true;
-            DisclaimerLabel.Location = new Point(371, 122);
-            DisclaimerLabel.Name = "DisclaimerLabel";
-            DisclaimerLabel.Size = new Size(308, 40);
-            DisclaimerLabel.TabIndex = 5;
-            DisclaimerLabel.Text = "ATENCION: esta accion elimina toda la base de datos actual, utilizar con precaución.";
-            DisclaimerLabel.TextAlign = ContentAlignment.TopCenter;
+            PerformLabel.AllowDrop = true;
+            PerformLabel.Location = new Point(160, 68);
+            PerformLabel.Name = "PerformLabel";
+            PerformLabel.Size = new Size(172, 51);
+            PerformLabel.TabIndex = 3;
+            PerformLabel.Text = "Realizar una copia de seguridad de la base de datos.";
+            PerformLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // RestoreBackupButton
+            // 
+            RestoreBackupButton.Location = new Point(371, 68);
+            RestoreBackupButton.Name = "RestoreBackupButton";
+            RestoreBackupButton.Size = new Size(130, 51);
+            RestoreBackupButton.TabIndex = 2;
+            RestoreBackupButton.Text = "Restaurar Base de Datos desde archivo";
+            RestoreBackupButton.UseVisualStyleBackColor = true;
+            // 
+            // PerformBackupButton
+            // 
+            PerformBackupButton.Location = new Point(24, 68);
+            PerformBackupButton.Name = "PerformBackupButton";
+            PerformBackupButton.Size = new Size(130, 51);
+            PerformBackupButton.TabIndex = 1;
+            PerformBackupButton.Text = "Realizar Backup";
+            PerformBackupButton.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(24, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Backup";
             // 
             // SystemSettingsView
             // 
@@ -117,6 +118,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SystemSettingsView";
             Text = "SystemSettingsView";
             panel1.ResumeLayout(false);

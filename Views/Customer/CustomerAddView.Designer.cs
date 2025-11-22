@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerAddView));
             CancelButton = new Button();
             AddCustomerButton = new Button();
             TB_Address = new TextBox();
@@ -159,6 +160,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CustomerAddView";
             Text = "CustomerAddView";
             ResumeLayout(false);

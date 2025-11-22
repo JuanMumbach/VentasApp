@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsReportView));
             ExportReportButton = new Button();
             CloseButton = new Button();
             PeriodLabel = new Label();
@@ -161,6 +162,7 @@
             Controls.Add(PeriodLabel);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ProductsReportView";
             Text = "ProductReportView";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

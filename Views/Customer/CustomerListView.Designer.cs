@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerListView));
             dataGridView1 = new DataGridView();
             label1 = new Label();
             SearchTextbox = new TextBox();
@@ -130,6 +131,7 @@
             Controls.Add(SearchTextbox);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CustomerListView";
             Text = "CustomerListView";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

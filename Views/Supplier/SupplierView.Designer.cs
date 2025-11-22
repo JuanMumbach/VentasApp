@@ -32,110 +32,118 @@ namespace VentasApp.Views
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            label4 = new System.Windows.Forms.Label();
-            NameTextbox = new System.Windows.Forms.TextBox();
-            CuilTextbox = new System.Windows.Forms.TextBox();
-            EmailTextbox = new System.Windows.Forms.TextBox();
-            PhoneTextbox = new System.Windows.Forms.TextBox();
-            AddSupplierButton = new System.Windows.Forms.Button();
-            CancelButton = new System.Windows.Forms.Button();
-            UpdateSupplierButton = new System.Windows.Forms.Button();
-            CloseAtUpdateCheckbox = new System.Windows.Forms.CheckBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierView));
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            NameTextbox = new TextBox();
+            CuilTextbox = new TextBox();
+            EmailTextbox = new TextBox();
+            PhoneTextbox = new TextBox();
+            AddSupplierButton = new Button();
+            CancelButton = new Button();
+            UpdateSupplierButton = new Button();
+            CloseAtUpdateCheckbox = new CheckBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(32, 32);
+            label1.Location = new Point(28, 24);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(64, 20);
+            label1.Size = new Size(51, 15);
             label1.TabIndex = 0;
             label1.Text = "Nombre";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(32, 75);
+            label2.Location = new Point(28, 56);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(43, 20);
+            label2.Size = new Size(32, 15);
             label2.TabIndex = 1;
             label2.Text = "CUIL";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(32, 118);
+            label3.Location = new Point(28, 88);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(46, 20);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 2;
             label3.Text = "Email";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(32, 161);
+            label4.Location = new Point(28, 121);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(67, 20);
+            label4.Size = new Size(52, 15);
             label4.TabIndex = 3;
             label4.Text = "Teléfono";
             // 
             // NameTextbox
             // 
-            NameTextbox.Location = new System.Drawing.Point(157, 29);
+            NameTextbox.Location = new Point(137, 22);
+            NameTextbox.Margin = new Padding(3, 2, 3, 2);
             NameTextbox.Name = "NameTextbox";
-            NameTextbox.Size = new System.Drawing.Size(255, 27);
+            NameTextbox.Size = new Size(224, 23);
             NameTextbox.TabIndex = 6;
             // 
             // CuilTextbox
             // 
-            CuilTextbox.Location = new System.Drawing.Point(157, 72);
+            CuilTextbox.Location = new Point(137, 54);
+            CuilTextbox.Margin = new Padding(3, 2, 3, 2);
             CuilTextbox.Name = "CuilTextbox";
-            CuilTextbox.Size = new System.Drawing.Size(255, 27);
+            CuilTextbox.Size = new Size(224, 23);
             CuilTextbox.TabIndex = 7;
             // 
             // EmailTextbox
             // 
-            EmailTextbox.Location = new System.Drawing.Point(157, 115);
+            EmailTextbox.Location = new Point(137, 86);
+            EmailTextbox.Margin = new Padding(3, 2, 3, 2);
             EmailTextbox.Name = "EmailTextbox";
-            EmailTextbox.Size = new System.Drawing.Size(255, 27);
+            EmailTextbox.Size = new Size(224, 23);
             EmailTextbox.TabIndex = 8;
             // 
             // PhoneTextbox
             // 
-            PhoneTextbox.Location = new System.Drawing.Point(157, 158);
+            PhoneTextbox.Location = new Point(137, 118);
+            PhoneTextbox.Margin = new Padding(3, 2, 3, 2);
             PhoneTextbox.Name = "PhoneTextbox";
-            PhoneTextbox.Size = new System.Drawing.Size(255, 27);
+            PhoneTextbox.Size = new Size(224, 23);
             PhoneTextbox.TabIndex = 9;
             // 
             // AddSupplierButton
             // 
-            AddSupplierButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            AddSupplierButton.Location = new System.Drawing.Point(32, 220);
+            AddSupplierButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddSupplierButton.Location = new Point(28, 165);
+            AddSupplierButton.Margin = new Padding(3, 2, 3, 2);
             AddSupplierButton.Name = "AddSupplierButton";
-            AddSupplierButton.Size = new System.Drawing.Size(141, 35);
+            AddSupplierButton.Size = new Size(123, 26);
             AddSupplierButton.TabIndex = 12;
             AddSupplierButton.Text = "Agregar Proveedor";
             AddSupplierButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
             // 
-            CancelButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            CancelButton.Location = new System.Drawing.Point(317, 220);
+            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            CancelButton.Location = new Point(277, 165);
+            CancelButton.Margin = new Padding(3, 2, 3, 2);
             CancelButton.Name = "CancelButton";
-            CancelButton.Size = new System.Drawing.Size(95, 35);
+            CancelButton.Size = new Size(83, 26);
             CancelButton.TabIndex = 13;
             CancelButton.Text = "Cancelar";
             CancelButton.UseVisualStyleBackColor = true;
             // 
             // UpdateSupplierButton
             // 
-            UpdateSupplierButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            UpdateSupplierButton.Location = new System.Drawing.Point(193, 220);
+            UpdateSupplierButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            UpdateSupplierButton.Location = new Point(169, 165);
+            UpdateSupplierButton.Margin = new Padding(3, 2, 3, 2);
             UpdateSupplierButton.Name = "UpdateSupplierButton";
-            UpdateSupplierButton.Size = new System.Drawing.Size(100, 35);
+            UpdateSupplierButton.Size = new Size(88, 26);
             UpdateSupplierButton.TabIndex = 16;
             UpdateSupplierButton.Text = "Actualizar";
             UpdateSupplierButton.UseVisualStyleBackColor = true;
@@ -143,19 +151,20 @@ namespace VentasApp.Views
             // CloseAtUpdateCheckbox
             // 
             CloseAtUpdateCheckbox.AutoSize = true;
-            CloseAtUpdateCheckbox.Location = new System.Drawing.Point(32, 261);
+            CloseAtUpdateCheckbox.Location = new Point(28, 196);
+            CloseAtUpdateCheckbox.Margin = new Padding(3, 2, 3, 2);
             CloseAtUpdateCheckbox.Name = "CloseAtUpdateCheckbox";
-            CloseAtUpdateCheckbox.Size = new System.Drawing.Size(295, 24);
+            CloseAtUpdateCheckbox.Size = new Size(234, 19);
             CloseAtUpdateCheckbox.TabIndex = 18;
             CloseAtUpdateCheckbox.Text = "No cerrar ventana al Agregar/Actualizar";
             CloseAtUpdateCheckbox.UseVisualStyleBackColor = true;
             // 
             // SupplierView
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.SystemColors.ControlLight;
-            ClientSize = new System.Drawing.Size(450, 300);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(394, 225);
             Controls.Add(CloseAtUpdateCheckbox);
             Controls.Add(UpdateSupplierButton);
             Controls.Add(CancelButton);
@@ -168,6 +177,8 @@ namespace VentasApp.Views
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SupplierView";
             Text = "Gestión de Proveedor";
             ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             MainPanel = new Panel();
             MainPanelLogoPicturebox = new PictureBox();
             WelcomeLabel = new Label();
@@ -322,6 +323,7 @@
             ClientSize = new Size(999, 507);
             Controls.Add(SidePanel);
             Controls.Add(MainPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(1015, 480);
             Name = "MainView";

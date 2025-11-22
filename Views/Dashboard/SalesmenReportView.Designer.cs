@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesmenReportView));
             dataGridView1 = new DataGridView();
             label1 = new Label();
             PeriodLabel = new Label();
@@ -102,6 +103,7 @@
             Controls.Add(PeriodLabel);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(748, 454);
             Name = "SalesmenReportView";
             Text = "SalesmenReportView";

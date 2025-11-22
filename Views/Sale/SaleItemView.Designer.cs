@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleItemView));
             label1 = new Label();
             SearchTextbox = new TextBox();
             dataGridView1 = new DataGridView();
@@ -120,6 +121,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(SearchTextbox);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "SaleItemView";
             Text = "SaleItemView";

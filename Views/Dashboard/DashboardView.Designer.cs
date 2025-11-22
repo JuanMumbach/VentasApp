@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardView));
             AutoscrollPanel = new Panel();
             DetailedProductsReportButton = new Button();
             DetailedSalesmenReportButton = new Button();
@@ -589,6 +590,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 749);
             Controls.Add(AutoscrollPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(800, 0);
             Name = "DashboardView";
             Text = "DashboardView";
