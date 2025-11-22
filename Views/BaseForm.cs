@@ -38,6 +38,8 @@ namespace VentasApp.Views
 
         protected void LoadColorTheme()
         {
+            this.Icon = Themes.AppIcon;
+
             // Aplicar el tema al formulario principal también
             this.BackColor = Themes.MainViewBackgroundColor;
             this.ForeColor = Themes.ColorNormalText;

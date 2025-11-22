@@ -31,6 +31,8 @@ namespace VentasApp.Services
 
         public static Image LogoImage;
 
+        public static Icon AppIcon;
+
         public static void SetLightTheme()
         {
             // Imagen del logo: usar la versión clara para un fondo claro
@@ -59,6 +61,9 @@ namespace VentasApp.Services
             // Botones de Advertencia/Peligro (Warning) - Rojo para indicar acción destructiva
             WarningButtonBackground = Color.FromArgb(220, 53, 69); // Rojo
             WarningButtonTextColor = Color.White; // Texto blanco en botón rojo
+
+            AppIcon = Properties.Resources.VentasAppIconOscuro;
+
         }
 
         public static void SetDarkTheme()
@@ -90,6 +95,8 @@ namespace VentasApp.Services
             // Botones de Advertencia/Peligro (Warning) - Rojo oscuro para indicar acción destructiva
             WarningButtonBackground = Color.FromArgb(220, 53, 69); // Rojo
             WarningButtonTextColor = Color.White; // Texto blanco
+
+            AppIcon = Properties.Resources.VentasAppLogoIcon;
         }
     }
 }
