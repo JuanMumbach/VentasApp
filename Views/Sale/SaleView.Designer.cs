@@ -217,7 +217,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "SaleView";
-            Text = "SaleView";
+            Text = "Venta  - VentasApp";
             ((System.ComponentModel.ISupportInitialize)SaleItemsDatagridview).EndInit();
             ViewItemsPanel.ResumeLayout(false);
             ViewItemsPanel.PerformLayout();

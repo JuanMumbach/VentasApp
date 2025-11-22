@@ -132,7 +132,7 @@ namespace VentasApp.Views.Sale
             Controls.Add(SalesDataGridView);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ListSalesView";
-            Text = "Historial de Ventas";
+            Text = "Historial de Ventas - VentasApp";
             ((System.ComponentModel.ISupportInitialize)SalesDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

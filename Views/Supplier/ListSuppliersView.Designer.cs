@@ -128,7 +128,7 @@ namespace VentasApp.Views
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "ListSuppliersView";
-            Text = "Lista de Proveedores";
+            Text = "Lista de Proveedores - VentasApp";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

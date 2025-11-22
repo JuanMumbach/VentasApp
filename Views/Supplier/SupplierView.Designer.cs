@@ -180,7 +180,7 @@ namespace VentasApp.Views
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "SupplierView";
-            Text = "Gestión de Proveedor";
+            Text = "Gestión de Proveedor - VentasApp";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -106,7 +106,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(748, 454);
             Name = "SalesmenReportView";
-            Text = "SalesmenReportView";
+            Text = "Reporte de vendedores - VentasApp";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

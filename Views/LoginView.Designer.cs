@@ -114,7 +114,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "LoginView";
+            Text = "Login - VentasApp";
             ((System.ComponentModel.ISupportInitialize)LoginImage).EndInit();
             ResumeLayout(false);
             PerformLayout();

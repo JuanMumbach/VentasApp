@@ -133,7 +133,7 @@
             Controls.Add(dataGridView1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CustomerListView";
-            Text = "CustomerListView";
+            Text = "Gestion de clientes - VentasApp";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

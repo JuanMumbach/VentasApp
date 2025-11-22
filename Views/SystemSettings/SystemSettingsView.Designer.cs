@@ -120,7 +120,7 @@
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SystemSettingsView";
-            Text = "SystemSettingsView";
+            Text = "Configuración de Sistema - VentasApp";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

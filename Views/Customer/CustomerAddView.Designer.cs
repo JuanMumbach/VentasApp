@@ -162,7 +162,7 @@
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "CustomerAddView";
-            Text = "CustomerAddView";
+            Text = "Nuevo cliente - VentasApp";
             ResumeLayout(false);
             PerformLayout();
         }

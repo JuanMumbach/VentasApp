@@ -164,7 +164,7 @@
             Controls.Add(dataGridView1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ProductsReportView";
-            Text = "ProductReportView";
+            Text = "Reporte de ventas de productos  - VentasApp";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

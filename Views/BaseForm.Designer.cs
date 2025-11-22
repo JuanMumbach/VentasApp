@@ -38,7 +38,7 @@
             ClientSize = new Size(800, 450);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "BaseForm";
-            Text = "BaseForm";
+            Text = "VentasApp";
             ResumeLayout(false);
         }
 

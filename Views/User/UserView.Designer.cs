@@ -208,7 +208,7 @@ namespace VentasApp.Views.User
             MinimizeBox = false;
             Name = "UserView";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Usuario";
+            Text = "Usuario  - VentasApp";
             ResumeLayout(false);
             PerformLayout();
         }
